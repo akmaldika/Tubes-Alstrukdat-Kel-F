@@ -31,7 +31,7 @@ Ketikan pada terminal
 Jika benar terminal akan menampilkan dan automatis menjalankan program:
 ```PowerShell
 $ .\Program.bat
-$ gcc Program.c -o Program HeaderImplement1.c .. && Program
+$ gcc Program.c -o Program HeaderImplement1.c ... && Program
 ```
 
 4. Setiap penambahan header* dengan include tambahkan juga '.c' pada file bat
