@@ -26,13 +26,8 @@ void CopyLine() {
        F.S. : currentChar == '\n' dan currentLine berisikan baris yang telah diakuisi */
     currentLine.Length = 0;
     while (!EOL) {
-        if (currentLine.Length < NMax) { 
-            // jika lebih akan terpotong
-            currentLine.Tabword[currentLine.Length++] = currentChar;
-            ADV();
-        }
-        else
-            break;
+        currentLine.Tabword[currentLine.Length++] = currentChar;
+        ADV();
     }
 }
 

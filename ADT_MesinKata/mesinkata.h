@@ -11,13 +11,13 @@
 #define NMax 100
 #define BLANK ' '
 
-typedef struct
+typedef struct line
 {
    str Tabword;
    int Length;
 } Line;
 
-typedef struct mesinkata
+typedef struct word
 {
    str String;
    int Length; 
@@ -30,7 +30,7 @@ extern Word currentWord;
 extern Line currentLine;
 
 
-void STARTLINE();
+void STARTLINE(str fileName);
     /* I.S. : currentChar sembarang, input nama file valid
        F.S. : currentChar == '\n' dan currentLine berisikan baris pertama yang telah diakuisisi */
 
