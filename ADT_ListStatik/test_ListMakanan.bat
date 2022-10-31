@@ -1,0 +1,1 @@
+gcc test_ListMakanan.c -o test_ListMakanan ListMakanan.c ..\ADT_MesinKata\mesinkata.c ..\ADT_MesinKata\string.c ..\ADT_Makanan\ ..\ADT_Time\ && test_ListMakanan

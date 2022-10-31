@@ -19,10 +19,13 @@ int main()
     }
 
     // Asumsi Simulator adjecent dengan B : tempat BUY
+    // input user : BUY
     DisplayBuyAbleLM(lm);
 
     // Asumsi Simulator adjecent dengan F : tempat FRY
+    // input user : FRY
     DisplayActionAbleLM(lm, "FRY");
 
+    // Asumsi input user : CATALOG
     DisplayCatalog(lm);
 }
