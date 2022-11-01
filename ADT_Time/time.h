@@ -1,0 +1,143 @@
+/* File: time.h */
+
+#ifndef TIME_H
+#define TIME_H
+
+#include "boolean.h"
+
+/* *** Definisi TYPE TIME <H:M:S> *** */
+typedef struct
+{
+   int D; /* integer [1..7]  */
+   int H; /* integer [0..23] */
+   int M; /* integer [0..59] */
+} TIME;
+
+/* *** Notasi Akses: selektor TIME *** */
+#define Day(T) (T).D
+#define Hour(T) (T).H
+#define Minute(T) (T).M
+
+/* ***************************************************************** */
+/* KELOMPOK SETTER DAN GETTER */
+/* ***************************************************************** */
+int getD(TIME T);
+int getH(TIME T);
+int getM(TIME T);
+
+void setD(TIME *T, int n);
+void setH(TIME *T, int n);
+void setM(TIME *T, int n);
+
+/* ***************************************************************** */
+/* DEFINISI PRIMITIF                                                 */
+/* ***************************************************************** */
+/* KELOMPOK VALIDASI TERHADAP TYPE                                   */
+/* ***************************************************************** */
+
+boolean IsTIMEValid(int D, int H, int M);
+/* Mengirim true jika H,M,S dapat membentuk T yang valid */
+/* dipakai untuk mentest SEBELUM membentuk sebuah Jam */
+
+/* *** Konstruktor: Membentuk sebuah TIME dari komponen-komponennya *** */
+void CreateTime(TIME *T, int D, int H, int M);
+/* Membentuk sebuah TIME dari komponen-komponennya yang valid */
+/* Prekondisi : H, M, S valid untuk membentuk TIME */
+
+/* ***************************************************************** */
+/* KELOMPOK BACA/TULIS                                               */
+/* ***************************************************************** */
+void ReadTIME(TIME *T);
+/* I.S. : T tidak terdefinisi */
+/* F.S. : T terdefinisi dan merupakan jam yang valid */
+/* Proses : mengulangi membaca komponen H, M, S sehingga membentuk T */
+/* yang valid. Tidak mungkin menghasilkan T yang tidak valid. */
+/* Pembacaan dilakukan dengan mengetikkan komponen H, M, S
+   dalam satu baris, masing-masing dipisahkan 1 spasi, diakhiri enter. */
+/* Jika TIME tidak valid maka diberikan pesan: "Jam tidak valid", dan pembacaan
+   diulangi hingga didapatkan jam yang valid. */
+/* Contoh:
+   60 3 4
+   Jam tidak valid
+   1 3 4
+   --> akan terbentuk TIME <1,3,4> */
+
+void DisplayTIME(TIME T);
+/* I.S. : T sembarang */
+/* F.S. : Nilai T ditulis dg format D:H:M */
+/* Proses : menulis nilai setiap komponen T ke layar dalam format D:H:M
+   tanpa karakter apa pun di depan atau belakangnya, termasuk spasi, enter, dll.*/
+
+/* ***************************************************************** */
+/* KELOMPOK KONVERSI TERHADAP TYPE                                   */
+/* ***************************************************************** */
+long TIMEToSec(TIME T);
+/* Diberikan sebuah TIME, mengkonversi menjadi jumlah detik dari pukul 0:0:0 */
+/* Rumus : detik = 3600*H + 60*M + S */
+/* Nilai maksimum = 3600*23+59*60+59 */
+long TIMEToMin(TIME T);
+/* Mengirimkan besar dari time dalam satuan menit */
+TIME MinToTIME(long N);
+/* Mengirimkan bentuk konversi dari menit menjadi TIME yang valid*/
+TIME DetikToTIME(int d, long N);
+/* Mengirim  konversi detik ke TIME */
+/* Catatan: Jika N >= 86400, maka harus dikonversi dulu menjadi jumlah detik yang
+   mewakili jumlah detik yang mungkin dalam 1 hari, yaitu dengan rumus:
+   N1 = N mod 86400, baru N1 dikonversi menjadi TIME */
+
+/* ***************************************************************** */
+/* KELOMPOK OPERASI TERHADAP TYPE                                    */
+/* ***************************************************************** */
+/* *** Kelompok Operator Relational *** */
+boolean TEQ(TIME T1, TIME T2);
+/* Mengirimkan true jika T1=T2, false jika tidak */
+boolean TNEQ(TIME T1, TIME T2);
+/* Mengirimkan true jika T1 tidak sama dengan T2 */
+boolean TLT(TIME T1, TIME T2);
+/* Mengirimkan true jika T1<T2, false jika tidak */
+boolean TGT(TIME T1, TIME T2);
+/* Mengirimkan true jika T1>T2, false jika tidak */
+
+/* *** Operator aritmatika TIME *** */
+// TIME NextDetik(TIME T);
+// /* Mengirim 1 detik setelah T dalam bentuk TIME */
+// TIME NextNDetik(TIME T, int N);
+// /* Mengirim N detik setelah T dalam bentuk TIME */
+// TIME PrevDetik(TIME T);
+// /* Mengirim 1 detik sebelum T dalam bentuk TIME */
+// TIME PrevNDetik(TIME T, int N);
+// /* Mengirim N detik sebelum T dalam bentuk TIME */
+TIME TNextNMin(TIME T, int N);
+// Mengirimkan time batu dengan Penambahan N menit
+TIME TPrevNMin(TIME T, int N);
+// Mengirimkan time batu dengan pengurangan N menit
+TIME TNextMin(TIME T);
+// Mengirimkan time batu dengan Penambahan 1 menit
+TIME TPrevMin(TIME T);
+// Mengirimkan time batu dengan Pengurangan 1 menit
+
+void NextMin(TIME *T);
+/* I.S. Time terdefinisi */
+/* F.S. Time menjadi Time baru yang sudah ditambahkan 1 menit */
+/* Proses : Mengubah Time ke dalam bentuk menit lalu  ditambahkan 1 menit */
+
+void PrevMin(TIME *T);
+/* I.S. Time terdefinisi */
+/* F.S. Time menjadi Time baru yang sudah dikurangkan 1 menit */
+/* Proses : Mengubah Time ke dalam bentuk menit lalu dikurang 1 menit */
+
+void NextNMin(TIME *T, int N);
+/* I.S. Time terdefinisi */
+/* F.S. Time menjadi Time baru yang sudah ditambahkan N menit */
+/* Proses : Mengubah Time ke dalam bentuk menit lalu ditambahkan N */
+void PrevNMin(TIME *T, int N);
+/* I.S. Time terdefinisi dan Time dikurang N valid membentuk Time (N < TIME yang sudah dijadikan menit)*/
+/* F.S. Time menjadi Time baru yang sudah dikurangkan N menit */
+/* Proses : Mengubah Time ke dalam bentuk menit lalu dikurangkan N */
+
+/* *** Kelompok Operator Aritmetika *** */
+long Durasi(TIME TAw, TIME TAkh);
+/* Mengirim TAkh-TAw dlm Detik, dengan kalkulasi */
+/* Jika TAw > TAkh, maka TAkh adalah 1 hari setelah TAw */
+
+#endif
