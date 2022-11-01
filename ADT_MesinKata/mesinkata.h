@@ -19,7 +19,7 @@ typedef struct line
 
 typedef struct word
 {
-   str String;
+   str String; 
    int Length; 
 } Word;
 

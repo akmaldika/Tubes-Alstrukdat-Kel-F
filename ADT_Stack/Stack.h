@@ -14,7 +14,6 @@
 #include "..\ADT_Matriks\"
 
 #define Nil -1
-#define CapacityStack 100
 /* Nil adalah stack dengan elemen kosong . */
 /* Kapasitas Stack adalah kelipatan 100 */
 
@@ -28,6 +27,7 @@ typedef int address;   /* indeks tabel */
 typedef struct { 
   ElStackURType T[CapacityStack]; /* tabel penyimpan elemen */
   address TOP;  /* alamat TOP: elemen puncak */
+  int capacity; /* kapasitas yang sedang ditampung */
 } Stack;
 
 
@@ -60,4 +60,7 @@ void Pop(Stack * S, ElStackURType* X);
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
 
+void IncreaseSize(Stack *S);
+/* Capacity bertambah sebanyak Capacity */
+..
 #endif
