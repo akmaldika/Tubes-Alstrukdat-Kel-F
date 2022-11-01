@@ -1,7 +1,8 @@
 /* File : Stack.h */
-/* deklarasi stack yang diimplementasi dengan tabel kontigu dan ukuran sama */
+/* Stack dengan elemen kontigu dan alokasi memori dinamk*/
 /* TOP adalah alamat elemen puncak */
-/* Implementasi dalam bahasa C dengan alokasi statik */
+
+
 #ifndef StackUndoRedo_h
 #define StackUndoRedo_h
 
@@ -13,33 +14,28 @@
 #include "..\ADT_Matriks\"
 
 #define Nil -1
-#define MaxElStack 100
+#define CapacityStack 100
 /* Nil adalah stack dengan elemen kosong . */
+/* Kapasitas Stack adalah kelipatan 100 */
 
 typedef struct
 {
     
 } ElStackURType;
+
 typedef int address;   /* indeks tabel */
 
-/* Contoh deklarasi variabel bertype stack dengan ciri TOP : */
-/* Versi I : dengan menyimpan tabel dan alamat top secara eksplisit*/
 typedef struct { 
-  ElStackURType T[MaxElStack]; /* tabel penyimpan elemen */
+  ElStackURType T[CapacityStack]; /* tabel penyimpan elemen */
   address TOP;  /* alamat TOP: elemen puncak */
 } Stack;
-/* Definisi stack S kosong : S.TOP = Nil */
-/* Elemen yang dipakai menyimpan nilai Stack T[0]..T[MaxEl-1] */
-/* Jika S adalah Stack maka akses elemen : */
-   /* S.T[(S.TOP)] untuk mengakses elemen TOP */
-   /* S.TOP adalah alamat elemen TOP */
 
-/* Definisi akses dengan Selektor : Set dan Get */
+
+/* ********** SELEKTOR ********** */
 #define Top(S) (S).TOP
 #define InfoTop(S) (S).T[(S).TOP]
 
-/* ************ Prototype ************ */
-/* *** Konstruktor/Kreator *** */
+/* *** KONSTRUKTOR *** */
 void CreateEmpty(Stack *S);
 /* I.S. sembarang; */
 /* F.S. Membuat sebuah stack S yang kosong berkapasitas MaxEl */
