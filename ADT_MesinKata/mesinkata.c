@@ -8,15 +8,16 @@ int currentLength;
 
 void STARTLINE(str fileName) {
     /* I.S. : currentChar sembarang, input nama file valid
-       F.S. : currentChar == '\n' dan currentLine berisikan baris pertama yang telah diakuisisi */
+       F.S. : currentChar = kata pertama dari baris berikutnya dan currentLine berisikan baris pertama yang telah diakuisisi */
     START(fileName);
     CopyLine();
     currentLength = 0;
+    ADV();
 }
 
 void ADVLINE() {
     /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
-       F.S. : currentChar == '\n' dan currentLine berisikan baris yang telah diakuisi.
+       F.S. : currentChar = kata pertama dari baris berikutnya dan currentLine berisikan baris yang telah diakuisi.
        Proses : Akuisisi baris menggunakan procedure CopyLine */
     CopyLine();
     ADV();
@@ -26,7 +27,7 @@ void ADVLINE() {
 void CopyLine() {
     /* Mengakuisisi kata, menyimpan dalam currentWord
        I.S. : currentChar adalah karakter pertama dari kata
-       F.S. : currentChar == '\n' dan currentLine berisikan baris yang telah diakuisi */
+       F.S. : currentChar = kata pertama dari baris berikutnya dan currentLine berisikan baris yang telah diakuisi */
     currentLine.Length = 0;
     while (!EOL) {
         currentLine.Tabword[currentLine.Length++] = currentChar;

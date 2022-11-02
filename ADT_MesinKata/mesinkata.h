@@ -32,17 +32,17 @@ extern int currentLength;
 
 void STARTLINE(str fileName);
     /* I.S. : currentChar sembarang, input nama file valid
-       F.S. : currentChar == '\n' dan currentLine berisikan baris pertama yang telah diakuisisi */
+       F.S. : currentChar = kata pertama dari baris berikutnya dan currentLine berisikan baris pertama yang telah diakuisisi */
 
 void ADVLINE();
     /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
-       F.S. : currentChar == '\n' dan currentLine berisikan baris yang telah diakuisi.
+       F.S. : currentChar = kata pertama dari baris berikutnya dan currentLine berisikan baris yang telah diakuisi.
        Proses : Akuisisi baris menggunakan procedure CopyLine */
 
 void CopyLine();
     /* Mengakuisisi kata, menyimpan dalam currentWord
        I.S. : currentChar adalah karakter pertama dari kata
-       F.S. : currentChar == '\n' dan currentLine berisikan baris yang telah diakuisi */
+       F.S. : currentChar = kata pertama dari baris berikutnya dan currentLine berisikan baris yang telah diakuisi */
 
 void ADVWORD();
     /* I.S. : CurrentLine terdefinisi
@@ -51,5 +51,8 @@ void ADVWORD();
 void CopyWord();
     /* I.S. : CurrentLine terdefinisi
        F.S. : currentWord berisi word mulai dari currentLine.Tabword[currentLength] sampai endWord */
+
+void displayString();
+    /* Menampilkan currentWord ke layar */
 
 #endif
