@@ -8,7 +8,6 @@
 #include "mesinkarakter.h"
 #include "string.h"
 
-#define NMax 100
 #define BLANK ' '
 
 typedef struct line
@@ -28,6 +27,7 @@ typedef struct word
 extern boolean endWord;
 extern Word currentWord;
 extern Line currentLine;
+extern int currentLength;
 
 
 void STARTLINE(str fileName);
@@ -44,7 +44,11 @@ void CopyLine();
        I.S. : currentChar adalah karakter pertama dari kata
        F.S. : currentChar == '\n' dan currentLine berisikan baris yang telah diakuisi */
 
-void CopyWord(int *currentLength);
+void ADVWORD();
+    /* I.S. : CurrentLine terdefinisi
+       F.S. : currentWord adalah kata yang telah diakusisi dari currentLength sampai endWord*/
+
+void CopyWord();
     /* I.S. : CurrentLine terdefinisi
        F.S. : currentWord berisi word mulai dari currentLine.Tabword[currentLength] sampai endWord */
 
