@@ -71,19 +71,11 @@ void DisplayTIME(TIME T);
 /* ***************************************************************** */
 /* KELOMPOK KONVERSI TERHADAP TYPE                                   */
 /* ***************************************************************** */
-long TIMEToSec(TIME T);
-/* Diberikan sebuah TIME, mengkonversi menjadi jumlah detik dari pukul 0:0:0 */
-/* Rumus : detik = 3600*H + 60*M + S */
-/* Nilai maksimum = 3600*23+59*60+59 */
+
 long TIMEToMin(TIME T);
 /* Mengirimkan besar dari time dalam satuan menit */
 TIME MinToTIME(long N);
 /* Mengirimkan bentuk konversi dari menit menjadi TIME yang valid*/
-TIME DetikToTIME(int d, long N);
-/* Mengirim  konversi detik ke TIME */
-/* Catatan: Jika N >= 86400, maka harus dikonversi dulu menjadi jumlah detik yang
-   mewakili jumlah detik yang mungkin dalam 1 hari, yaitu dengan rumus:
-   N1 = N mod 86400, baru N1 dikonversi menjadi TIME */
 
 /* ***************************************************************** */
 /* KELOMPOK OPERASI TERHADAP TYPE                                    */
@@ -136,7 +128,7 @@ void PrevNMin(TIME *T, int N);
 /* Proses : Mengubah Time ke dalam bentuk menit lalu dikurangkan N */
 
 /* *** Kelompok Operator Aritmetika *** */
-long Durasi(TIME TAw, TIME TAkh);
+long Duration(TIME TAw, TIME TAkh);
 /* Mengirim TAkh-TAw dlm Detik, dengan kalkulasi */
 /* Jika TAw > TAkh, maka TAkh adalah 1 hari setelah TAw */
 

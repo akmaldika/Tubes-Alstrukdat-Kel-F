@@ -65,27 +65,11 @@ void ReadTIME(TIME *T)
 {
     /* I.S. : T tidak terdefinisi */
     /* F.S. : T terdefinisi dan merupakan jam yang valid */
-    /* Proses : mengulangi membaca komponen HH, MM, SS sehingga membentuk T */
-    /* yang valid. Tidak mungkin menghasilkan T yang tidak valid. */
-    /* Pembacaan dilakukan dengan mengetikkan komponen HH, MM, SS
-    dalam satu baris, masing-masing dipisahkan 1 spasi, diakhiri enter. */
-    /* Jika TIME tidak valid maka diberikan pesan: "Jam tidak valid", dan pembacaan
-    diulangi hingga didapatkan jam yang valid. */
-    /* Contoh:
-    60 3 4
-    Jam tidak valid
-    1 3 4
-    --> akan terbentuk TIME <1,3,4> */
+
     // KAMUS LOKAL
     int d, h, m;
     // ALGORITMA
 
-    // scanf("%d %d %d", &h, &m, &s);
-    // while (!(IsTIMEValid(h, m, s)))
-    // {
-    //     printf("Jam tidak valid\n");
-    //     scanf("%d %d %d", &h, &m, &s);
-    // }
 
     CreateTime(T, d, h, m);
 }
@@ -104,15 +88,7 @@ void DisplayTIME(TIME T)
 /* ***************************************************************** */
 /* KELOMPOK KONVERSI TERHADAP TYPE                                   */
 /* ***************************************************************** */
-long TIMEToSec(TIME T)
-{
-    /* Diberikan sebuah TIME, mengkonversi menjadi jumlah detik dari pukul 0:0:0 */
-    /* Rumus : detik = 3600*HH + 60*MM + SS */
-    /* Nilai maksimum = 3600*23+59*60+59 */
-    // KAMUS LOKAL
-    // ALGORITMA
-    return (Day(T) * 86400 + 3600 * Hour(T) + 60 * Minute(T));
-}
+
 long TIMEToMin(TIME T)
 {
     /* Mengirimkan besar dari time dalam satuan menit */
@@ -125,20 +101,6 @@ TIME MinToTIME(long N)
     TIME T;
     // ALGORITMA
     CreateTime(&T, N / 1440, ((N % 1440) / 60), ((N % 1440) % 60));
-    return T;
-}
-TIME DetikToTIME(int d, long N)
-{
-    /* Mengirim  konversi detik ke TIME */
-    /* Catatan: Jika N >= 86400, maka harus dikonversi dulu menjadi jumlah detik yang
-    mewakili jumlah detik yang mungkin dalam 1 hari, yaitu dengan rumus:
-    N1 = N mod 86400, baru N1 dikonversi menjadi TIME */
-    // KAMUS LOKAL
-    TIME T;
-    // ALGORITMA
-    d = N / 86400;
-    N = (N % 86400);
-    CreateTime(&T, d, (N / 3600), (N % 3600) / 60);
     return T;
 }
 
@@ -235,7 +197,7 @@ void PrevNMin(TIME *T, int N)
 }
 
 /* *** Kelompok Operator Aritmetika *** */
-long Durasi(TIME TAw, TIME TAkh)
+long Duration(TIME TAw, TIME TAkh)
 {
     /* Mengirim TAkh-TAw dlm menit, dengan kalkulasi */
     // KAMUS LOKAL
