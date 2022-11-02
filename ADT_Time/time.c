@@ -62,7 +62,7 @@ void CreateTime(TIME *T, int D, int H, int M)
 /* KELOMPOK BACA/TULIS                                               */
 /* ***************************************************************** */
 
-void DisplayTIME(TIME T)
+void DisplayTIMEFull(TIME T)
 {
     /* I.S. : T sembarang */
     /* F.S. : Nilai T ditulis dg format D:H:M */
@@ -71,6 +71,26 @@ void DisplayTIME(TIME T)
     // KAMUS LOKAL
     // ALGORITMA
     printf("%d:%d:%d", Day(T), Hour(T), Minute(T));
+}
+
+void DisplayTIME(TIME T)
+{
+    /* I.S. : T sembarang */
+    /* F.S. : Nilai T ditulis dg format D:H:M */
+    /* Proses : menulis nilai setiap komponen T ke layar dalam format D.H.M
+    tanpa karakter apa pun di depan atau belakangnya, termasuk spasi, enter, dll.*/
+    if (getD(T) == 0 && getH != 0)
+    { // H.M
+        printf("%d.%d", Hour(T), Minute(T));
+    }
+    else if (getD(T) == 0 && getH(T) == 0)
+    { // M
+        printf("%d", Minute(T));
+    }
+    else
+    { // D.H.M
+        printf("%d.%d.%d", Day(T), Hour(T), Minute(T));
+    }
 }
 
 /* ***************************************************************** */

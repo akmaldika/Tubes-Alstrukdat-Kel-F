@@ -8,7 +8,7 @@
 /* *** Definisi TYPE TIME <H:M:S> *** */
 typedef struct
 {
-   int D; /* integer [1..7]  */
+   int D; /* integer [1..]  */
    int H; /* integer [0..23] */
    int M; /* integer [0..59] */
 } TIME;
@@ -48,10 +48,16 @@ void CreateTime(TIME *T, int D, int H, int M);
 /* KELOMPOK BACA/TULIS                                               */
 /* ***************************************************************** */
 
-void DisplayTIME(TIME T);
+void DisplayTIMEFull(TIME T);
 /* I.S. : T sembarang */
 /* F.S. : Nilai T ditulis dg format D:H:M */
 /* Proses : menulis nilai setiap komponen T ke layar dalam format D:H:M
+   tanpa karakter apa pun di depan atau belakangnya, termasuk spasi, enter, dll.*/
+
+void DisplayTIME(TIME T);
+/* I.S. : T sembarang */
+/* F.S. : Nilai T ditulis dg format D:H:M */
+/* Proses : menulis nilai setiap komponen T ke layar dalam format D.H.M
    tanpa karakter apa pun di depan atau belakangnya, termasuk spasi, enter, dll.*/
 
 /* ***************************************************************** */
