@@ -61,18 +61,6 @@ void CreateTime(TIME *T, int D, int H, int M)
 /* ***************************************************************** */
 /* KELOMPOK BACA/TULIS                                               */
 /* ***************************************************************** */
-void ReadTIME(TIME *T)
-{
-    /* I.S. : T tidak terdefinisi */
-    /* F.S. : T terdefinisi dan merupakan jam yang valid */
-
-    // KAMUS LOKAL
-    int d, h, m;
-    // ALGORITMA
-
-
-    CreateTime(T, d, h, m);
-}
 
 void DisplayTIME(TIME T)
 {

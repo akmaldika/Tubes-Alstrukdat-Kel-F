@@ -47,20 +47,6 @@ void CreateTime(TIME *T, int D, int H, int M);
 /* ***************************************************************** */
 /* KELOMPOK BACA/TULIS                                               */
 /* ***************************************************************** */
-void ReadTIME(TIME *T);
-/* I.S. : T tidak terdefinisi */
-/* F.S. : T terdefinisi dan merupakan jam yang valid */
-/* Proses : mengulangi membaca komponen H, M, S sehingga membentuk T */
-/* yang valid. Tidak mungkin menghasilkan T yang tidak valid. */
-/* Pembacaan dilakukan dengan mengetikkan komponen H, M, S
-   dalam satu baris, masing-masing dipisahkan 1 spasi, diakhiri enter. */
-/* Jika TIME tidak valid maka diberikan pesan: "Jam tidak valid", dan pembacaan
-   diulangi hingga didapatkan jam yang valid. */
-/* Contoh:
-   60 3 4
-   Jam tidak valid
-   1 3 4
-   --> akan terbentuk TIME <1,3,4> */
 
 void DisplayTIME(TIME T);
 /* I.S. : T sembarang */
