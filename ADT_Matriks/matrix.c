@@ -2,6 +2,11 @@
 #include <stdio.h>
 #include "matrix.h"
 #include <math.h>
+#include "mesinkata.h"
+#include "string.h"
+#include "mesinkata.c"
+#include "mesinkarakter.c"
+#include "mesinkarakter.h"
 
 //Muhammad Zaydan A
 //13521104
@@ -12,7 +17,7 @@
 void createMatrix(int nRows, int nCols, Matrix *m){
 /* Membentuk sebuah Matrix "kosong" yang siap diisi berukuran nRow x nCol di "ujung kiri" memori */
 /* I.S. nRow dan nCol adalah valid untuk memori matriks yang dibuat */
-/* F.S. Matriks m sesuai dengan definisi di atas terbentuk */
+/* F.S. Matriks m sesuai dengan definisi di atawords terbentuk */
 
    // ALGORITMA
    ROW_EFF(*m) = nRows;
@@ -20,42 +25,77 @@ void createMatrix(int nRows, int nCols, Matrix *m){
 }
 
 Matrix MapMatrix(){
-    /* Membuat MATRIKS Map berukuran 11 x 11 dengan */
+    /* Membuat MATRIKS Map berukuran N x M dengan */
     /* sisi terluarnya adalah # yaitu pagar, sisi dalamnya adalah . yaitu lahan */
     Matrix Map;
-    
-    createMatrix(12, 12, &Map);
+    Matrix RetMap;
+    str f;
+    int row, col, N, M;
+    boolean first = true;
+    int i;
+    int j = 0;
+    int cnt = 0;
+    scanf("%s", &f);
+        
+        
+        STARTLINE(f);
+        for (i = 0; i < currentLine.Length; i++) {
+            CopyWord(&i);
+            if (first) {
+                row = wordToInt(currentWord.String, currentWord.Length);
+                N = row;
+               //  printf("%d\n", N);
+                first = false;
+            }
+            else {
+                col = wordToInt(currentWord.String, currentWord.Length);
+                M = col;
+               //  printf("%d\n", col);          
+            }
+        }
+      //   printf("\n%d %d\n", N, M);
 
-    for (int i = brsmin; i <= getLastIdxRow(Map); i++){
-        for (int j = kolmin; j <= getLastIdxCol(Map); j++){
-            ELMT(Map, i, j) = (i == brsmin || i == getLastIdxRow(Map) || j == kolmin || j == getLastIdxCol(Map) ) 
+        
+        i = 0;
+        createMatrix(N,M,&Map);
+        ADV();
+        do{
+
+
+            CopyLine();
+
+                for (j=0;j<M;j++){
+                    ELMT(Map,i,j)=currentLine.Tabword[j];
+                }
+
+            i+=1;
+            if (i==10){
+                break;
+            }else{
+                ADV();
+            }
+        } while (i<row+1);
+
+      createMatrix(N+2,M+2,&RetMap);
+      for (int i = brsmin; i <= getLastIdxRow(RetMap); i++){
+         for (int j = kolmin; j <= getLastIdxCol(RetMap); j++){
+            ELMT(RetMap, i, j) = (i == brsmin || i == getLastIdxRow(RetMap) || j == kolmin || j == getLastIdxCol(RetMap) ) 
                 ? '*'
-                : ' ';
-
+                : ELMT(Map,i-1,j-1);
         }
     }
 
-       ELMT(Map,1,1) = 'S';
-       ELMT(Map,2,5) = 'T'; 
-       ELMT(Map,3,2) = 'M';
-      for (int j = (kolmin+5); j <= 8; j++){
-         ELMT(Map, 5, j) = 'X';
-      }
-      for (int i = (brsmin+2); i <= 5; i++){
-         ELMT(Map, i, 8) = 'X';
-      }
-       ELMT(Map,8,7) = 'F';
-       ELMT(Map,10,7) = 'B';
-       ELMT(Map,7,9) = 'C';
-      for (int i = (kolmin+6); i <= 8; i++){
-         ELMT(Map, i, 2) = 'X';
-      }
-      for (int j = (kolmin+2); j <= 4; j++){
-         ELMT(Map, 8, j) = 'X';
-      }      
 
-    return Map;
+      return RetMap;
 }
+
+
+   
+
+
+
+
+
 
 void MoveEast(Matrix *m){
    int x,y;
@@ -88,7 +128,7 @@ void MoveWest(Matrix *m){
    // printf("%d\n",y+1);
    // printf("%d\n",x+1);
 
-   if (ELMT(*m,y,x-1)=='*'){
+   if (ELMT(*m,y,x-1)=='*'||ELMT(*m,y,x+1)=='M'||ELMT(*m,y,x+1)=='T'||ELMT(*m,y,x+1)=='C'||ELMT(*m,y,x+1)=='F'||ELMT(*m,y,x+1)=='B'){
       printf("West MENTOK\n");
    }
    else{
@@ -110,7 +150,7 @@ void MoveNorth(Matrix *m){
    // printf("%d\n",y+1);
    // printf("%d\n",x+1);
 
-   if (ELMT(*m,y-1,x)=='*'){
+   if (ELMT(*m,y,x+1)=='*'||ELMT(*m,y,x+1)=='M'||ELMT(*m,y,x+1)=='T'||ELMT(*m,y,x+1)=='C'||ELMT(*m,y,x+1)=='F'||ELMT(*m,y,x+1)=='B'){
       printf("North MENTOK\n");
    }
    else{
@@ -132,7 +172,7 @@ void MoveSouth(Matrix *m){
    // printf("%d\n",y+1);
    // printf("%d\n",x+1);
 
-   if (ELMT(*m,y+1,x)=='*'){
+   if (ELMT(*m,y,x+1)=='*'||ELMT(*m,y,x+1)=='M'||ELMT(*m,y,x+1)=='T'||ELMT(*m,y,x+1)=='C'||ELMT(*m,y,x+1)=='F'||ELMT(*m,y,x+1)=='B'){
       printf("South MENTOK\n");
    }
    else{

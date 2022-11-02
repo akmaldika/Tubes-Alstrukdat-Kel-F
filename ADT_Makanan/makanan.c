@@ -3,7 +3,9 @@
 #include "makanan.h"
 
 void CreateMakanan(MAKANAN *m, int id, char judul, __TIME__ exp,__TIME__ durasi,int loc){
-
+        ID(*m)= id;
+        Judul(*m)= judul;
+        exp(*m)= exp;
 
 }
 
