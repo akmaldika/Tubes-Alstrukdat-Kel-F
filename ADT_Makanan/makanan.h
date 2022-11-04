@@ -24,7 +24,7 @@ typedef struct
 } MAKANAN;
 
 #define ID(m) (m).id
-#define Judul(m) (m).judul
+#define judul(m) (m).Judul
 #define exp(m) (m).exp
 #define durasi(m) (m).durasi
 #define loc(m) (m).loc

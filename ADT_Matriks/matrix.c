@@ -120,7 +120,7 @@ void MoveEast(Matrix *m){
    // printf("%d\n",y+1);
    // printf("%d\n",x+1);
 
-   if (ELMT(*m,y,x+1)=='*'||ELMT(*m,y,x+1)=='M'||ELMT(*m,y,x+1)=='T'||ELMT(*m,y,x+1)=='C'||ELMT(*m,y,x+1)=='F'||ELMT(*m,y,x+1)=='B'){
+   if (ELMT(*m,y,x+1)=='*'||ELMT(*m,y,x+1)=='M'||ELMT(*m,y,x+1)=='T'||ELMT(*m,y,x+1)=='C'||ELMT(*m,y,x+1)=='F'||ELMT(*m,y,x+1)=='B'||ELMT(*m,y,x+1)=='X'){
       printf("East MENTOK\n");
    }
    else{
@@ -142,7 +142,7 @@ void MoveWest(Matrix *m){
    // printf("%d\n",y+1);
    // printf("%d\n",x+1);
 
-   if (ELMT(*m,y,x-1)=='*'||ELMT(*m,y,x+1)=='M'||ELMT(*m,y,x+1)=='T'||ELMT(*m,y,x+1)=='C'||ELMT(*m,y,x+1)=='F'||ELMT(*m,y,x+1)=='B'){
+   if (ELMT(*m,y,x-1)=='*'||ELMT(*m,y,x-1)=='M'||ELMT(*m,y,x-1)=='T'||ELMT(*m,y,x-1)=='C'||ELMT(*m,y,x-1)=='F'||ELMT(*m,y,x-1)=='B'||ELMT(*m,y,x-1)=='X'){
       printf("West MENTOK\n");
    }
    else{
@@ -164,7 +164,7 @@ void MoveNorth(Matrix *m){
    // printf("%d\n",y+1);
    // printf("%d\n",x+1);
 
-   if (ELMT(*m,y,x+1)=='*'||ELMT(*m,y,x+1)=='M'||ELMT(*m,y,x+1)=='T'||ELMT(*m,y,x+1)=='C'||ELMT(*m,y,x+1)=='F'||ELMT(*m,y,x+1)=='B'){
+   if (ELMT(*m,y-1,x)=='*'||ELMT(*m,y-1,x)=='M'||ELMT(*m,y-1,x)=='T'||ELMT(*m,y-1,x)=='C'||ELMT(*m,y-1,x)=='F'||ELMT(*m,y-1,x)=='B'||ELMT(*m,y-1,x)=='X'){
       printf("North MENTOK\n");
    }
    else{
@@ -186,7 +186,7 @@ void MoveSouth(Matrix *m){
    // printf("%d\n",y+1);
    // printf("%d\n",x+1);
 
-   if (ELMT(*m,y,x+1)=='*'||ELMT(*m,y,x+1)=='M'||ELMT(*m,y,x+1)=='T'||ELMT(*m,y,x+1)=='C'||ELMT(*m,y,x+1)=='F'||ELMT(*m,y,x+1)=='B'){
+   if (ELMT(*m,y+1,x)=='*'||ELMT(*m,y+1,x)=='M'||ELMT(*m,y+1,x)=='T'||ELMT(*m,y+1,x)=='C'||ELMT(*m,y+1,x)=='F'||ELMT(*m,y+1,x)=='B'||ELMT(*m,y+1,x)=='X'){
       printf("South MENTOK\n");
    }
    else{
