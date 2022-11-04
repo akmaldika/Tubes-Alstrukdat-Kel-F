@@ -61,7 +61,7 @@ void SetUpListMakanan(ListMakanan *l, char *namaFile)
     /* I.F. Terbentuk list makanan berdasarkan hasil konfigurasi */
     /* NElmt list pasti sama dengan CONFIG_SIZELM */
     STARTLINE(namaFile);
-    LengthLM(*l) = wordToInt(currentWord)
+    
 }
 
 void DisplayBuyAbleLM(ListMakanan l)

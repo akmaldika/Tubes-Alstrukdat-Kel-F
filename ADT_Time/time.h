@@ -8,7 +8,7 @@
 /* *** Definisi TYPE TIME <H:M:S> *** */
 typedef struct
 {
-   int D; /* integer [1..7]  */
+   int D; /* integer [1..]  */
    int H; /* integer [0..23] */
    int M; /* integer [0..59] */
 } TIME;
@@ -47,43 +47,27 @@ void CreateTime(TIME *T, int D, int H, int M);
 /* ***************************************************************** */
 /* KELOMPOK BACA/TULIS                                               */
 /* ***************************************************************** */
-void ReadTIME(TIME *T);
-/* I.S. : T tidak terdefinisi */
-/* F.S. : T terdefinisi dan merupakan jam yang valid */
-/* Proses : mengulangi membaca komponen H, M, S sehingga membentuk T */
-/* yang valid. Tidak mungkin menghasilkan T yang tidak valid. */
-/* Pembacaan dilakukan dengan mengetikkan komponen H, M, S
-   dalam satu baris, masing-masing dipisahkan 1 spasi, diakhiri enter. */
-/* Jika TIME tidak valid maka diberikan pesan: "Jam tidak valid", dan pembacaan
-   diulangi hingga didapatkan jam yang valid. */
-/* Contoh:
-   60 3 4
-   Jam tidak valid
-   1 3 4
-   --> akan terbentuk TIME <1,3,4> */
 
-void DisplayTIME(TIME T);
+void DisplayTIMEFull(TIME T);
 /* I.S. : T sembarang */
 /* F.S. : Nilai T ditulis dg format D:H:M */
 /* Proses : menulis nilai setiap komponen T ke layar dalam format D:H:M
    tanpa karakter apa pun di depan atau belakangnya, termasuk spasi, enter, dll.*/
 
+void DisplayTIME(TIME T);
+/* I.S. : T sembarang */
+/* F.S. : Nilai T ditulis dg format D:H:M */
+/* Proses : menulis nilai setiap komponen T ke layar dalam format D.H.M
+   tanpa karakter apa pun di depan atau belakangnya, termasuk spasi, enter, dll.*/
+
 /* ***************************************************************** */
 /* KELOMPOK KONVERSI TERHADAP TYPE                                   */
 /* ***************************************************************** */
-long TIMEToSec(TIME T);
-/* Diberikan sebuah TIME, mengkonversi menjadi jumlah detik dari pukul 0:0:0 */
-/* Rumus : detik = 3600*H + 60*M + S */
-/* Nilai maksimum = 3600*23+59*60+59 */
+
 long TIMEToMin(TIME T);
 /* Mengirimkan besar dari time dalam satuan menit */
 TIME MinToTIME(long N);
 /* Mengirimkan bentuk konversi dari menit menjadi TIME yang valid*/
-TIME DetikToTIME(int d, long N);
-/* Mengirim  konversi detik ke TIME */
-/* Catatan: Jika N >= 86400, maka harus dikonversi dulu menjadi jumlah detik yang
-   mewakili jumlah detik yang mungkin dalam 1 hari, yaitu dengan rumus:
-   N1 = N mod 86400, baru N1 dikonversi menjadi TIME */
 
 /* ***************************************************************** */
 /* KELOMPOK OPERASI TERHADAP TYPE                                    */
@@ -136,7 +120,7 @@ void PrevNMin(TIME *T, int N);
 /* Proses : Mengubah Time ke dalam bentuk menit lalu dikurangkan N */
 
 /* *** Kelompok Operator Aritmetika *** */
-long Durasi(TIME TAw, TIME TAkh);
+long Duration(TIME TAw, TIME TAkh);
 /* Mengirim TAkh-TAw dlm Detik, dengan kalkulasi */
 /* Jika TAw > TAkh, maka TAkh adalah 1 hari setelah TAw */
 
