@@ -38,6 +38,10 @@ void createMatrix(int nRows, int nCols, Matrix *m);
 
 Matrix MapMatrix();
 
+void displayMap(Matrix m);
+/* Merubah '#' dalam matrix menjadi ' ' kemudian menampilkan matrix */
+
+
 
 /* *** Selektor "Dunia Matrix" *** */
 boolean isMatrixIdxValid(int i, int j);

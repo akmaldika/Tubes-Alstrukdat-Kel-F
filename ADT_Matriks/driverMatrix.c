@@ -8,7 +8,7 @@ int main(){
     Matrix p;
     p=MapMatrix();
     MoveWest(&p);
-    displayMatrix(p);
+    displayMap(p);
 
 
 }

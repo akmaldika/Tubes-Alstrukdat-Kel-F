@@ -83,14 +83,28 @@ Matrix MapMatrix(){
                 ? '*'
                 : ELMT(Map,i-1,j-1);
         }
-    }
+      }
 
 
       return RetMap;
 }
 
 
-   
+void displayMap(Matrix m){
+   int i;
+   int j;
+      for (int i = brsmin; i <= getLastIdxRow(m); i++){
+         for (int j = kolmin; j <= getLastIdxCol(m); j++){
+            if (ELMT(m,i,j)=='#'){
+               ELMT(m,i,j)=' ';
+            }
+
+        }
+      }
+
+   displayMatrix(m);
+
+}  
 
 
 

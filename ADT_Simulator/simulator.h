@@ -7,6 +7,7 @@ typedef struct {
     char nama;
     int locs;
     char inventory;
+    char notifikasi;
 
 
 } SIMULATOR;
@@ -16,7 +17,6 @@ typedef struct {
 #define LOCS(s) (s).locs
 #define INVENTORY(s) (s).inventory
 
-void StartSimulator(SIMULATOR *s);
 
 boolean isAdjacent(int locs);
 
