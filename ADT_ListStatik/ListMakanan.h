@@ -10,18 +10,18 @@
 #include "..\config_main.h"
 #include "..\ADT_MesinKata\mesinkata.h"
 #include "..\ADT_MesinKata\string.h"
-// #include "..\ADT_Makanan\"
+#include "..\ADT_Makanan\makanan.h"
 // #include "..\ADT_Time\"
 
 
 /* CONFIG_SIZELM adalah SetUp Ukuran Makanan sesuai konfigurasi pada file config_main.h */
 
 typedef int IdxTypeLM; /* Type index */
-typedef _TIPE_MAKANAN_ ElListMakananType;
+typedef MAKANAN ElListMakananType;
 
 typedef struct
 {
-  ElListMakananType makanan[CONFIG_SIZELM];
+  ElListMakananType Lmakanan[CONFIG_SIZELM];
   int NElmt;
 } ListMakanan;
 /* Index yang digunakan [0..CONFIG_SIZELM-1] */
@@ -39,10 +39,10 @@ void CreateListMakanan(ListMakanan *l);
 /* ********** SELEKTOR ********** */
 /* l adalah ListMakanan */
 #define LengthLM(l) (l).NElmt           /* get ukuran list */
-#define ListMkn(l) (l)._MAKANAN_           /* get pointer list */
-#define ElmtLM(l,i) LMakanan[i]         /* get elemen list ke-i */
+#define ListMkn(l) (l).Lmakanan           /* get pointer list */
+#define ElmtLM(l,i) (l).Lmakanan[i]         /* get elemen list ke-i */
 
-_ID_MAKANAN_ GetIdMkn(ListMakanan l, int i);
+MAKANAN.id GetIdMkn(ListMakanan l, int i);
 /* l terdefinisi dan i valid untuk l, yaitu [0..NElmt-1] */
 /* Mengembalikan int ID makanan index ke-i */
 
