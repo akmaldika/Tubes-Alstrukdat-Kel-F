@@ -1,14 +1,12 @@
+#include "../ADT_Time/boolean.h"
+#include "../ADT_Time/time.h"
+
 #ifndef MAKANAN_H
 #define MAKANAN_H
-
-#include "boolean.h"
-
-
 
 /* Ukuran maksimum baris dan kolom */
 #define ROW_CAP 100
 #define brsmin 0
-
 
 typedef int IdxType; /* Index baris, kolom */
 typedef int ElMakananType;
@@ -17,10 +15,10 @@ typedef struct
 {
    int id; /* banyaknya/ukuran baris yg terdefinisi */
    char Judul;
-   __TIME__ exp;
-   __TIME__ durasi;
+   TIME exp;
+   TIME durasi;
    int loc;
-   
+
 } MAKANAN;
 
 #define ID(m) (m).id
@@ -29,18 +27,16 @@ typedef struct
 #define durasi(m) (m).durasi
 #define loc(m) (m).loc
 
-
-
-
-void CreateMakanan(MAKANAN *m, int id, char judul, __TIME__ exp,__TIME__ durasi,int loc); 
+void CreateMakanan(MAKANAN *m, int id, char judul, TIME exp, TIME durasi, int loc);
 
 int getId(MAKANAN m);
 
 char getJudul(MAKANAN m);
 
-__TIME__ getExp(MAKANAN m);
+TIME getExp(MAKANAN m);
 
-__TIME__ getDurasi(MAKANAN *m);
+TIME getDurasi(MAKANAN m);
 
 int getLoc(MAKANAN *m);
 
+#endif

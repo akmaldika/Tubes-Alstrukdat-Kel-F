@@ -2,28 +2,33 @@
 #include "boolean.h"
 #include "makanan.h"
 
-void CreateMakanan(MAKANAN *m, int id, char judul, __TIME__ exp,__TIME__ durasi,int loc){
-        ID(*m)= id;
-        Judul(*m)= judul;
-        exp(*m)= exp;
-
+void CreateMakanan(MAKANAN *m, int id, char judul, TIME exp, TIME durasi, int loc)
+{
+        ID(*m) = id;
+        judul(*m) = judul;
+        exp(*m) = exp;
 }
 
-int getId(MAKANAN m){
+int getId(MAKANAN m)
+{
         return ID(m);
 }
 
-char getJudul(MAKANAN m){
+char getJudul(MAKANAN m)
+{
         return Judul(m);
 }
 
-__TIME__ getExp(MAKANAN m){
+TIME getExp(MAKANAN m)
+{
         return exp(m);
 }
 
-__TIME__ getDurasi(MAKANAN *m);
+TIME getDurasi(MAKANAN m)
+{
         return durasi(m);
-
-int getLoc(MAKANAN *m){
-        // return loc(m);
+}
+int getLoc(MAKANAN *m)
+{
+        return loc(*m);
 }
