@@ -16,7 +16,7 @@
 
 /* CONFIG_SIZELM adalah SetUp Ukuran Makanan sesuai konfigurasi pada file config_main.h */
 
-typedef int IdxTypeLM; /* Type index */
+typedef int IdxType; /* Type index */
 typedef MAKANAN ElListMakananType;
 
 typedef struct
@@ -42,29 +42,55 @@ void CreateListMakanan(ListMakanan *l);
 #define ListMkn(l) (l).Lmakanan           /* get pointer list */
 #define ElmtLM(l,i) (l).Lmakanan[i]         /* get elemen list ke-i */
 
-MAKANAN.id GetIdMkn(ListMakanan l, int i);
+IDEM GetIdMkn(ListMakanan l, int i);
 /* l terdefinisi dan i valid untuk l, yaitu [0..NElmt-1] */
 /* Mengembalikan int ID makanan index ke-i */
 
-_NAMA_MAKANAN_ GetNamaMkn(ListMakanan l, int i);
+NamaMakanan GetNamaMkn(ListMakanan l, int i);
 /* l terdefinisi dan i valid untuk l, yaitu [0..NElmt-1] */
 /* Mengembalikan String nama makanan index ke-i*/
 
-_WAKTU_KADALUARSA_MAKANAN_ GetKadaluarsaMkn(ListMakanan l, int i);
+TIME GetKadaluarsaMkn(ListMakanan l, int i);
 /* l terdefinisi dan i valid untuk l, yaitu [0..NElmt-1] */
 /* Mengembalikan _TIPE_TIME_ dari kadaluarsa makanan index ke-i*/
 
-_WAKTU_DELIVER_MAKANAN_ GetDeliverTimeMkn(ListMakanan l, int i);
+TIME GetDeliverTimeMkn(ListMakanan l, int i);
 /* l terdefinisi dan i valid untuk l, yaitu [0..NElmt-1] */
 /* Mengembalikan _TIPE_TIME_ dari Waktu pengiriman makanan index ke-i*/
 
-_LOKASI_AKSI_MAKANAN_ GetActionLocMkn(ListMakanan l, int i);
+Word GetActionLocMkn(ListMakanan l, int i);
 /* l terdefinisi dan i valid untuk l, yaitu [0..NElmt-1] */
 /* Mengembalikan String lokasi aksi makanan index ke-i*/
 
-_UKURAN_MAKANAN_ GetUkuranMkn(ListMakanan l, int i);
+// POINT GetUkuranMkn(ListMakanan l, int i);
 /* l terdefinisi dan i valid untuk l, yaitu [0..NElmt-1] */
 /* Mengembalikan _TIPE_UKURAN_MAKANAN_  makanan index ke-i*/
+
+/* ***** Operasi pencarian elemen ***** */
+boolean isIdValid(ListMakanan l, IDEM id);
+/* Mengembalikan true jika id ada di dalam list */
+
+/* Precond : untuk setiap parameter Id adalah valid dan pasti ada dalam list makanan */
+IdxType SearchIndexId(ListMakanan l, IDEM id);
+/* mengembalikan index jika menemukan Id pada list */
+
+ElListMakananType MknId(ListMakanan l, IDEM id);
+/* mengambalikan tipe Makanan berdasarkan ID makanan */
+
+NamaMakanan NamaMknId(ListMakanan l, IDEM id);
+/* mengambalikan nama makanan berdasarkan ID makanan */
+
+TIME KedaluarsaMknId(ListMakanan l, IDEM id);
+/* Mengembalikan nama makanan berdasarkan ID makanan */
+
+TIME DeliverTimeMknId(ListMakanan l, IDEM id);
+/* Mengembalikan waktu pengiriman makanan berdasarkan Id makanan*/
+
+LokasiAksi ActionLocId(ListMakanan l, IDEM id);
+/* Mengembalikan lokasi aksi makanan berdasarkan Id makanan */
+
+// POINT UkuranMknId(ListMakanan l, IDEM);
+/* mengambalikan _UKURAN_MAKANAN_ berdasarkan ID */
 
 /* ********** INPUT / OUTPUT ********** */
 void SetUpListMakanan(ListMakanan *l, char* namaFile);
