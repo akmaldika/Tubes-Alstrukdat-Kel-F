@@ -54,4 +54,16 @@ void CopyWord();
 void displayString();
     /* Menampilkan currentWord ke layar */
 
+void STARTCOMMAND();
+    /* I.S. : Sembarang
+       F.S. : currentChar adalah karakter pertama pada pita. Jika currentChar != '\n' maka EOL akan padam (false).
+              Jika currentChar = '\n' maka EOL akan menyala (true)*/
+
+void ADVCOMMAND();
+    /* Pita dimajukan satu karakter.
+        I.S. : Karakter pada jendela = currentChar
+        F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama.
+               Jika  currentChar = '\n' maka EOL akan menyala (true) dan pita akan ditutup */
+
+
 #endif

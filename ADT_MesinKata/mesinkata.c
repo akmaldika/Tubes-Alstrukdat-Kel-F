@@ -5,6 +5,8 @@ boolean endWord;
 Line currentLine;
 Word currentWord;
 int currentLength;
+static FILE *pita;
+
 
 void STARTLINE(str fileName) {
     /* I.S. : currentChar sembarang, input nama file valid
@@ -60,5 +62,28 @@ void displayString () {
 
     for (i = 0; i < currentWord.Length; i++) {
         printf("%c", currentWord.String[i]);
+    }
+}
+
+void STARTCOMMAND() {
+    /* I.S. : Sembarang
+       F.S. : currentChar adalah karakter pertama pada pita. Jika currentChar != '\n' maka EOL akan padam (false).
+              Jika currentChar = '\n' maka EOL akan menyala (true)*/
+    pita = stdin;
+    ADV();
+    CopyLine();
+    currentLength = 0;
+}
+
+void ADVCOMMAND() {
+    /* Pita dimajukan satu karakter.
+        I.S. : Karakter pada jendela = currentChar
+        F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama.
+               Jika  currentChar = '\n' maka EOL akan menyala (true) dan pita akan ditutup */
+    if (EOL) {
+        fclose(pita);
+    }
+    else {
+        ADV();
     }
 }
