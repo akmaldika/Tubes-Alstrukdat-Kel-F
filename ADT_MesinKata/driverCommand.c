@@ -7,15 +7,29 @@
 #include "string.c"
 
 int main () {
+    /* Beda isWordSame buat 1 kata, sedangkan isLineSame buat 1 baris (ada spasinya) */
+    STARTCOMMAND();
+    while (!EOL) {
+        ADVCOMMAND();
+    }
+    ADVWORD();
+    printf("Command = %s\n", currentWord.String);
+    if (isWordSame(currentWord, "WAIT")) {
+        printf("benul\n");
+    }
+    else {
+        printf("salah\n");
+    }
+
     STARTCOMMAND();
     while (!EOL) {
         ADVCOMMAND();
     }
     printf("Command = %s\n", currentLine.Tabword);
-    if (isWordSame(currentLine.Tabword, "MOVE NORTH")) {
-        printf("benul\n");
+    if (isLineSame(currentLine,"MOVE NORTH")) {
+        printf("Mendaki guuunung, melewati sungai.\n");
     }
     else {
-        printf("salah\n");
+        printf("meng-turu\n");
     }
 }

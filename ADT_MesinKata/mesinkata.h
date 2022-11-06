@@ -51,7 +51,7 @@ void CopyWord();
     /* I.S. : CurrentLine terdefinisi
        F.S. : currentWord berisi word mulai dari currentLine.Tabword[currentLength] sampai endWord */
 
-void displayString();
+void displayWord();
     /* Menampilkan currentWord ke layar */
 
 void STARTCOMMAND();

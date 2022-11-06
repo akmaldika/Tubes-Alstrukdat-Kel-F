@@ -1,14 +1,31 @@
 #include "string.h"
 
-boolean isWordSame (str str1, str str2) {
+boolean isWordSame (Word str1, str str2) {
     int i = 0;
     boolean same = true;
 
-    while ((str1[i] != '\0' || str2[i] != '\0') && same) {
-        if (str1[i] != str2[i]) {
+    while (i < str1.Length && same) {
+        if (str1.String[i] != str2[i]) {
             same = false;
         }
-        i++;
+        else {
+            i++;
+        }
+    }
+    return same;
+}
+
+boolean isLineSame (Line l, str str2) {
+    int i = 0;
+    boolean same = true;
+
+    while (i < l.Length && same) {
+        if (l.Tabword[i] != str2[i]) {
+            same = false;
+        }
+        else {
+            i++;
+        }
     }
     return same;
 }

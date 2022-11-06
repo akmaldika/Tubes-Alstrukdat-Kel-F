@@ -8,56 +8,58 @@
 
 
 int main () {
-    str t;
-    int cnt = 0;
-    scanf("%s", &t);
+    STARTCOMMAND();
+    while (!EOL) {
+        ADVCOMMAND();
+    }
+    CopyWord();
 
-    if (isWordSame(t,"MAKANAN")) {
+    if (isWordSame(currentWord,"MAKANAN")) {
         STARTLINE("ConfigMakanan.txt");
-        CopyWord();
-        int N = ((wordToInt(currentWord)) * 5);
-        printf("%s\n", currentWord.String);
-        while (cnt < N) {
+        ADVWORD();
+        displayWord();
+        printf("\n");
+        while (!EOP) {
             ADVLINE();
             while (currentLength < currentLine.Length) {
                 ADVWORD();
-                displayString();
+                displayWord();
                 printf(" ");
             }
             printf("\n");
-            cnt++;
         }
     }
-    else if (isWordSame(t,"RESEP")) {
+    else if (isWordSame(currentWord,"RESEP")) {
         STARTLINE("ConfigResep.txt");
-        CopyWord();
-        int N = (wordToInt(currentWord));
-        printf("%s\n", currentWord.String);
-        while (cnt < N) {
+        ADVWORD();
+        displayWord();
+        printf("\n");        
+        while (!EOP) {
             ADVLINE();
             while (currentLength < currentLine.Length) {
                 ADVWORD();
-                displayString();
+                displayWord();
                 printf(" ");
             }
             printf("\n");
-            cnt++;
         }      
     }
-    else if (isWordSame(t,"PETA")) {
+    else if (isWordSame(currentWord,"PETA")) {
         STARTLINE("ConfigPeta.txt");
-        CopyWord();
-        int N = (wordToInt(currentWord));
-        printf("%s\n", currentLine.Tabword);
-        while (cnt < N) {
+        ADVWORD();
+        displayWord();
+        printf(" ");
+        ADVWORD();
+        displayWord();
+        printf("\n");        
+        while (!EOP) {
             ADVLINE();
             while (currentLength < currentLine.Length) {
                 ADVWORD();
-                displayString();
+                displayWord();
                 printf(" ");
             }
             printf("\n");
-            cnt++;
         }        
     }
     else {

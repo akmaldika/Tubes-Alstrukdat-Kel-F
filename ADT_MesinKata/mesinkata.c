@@ -6,6 +6,7 @@ Line currentLine;
 Word currentWord;
 int currentLength;
 static FILE *pita;
+static int retval;
 
 
 void STARTLINE(str fileName) {
@@ -31,7 +32,7 @@ void CopyLine() {
        I.S. : currentChar adalah karakter pertama dari kata
        F.S. : currentChar = kata pertama dari baris berikutnya dan currentLine berisikan baris yang telah diakuisi */
     currentLine.Length = 0;
-    while (!EOL) {
+    while (!EOP && !EOL) {
         currentLine.Tabword[currentLine.Length++] = currentChar;
         ADV();
     }
@@ -56,7 +57,7 @@ void CopyWord() {
     }
 }
 
-void displayString () {
+void displayWord () {
     /* Menampilkan currentWord ke layar */
     int i;
 
@@ -80,10 +81,5 @@ void ADVCOMMAND() {
         I.S. : Karakter pada jendela = currentChar
         F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama.
                Jika  currentChar = '\n' maka EOL akan menyala (true) dan pita akan ditutup */
-    if (EOL) {
-        fclose(pita);
-    }
-    else {
-        ADV();
-    }
+    ADV();
 }
