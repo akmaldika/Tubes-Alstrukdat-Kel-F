@@ -6,7 +6,6 @@
 
 #include "boolean.h"
 #include "mesinkarakter.h"
-#include "string.h"
 
 #define BLANK ' '
 

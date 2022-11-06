@@ -5,7 +5,8 @@
 #define __MESIN_KAR_H_
 
 #include "boolean.h"
-#include "string.h"
+
+typedef char str[100];
 
 /* State Mesin */
 extern char currentChar;
