@@ -2,33 +2,19 @@
 #include "boolean.h"
 #include "makanan.h"
 
-void CreateMakanan(MAKANAN *m, int id, char judul, TIME exp, TIME durasi, int loc)
+/* ***** SELEKTOR ***** */
+// #define IDs(m) (m).id
+// #define Judul(m) (m).JudulMakanan
+// #define Exp(m) (m).exp
+// #define Deliv(m) (m).deliv
+// #define Locate(m) (m).loc
+
+/* **** KONSTRUKTOR **** */
+void CreateMakanan(MAKANAN *m, IDEM id, NamaMakanan namaMakanan, TIME exp, TIME deliv, LokasiAksi loc)
 {
         ID(*m) = id;
-        judul(*m) = judul;
-        exp(*m) = exp;
-}
-
-int getId(MAKANAN m)
-{
-        return ID(m);
-}
-
-char getJudul(MAKANAN m)
-{
-        return Judul(m);
-}
-
-TIME getExp(MAKANAN m)
-{
-        return exp(m);
-}
-
-TIME getDurasi(MAKANAN m)
-{
-        return durasi(m);
-}
-int getLoc(MAKANAN *m)
-{
-        return loc(*m);
+        Judul(*m) = namaMakanan;
+        Exp(*m) = exp;
+        Deliv(*m) = deliv;
+        Locate(*m) = loc;
 }
