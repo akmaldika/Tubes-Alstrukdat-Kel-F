@@ -7,10 +7,10 @@
 
 
 /* Modul lain yang digunakan : */
-#include "boolean.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "NTree.h"
+#include "..\ADT_Tree\boolean.h"
+#include "..\ADT_Tree\NTree.h"
 
 /* *** Definisi Type N-Tree dengan left child right sibling interpretation *** */
 // typedef int ElNTreeType;

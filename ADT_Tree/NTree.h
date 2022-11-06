@@ -16,7 +16,8 @@ typedef struct node {
     ElNTreeType info;
     Address child;
     Address sibling; 
-    int countChild; } Node;
+    int countChild; 
+} Node;
 
 /* Definisi N-ary Tree*/
 /* N-ary Tree kosong ketika T = NULL*/

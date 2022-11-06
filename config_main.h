@@ -4,6 +4,6 @@
 
 /* Atur terlebih dahulu ukuran sebelum menjalankan */
 #define CONFIG_SIZELM 6 
-#define CONFIG_SIZELR 4
+#define CONFIG_SIZELR 10
 
 #endif
