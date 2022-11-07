@@ -7,7 +7,7 @@ typedef struct {
     char nama;
     int locs;
     char inventory;
-    char notifikasi;
+    char notifikasi 
 
 
 } SIMULATOR;
