@@ -23,6 +23,6 @@ void ADV();
 /* Pita dimajukan satu karakter.
    I.S. : Karakter pada jendela = currentChar
    F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama,
-          jika currentChar == '\n', EOL menyala */
+          Jika  currentChar = '\n' maka EOL true. Jika retval != 1, maka EOP menyala (true) */
 
 #endif
