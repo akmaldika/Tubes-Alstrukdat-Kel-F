@@ -197,11 +197,12 @@ void PrintPrioQueue(PrioQueue Q)
 	}
 }
 
-void Min1Minute(PrioQueue *Q, boolean *Flag, ListMakanan *LMakanan, MAKANAN *Makanan)
+void Min1Minute(PrioQueue *Q, boolean *Flag, ListMakanan *LMakanan)
 /* I.S. q terdefinisi */
 /* F.S. Semnua elemen makanan  dalam q berkurang 1 menit dan DequeueExp  */
 {
 	int i;
+	MAKANAN m;
 	int nMknExp = 0;
 	if (! IsEmpty(*Q)){
 		i = Head(*Q);
@@ -215,8 +216,8 @@ void Min1Minute(PrioQueue *Q, boolean *Flag, ListMakanan *LMakanan, MAKANAN *Mak
 			{
 				PrevMin( &Exp(Elmt(*Q,i)) );
 				if(isThereExp(*Q)){
-					DequeueExp(Q,Makanan);
-					LMakanan->Lmakanan[LMakanan->NElmt]=*Makanan;
+					DequeueExp(Q,&m);
+					LMakanan->Lmakanan[LMakanan->NElmt]=m;
 					LMakanan->NElmt++;
 					*Flag = true;
 				}
@@ -226,7 +227,9 @@ void Min1Minute(PrioQueue *Q, boolean *Flag, ListMakanan *LMakanan, MAKANAN *Mak
 		// Tail nya
 		PrevMin( &Exp(Elmt(*Q,i)) );
 		if(isThereExp(*Q)){
-			DequeueExp(Q,Makanan);
+			DequeueExp(Q,&m);
+			LMakanan->Lmakanan[LMakanan->NElmt]=m;
+			LMakanan->NElmt++;
 			*Flag = true;
 		}
 	}

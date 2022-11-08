@@ -117,7 +117,7 @@ void PrintPrioQueue(PrioQueue Q);
 // Cabai - 3 jam
 // Bawang - 1 jam
 
-void Min1Minute(PrioQueue *Q, boolean *Flag, ListMakanan *LMakanan, MAKANAN *Makanan);
+void Min1Minute(PrioQueue *Q, boolean *Flag, ListMakanan *LMakana);
 /* I.S. q terdefinisi */
 /* F.S. Semnua elemen makanan  dalam q berkurang 1 menit dan DequeueExp  */
 
