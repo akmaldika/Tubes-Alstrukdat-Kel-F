@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "string.h": "c",
-        "ntree.h": "c",
-        "boolean.h": "c",
-        "mesinkata.h": "c",
-        "listresep.h": "c"
-    }
-}

@@ -5,11 +5,13 @@
 #define __MESIN_KAR_H_
 
 #include "boolean.h"
-#include "string.h"
+
+typedef char str[100];
 
 /* State Mesin */
 extern char currentChar;
 extern boolean EOL;
+extern boolean EOP;
 
 void START(str fileName);
 /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.

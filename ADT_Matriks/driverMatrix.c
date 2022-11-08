@@ -10,7 +10,6 @@ int main(){
     Matrix p;
     p=MapMatrix();
     char input;
-    displayMap(p);
     while (input != 'b'){
     
         scanf("%c",&input); //gerakan menggunakan wasd

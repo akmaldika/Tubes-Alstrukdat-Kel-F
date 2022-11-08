@@ -7,6 +7,7 @@
 #include "mesinkata.c"
 #include "mesinkarakter.c"
 #include "mesinkarakter.h"
+#include "string.c"
 
 //Muhammad Zaydan A
 //13521104
@@ -39,44 +40,24 @@ Matrix MapMatrix(){
         
         
         STARTLINE(f);
-        for (i = 0; i < currentLine.Length; i++) {
-            CopyWord(&i);
-            if (first) {
-                row = wordToInt(currentWord.String, currentWord.Length);
-                N = row;
-               //  printf("%d\n", N);
-                first = false;
-            }
-            else {
-                col = wordToInt(currentWord.String, currentWord.Length);
-                M = col;
-               //  printf("%d\n", col);          
-            }
+        ADVWORD();
+        row = wordToInt(currentWord);
+        printf(" ");
+        ADVWORD();
+        col = wordToInt(currentWord);
+        printf("\n"); 
+        createMatrix(row,col,&Map);
+        i=0;
+        j=0;       
+        while (!EOP) {
+          ADVLINE();
+          for (j=0;j<col;j++){
+            ELMT(Map,i,j)=currentLine.Tabword[j];
+          }
+            i++;
+            printf("\n");
         }
-      //   printf("\n%d %d\n", N, M);
-
-        
-        i = 0;
-        createMatrix(N,M,&Map);
-        ADV();
-        do{
-
-
-            CopyLine();
-
-                for (j=0;j<M;j++){
-                    ELMT(Map,i,j)=currentLine.Tabword[j];
-                }
-
-            i+=1;
-            if (i==10){
-                break;
-            }else{
-                ADV();
-            }
-        } while (i<row+1);
-
-      createMatrix(N+2,M+2,&RetMap);
+      createMatrix(row+2,col+2,&RetMap);
       for (int i = brsmin; i <= getLastIdxRow(RetMap); i++){
          for (int j = kolmin; j <= getLastIdxCol(RetMap); j++){
             ELMT(RetMap, i, j) = (i == brsmin || i == getLastIdxRow(RetMap) || j == kolmin || j == getLastIdxCol(RetMap) ) 

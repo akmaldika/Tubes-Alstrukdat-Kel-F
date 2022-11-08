@@ -12,6 +12,9 @@
 
 typedef int IdxType; /* Index baris, kolom */
 typedef int ElMakananType;
+typedef int ID;
+typedef char 
+
 
 typedef struct
 {

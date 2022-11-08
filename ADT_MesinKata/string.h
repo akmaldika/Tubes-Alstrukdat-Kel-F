@@ -4,33 +4,16 @@
 #include <stdio.h>
 #include <math.h>
 #include "boolean.h"
+#include "mesinkata.h"
 
-typedef char str[100];
 
-boolean isStrSame (str str1, str str2) {
-    int i = 0;
-    boolean same = true;
+boolean isWordSame (Word str1, str str2);
+/* Mengembalikan true jika kedua kata sama dan false bila tidak */
 
-    while ((str1[i] != '\0' || str2[i] != '\0') && same) {
-        if (str1[i] != str2[i]) {
-            same = false;
-        }
-        i++;
-    }
-    return same;
-}
+boolean isLineSame (Line l, str str2);
+/* Mengembalikan true jika kedua kalimat sama dan false jika tidak (kalimat di sini berarti satu baris dengan spasi) */
 
-int wordToInt (str word, int length) {
-	int i;
-	int num = 0;
-	int power = length - 1;
-
-	for (i = 0; i < length; i++) {
-		num += ((int) word[i] - 48) * pow(10, power);
-		power--;
-	}
-
-	return num;
-}
+int wordToInt (Word cc);
+/* Mengembalikan integer dari suatu word */
 
 #endif

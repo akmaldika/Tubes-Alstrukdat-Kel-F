@@ -6,8 +6,11 @@
 
 char currentChar;
 boolean EOL;
+boolean EOP;
 
 static FILE *pita;
+static int retval;
+
 
 void START(str fileName)
 {
@@ -29,6 +32,10 @@ void ADV()
                  Jika  currentChar = '\n' maka EOL akan menyala (true) */
 
        /* Algoritma */
-       fscanf(pita, "%c", &currentChar);
+       retval = fscanf(pita, "%c", &currentChar);
        EOL = (currentChar == '\n');
+       EOP = (retval != 1);
+       if (EOP) {
+              fclose(pita);
+       }
 }
