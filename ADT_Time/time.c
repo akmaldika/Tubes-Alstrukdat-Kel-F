@@ -53,9 +53,9 @@ void CreateTime(TIME *T, int D, int H, int M)
     /* Prekondisi : D, H, M, S valid untuk membentuk TIME */
     // KAMUS LOKAL
     // ALGORITMA
-    Day(*T) = D;
-    Hour(*T) = H;
-    Minute(*T) = M;
+    setD(T, D);
+    setH(T, H);
+    setM(T, M);
 }
 
 /* ***************************************************************** */
@@ -90,6 +90,25 @@ void DisplayTIME(TIME T)
     else
     { // D.H.M
         printf("%d.%d.%d", Day(T), Hour(T), Minute(T));
+    }
+}
+
+void DisplayTIMEk(TIME T)
+{
+    /* I.S. : T sembarang */
+    /* F.S. : Nilai T ditulis dg format D,H,M dengan tambahan "jam menit detik" */
+    /* Proses : menulis nilai setiap komponen T ke layar dalam format D, H, M dengan tambahan keterangan satuannya yaitu jam, menit, dan detik */
+    if (getD(T) == 0 && getH(T) != 0)
+    { // H.M
+        printf("%d jam %d menit", Hour(T), Minute(T));
+    }
+    else if (getD(T) == 0 && getH(T) == 0)
+    { // M
+        printf("%d menit", Minute(T));
+    }
+    else
+    { // D.H.M
+        printf("%d hari %d jam %d menit", Day(T), Hour(T), Minute(T));
     }
 }
 
