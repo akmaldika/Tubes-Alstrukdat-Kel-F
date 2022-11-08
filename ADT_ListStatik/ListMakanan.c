@@ -247,7 +247,6 @@ void DisplayCatalog(ListMakanan l)
     /* KAMUS LOKAL */
     int i, cntStr;
 
-    int i;
     printf("\xc9");
     for (i = 1; i <= 45; i++)
     {
