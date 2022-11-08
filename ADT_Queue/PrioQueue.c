@@ -202,6 +202,7 @@ void Min1Minute(PrioQueue *Q, boolean *Flag, ListMakanan *LMakanan, MAKANAN *Mak
 /* F.S. Semnua elemen makanan  dalam q berkurang 1 menit dan DequeueExp  */
 {
 	int i;
+	int nMknExp = 0;
 	if (! IsEmpty(*Q)){
 		i = Head(*Q);
 		while (i != Tail(*Q))
@@ -215,6 +216,8 @@ void Min1Minute(PrioQueue *Q, boolean *Flag, ListMakanan *LMakanan, MAKANAN *Mak
 				PrevMin( &Exp(Elmt(*Q,i)) );
 				if(isThereExp(*Q)){
 					DequeueExp(Q,Makanan);
+					LMakanan->Lmakanan[LMakanan->NElmt]=*Makanan;
+					LMakanan->NElmt++;
 					*Flag = true;
 				}
 				i++;

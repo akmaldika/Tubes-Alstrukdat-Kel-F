@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "PrioQueue.h"
-#include "../ADT_ListStatik/ListMakanan.h" 
+#include "../ADT_ListStatik/ListMakanan.h"
 #include <string.h>
 
 int main()
@@ -61,7 +61,7 @@ int main()
     // printf("h t%d %d\n", Head(q), Tail(q));
     Enqueue(&q, m6);
     // PrintPrioQueue(q);
-    
+
     // printf("h t%d %d\n", Head(q), Tail(q));
     Enqueue(&q, m7);
     // PrintPrioQueue(q);
@@ -72,26 +72,56 @@ int main()
 
     printf("\n\n1. Pengurangan 1 menit dalam PrioQueue \n");
     PrintPrioQueue(q);
-    Min1Minute(&q,&Flag, &ListMakananExp,&mExp);
+    Min1Minute(&q, &Flag, &ListMakananExp, &mExp);
     PrintPrioQueue(q);
-    if(Flag){
+    if (Flag)
+    {
         printf("\nFlag truee \n");
-        printf("Makanan yg sudah Exp adalah %s\n\n",mExp.Nama );
+        printf("Makanan yg sudah Exp adalah %s\n\n", mExp.Nama);
     }
-    else{
+    else
+    {
         printf("\nFlag false, belum ada yg expired \n");
     }
 
     printf("\n2. Pengurangan 1 menit dalam PrioQueue \n");
     PrintPrioQueue(q);
-    Min1Minute(&q,&Flag, &ListMakananExp,&mExp);
+    Min1Minute(&q, &Flag, &ListMakananExp, &mExp);
     PrintPrioQueue(q);
-    if(Flag){
+    if (Flag)
+    {
         printf("\nFlag truee \n");
-        printf("Makanan yg sudah Exp adalah %s\n\n",mExp.Nama );
+        printf("Makanan yg sudah Exp adalah %s\n\n", mExp.Nama);
     }
-    else{
+    else
+    {
         printf("\nFlag false, belum ada yg expired \n\n");
     }
+    
+    printf("\n3. Pengurangan 1 menit dalam PrioQueue \n");
+    PrintPrioQueue(q);
+    Min1Minute(&q, &Flag, &ListMakananExp, &mExp);
+    PrintPrioQueue(q);
+    if (Flag)
+    {
+        printf("\nFlag truee \n");
+        printf("Makanan yg sudah Exp adalah %s\n\n", mExp.Nama);
+    }
+    else
+    {
+        printf("\nFlag false, belum ada yg expired \n\n");
+    }
+
+
+
+    int i = 0;
+    // ListMakananExp.Lmakanan[0] = mExp;
+    printf("dalam list makanan basi : \n");
+    while (i < ListMakananExp.NElmt)
+    {
+        printf("   %d. %s\n", i + 1, ListMakananExp.Lmakanan[i].Nama);
+        i++;
+    }
+
     return 0;
 }
