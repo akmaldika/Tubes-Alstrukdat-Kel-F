@@ -6,7 +6,7 @@
 #define MAKANAN_H
 
 typedef int IDEM;
-typedef Word NamaMakanan;
+typedef Line NamaMakanan;
 typedef Word LokasiAksi;
 
 typedef struct
