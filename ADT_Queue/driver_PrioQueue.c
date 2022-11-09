@@ -1,23 +1,60 @@
 #include <stdio.h>
 #include "PrioQueue.h"
 #include "../ADT_ListStatik/ListMakanan.h"
-#include <string.h>
+
+// typedef char str[100];
+
+// typedef struct line
+// {
+//     str Tabword;
+//     int Length;
+// } Line;
+
+// typedef struct word
+// {
+//     str String;
+//     int Length;
+// } Word;
+
+void assignWord(Word *w, char str[])
+{
+    int i = 0;
+    for (i = 0; str[i] != '\0'; i++)
+    {
+        w->String[i] = str[i];
+    }
+    w->Length = i;
+    w->String[i] = '\0';
+}
+void assignLine(Line *w, char str[])
+{
+    int i = 0;
+    for (i = 0; str[i] != '\0'; i++)
+    {
+        w->Tabword[i] = str[i];
+    }
+    w->Length = i;
+    w->Tabword[i] = '\0';
+}
 
 int main()
 {
     MAKANAN m1, m2, m3, m4, m5, m6, m7, m8, temp, mExp;
-    Word w1, w2, w3, w4, w5, w6, w7, wd;
+    Line w1, w2, w3, w4, w5, w6, w7;
+    Word wd;
     ListMakanan ListMakananExp;
     CreateListMakanan(&ListMakananExp);
     boolean Flag = false;
-    strcpy(wd.String, "Dapur");
-    strcpy(w1.String, "Ayam goreng");
-    strcpy(w2.String, "Kangkung");
-    strcpy(w3.String, "Iga sapi");
-    strcpy(w4.String, "Bayam");
-    strcpy(w5.String, "Kentang");
-    strcpy(w6.String, "Ikan asin");
-    strcpy(w7.String, "Ubi");
+    assignWord(&wd, "Dapur");
+    assignLine(&w1, "Ayam goreng");
+    assignLine(&w2,"Kangkung");
+    assignLine(&w3,"Iga sapi");
+    assignLine(&w4,"Bayam");
+    assignLine(&w5,"Kentang");
+    assignLine(&w6,"Ikan asin");
+    assignLine(&w7,"Ubi");
+    printf("\nkata word: %s, n : %d\n", w1.Tabword, w1.Length);
+    printf("kata line: %s, n : %d\n\n", wd.String, wd.Length);
 
     TIME t1, t2, t3, t4, t5, t6, t7;
     printf("\nTest PrioQueue \n\n");
