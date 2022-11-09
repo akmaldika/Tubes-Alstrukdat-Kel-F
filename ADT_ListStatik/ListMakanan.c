@@ -3,6 +3,8 @@
 
 #include "ListMakanan.h"
 
+static ListMakanan ListMkn;
+
 /* ********** KONSTRUKTOR ********** */
 void CreateListMakanan(ListMakanan *l)
 {
@@ -13,9 +15,9 @@ void CreateListMakanan(ListMakanan *l)
 
 /* ********** SELEKTOR ********** */
 /* l adalah ListMakanan; selektor khusus dalam file; l tak dapat berubah */
-// #define LengthLM(l) (l).NElmt           /* get ukuran list */
-// #define ListMkn(l) (l)._MAKANAN_        /* get pointer list */
-// #define ElmtLM(l,i) LMakanan[i]         /* get elemen list ke-i */
+// #define LengthLM(l) (l).NElmt           /* get/set ukuran list */
+// #define ListMkn(l) (l)._MAKANAN_        /* get/set pointer list */
+// #define ElmtLM(l,i) LMakanan[i]         /* get/set elemen list ke-i */
 
 IDEM GetIdMkn(ListMakanan l, int i)
 {
@@ -141,11 +143,58 @@ LokasiAksi ActionLocId(ListMakanan l, IDEM id)
 
 
 /* ********** INPUT / OUTPUT ********** */
-void SetUpListMakanan(ListMakanan *l, char *namaFile)
+void SetUpListMakanan()
 {
     /* I.S. Sembarang */
     /* I.F. Terbentuk list makanan berdasarkan hasil konfigurasi */
     /* NElmt list pasti sama dengan CONFIG_SIZELM */
+    /* KMAMUS LOKAL */
+    int BanyakMakanan;
+    IdxType i;
+    TIME tempT;
+    int D, M, H;
+
+    CreateListMakanan(&ListMkn);
+    STARTLINE("../Config/Config_Makanan.txt");
+    STARTWORD();
+    LengthLM(ListMkn) = wordToInt(currentWord);
+    i = 0;
+    while (!EOP)
+    {
+        // ID
+        ADVLINE();
+        STARTWORD();
+        ID(ElmtLM(ListMkn, i)) = wordToInt(currentWord);
+        // Judul Makanan
+        ADVLINE();
+        Judul(ElmtLM(ListMkn, i)) = currentLine;
+        // exp Time
+        ADVLINE();
+        STARTWORD();
+        D = wordToInt(currentWord);
+        ADVWORD();
+        M = wordToInt(currentWord);
+        ADVWORD();
+        H = wordToInt(currentWord);
+        CreateTime(&tempT, D, M, H);
+        Exp(ElmtLM(ListMkn, i)) = tempT;
+        // deliv Time
+        ADVLINE();
+        STARTWORD();
+        D = wordToInt(currentWord);
+        ADVWORD();
+        M = wordToInt(currentWord);
+        ADVWORD();
+        H = wordToInt(currentWord);
+        CreateTime(&tempT, D, M, H);
+        Deliv(ElmtLM(ListMkn, i)) = tempT;
+        // lokasi
+        ADVLINE();
+        STARTWORD();
+        Locate(ElmtLM(ListMkn, i)) = currentWord;
+        i++;
+    }
+    
 }
 
 void DisplayBuyAbleLM(ListMakanan l)
@@ -174,7 +223,7 @@ void DisplayBuyAbleLM(ListMakanan l)
     {
         if (GetActionLocMkn(l, i).String == "BUY")
         {
-            printf("%d. %s\t()", i, GetNamaMkn(l, i).String); //*************************************************************************************
+            printf("%d. %s\t()", i, GetNamaMkn(l, i).Tabword); //*************************************************************************************
             printf("\n");
         }
         i++;
@@ -223,7 +272,7 @@ void DisplayActionAbleLM(ListMakanan l, char *str)
     {
         if (GetActionLocMkn(l, i).String == str)
         {
-            printf("%d. %s", i, GetNamaMkn(l, i).String);
+            printf("%d. %s", i, GetNamaMkn(l, i).Tabword);
             printf("\n");
         }
         i++;
@@ -267,9 +316,9 @@ void DisplayCatalog(ListMakanan l)
     {   
         printf(" | ");
         cntStr = 0; // Nama Makanan
-        while(GetNamaMkn(l, i).String[cntStr] != '\0')
+        while(GetNamaMkn(l, i).Tabword[cntStr] != '\0')
         {
-            printf("%c", GetNamaMkn(l, i).String[cntStr]);
+            printf("%c", GetNamaMkn(l, i).Tabword[cntStr]);
             cntStr++;
         }
         while(cntStr < 34)
