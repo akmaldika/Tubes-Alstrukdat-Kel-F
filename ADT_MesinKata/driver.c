@@ -16,12 +16,15 @@ int main () {
 
     if (isWordSame(currentWord,"MAKANAN")) {
         STARTLINE("ConfigMakanan.txt");
-        ADVWORD();
+        STARTWORD();
         displayWord();
         printf("\n");
         while (!EOP) {
             ADVLINE();
-            while (currentLength < currentLine.Length) {
+            STARTWORD();
+            displayWord();
+            printf(" ");            
+            while (!endWord) {
                 ADVWORD();
                 displayWord();
                 printf(" ");
@@ -31,12 +34,15 @@ int main () {
     }
     else if (isWordSame(currentWord,"RESEP")) {
         STARTLINE("ConfigResep.txt");
-        ADVWORD();
+        STARTWORD();
         displayWord();
         printf("\n");        
         while (!EOP) {
             ADVLINE();
-            while (currentLength < currentLine.Length) {
+            STARTWORD();
+            displayWord();
+            printf(" ");
+            while (!endWord) {
                 ADVWORD();
                 displayWord();
                 printf(" ");
@@ -46,7 +52,7 @@ int main () {
     }
     else if (isWordSame(currentWord,"PETA")) {
         STARTLINE("ConfigPeta.txt");
-        ADVWORD();
+        STARTWORD();
         displayWord();
         printf(" ");
         ADVWORD();
@@ -54,7 +60,10 @@ int main () {
         printf("\n");        
         while (!EOP) {
             ADVLINE();
-            while (currentLength < currentLine.Length) {
+            STARTWORD();
+            displayWord();
+            printf(" ");            
+            while (!endWord) {
                 ADVWORD();
                 displayWord();
                 printf(" ");

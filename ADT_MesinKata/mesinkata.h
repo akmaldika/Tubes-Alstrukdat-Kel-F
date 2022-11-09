@@ -43,9 +43,13 @@ void CopyLine();
        I.S. : currentChar adalah karakter pertama dari kata
        F.S. : currentChar = kata pertama dari baris berikutnya dan currentLine berisikan baris yang telah diakuisi */
 
+void STARTWORD();
+    /* I.S. : CurrentLine terdefinisi
+       F.S. : currentWord adalah kata pertama yang telah diakusisi */
+
 void ADVWORD();
     /* I.S. : CurrentLine terdefinisi
-       F.S. : currentWord adalah kata yang telah diakusisi dari currentLength sampai endWord*/
+       F.S. : currentWord adalah kata yang telah diakusisi dari currentLength sampai akhir kata (sebelum spasi atau akhir baris) */
 
 void CopyWord();
     /* I.S. : CurrentLine terdefinisi

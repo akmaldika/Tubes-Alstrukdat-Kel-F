@@ -14,7 +14,6 @@ void STARTLINE(str fileName) {
        F.S. : currentChar = kata pertama dari baris berikutnya dan currentLine berisikan baris pertama yang telah diakuisisi */
     START(fileName);
     CopyLine();
-    currentLength = 0;
     ADV();
 }
 
@@ -24,7 +23,6 @@ void ADVLINE() {
        Proses : Akuisisi baris menggunakan procedure CopyLine */
     CopyLine();
     ADV();
-    currentLength = 0;
 }
 
 void CopyLine() {
@@ -38,23 +36,33 @@ void CopyLine() {
     }
 }
 
+void STARTWORD() {
+    /* I.S. : CurrentLine terdefinisi
+       F.S. : currentWord adalah kata pertama yang telah diakusisi */
+    currentLength = 0;
+    CopyWord();
+    currentLength++;
+}
+
 void ADVWORD() {
     /* I.S. : CurrentLine terdefinisi
-       F.S. : currentWord adalah kata yang telah diakusisi dari currentLength sampai endWord*/
+       F.S. : currentWord adalah kata yang telah diakusisi dari currentLength sampai akhir kata (sebelum spasi atau akhir baris) */
     CopyWord();
     currentLength++;
 }
 
 void CopyWord() {
     /* I.S. : CurrentLine terdefinisi
-       F.S. : currentWord berisi word mulai dari currentLine.Tabword[currentLength]  sampai endWord */
+       F.S. : currentWord berisi word mulai dari currentLength sampai akhir kata */
     currentWord.Length = 0;
 
     while (currentLine.Tabword[currentLength] != BLANK && currentLength < currentLine.Length) {
         currentWord.String[currentWord.Length] = currentLine.Tabword[currentLength];
         currentWord.Length++;
-        currentLength = currentLength + 1;
+        currentLength++;
     }
+
+    endWord = (currentLength == currentLine.Length);
 }
 
 void displayWord () {

@@ -1,1 +1,1 @@
-BACA MAKANAN
+urrentLength < currentLine.Length
