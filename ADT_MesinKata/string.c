@@ -2,7 +2,7 @@
 
 boolean isWordSame (Word str1, char str2[]) {
     int i = 0;
-    boolean same = true;
+    boolean same = (str1.Length != 0);
 
     while (i < str1.Length && same) {
         if (str1.String[i] != str2[i]) {
@@ -17,7 +17,7 @@ boolean isWordSame (Word str1, char str2[]) {
 
 boolean isLineSame (Line l, char str2[]) {
     int i = 0;
-    boolean same = true;
+    boolean same = (l.Length != 0);
 
     while (i < l.Length && same) {
         if (l.Tabword[i] != str2[i]) {
