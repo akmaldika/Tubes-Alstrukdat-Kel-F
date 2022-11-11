@@ -50,6 +50,11 @@ Address newNode (ElNTreeType val);
 /* Melakukan dealokasi Address p */
 void deallocateNode(Address p);
 
+/* I.S. t terdefinisi */
+/* F.S. t dan semua sub elemen nya dikembalikan ke sistem */
+/* Melakukan dealokasi NTree t*/
+void deallocateNTree(NTree t);
+
 /* *** Predikat-Predikat Penting *** */
 
 /* Mengembalikan true jika NTree t kosong dan sebaliknya */
@@ -65,7 +70,7 @@ boolean isHaveChild(NTree t);
 
 /* Mengembalikan true jika terdapat address p di node NTree t 
    sehingga INFONTREE(p) == val, dan sebaliknya */
-boolean isContainAddress(NTree t, int val);
+boolean isContainInfo(NTree t, int val);
 
 /* Mengembalikan address p sehingga INFONTREE(p) adalah anak ke-n dari parent t */
 Address traverseChild(NTree t, int n);
@@ -74,19 +79,16 @@ Address traverseChild(NTree t, int n);
 /* F.S. Tecetak NTree pada layar*/
 void printNTree(NTree t, int offset);
 
-/* Mengirimkan true jika ada node dari t sehingga INFONTREE(t) == val */
-boolean searchNTree(NTree t, ElNTreeType val);
-
 /* *** Fungsi-Fungsi Lain *** */
-
-/* Menambahkan NTree dengan alamat chd kepada suatu parent*/
-void addChildAddress(NTree *prt, NTree chd);
 
 /* Menambahkan prt dengan child, misal t, sehingga INFO(t) = val*/
 void addChildInfo(NTree *prt, int val);
 
 /* Mengembalikan adress tree dengan hasil salinan prt */
-Address copyNTree(NTree prt);
+void copyNTreePrt(NTree prt, NTree *newPrt);
+
+/* Mengembalikan adress tree dengan hasil salinan chd */
+void copyNTreeChd(NTree chd, NTree *newChd);
 
 /* I.S. prt terdefinisi, chd terdefinisi */
 /* F.S. setiap bagian cabang dari prt yang memiliki info sama dengan INFO(chd)
