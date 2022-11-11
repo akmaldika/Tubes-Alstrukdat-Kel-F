@@ -9,10 +9,7 @@
 int main () {
     /* Beda isWordSame buat 1 kata, sedangkan isLineSame buat 1 baris (ada spasinya) */
     STARTCOMMAND();
-    while (!EOL) {
-        ADVCOMMAND();
-    }
-    ADVWORD();
+    STARTWORD();
     printf("Command = %s\n", currentWord.String);
     if (isWordSame(currentWord, "WAIT")) {
         printf("benul\n");
@@ -22,9 +19,6 @@ int main () {
     }
 
     STARTCOMMAND();
-    while (!EOL) {
-        ADVCOMMAND();
-    }
     printf("Command = %s\n", currentLine.Tabword);
     if (isLineSame(currentLine,"MOVE NORTH")) {
         printf("Mendaki guuunung, melewati sungai.\n");

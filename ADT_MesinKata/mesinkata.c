@@ -34,6 +34,7 @@ void CopyLine() {
         currentLine.Tabword[currentLine.Length++] = currentChar;
         ADV();
     }
+    currentLine.Tabword[currentLine.Length] = '\0';
 }
 
 void STARTWORD() {
@@ -61,33 +62,14 @@ void CopyWord() {
         currentWord.Length++;
         currentLength++;
     }
-
+    currentWord.String[currentWord.Length] = '\0';
     endWord = (currentLength == currentLine.Length);
-}
-
-void displayWord () {
-    /* Menampilkan currentWord ke layar */
-    int i;
-
-    for (i = 0; i < currentWord.Length; i++) {
-        printf("%c", currentWord.String[i]);
-    }
 }
 
 void STARTCOMMAND() {
     /* I.S. : Sembarang
-       F.S. : currentChar adalah karakter pertama pada pita. Jika currentChar != '\n' maka EOL akan padam (false).
-              Jika currentChar = '\n' maka EOL akan menyala (true)*/
+       F.S. : currentLine berisi masukan command dari user sampai sebelum new line (currentChar = '\n') */
     pita = stdin;
     ADV();
     CopyLine();
-    currentLength = 0;
-}
-
-void ADVCOMMAND() {
-    /* Pita dimajukan satu karakter.
-        I.S. : Karakter pada jendela = currentChar
-        F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama.
-               Jika  currentChar = '\n' maka EOL akan menyala (true) dan pita akan ditutup */
-    ADV();
 }

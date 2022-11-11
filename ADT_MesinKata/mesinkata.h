@@ -55,19 +55,9 @@ void CopyWord();
     /* I.S. : CurrentLine terdefinisi
        F.S. : currentWord berisi word mulai dari currentLine.Tabword[currentLength] sampai endWord */
 
-void displayWord();
-    /* Menampilkan currentWord ke layar */
-
 void STARTCOMMAND();
     /* I.S. : Sembarang
-       F.S. : currentChar adalah karakter pertama pada pita. Jika currentChar != '\n' maka EOL akan padam (false).
-              Jika currentChar = '\n' maka EOL akan menyala (true)*/
-
-void ADVCOMMAND();
-    /* Pita dimajukan satu karakter.
-        I.S. : Karakter pada jendela = currentChar
-        F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama.
-               Jika  currentChar = '\n' maka EOL akan menyala (true) dan pita akan ditutup */
+       F.S. : currentLine berisi masukan command dari user sampai sebelum new line (currentChar = '\n') */
 
 
 #endif
