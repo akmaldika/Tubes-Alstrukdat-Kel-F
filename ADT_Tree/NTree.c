@@ -1,10 +1,7 @@
 
 
-/* ADT Pohon Biner */
+/* ADT N-Ary Tree */
 /* Implementasi dengan menggunakan pointer */
-/* Penamaan type infotype, type addrNode, dan beberapa fungsi disesuikan 
-   karena melibatkan modul list rekursif. */
-
 
 /* Modul lain yang digunakan : */
 #include <stdio.h>
@@ -22,7 +19,7 @@
 //     int countChild; } Node;
 
 /* Definisi N-ary Tree*/
-/* N-ary Tree kosong ketika T = NULL*/
+/* NTree T kosong ketika T = NULL*/
 // typedef Address NTree;
 
 /* *** PROTOTYPE *** */
@@ -35,6 +32,8 @@
 
 /* *** Konstruktor *** */
 
+/* I.S. Sembarang */
+/* F.S. Ntree t kosong terdefinisi*/
 void CreateNTree(NTree *t) {
     *t = NULL;
 }
@@ -62,19 +61,40 @@ void deallocateNode(Address p) {
     free(p);
 }
 
+/* I.S. t terdefinisi */
+/* F.S. t dan semua sub elemen nya dikembalikan ke sistem */
+/* Melakukan dealokasi NTree t*/
+// TODO
+void deallocateNTree(NTree t) {
+    // KAMUS
+    Address p;
+    // ALGORITMA
+    if (!isNTreeEmpty(t)) {
+        p = t;
+        if (isHaveChild(t)) {
+            deallocateNTree(CHILD(t));
+        } if (isHaveSibling(t)) {
+            deallocateNTree(SIBLING(t));
+        } free(p);
+        // deallocateNode(p);
+    }
+}
+
 /* *** Predikat-Predikat Penting *** */
 
-/* Mengembalikan true jika NTree t kosong*/
+/* Mengembalikan true jika NTree t kosong */
 boolean isNTreeEmpty(NTree t) {
     return (t == NULL);
 }
 
 /* Membalikan true jika NTree t punya sibling*/
+/* Pointer harus menunjuk pada sebuah node */
 boolean isHaveSibling(NTree t) {
     return !(SIBLING(t) == NULL);
 }
 
 /* Mengembalikan true jika NTree t punya child*/
+/* Pointer harus menunjuk pada sebuah node */
 boolean isHaveChild(NTree t) {
     return !(CHILD(t) == NULL);
 }
@@ -82,7 +102,7 @@ boolean isHaveChild(NTree t) {
 /* *** Traversal *** */
 
 /* Mengembalikan true jika terdapat address p di node NTree t sehingga INFONTREE(p) == val */
-boolean isContainAddress(NTree t, int val) {
+boolean isContainInfo(NTree t, int val) {
     // KAMUS
     boolean isFound;
     // ALGORITMA
@@ -93,9 +113,9 @@ boolean isContainAddress(NTree t, int val) {
     } else {
         isFound = false;
         if (isHaveChild(t) && !isFound) {
-            isFound = isContainAddress(CHILD(t), val);
+            isFound = isContainInfo(CHILD(t), val);
         } if (isHaveSibling(t) && !isFound) {
-            isFound = isContainAddress(SIBLING(t), val);
+            isFound = isContainInfo(SIBLING(t), val);
         } return isFound;
     }
 } 
@@ -116,8 +136,7 @@ Address traverseChild(NTree t, int n) {
 
 void printNTree(NTree t, int offset) {
     if (isNTreeEmpty(t)) {
-        printf("Tree Kosong");
-        printf("\n");
+        printf("Tree Kosong\n");
     } else {
         printNSpace(offset);
         printf("%d\n", INFONTREE(t));
@@ -131,46 +150,7 @@ void printNTree(NTree t, int offset) {
 
 }
 
-/* Mengirimkan true jika ada node dari t sehingga INFONTREE(t) == val */
-boolean searchNTree(NTree t, ElNTreeType val)
-{
-    //KAMUS
-    Address p;
-    boolean isFound;
-    int i;
-    // ALGORITMA
-    p = t;
-    isFound = (INFONTREE(p) == val);
-
-    if (!isFound && isHaveChild(p)) {
-        isFound = searchNTree(CHILD(p), val);
-    }
-    if (!isFound && isHaveSibling(p)) {
-        isFound = searchNTree(SIBLING(p), val);
-    }
-
-    return isFound;
-}
-
-
 /* *** Fungsi-Fungsi Lain *** */
-
-/* Menambahkan NTree dengan alamat chd kepada suatu parent*/
-void addChildAddress(NTree *prt, NTree chd) {
-    // KAMUS
-    Address p;
-    // ALGORITMA
-    if (isNTreeEmpty(*prt)) {
-        printf("Parent tree kosong\n");
-    } else {
-        if (!isHaveChild(*prt)) {
-            CHILD(*prt) = chd;
-        } else {
-            p = traverseChild(*prt, COUNTCHILD(*prt));
-            SIBLING(p) = chd;
-        } COUNTCHILD(*prt)++;
-    }
-}
 
 /* Menambahkan prt dengan child, misal t, sehingga INFO(t) = val*/
 void addChildInfo(NTree *prt, int val) {
@@ -189,20 +169,42 @@ void addChildInfo(NTree *prt, int val) {
     }
 }
 
-Address copyNTree(NTree prt) {
+void copyNTreePrt(NTree prt, NTree *newPrt) {
     // KAMUS
-    Address newPrt;
+    NTree newChd;
     // ALGORITMA
     if (isNTreeEmpty(prt)) {
-        printf("Parent tree kosong\n");
-        return NULL;
+        *newPrt = NULL;
     } else {
-        CreateNTree(&newPrt);
-        newPrt = newNode(INFONTREE(prt));
+        *newPrt = newNode(INFONTREE(prt));
         if (isHaveChild(prt)) {
-            CHILD(newPrt) = CHILD(prt);
+            CreateNTree(&newChd);
+            newChd = newNode(INFONTREE(CHILD(prt)));
+            CHILD(*newPrt) = newChd;
+            copyNTreeChd(CHILD(prt), &newChd);
         } 
-        return newPrt;
+    } 
+}
+
+void copyNTreeChd(NTree chd, NTree *newChd) {
+    // KAMUS
+    Address newChdOfChd;
+    Address newSibOfChd;
+    // ALGORITMA
+    if (isNTreeEmpty(chd)) {
+        *newChd = NULL;
+    } else {
+        if (isHaveChild(chd)) {
+            CreateNTree(&newChdOfChd);
+            newChdOfChd = newNode(INFONTREE(CHILD(chd)));
+            CHILD(*newChd) = newChdOfChd;
+            copyNTreeChd(CHILD(chd), &newChdOfChd);
+        } if (isHaveSibling(chd)) {
+            CreateNTree(&newSibOfChd);
+            newSibOfChd = newNode(INFONTREE(SIBLING(chd)));
+            SIBLING(*newChd) = newSibOfChd;
+            copyNTreeChd(SIBLING(chd), &newSibOfChd);
+        } 
     } 
 }
 /* I.S. prt terdefinisi, chd terdefinisi */
@@ -210,23 +212,28 @@ Address copyNTree(NTree prt) {
         akan diganti dengan address copian NTree chd*/
 void addChildBySpecificInfo(NTree *prt, NTree chd) {
     // KAMUS
+    NTree newChdOfChd;
     Address p, temp;
     int info;
     // ALGORITMA
-    if (isNTreeEmpty(*prt)) {
-        printf("Parent tree kosong\n");
-    } else {
-        info = INFONTREE(chd);
-        if (INFONTREE(*prt) == info) {
-            temp = SIBLING(*prt);
-            *prt = copyNTree(chd);
-            SIBLING(*prt) = temp;
-        }
-        /* Bagian rekursi */
-        if (isHaveChild(*prt)) {
-            addChildBySpecificInfo(&CHILD(*prt), chd);
-        } if (isHaveSibling(*prt)) {
-            addChildBySpecificInfo(&SIBLING(*prt), chd);
+    if (isHaveChild(chd)) {
+        if (isNTreeEmpty(*prt)) {
+            printf("Parent tree kosong\n");
+        } else {
+            /* Bagian rekursi */
+            if (isHaveChild(*prt)) {
+                addChildBySpecificInfo(&CHILD(*prt), chd);
+            } if (isHaveSibling(*prt)) {
+                addChildBySpecificInfo(&SIBLING(*prt), chd);
+            }
+            
+            info = INFONTREE(chd);
+            if (INFONTREE(*prt) == info)  {
+                CreateNTree(&newChdOfChd);
+                newChdOfChd = newNode(INFONTREE(CHILD(chd)));
+                CHILD(*prt) = newChdOfChd;
+                copyNTreeChd(CHILD(chd), &newChdOfChd);
+            }
         }
     }
 }
