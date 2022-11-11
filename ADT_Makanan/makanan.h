@@ -1,49 +1,33 @@
+#include "../ADT_Time/boolean.h"
+#include "../ADT_Time/time.h"
+#include "../ADT_MesinKata/mesinkata.h"
+
 #ifndef MAKANAN_H
 #define MAKANAN_H
 
-#include "boolean.h"
-
-
-
-/* Ukuran maksimum baris dan kolom */
-#define ROW_CAP 100
-#define brsmin 0
-
-
-typedef int IdxType; /* Index baris, kolom */
-typedef int ElMakananType;
-typedef int ID;
-typedef char 
-
+typedef int IDEM;
+typedef Line NamaMakanan;
+typedef Word LokasiAksi;
 
 typedef struct
 {
-   int id; /* banyaknya/ukuran baris yg terdefinisi */
-   char Judul;
-   __TIME__ exp;
-   __TIME__ durasi;
-   int loc;
-   
+   IDEM id;
+   NamaMakanan Nama;
+   TIME exp;
+   TIME deliv;
+   LokasiAksi loc;
 } MAKANAN;
 
+/* ***** SELEKTOR ***** */
 #define ID(m) (m).id
-#define judul(m) (m).Judul
-#define exp(m) (m).exp
-#define durasi(m) (m).durasi
-#define loc(m) (m).loc
+#define Judul(m) (m).Nama
+#define Exp(m) (m).exp
+#define Deliv(m) (m).deliv
+#define Locate(m) (m).loc
 
+/* **** KONSTRUKTOR **** */
+void CreateMakanan(MAKANAN *m, IDEM id, NamaMakanan namaMakanan, TIME exp, TIME deliv, LokasiAksi loc);
+/* I.S. m sembarang */
+/* F.s. m terdefinisi dengan elemen pembentuknya sesuai masukan parameter */
 
-
-
-void CreateMakanan(MAKANAN *m, int id, char judul, __TIME__ exp,__TIME__ durasi,int loc); 
-
-int getId(MAKANAN m);
-
-char getJudul(MAKANAN m);
-
-__TIME__ getExp(MAKANAN m);
-
-__TIME__ getDurasi(MAKANAN *m);
-
-int getLoc(MAKANAN *m);
-
+#endif

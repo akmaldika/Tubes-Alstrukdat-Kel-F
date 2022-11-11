@@ -13,12 +13,6 @@ int main() {
     /* ALGORITMA */
 
     // Buat list baru
-    printf("Buat list baru l\n");
-    CreateLR(&l);
-
-    printf("Ambil indeks pertama:\n%d\n", getFirstIdxLR(l));
-
-    printf("Ambil indeks terakhir:\n%d\n", getLastIdxLR(l));
     
     printf("Cek apakah kosong:\n%d\n", isEmptyLR(l));
 

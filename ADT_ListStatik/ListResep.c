@@ -31,7 +31,6 @@
 // #define ELMTLR(l, i) (l).resep[i]
 
 /* *** Konstruktor *** */
-
 /* I.S. l sembarang*/
 /* F.S  l merupakan ListResep yang kosong*/
 void CreateLR(ListResep *l) {

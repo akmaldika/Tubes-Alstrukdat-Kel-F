@@ -11,7 +11,7 @@
 #include "..\ADT_MesinKata\mesinkata.h"
 #include "..\ADT_MesinKata\string.h"
 #include "..\ADT_Makanan\makanan.h"
-// #include "..\ADT_Time\"
+#include "..\ADT_Time\time.h"
 
 
 /* CONFIG_SIZELM adalah SetUp Ukuran Makanan sesuai konfigurasi pada file config_main.h */
@@ -31,6 +31,9 @@ typedef struct
    ..LM / LMkn
    ..Mkn*/
  
+
+
+
 /* ********** KONSTRUKTOR ********** */
 void CreateListMakanan(ListMakanan *l);
 /* I.S. l sembarang */
@@ -38,9 +41,9 @@ void CreateListMakanan(ListMakanan *l);
 
 /* ********** SELEKTOR ********** */
 /* l adalah ListMakanan */
-#define LengthLM(l) (l).NElmt           /* get ukuran list */
-#define ListMkn(l) (l).Lmakanan           /* get pointer list */
-#define ElmtLM(l,i) (l).Lmakanan[i]         /* get elemen list ke-i */
+#define LengthLM(l) (l).NElmt           /* get/set ukuran list */
+#define ListMkn(l) (l).Lmakanan           /* get/set pointer list */
+#define ElmtLM(l,i) (l).Lmakanan[i]         /* get/set elemen list ke-i */
 
 IDEM GetIdMkn(ListMakanan l, int i);
 /* l terdefinisi dan i valid untuk l, yaitu [0..NElmt-1] */
@@ -93,7 +96,7 @@ LokasiAksi ActionLocId(ListMakanan l, IDEM id);
 /* mengambalikan _UKURAN_MAKANAN_ berdasarkan ID */
 
 /* ********** INPUT / OUTPUT ********** */
-void SetUpListMakanan(ListMakanan *l, char* namaFile);
+void SetUpListMakanan();
 /* I.S. Sembarang */
 /* I.F. Terbentuk list makanan berdasarkan hasil konfigurasi */
 /* NElmt list pasti sama dengan CONFIG_SIZELM */
