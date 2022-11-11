@@ -31,6 +31,7 @@
 // #define ELMTLR(l, i) (l).resep[i]
 
 /* *** Konstruktor *** */
+
 /* I.S. l sembarang*/
 /* F.S  l merupakan ListResep yang kosong*/
 void CreateLR(ListResep *l) {
@@ -95,27 +96,30 @@ boolean isFullLR(ListResep l) {
 /* F.S. List l terdefinisi */
 void readListLR(ListResep *l) {
     // KAMUS
+    NTree newResep;
+    Address newSubresep;
     int n, baris, i, k, id;
     // ALGORITMA
     STARTLINE("../Config/Config_Resep.txt");
-    ADVWORD();
+    STARTWORD();
     n = wordToInt(currentWord);
     printf("%d\n", n);
-    ADVLINE();
-    for (baris = 1; baris <= n; baris++) {
+    while (!EOP) {
         // Akuisi integer pertama sebagai resep utama
-        ADVWORD();
+        ADVLINE();
+        STARTWORD();
+        CreateNTree(&newResep);
         id = wordToInt(currentWord);
-        
-
-        i = 0;
-        while (currentLength < currentLine.Length) {
+        newResep = newNode(id);
+        printf("%d ", id);
+        while (!endWord) {
             ADVWORD();
             k = wordToInt(currentWord);
+            addChildInfo(&newResep, k);
             printf("%d ", k);
         }
         printf("\n");
-        ADVLINE();
+        insertLastLRKonsolidasi(l, &newResep);
     }
 }
 
