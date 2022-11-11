@@ -1,6 +1,6 @@
 #include "string.h"
 
-boolean isWordSame (Word str1, str str2) {
+boolean isWordSame (Word str1, char str2[]) {
     int i = 0;
     boolean same = true;
 
@@ -15,7 +15,7 @@ boolean isWordSame (Word str1, str str2) {
     return same;
 }
 
-boolean isLineSame (Line l, str str2) {
+boolean isLineSame (Line l, char str2[]) {
     int i = 0;
     boolean same = true;
 
@@ -39,6 +39,5 @@ int wordToInt (Word cc) {
 		num += ((int) cc.String[i] - 48) * pow(10, power);
 		power--;
 	}
-
 	return num;
 }

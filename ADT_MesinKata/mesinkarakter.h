@@ -6,7 +6,8 @@
 
 #include "boolean.h"
 
-typedef char str[100];
+#define Nmax 100
+typedef char str[Nmax];
 
 /* State Mesin */
 extern char currentChar;
