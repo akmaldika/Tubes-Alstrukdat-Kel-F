@@ -29,7 +29,7 @@ extern Line currentLine;
 extern int currentLength;
 
 
-void STARTLINE(str fileName);
+void STARTLINE(char fileName[]);
     /* I.S. : currentChar sembarang, input nama file valid
        F.S. : currentChar = kata pertama dari baris berikutnya dan currentLine berisikan baris pertama yang telah diakuisisi */
 
