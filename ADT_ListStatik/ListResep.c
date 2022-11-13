@@ -111,14 +111,11 @@ void readListLR(ListResep *l) {
         CreateNTree(&newResep);
         id = wordToInt(currentWord);
         newResep = newNode(id);
-        printf("%d ", id);
         while (!endWord) {
             ADVWORD();
             k = wordToInt(currentWord);
             addChildInfo(&newResep, k);
-            printf("%d ", k);
         }
-        printf("\n");
         insertLastLRKonsolidasi(l, &newResep);
     }
 }
@@ -240,26 +237,9 @@ void insertLastLRKonsolidasi(ListResep *l, NTree *newResep) {
 /* *** Menghapus elemen pada index tertentu *** */
 void deleteFirstLR(ListResep *l, ElListResepType *val);
 
-/* Proses : Menghapus elemen pada index idx List */
-/* I.S. List tidak kosong, idx adalah index yang valid di l */
-/* F.S. val adalah nilai elemen pada index idx l sebelum penghapusan, */
-/*      Banyaknya elemen List berkurang satu */
-/*      List l mungkin menjadi kosong */
-/* *** Menghapus elemen terakhir *** */
-void deleteAtLR(ListResep *l, ElListResepType *val, int idx);
-
-/* Proses : Menghapus elemen terakhir List */
-/* I.S. List tidak kosong */
-/* F.S. val adalah nilai elemen terakhir l sebelum penghapusan, */
-/*      Banyaknya elemen List berkurang satu */
-/*      List l mungkin menjadi kosong */
-void deleteLastLR(ListResep *l, ElListResepType *val);
-
-/* Manajemen lokasi resep pada ListResep*/
-
-/* I.S. l terdefinisi, tidak kosong, i merupakan index valid dari l*/
+/* I.S. l terdefinisi, l tidak kosong, i merupakan index valid dari l*/
 /* F.S. Semua elemen dari l mulai dari index i tergeser ke kiri sekali */
-void shiftLeftLRAtIndex(ListResep *l, int i) {
+void deleteAtLR(ListResep *l, int i) {
     // KAMUS
     NTree currResep, nextResep;
     // ALGORITMA
@@ -270,6 +250,15 @@ void shiftLeftLRAtIndex(ListResep *l, int i) {
     ELMTLR(*l, i) = NULL;
     NEFFLR(*l) = NEFFLR(*l) - 1;
 }
+
+/* Proses : Menghapus elemen terakhir List */
+/* I.S. List tidak kosong */
+/* F.S. val adalah nilai elemen terakhir l sebelum penghapusan, */
+/*      Banyaknya elemen List berkurang satu */
+/*      List l mungkin menjadi kosong */
+void deleteLastLR(ListResep *l, ElListResepType *val);
+
+/* Manajemen lokasi resep pada ListResep*/
 
 void compressLR(ListResep *l) {
 

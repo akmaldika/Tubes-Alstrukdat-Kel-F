@@ -8,8 +8,9 @@
 #include "..\ADT_Tree\NTree.h"
 #include "..\ADT_MesinKata\mesinkata.h"
 #include "..\ADT_MesinKata\mesinkarakter.h"
-#include "..\ADT_MesinKata\string.h"
 #include "..\config_main.h"
+#include "..\ADT_MesinKata\string.h"
+
 
 
 #define CAPACITY_LIST_RESEP CONFIG_SIZELR
@@ -43,7 +44,6 @@ typedef struct {
 /* F.S  l merupakan ListResep yang kosong*/
 void CreateLR(ListResep *l);
 
-/* ********** SELEKTOR (TAMBAHAN) ********** */
 /* *** Banyaknya elemen *** */
 
 /* Mengirimkan banyaknya elemen efektif List */
@@ -62,6 +62,7 @@ int getLastIdxLR(ListResep l);
 
 
 /* ********** Test Indeks yang valid ********** */
+
 /* Mengirimkan true jika i adalah indeks yang valid utk kapasitas List l */
 /* yaitu antara indeks yang terdefinisi utk container*/
 boolean isIdxValidLR(ListResep l, int i);
@@ -150,13 +151,9 @@ void insertLastLRKonsolidasi(ListResep *l, NTree *newResep);
 /* *** Menghapus elemen pada index tertentu *** */
 void deleteFirstLR(ListResep *l, ElListResepType *val);
 
-/* Proses : Menghapus elemen pada index idx List */
-/* I.S. List tidak kosong, idx adalah index yang valid di l */
-/* F.S. val adalah nilai elemen pada index idx l sebelum penghapusan, */
-/*      Banyaknya elemen List berkurang satu */
-/*      List l mungkin menjadi kosong */
-/* *** Menghapus elemen terakhir *** */
-void deleteAtLR(ListResep *l, ElListResepType *val, int idx);
+/* I.S. l terdefinisi, tidak kosong, i merupakan index valid dari l*/
+/* F.S. Semua elemen dari l mulai dari index i tergeser ke kiri sekali */
+void deleteAtLR(ListResep *l, int i);
 
 /* Proses : Menghapus elemen terakhir List */
 /* I.S. List tidak kosong */
@@ -165,9 +162,7 @@ void deleteAtLR(ListResep *l, ElListResepType *val, int idx);
 /*      List l mungkin menjadi kosong */
 void deleteLastLR(ListResep *l, ElListResepType *val);
 
-/* I.S. l terdefinisi, tidak kosong, i merupakan index valid dari l*/
-/* F.S. Semua elemen dari l mulai dari index i tergeser ke kiri sekali */
-void shiftLeftLRAtIndex(ListResep *l, int i);
+
 
 
 #endif
