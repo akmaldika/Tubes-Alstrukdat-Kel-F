@@ -40,7 +40,7 @@ Matrix MapMatrix(){
         
         
         STARTLINE(f);
-        ADVWORD();
+        STARTWORD();
         row = wordToInt(currentWord);
         printf(" ");
         ADVWORD();
@@ -101,16 +101,18 @@ void MoveEast(Matrix *m){
    // printf("%d\n",y+1);
    // printf("%d\n",x+1);
 
-   if (ELMT(*m,y,x+1)=='*'||ELMT(*m,y,x+1)=='M'||ELMT(*m,y,x+1)=='T'||ELMT(*m,y,x+1)=='C'||ELMT(*m,y,x+1)=='F'||ELMT(*m,y,x+1)=='B'||ELMT(*m,y,x+1)=='X'){
-      printf("East MENTOK\n");
-   }
-   else{
+   if (ELMT(*m,y,x+1)=='#'){
       ElType temp=ELMT(*m,y,x+1);
       
       ELMT(*m,y,x+1)=ELMT(*m,y,x);
       ELMT(*m,y,x)=temp;
-      
+
+   }else{
+      printf("gakbisa");
    }
+
+
+   
 
 }
 
@@ -123,15 +125,14 @@ void MoveWest(Matrix *m){
    // printf("%d\n",y+1);
    // printf("%d\n",x+1);
 
-   if (ELMT(*m,y,x-1)=='*'||ELMT(*m,y,x-1)=='M'||ELMT(*m,y,x-1)=='T'||ELMT(*m,y,x-1)=='C'||ELMT(*m,y,x-1)=='F'||ELMT(*m,y,x-1)=='B'||ELMT(*m,y,x-1)=='X'){
-      printf("West MENTOK\n");
-   }
-   else{
+   if (ELMT(*m,y,x-1)=='#'){
       ElType temp=ELMT(*m,y,x-1);
       
       ELMT(*m,y,x-1)=ELMT(*m,y,x);
       ELMT(*m,y,x)=temp;
-      
+
+   }else{
+      printf("gakbisa");
    }
 
 }
@@ -145,15 +146,15 @@ void MoveNorth(Matrix *m){
    // printf("%d\n",y+1);
    // printf("%d\n",x+1);
 
-   if (ELMT(*m,y-1,x)=='*'||ELMT(*m,y-1,x)=='M'||ELMT(*m,y-1,x)=='T'||ELMT(*m,y-1,x)=='C'||ELMT(*m,y-1,x)=='F'||ELMT(*m,y-1,x)=='B'||ELMT(*m,y-1,x)=='X'){
-      printf("North MENTOK\n");
-   }
-   else{
+   if (ELMT(*m,y-1,x)=='#'){
       ElType temp=ELMT(*m,y-1,x);
       
       ELMT(*m,y-1,x)=ELMT(*m,y,x);
       ELMT(*m,y,x)=temp;
+
       
+   }else{
+      printf("gakbisa");
    }
 
 }
@@ -167,15 +168,17 @@ void MoveSouth(Matrix *m){
    // printf("%d\n",y+1);
    // printf("%d\n",x+1);
 
-   if (ELMT(*m,y+1,x)=='*'||ELMT(*m,y+1,x)=='M'||ELMT(*m,y+1,x)=='T'||ELMT(*m,y+1,x)=='C'||ELMT(*m,y+1,x)=='F'||ELMT(*m,y+1,x)=='B'||ELMT(*m,y+1,x)=='X'){
-      printf("South MENTOK\n");
-   }
-   else{
+   // if (ELMT(*m,y+1,x)=='*'||ELMT(*m,y+1,x)=='M'||ELMT(*m,y+1,x)=='T'||ELMT(*m,y+1,x)=='C'||ELMT(*m,y+1,x)=='F'||ELMT(*m,y+1,x)=='B'||ELMT(*m,y+1,x)=='X'){
+   //    printf("South MENTOK\n");
+   // }
+   if (ELMT(*m,y+1,x)=='#'){
       ElType temp=ELMT(*m,y+1,x);
       
       ELMT(*m,y+1,x)=ELMT(*m,y,x);
       ELMT(*m,y,x)=temp;
-      
+
+   }else{
+      printf("gakbisa");
    }
 
 }
@@ -305,49 +308,6 @@ void displayMatrix(Matrix m){
 
 
 
-boolean isMatrixEqual(Matrix m1, Matrix m2){
-/* Mengirimkan true jika m1 = m2, yaitu count(m1) = count(m2) dan */
-/* untuk setiap i,j yang merupakan Index baris dan kolom m1(i,j) = m2(i,j) */
-/* Juga merupakan strong eq karena getLastIdxCol(m1) = getLastIdxCol(m2) */
-
-   // KAMUS LOKAL
-   int i, j;
-   boolean isEq = false;
-
-   // ALGORITMA
-   if (isMatrixSizeEqual(m1, m2)) {
-      isEq = true;
-      i = 0;
-      while (i < ROW_EFF(m1) && isEq) {
-         j = 0;
-         while (j < COL_EFF(m1) && isEq) {
-            if (ELMT(m1, i, j) != ELMT(m2, i, j)) {
-               isEq = false;
-            } else {
-               j += 1;
-            }
-         }
-         i += 1;
-      }
-   }
-   return isEq;
-}
-
-boolean isMatrixNotEqual(Matrix m1, Matrix m2){
-/* Mengirimkan true jika m1 tidak sama dengan m2 */
-
-   // ALGORITMA
-   return (!isMatrixEqual(m1, m2)); 
-}
-
-boolean isMatrixSizeEqual(Matrix m1, Matrix m2){
-/* Mengirimkan true jika ukuran efektif matriks m1 sama dengan ukuran efektif m2 */
-/* yaitu RowEff(m1) = RowEff (m2) dan ColEff (m1) = ColEff (m2) */
-
-   // ALGORITMA
-   return (ROW_EFF(m1) == ROW_EFF(m2)) && (COL_EFF(m1) == COL_EFF(m2));
-}
-
 
 int countElmt(Matrix m){
 /* Mengirimkan banyaknya elemen m */
@@ -357,37 +317,4 @@ int countElmt(Matrix m){
 }
 
 
-boolean isSquare(Matrix m){
-/* Mengirimkan true jika m adalah matriks dg ukuran baris dan kolom sama */
 
-   // ALGORITMA
-   return (ROW_EFF(m) == COL_EFF(m));
-}
-
-int CountNumRow(Matrix m, IdxType i, ElType val) {
-   // KAMUS LOKAL
-   int j;
-   int count = 0;
-
-   // ALGORITMA
-   for (j = 0; j < COL_EFF(m); j ++) {
-      if (ELMT(m, i, j) == val) {
-         count += 1;
-      }
-   }
-   return count;
-}
-
-int CountNumCol(Matrix m, IdxType j, ElType val) {
-   // KAMUS LOKAL
-   int i;
-   int count = 0;
-
-   // ALGORITMA
-   for (i = 0; i < ROW_EFF(m); i ++) {
-      if (ELMT(m, i, j) == val) {
-         count += 1;
-      }
-   }
-   return count;
-}
