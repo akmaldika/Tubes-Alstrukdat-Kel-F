@@ -3,6 +3,8 @@
 
 #include "ListMakanan.h"
 
+ListMakanan ListMkn;
+
 /* ********** KONSTRUKTOR ********** */
 void CreateListMakanan(ListMakanan *l)
 {
@@ -13,54 +15,185 @@ void CreateListMakanan(ListMakanan *l)
 
 /* ********** SELEKTOR ********** */
 /* l adalah ListMakanan; selektor khusus dalam file; l tak dapat berubah */
-// #define LengthLM(l) (l).NElmt           /* get ukuran list */
-// #define ListMkn(l) (l)._MAKANAN_        /* get pointer list */
-// #define ElmtLM(l,i) LMakanan[i]         /* get elemen list ke-i */
+// #define LengthLM(l) (l).NElmt           /* get/set ukuran list */
+// #define ListMkn(l) (l)._MAKANAN_        /* get/set pointer list */
+// #define ElmtLM(l,i) LMakanan[i]         /* get/set elemen list ke-i */
 
-_ID_MAKANAN_ GetIdMkn(ListMakanan l, int i)
+IDEM GetIdMkn(ListMakanan l, int i)
 {
     /* l terdefinisi dan i valid untuk l, yaitu [0..NElmt-1] */
     /* Mengembalikan int ID makanan index ke-i */
-    return;
+    return ID(ElmtLM(l,i));
 }
-_NAMA_MAKANAN_ GetNamaMkn(ListMakanan l, int i)
+
+NamaMakanan GetNamaMkn(ListMakanan l, int i)
 {
     /* l terdefinisi dan i valid untuk l, yaitu [0..NElmt-1] */
     /* Mengembalikan String nama makanan index ke-i*/
-    return;
+    return Judul(ElmtLM(l,i));
 }
-_WAKTU_KADALUARSA_MAKANAN_ GetKadaluarsaMkn(ListMakanan l, int i)
+
+TIME GetKadaluarsaMkn(ListMakanan l, int i)
 {
     /* l terdefinisi dan i valid untuk l, yaitu [0..NElmt-1] */
     /* Mengembalikan _TIPE_TIME_ dari kadaluarsa makanan index ke-i*/
-    return;
+    return Exp(ElmtLM(l,i));
 }
-_WAKTU_DELIVER_MAKANAN_ GetDeliverTimeMkn(ListMakanan l, int i);
+
+TIME GetDeliverTimeMkn(ListMakanan l, int i)
 {
     /* l terdefinisi dan i valid untuk l, yaitu [0..NElmt-1] */
     /* Mengembalikan _TIPE_TIME_ dari Waktu pengiriman makanan index ke-i*/
-    return;
+    return Deliv(ElmtLM(l,i));
 }
-_LOKASI_AKSI_MAKANAN_ GetActionLocMkn(ListMakanan l, int i);
+
+Word GetActionLocMkn(ListMakanan l, int i)
 {
     /* l terdefinisi dan i valid untuk l, yaitu [0..NElmt-1] */
     /* Mengembalikan String lokasi aksi makanan index ke-i*/
-    return;
-}
-_UKURAN_MAKANAN_ GetUkuranMkn(ListMakanan l, int i);
-{
-    /* l terdefinisi dan i valid untuk l, yaitu [0..NElmt-1] */
-    /* Mengembalikan _TIPE_UKURAN_MAKANAN_  makanan index ke-i*/
-    return;
+    return Locate(ElmtLM(l,i));
 }
 
+// POINT GetUkuranMkn(ListMakanan l, int i);
+/* l terdefinisi dan i valid untuk l, yaitu [0..NElmt-1] */
+/* Mengembalikan _TIPE_UKURAN_MAKANAN_  makanan index ke-i*/
+
+/* ***** Operasi pencarian elemen ***** */
+boolean isIdValid(ListMakanan l, IDEM id)
+{
+    /* Mengembalikan true jika id ada di dalam list */
+    /* KAMUS LOKAL */
+    IdxType i;
+    boolean found;
+
+    /* ALGORITMA */
+    while (!found && i <= LengthLM(l))
+    {
+        found = ID(ElmtLM(l,i)) == id;
+        i++;
+    }
+
+    return found;
+}
+
+/* Precond : untuk setiap parameter Id adalah valid dan pasti ada dalam list makanan */
+IdxType SearchIndexId(ListMakanan l, IDEM id)
+{
+    /* mengembalikan index jika menemukan Id pada list */
+    /* KAMUS LOKAL */
+    IdxType i;
+    boolean found;
+
+    /* ALGORITMA */
+    i = 0;
+    found = false;
+    while(!found && i <= LengthLM(l))
+    {
+        if (ID(ElmtLM(l,i)) == id)
+        {
+            found = true;
+        }
+        else
+        {
+            i++;
+        }
+    }
+
+    return i;
+}
+
+
+ElListMakananType MknId(ListMakanan l, IDEM id)
+{
+    /* mengambalikan tipe Makanan berdasarkan ID makanan */
+    /* KAMUS LOKAL */
+    IdxType i;
+
+    /* ALGORITMA */
+    i = SearchIndexId(l, id);
+    return ElmtLM(l,i);
+}
+
+NamaMakanan NamaMknId(ListMakanan l, IDEM id)
+{
+    /* mengambalikan nama makanan berdasarkan ID makanan */
+    return Judul(MknId(l, id));
+}
+
+TIME KedaluarsaMknId(ListMakanan l, IDEM id)
+{
+    /* Mengembalikan nama makanan berdasarkan ID makanan */
+    return Exp(MknId(l,id));
+}
+
+TIME DeliverTimeMknId(ListMakanan l, IDEM id)
+{
+    /* Mengembalikan waktu pengiriman makanan berdasarkan Id makanan*/
+    return Deliv(MknId(l, id));
+}
+
+LokasiAksi ActionLocId(ListMakanan l, IDEM id)
+{
+    /* Mengembalikan lokasi aksi makanan berdasarkan Id makanan */
+    return Locate(MknId(l, id));
+}
+
+// POINT UkuranMknId(ListMakanan l, IDEM);
+/* mengambalikan _UKURAN_MAKANAN_ berdasarkan ID */
+
+
 /* ********** INPUT / OUTPUT ********** */
-void SetUpListMakanan(ListMakanan *l, char *namaFile)
+void SetUpListMakanan()
 {
     /* I.S. Sembarang */
     /* I.F. Terbentuk list makanan berdasarkan hasil konfigurasi */
     /* NElmt list pasti sama dengan CONFIG_SIZELM */
-    STARTLINE(namaFile);
+    /* KMAMUS LOKAL */
+    int BanyakMakanan;
+    IdxType i;
+    TIME tempT;
+    int D, M, H;
+
+    CreateListMakanan(&ListMkn);
+    STARTLINE("../Config/Config_Makanan.txt");
+    STARTWORD();
+    LengthLM(ListMkn) = wordToInt(currentWord);
+    i = 0;
+    while (!EOP)
+    {
+        // ID
+        ADVLINE();
+        STARTWORD();
+        ID(ElmtLM(ListMkn, i)) = wordToInt(currentWord);
+        // Judul Makanan
+        ADVLINE();
+        Judul(ElmtLM(ListMkn, i)) = currentLine;
+        // exp Time
+        ADVLINE();
+        STARTWORD();
+        D = wordToInt(currentWord);
+        ADVWORD();
+        M = wordToInt(currentWord);
+        ADVWORD();
+        H = wordToInt(currentWord);
+        CreateTime(&tempT, D, M, H);
+        Exp(ElmtLM(ListMkn, i)) = tempT;
+        // deliv Time
+        ADVLINE();
+        STARTWORD();
+        D = wordToInt(currentWord);
+        ADVWORD();
+        M = wordToInt(currentWord);
+        ADVWORD();
+        H = wordToInt(currentWord);
+        CreateTime(&tempT, D, M, H);
+        Deliv(ElmtLM(ListMkn, i)) = tempT;
+        // lokasi
+        ADVLINE();
+        STARTWORD();
+        Locate(ElmtLM(ListMkn, i)) = currentWord;
+        i++;
+    }
     
 }
 
@@ -78,26 +211,29 @@ void DisplayBuyAbleLM(ListMakanan l)
         3. Ayam Mentah (5 jam)
     */
     /* KAMUS LOKAL */
-    int i;
+    int i, n;
 
     /* ALGORITMA */
-    printf("=========================\n");
-    printf("=          BUY          =\n");
-    printf("=========================\n");
-    printf("List Bahan Makanan");
-    i = 0;
+    printf("=========================================\n");
+    printf("=                   BUY                 =\n");
+    printf("=========================================\n");
+    printf("List Bahan Makanan\n");
+    
+    i = 0; n = 0;
     while (i < LengthLM(l))
     {
-        if (GetActionLocMkn(l, i) == "BUY")
+        if (isWordSame(GetActionLocMkn(l, i), "Buy"))
         {
-            printf("%d. %s\t()", i, GetNamaMkn(l, i)); //*************************************************************************************
+            printf("%d. %s     \t(", i, GetNamaMkn(l, i).Tabword);
+            DisplayTIMEk(GetDeliverTimeMkn(l, i));
+            printf(")");
             printf("\n");
         }
         i++;
     }
 }
 
-void DisplayActionAbleLM(ListMakanan l, char *str)
+void DisplayActionAbleLM(ListMakanan l, char *Lchar)
 {
     /* I.S. l tidak kosong str valid yaitu command / simuulator terdapat pada FRY, CHOP, BOIL, MIX */
     /* F.S menampilkan bahan makanan yang memiliki String _LOKASI_AKSI_MAKANAN_ str */
@@ -110,37 +246,38 @@ void DisplayActionAbleLM(ListMakanan l, char *str)
     2. Sambal Goreng
     */
     /* KAMUS LOKAL */
-    int i;
+    int i, n;
 
     /* ALGORITMA */
     i = 0;
     printf("===========");
-    while (str[i] != '\0')
+    while (Lchar[i] != '\0')
     {
         printf("=");
         i++;
     }
     printf("===========\n");
     printf("=          ");
-    printf("%s", str);
+    printf("%s", Lchar);
     printf("          =\n");
     i = 0;
     printf("===========");
-    while (str[i] != '\0')
+    while (Lchar[i] != '\0')
     {
         printf("=");
         i++;
     }
     printf("===========\n");
 
-    i = 0;
+    i = 0; n = 1;
     printf("List Bahan Makanan yang Bisa Dibuat:\n");
     while (i < LengthLM(l))
     {
-        if (GetActionLocMkn(l, i) == str)
+        if (isWordSame(GetActionLocMkn(l, i), Lchar))
         {
-            printf("%d. %s", i, GetNamaMkn(l, i));
+            printf("%d. %s", n, GetNamaMkn(l, i).Tabword);
             printf("\n");
+            n++;
         }
         i++;
     }
@@ -155,15 +292,11 @@ void DisplayCatalog(ListMakanan l)
     List Makanan
     |- Nama -|- Durasi Kedaluwarsa -|- Aksi yang  -|- Delivery Time -|
     |        |                      |- Diperlukan -|                 |
-    Cabai - 3 jam - BUY - 2 jam
-    Ayam Mentah - 5 menit - BUY - 4 jam
-    Ayam Potong - 5 menit - CHOP - 0
-    Ayam Goreng - 8 jam - FRY - 0
     */
     /* KAMUS LOKAL */
-    int i, cntStr;
+    int i, cntStr, tempInt;
+    TIME tempTime;
 
-    int i;
     printf("\xc9");
     for (i = 1; i <= 45; i++)
     {
@@ -183,10 +316,11 @@ void DisplayCatalog(ListMakanan l)
     for (i = 0; i < LengthLM(l); i++)
     {   
         printf(" | ");
+
         cntStr = 0; // Nama Makanan
-        while(GetNamaMkn(l, i)[cntStr] != '\0')
+        while(GetNamaMkn(l, i).Tabword[cntStr] != '\0')
         {
-            printf("%c", GetNamaMkn(l, i)[cntStr]);
+            printf("%c", GetNamaMkn(l, i).Tabword[cntStr]);
             cntStr++;
         }
         while(cntStr < 34)
@@ -195,40 +329,119 @@ void DisplayCatalog(ListMakanan l)
             cntStr++;
         }
         printf(" | ");
+
         cntStr = 0; // Kedaluarsa Time
-        while(GetActionLocMkn(l, i)[cntStr] != '\0')
+        DisplayTIMEk(GetKadaluarsaMkn(l,i));
+        tempTime = GetKadaluarsaMkn(l,i);
+        tempInt = TIMEToMin(GetKadaluarsaMkn(l,i));
+
+        if (tempTime.M < 10)
         {
-            printf("%c", GetActionLocMkn(l, i)[cntStr]);
-            cntStr++;
+            cntStr += 7;
         }
+        else
+        {
+            cntStr += 8;
+        }
+
+        if (tempInt >= 60)
+        {
+            cntStr += 6;
+
+            if (tempTime.H >= 10)
+            {
+                cntStr++;
+            }
+        }
+        
+        if (tempInt >= 1440)
+        {
+            cntStr += 7;
+            if (tempTime.D >= 10)
+            {
+                cntStr++;
+            }
+            
+            if (tempTime.D >= 100)
+            {
+                cntStr++;
+            }
+        }
+
         while(cntStr < 24)
         {
             printf(" ");
             cntStr++;
         }
         printf(" | ");
+
         cntStr = 0; // Action Loc
-        while(GetActionLocMkn(l, i)[cntStr] != '\0')
+        while(GetActionLocMkn(l, i).String[cntStr] != '\0')
         {
-            printf("%c", GetActionLocMkn(l, i)[cntStr]);
+            printf("%c", GetActionLocMkn(l, i).String[cntStr]);
             cntStr++;
         }
-        while(cntStr < 24)
+        while(cntStr < 10)
         {
             printf(" ");
             cntStr++;
         }
         printf(" | ");
-        cntStr = 0; // Delivery Time
+
+        cntStr = 0; // Deliver Time
+        DisplayTIMEk(GetDeliverTimeMkn(l,i));
+        tempTime = GetDeliverTimeMkn(l,i);
+        tempInt = TIMEToMin(GetDeliverTimeMkn(l,i));
+
+        if (tempTime.M < 10)
+        {
+            cntStr += 7;
+        }
+        else
+        {
+            cntStr += 8;
+        }
+
+        if (tempInt >= 60)
+        {
+            cntStr += 6;
+
+            if (tempTime.H >= 10)
+            {
+                cntStr++;
+            }
+        }
+        
+        if (tempInt >= 1440)
+        {
+            cntStr += 7;
+            if (tempTime.D >= 10)
+            {
+                cntStr++;
+            }
+            
+            if (tempTime.D >= 100)
+            {
+                cntStr++;
+            }
+        }
+
+        while(cntStr < 24)
+        {
+            printf(" ");
+            cntStr++;
+        }
+
+        printf(" | \n");
     }
 
     printf("\xc8");
-    for (i = 1; i <= 45; i++)
+    for (i = 1; i <= 41; i++)
     {
         printf("\xcd"); // ░
     }
-    printf(" PROGRAM BNMO ");
-    for (i = 1; i <= 46; i++)
+    printf(" OVERCOOKING SIMULATOR ");
+    for (i = 1; i <= 41; i++)
     {
         printf("\xcd"); // ░
     }

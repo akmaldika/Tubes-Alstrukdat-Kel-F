@@ -1,0 +1,1 @@
+gcc driver_time.c boolean.h time.c -o timeTest  && .\timeTest

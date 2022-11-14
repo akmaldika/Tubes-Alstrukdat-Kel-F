@@ -4,6 +4,7 @@
 #define MATRIX_H
 
 #include "boolean.h"
+#include "point.h"
 
 /* Ukuran maksimum baris dan kolom */
 #define ROW_CAP 100

@@ -3,7 +3,7 @@
 #define _CONFIG_MAIN_h
 
 /* Atur terlebih dahulu ukuran sebelum menjalankan */
-#define CONFIG_SIZELM 6 
-#define CONFIG_SIZELR 4
+#define CONFIG_SIZELM 20 
+#define CONFIG_SIZELR 20
 
 #endif

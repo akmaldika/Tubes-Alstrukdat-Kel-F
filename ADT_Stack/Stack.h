@@ -7,60 +7,77 @@
 #define StackUndoRedo_h
 
 #include "boolean.h"
-#include "..\ADT_Makanan\"
-#include "..\ADT_Time\"
-#include "..\ADT_Simulator\"
-#include "..\ADT_Point\"
-#include "..\ADT_Matriks\"
+#include "..\ADT_Makanan\makanan.h"
+#include "..\ADT_Time\time.h"
+// #include "..\ADT_Simulator\"
+// #include "..\ADT_Point\"
+// #include "..\ADT_Matriks\"
 
 #define Nil -1
-/* Nil adalah stack dengan elemen kosong . */
-/* Kapasitas Stack adalah kelipatan 100 */
+#define initCap 20
+#define addCap 10
+#define minCap 10
 
-typedef struct
-{
-    
-} ElStackURType;
 
 typedef int address;   /* indeks tabel */
+typedef MAKANAN ElStackURType; /* Type List Makanan */
 
 typedef struct { 
-  ElStackURType T[CapacityStack]; /* tabel penyimpan elemen */
+  ElStackURType *Container; /* tabel penyimpan elemen */
   address TOP;  /* alamat TOP: elemen puncak */
-  int capacity; /* kapasitas yang sedang ditampung */
+  int Capacity; /* kapasitas yang sedang ditampung */
 } Stack;
+/* indeks stack [0..Capacity-1] */
+/* Stack kosong adalah stack dengan Top == Nil */
+/* Stack penuh adalah stack dengan Top == Capacity - 1 */
+/* Stack sepi adalah stack dengan Top < Capacity - 20 dan Capacity >= 40 */
 
 
 /* ********** SELEKTOR ********** */
 #define Top(S) (S).TOP
-#define InfoTop(S) (S).T[(S).TOP]
+#define LStack(S) (S).Container
+#define InfoTop(S) (S).Container[(S).TOP]
+#define CapStack(S) (S).Capacity
 
 /* *** KONSTRUKTOR *** */
 void CreateEmpty(Stack *S);
 /* I.S. sembarang; */
-/* F.S. Membuat sebuah stack S yang kosong berkapasitas MaxEl */
-/* jadi indeksnya antara 0.. MaxEl */
-/* Ciri stack kosong : TOP bernilai Nil */
+/* F.S. Sebuah stack S kosong terbentuk dengan kapasitas initial initCap*/
 
-/* ************ Predikat Untuk test keadaan KOLEKSI ************ */
+/* ************ Predikat Untuk test keadaan Stack ************ */
 boolean IsEmpty(Stack S);
-/* Mengirim true jika Stack kosong: lihat definisi di atas */
+/* Mengirim true jika Stack kosong */
+
 boolean IsFull(Stack S);
-/* Mengirim true jika tabel penampung nilai elemen stack penuh */
+/* Mengirim true jika Stack penuh */
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
-void Push(Stack * S, ElStackURType X);
+void Push(Stack *S, ElStackURType X);
 /* Menambahkan X sebagai elemen Stack S. */
-/* I.S. S mungkin kosong, tabel penampung elemen stack TIDAK penuh */
-/* F.S. X menjadi TOP yang baru,TOP bertambah 1 */
+/* I.S. S mungkin kosong, mungkin penuh */
+/* F.S. Jika Stack tidak penuh maka Top bertambah 1 */
+/* Jika stack penuh akan mengalokasi memori tambahan dengan fungsi IncearseSize */
 
 /* ************ Menghapus sebuah elemen Stack ************ */
-void Pop(Stack * S, ElStackURType* X);
+void Pop(Stack *S, ElStackURType *X);
 /* Menghapus X dari Stack S. */
-/* I.S. S  tidak mungkin kosong */
+/* I.S. S  tidak mungkin kosong, mungkin mendekati keadaan sepi */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
+/* Jika stack sepi akan di-dealokasi dengan fungsi DecreaseSize */
 
 void IncreaseSize(Stack *S);
-/* Capacity bertambah sebanyak Capacity */
-..
+/* I.S. Stack terdefinisi, Stack penuh */
+/* F.S. Capacity stack bertambah sebanyak addCap */
+/* Mengalokasikan memori tambahan untuk stack sebanyak addCap dengan realloc*/
+
+void DecreaseSize(Stack *S);
+/* I.S. Stack terdefinisi, Stack sepi */
+/* F.S. Capacity stack berkurang sebanyak minCap*/
+/* Men-dealokasi memori berbelih stack sebanyak minCap dengan realloc */
+
+void resetStack(Stack *S);
+/* I.S. Stack  terdefinisi, sembarang */
+/* F.S. Capacity Stack dikembalikan initCap; Top Stack = Nil; Container menampung initCap memori */
+/* menggunakan fungsi realloc untuk container */
+
 #endif

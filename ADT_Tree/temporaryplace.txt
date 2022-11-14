@@ -1,0 +1,16 @@
+/* Menambahkan NTree dengan alamat chd kepada suatu parent*/
+void addChildAddress(NTree *prt, NTree chd) {
+    // KAMUS
+    Address p;
+    // ALGORITMA
+    if (isNTreeEmpty(*prt)) {
+        printf("Parent tree kosong\n");
+    } else {
+        if (!isHaveChild(*prt)) {
+            CHILD(*prt) = chd;
+        } else {
+            p = traverseChild(*prt, COUNTCHILD(*prt));
+            SIBLING(p) = chd;
+        } COUNTCHILD(*prt)++;
+    }
+}

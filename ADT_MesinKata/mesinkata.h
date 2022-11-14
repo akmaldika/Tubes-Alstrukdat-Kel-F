@@ -6,7 +6,6 @@
 
 #include "boolean.h"
 #include "mesinkarakter.h"
-#include "string.h"
 
 #define BLANK ' '
 
@@ -30,7 +29,7 @@ extern Line currentLine;
 extern int currentLength;
 
 
-void STARTLINE(str fileName);
+void STARTLINE(char fileName[]);
     /* I.S. : currentChar sembarang, input nama file valid
        F.S. : currentChar = kata pertama dari baris berikutnya dan currentLine berisikan baris pertama yang telah diakuisisi */
 
@@ -44,15 +43,21 @@ void CopyLine();
        I.S. : currentChar adalah karakter pertama dari kata
        F.S. : currentChar = kata pertama dari baris berikutnya dan currentLine berisikan baris yang telah diakuisi */
 
+void STARTWORD();
+    /* I.S. : CurrentLine terdefinisi
+       F.S. : currentWord adalah kata pertama yang telah diakusisi */
+
 void ADVWORD();
     /* I.S. : CurrentLine terdefinisi
-       F.S. : currentWord adalah kata yang telah diakusisi dari currentLength sampai endWord*/
+       F.S. : currentWord adalah kata yang telah diakusisi dari currentLength sampai akhir kata (sebelum spasi atau akhir baris) */
 
 void CopyWord();
     /* I.S. : CurrentLine terdefinisi
        F.S. : currentWord berisi word mulai dari currentLine.Tabword[currentLength] sampai endWord */
 
-void displayString();
-    /* Menampilkan currentWord ke layar */
+void STARTCOMMAND();
+    /* I.S. : Sembarang
+       F.S. : currentLine berisi masukan command dari user sampai sebelum new line (currentChar = '\n') */
+
 
 #endif

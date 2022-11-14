@@ -6,11 +6,13 @@
 
 char currentChar;
 boolean EOL;
+boolean EOP;
 
 static FILE *pita;
+static int retval;
 
-void START(str fileName)
-{
+
+void START(char fileName[]) {
        /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
           Karakter pertama yang ada pada pita posisinya adalah pada jendela.
           I.S. : sembarang
@@ -21,14 +23,17 @@ void START(str fileName)
        ADV();
 }
 
-void ADV()
-{
+void ADV() {
        /* Pita dimajukan satu karakter.
           I.S. : Karakter pada jendela = currentChar
           F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama.
-                 Jika  currentChar = '\n' maka EOL akan menyala (true) */
+                 Jika  currentChar = '\n' maka EOL true. Jika retval != 1, maka EOP menyala (true) */
 
        /* Algoritma */
-       fscanf(pita, "%c", &currentChar);
+       retval = fscanf(pita, "%c", &currentChar);
        EOL = (currentChar == '\n');
+       EOP = (retval != 1);
+       if (EOP) {
+              fclose(pita);
+       }
 }

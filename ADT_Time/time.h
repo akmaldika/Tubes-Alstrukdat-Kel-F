@@ -60,6 +60,11 @@ void DisplayTIME(TIME T);
 /* Proses : menulis nilai setiap komponen T ke layar dalam format D.H.M
    tanpa karakter apa pun di depan atau belakangnya, termasuk spasi, enter, dll.*/
 
+void DisplayTIMEk(TIME T);
+/* I.S. : T sembarang */
+/* F.S. : Nilai T ditulis dg format D,H,M dengan tambahan "jam menit detik" */
+/* Proses : menulis nilai setiap komponen T ke layar dalam format D, H, M dengan tambahan keterangan satuannya yaitu jam, menit, dan detik */
+
 /* ***************************************************************** */
 /* KELOMPOK KONVERSI TERHADAP TYPE                                   */
 /* ***************************************************************** */

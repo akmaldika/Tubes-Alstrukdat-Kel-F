@@ -10,18 +10,18 @@
 #include "..\config_main.h"
 #include "..\ADT_MesinKata\mesinkata.h"
 #include "..\ADT_MesinKata\string.h"
-// #include "..\ADT_Makanan\"
-// #include "..\ADT_Time\"
+#include "..\ADT_Makanan\makanan.h"
+#include "..\ADT_Time\time.h"
 
 
 /* CONFIG_SIZELM adalah SetUp Ukuran Makanan sesuai konfigurasi pada file config_main.h */
 
-typedef int IdxTypeLM; /* Type index */
-typedef _TIPE_MAKANAN_ ElListMakananType;
+typedef int IdxType; /* Type index */
+typedef MAKANAN ElListMakananType;
 
 typedef struct
 {
-  ElListMakananType makanan[CONFIG_SIZELM];
+  ElListMakananType Lmakanan[CONFIG_SIZELM];
   int NElmt;
 } ListMakanan;
 /* Index yang digunakan [0..CONFIG_SIZELM-1] */
@@ -29,8 +29,12 @@ typedef struct
    List kosong NElmt = 0 
    Pattern function/procedure agar tidak konflik :
    ..LM / LMkn
-   ..Mkn*/
+   ..Mkn
+*/
  
+extern ListMakanan ListMkn;
+
+
 /* ********** KONSTRUKTOR ********** */
 void CreateListMakanan(ListMakanan *l);
 /* I.S. l sembarang */
@@ -38,36 +42,62 @@ void CreateListMakanan(ListMakanan *l);
 
 /* ********** SELEKTOR ********** */
 /* l adalah ListMakanan */
-#define LengthLM(l) (l).NElmt           /* get ukuran list */
-#define ListMkn(l) (l)._MAKANAN_           /* get pointer list */
-#define ElmtLM(l,i) LMakanan[i]         /* get elemen list ke-i */
+#define LengthLM(l) (l).NElmt           /* get/set ukuran list */
+#define ListMkn(l) (l).Lmakanan           /* get/set pointer list */
+#define ElmtLM(l,i) (l).Lmakanan[i]         /* get/set elemen list ke-i */
 
-_ID_MAKANAN_ GetIdMkn(ListMakanan l, int i);
+IDEM GetIdMkn(ListMakanan l, int i);
 /* l terdefinisi dan i valid untuk l, yaitu [0..NElmt-1] */
 /* Mengembalikan int ID makanan index ke-i */
 
-_NAMA_MAKANAN_ GetNamaMkn(ListMakanan l, int i);
+NamaMakanan GetNamaMkn(ListMakanan l, int i);
 /* l terdefinisi dan i valid untuk l, yaitu [0..NElmt-1] */
 /* Mengembalikan String nama makanan index ke-i*/
 
-_WAKTU_KADALUARSA_MAKANAN_ GetKadaluarsaMkn(ListMakanan l, int i);
+TIME GetKadaluarsaMkn(ListMakanan l, int i);
 /* l terdefinisi dan i valid untuk l, yaitu [0..NElmt-1] */
 /* Mengembalikan _TIPE_TIME_ dari kadaluarsa makanan index ke-i*/
 
-_WAKTU_DELIVER_MAKANAN_ GetDeliverTimeMkn(ListMakanan l, int i);
+TIME GetDeliverTimeMkn(ListMakanan l, int i);
 /* l terdefinisi dan i valid untuk l, yaitu [0..NElmt-1] */
 /* Mengembalikan _TIPE_TIME_ dari Waktu pengiriman makanan index ke-i*/
 
-_LOKASI_AKSI_MAKANAN_ GetActionLocMkn(ListMakanan l, int i);
+Word GetActionLocMkn(ListMakanan l, int i);
 /* l terdefinisi dan i valid untuk l, yaitu [0..NElmt-1] */
 /* Mengembalikan String lokasi aksi makanan index ke-i*/
 
-_UKURAN_MAKANAN_ GetUkuranMkn(ListMakanan l, int i);
+// POINT GetUkuranMkn(ListMakanan l, int i);
 /* l terdefinisi dan i valid untuk l, yaitu [0..NElmt-1] */
 /* Mengembalikan _TIPE_UKURAN_MAKANAN_  makanan index ke-i*/
 
+/* ***** Operasi pencarian elemen ***** */
+boolean isIdValid(ListMakanan l, IDEM id);
+/* Mengembalikan true jika id ada di dalam list */
+
+/* Precond : untuk setiap parameter Id adalah valid dan pasti ada dalam list makanan */
+IdxType SearchIndexId(ListMakanan l, IDEM id);
+/* mengembalikan index jika menemukan Id pada list */
+
+ElListMakananType MknId(ListMakanan l, IDEM id);
+/* mengambalikan tipe Makanan berdasarkan ID makanan */
+
+NamaMakanan NamaMknId(ListMakanan l, IDEM id);
+/* mengambalikan nama makanan berdasarkan ID makanan */
+
+TIME KedaluarsaMknId(ListMakanan l, IDEM id);
+/* Mengembalikan nama makanan berdasarkan ID makanan */
+
+TIME DeliverTimeMknId(ListMakanan l, IDEM id);
+/* Mengembalikan waktu pengiriman makanan berdasarkan Id makanan*/
+
+LokasiAksi ActionLocId(ListMakanan l, IDEM id);
+/* Mengembalikan lokasi aksi makanan berdasarkan Id makanan */
+
+// POINT UkuranMknId(ListMakanan l, IDEM);
+/* mengambalikan _UKURAN_MAKANAN_ berdasarkan ID */
+
 /* ********** INPUT / OUTPUT ********** */
-void SetUpListMakanan(ListMakanan *l, char* namaFile);
+void SetUpListMakanan();
 /* I.S. Sembarang */
 /* I.F. Terbentuk list makanan berdasarkan hasil konfigurasi */
 /* NElmt list pasti sama dengan CONFIG_SIZELM */
@@ -85,7 +115,7 @@ void DisplayBuyAbleLM(ListMakanan l);
   3. Ayam Mentah (5 jam) 
  */
 
-void DisplayActionAbleLM(ListMakanan l, char* str);
+void DisplayActionAbleLM(ListMakanan l, char *Lchar);
 /* I.S. l tidak kosong str valid yaitu command / simuulator terdapat pada FRY, CHOP, BOIL, MIX */
 /* F.S menampilkan bahan makanan yang memiliki String _LOKASI_AKSI_MAKANAN_ str */
 /* contoh tampilan : 

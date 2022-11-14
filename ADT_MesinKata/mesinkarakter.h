@@ -5,13 +5,16 @@
 #define __MESIN_KAR_H_
 
 #include "boolean.h"
-#include "string.h"
+
+#define Nmax 100
+typedef char str[Nmax];
 
 /* State Mesin */
 extern char currentChar;
 extern boolean EOL;
+extern boolean EOP;
 
-void START(str fileName);
+void START(char fileName[]);
 /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
    Karakter pertama yang ada pada pita posisinya adalah pada jendela.
    I.S. : sembarang
@@ -21,6 +24,6 @@ void ADV();
 /* Pita dimajukan satu karakter.
    I.S. : Karakter pada jendela = currentChar
    F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama,
-          jika currentChar == '\n', EOL menyala */
+          Jika  currentChar = '\n' maka EOL true. Jika retval != 1, maka EOP menyala (true) */
 
 #endif
