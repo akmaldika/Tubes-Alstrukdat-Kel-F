@@ -63,6 +63,9 @@ boolean IsFull(PrioQueue Q);
 /* yaitu mengandung elemen sebanyak MaxEl */
 boolean isThereExp(PrioQueue Q);
 /* Mengirim true jika dalam queue ada yang expired */
+boolean searchMkn(PrioQueue Q, MAKANAN m);
+/* Mengirimkan true jika makanan terdapat dalam queue */
+
 int NBElmt(PrioQueue Q);
 /* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika Q kosong. */
 
@@ -120,5 +123,9 @@ void PrintPrioQueue(PrioQueue Q);
 void Min1Minute(PrioQueue *Q, boolean *Flag, ListMakanan *LMakana);
 /* I.S. q terdefinisi */
 /* F.S. Semnua elemen makanan  dalam q berkurang 1 menit dan DequeueExp  */
+
+void MinNTime(PrioQueue *Q, boolean *Flag, ListMakanan *LMakana, int h, int m);
+/* I.S. q terdefinisi */
+/* F.S. Semnua elemen makanan  dalam q berkurang h jam dan m menit dan DequeueExp  */
 
 #endif

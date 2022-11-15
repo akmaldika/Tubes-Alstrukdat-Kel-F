@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "PrioQueue.h"
-#include "../ADT_ListStatik/ListMakanan.h"
+// #include "../ADT_ListStatik/ListMakanan.h"
 
 // typedef char str[100];
 
@@ -47,12 +47,12 @@ int main()
     boolean Flag = false;
     assignWord(&wd, "Dapur");
     assignLine(&w1, "Ayam goreng");
-    assignLine(&w2,"Kangkung");
-    assignLine(&w3,"Iga sapi");
-    assignLine(&w4,"Bayam");
-    assignLine(&w5,"Kentang");
-    assignLine(&w6,"Ikan asin");
-    assignLine(&w7,"Ubi");
+    assignLine(&w2, "Kangkung");
+    assignLine(&w3, "Iga sapi");
+    assignLine(&w4, "Bayam");
+    assignLine(&w5, "Kentang");
+    assignLine(&w6, "Ikan asin");
+    assignLine(&w7, "Ubi");
     printf("\nkata word: %s, n : %d\n", w1.Tabword, w1.Length);
     printf("kata line: %s, n : %d\n\n", wd.String, wd.Length);
 
@@ -78,13 +78,17 @@ int main()
     // CreateMakanan(&m4, 15, "nasi goreng", t4, t4, 4);
     // Makanan(a) = m1;
     PrioQueue q;
-    MakeEmpty(&q, 4);
+    MakeEmpty(&q, 6);  // 4 dan 5 
     Enqueue(&q, m1);
     Enqueue(&q, m2);
     Enqueue(&q, m3);
     Enqueue(&q, m4);
+    Enqueue(&q, m5);
+    Enqueue(&q, m7);
+    printf("max : %d \n", MaxEl(q));
     PrintPrioQueue(q);
     // printf("h t%d %d\n", Head(q), Tail(q));
+    // printf("is full %d \n",IsFull(q) );
 
     Dequeue(&q, &temp);
     Dequeue(&q, &temp);
@@ -152,6 +156,33 @@ int main()
     int i = 0;
     // ListMakananExp.Lmakanan[0] = mExp;
     printf("list makanan basi : \n");
+    while (i < ListMakananExp.NElmt)
+    {
+        printf("   %d. %s\n", i + 1, ListMakananExp.Lmakanan[i].Nama);
+        i++;
+    }
+    PrintPrioQueue(q);
+    printf("m3 id : %d\n",m1.id);
+    printf("ada ayam goreng : %d", searchMkn(q, m1) );
+    boolean flag = 0;
+
+
+
+    printf("\n\n4. Pengurangan 3 menit dalam PrioQueue \n");
+    PrintPrioQueue(q);
+    MinNTime(&q, &flag, &ListMakananExp, 0, 3);
+    PrintPrioQueue(q);
+    if (Flag)
+    {
+        printf("\nFlag truee \n");
+        printf("Makanan yg sudah Exp adalah %s\n\n", ListMakananExp.Lmakanan[ListMakananExp.NElmt - 1].Nama);
+    }
+    else
+    {
+        printf("\nFlag false, belum ada yg expired \n\n");
+    }
+    printf("list makanan basi : \n");
+    i=0;
     while (i < ListMakananExp.NElmt)
     {
         printf("   %d. %s\n", i + 1, ListMakananExp.Lmakanan[i].Nama);

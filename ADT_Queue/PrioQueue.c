@@ -24,6 +24,28 @@ boolean isThereExp(PrioQueue Q)
 	/* Mengirim true jika dalam queue ada yang expired */
 	return Time(Elmt(Q, Head(Q))) < 1;
 }
+boolean searchMkn(PrioQueue Q, MAKANAN m)
+{
+	/* Mengirimkan true jika makanan terdapat dalam queue */
+	if (IsEmpty(Q))
+	{
+		return false;
+	}
+	else
+	{
+		int i = Head(Q);
+		while (i != Tail(Q) && Elmt(Q, i).id != m.id)
+		{
+			i++;
+			if (i == Q.MaxEl)
+			{
+				i = 0;
+			}
+		}
+		// i == tail atau elemennya udah sama
+		return Elmt(Q, i).id == m.id;
+	}
+}
 int NBElmt(PrioQueue Q)
 {
 	/* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika Q kosong. */
@@ -90,12 +112,12 @@ void Enqueue(PrioQueue *Q, MAKANAN X)
 	/* F.S. X disisipkan pada posisi yang tepat sesuai dengan prioritas,
 			TAIL "maju" dengan mekanisme circular buffer; */
 	int i, h;
-	if(Time(X) != 0){
-		if (IsFull(*Q))
-		{
-
-		}
-		else if (IsEmpty(*Q))
+	if (Time(X) != 0 && ! IsFull(*Q))
+	{
+		// if (IsFull(*Q))
+		// {
+		// }
+		if (IsEmpty(*Q))
 		{
 			Head(*Q) = 0;
 			Tail(*Q) = 0;
@@ -106,6 +128,9 @@ void Enqueue(PrioQueue *Q, MAKANAN X)
 			i = Tail(*Q);
 			Tail(*Q) = (Tail(*Q) + 1) % MaxEl(*Q);
 			h = (Head(*Q) - 1) % MaxEl(*Q);
+			// if (Head(*Q)==-1){
+			// 	h =  MaxEl(*Q)-1;
+			// }
 			while (i != h && Time(X) <= Time(Elmt(*Q, i)))
 			{
 				(*Q).T[((i + 1) % MaxEl(*Q))] = (*Q).T[i];
@@ -184,13 +209,15 @@ void PrintPrioQueue(PrioQueue Q)
 			}
 			if (i != Tail(Q))
 			{
-				printf("   %d. %s - ", no, NamaMakanan(Elmt(Q,i))); // buat method display 4 jam , 3 jam 10 menit, print sama getvar nya
+				printf("   %d. %s - ", no, NamaMakanan(Elmt(Q,i)));
+				// printf("   %d. %s - %d ", no, NamaMakanan(Elmt(Q, i)), Elmt(Q, i).id); // buat method display 4 jam , 3 jam 10 menit, print sama getvar nya
 				DisplayTIMEk(TimeFull((Q).T[i]));
 				printf("\n");
 				i++;
 				no++;
 			}
 		}
+		// printf("   %d. %s - %d ", no, NamaMakanan(Elmt(Q, i)), Elmt(Q, i).id); // buat method display 4 jam , 3 jam 10 menit, print sama getvar nya
 		printf("   %d. %s - ", no, NamaMakanan(Elmt(Q,i)));
 		DisplayTIMEk(TimeFull((Q).T[i]));
 		printf("\n");
@@ -198,14 +225,15 @@ void PrintPrioQueue(PrioQueue Q)
 }
 
 void Min1Minute(PrioQueue *Q, boolean *Flag, ListMakanan *LMakanan)
-/* I.S. q terdefinisi */
-/* F.S. Semnua elemen makanan  dalam q berkurang 1 menit dan DequeueExp  */
 {
+	/* I.S. q terdefinisi */
+	/* F.S. Semnua elemen makanan  dalam q berkurang 1 menit dan DequeueExp  */
 	int i, nBefore;
 	int nMknExp = 0;
 	nBefore = LMakanan->NElmt;
 	MAKANAN m;
-	if (! IsEmpty(*Q)){
+	if (!IsEmpty(*Q))
+	{
 		i = Head(*Q);
 		while (i != Tail(*Q))
 		{
@@ -215,10 +243,11 @@ void Min1Minute(PrioQueue *Q, boolean *Flag, ListMakanan *LMakanan)
 			}
 			if (i != Tail(*Q))
 			{
-				PrevMin( &Exp(Elmt(*Q,i)) );
-				if(isThereExp(*Q)){
-					DequeueExp(Q,&m);
-					LMakanan->Lmakanan[LMakanan->NElmt]=m;
+				PrevMin(&Exp(Elmt(*Q, i)));
+				if (isThereExp(*Q))
+				{
+					DequeueExp(Q, &m);
+					LMakanan->Lmakanan[LMakanan->NElmt] = m;
 					LMakanan->NElmt++;
 					*Flag = true;
 				}
@@ -226,14 +255,67 @@ void Min1Minute(PrioQueue *Q, boolean *Flag, ListMakanan *LMakanan)
 			}
 		}
 		// Tail nya
-		PrevMin( &Exp(Elmt(*Q,i)) );
-		if(isThereExp(*Q)){
-			DequeueExp(Q,&m);
-			LMakanan->Lmakanan[LMakanan->NElmt]=m;
+		PrevMin(&Exp(Elmt(*Q, i)));
+		if (isThereExp(*Q))
+		{
+			DequeueExp(Q, &m);
+			LMakanan->Lmakanan[LMakanan->NElmt] = m;
 			LMakanan->NElmt++;
 			*Flag = true;
 		}
-		if (LMakanan->NElmt == nBefore){
+		if (LMakanan->NElmt == nBefore)
+		{
+			Flag = false;
+		}
+	}
+}
+
+void MinNTime(PrioQueue *Q, boolean *Flag, ListMakanan *LMakanan, int h, int m){
+	/* I.S. q terdefinisi */
+	/* F.S. Semnua elemen makanan  dalam q berkurang h jam dan m menit dan DequeueExp  */
+	int i, nBefore;
+	int nMknExp = 0;
+	TIME tim;
+	long Nmin;
+	CreateTime(&tim, 0, h, m);
+	Nmin = TIMEToMin(tim);
+	nBefore = LMakanan->NElmt;
+	MAKANAN mkn;
+	if (!IsEmpty(*Q))
+	{
+		i = Head(*Q);
+		while (i != Tail(*Q))
+		{
+			if (i == MaxEl(*Q))
+			{
+				i = 0;
+			}
+			if (i != Tail(*Q))
+			{
+				PrevNMin(&Exp(Elmt(*Q, i)), Nmin);
+				// PrevMin(&Exp(Elmt(*Q, i)));
+				if (isThereExp(*Q))
+				{
+					DequeueExp(Q, &mkn);
+					LMakanan->Lmakanan[LMakanan->NElmt] = mkn;
+					LMakanan->NElmt++;
+					*Flag = true;
+				}
+				i++;
+			}
+		}
+		// Tail nya
+		PrevNMin(&Exp(Elmt(*Q, i)), Nmin);
+		// PrevMin(&Exp(Elmt(*Q, i)));
+		if (isThereExp(*Q))
+		{
+			DequeueExp(Q, &mkn);
+			LMakanan->Lmakanan[LMakanan->NElmt] = mkn;
+			LMakanan->NElmt++;
+			*Flag = true;
+		}
+		if (LMakanan->NElmt == nBefore)
+		{
 			Flag = false;
 		}
 	}
