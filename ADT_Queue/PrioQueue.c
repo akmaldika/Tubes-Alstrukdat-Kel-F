@@ -78,7 +78,7 @@ void MakeEmpty(PrioQueue *Q, int Max)
 	/* atau : jika alokasi gagal, Q kosong dg MaxEl=0 */
 	/* Proses : Melakukan alokasi, membuat sebuah Q kosong */
 
-	(*Q).T = (MAKANAN *)malloc((Max) * sizeof(MAKANAN)); // alokasi
+	(*Q).T = (MAKANAN *)malloc((Max) * sizeof(MAKANAN) * sizeof(int)); // alokasi
 	if ((*Q).T != NULL)
 	{
 		MaxEl(*Q) = Max;
@@ -180,6 +180,55 @@ void DequeueExp(PrioQueue *Q, MAKANAN *X)
 		Dequeue(Q, X);
 	}
 }
+
+void removeFromInventory(PrioQueue *Q, MAKANAN m){
+	/* Proses: Menghapus m pada Q dengan aturan yang paling mendekati expired dimulai dari head 
+	hingga menemukan m lalu dihapus */
+	/* I.S. Q tidak mungkin kosong */
+	/* F.S. m ter-dequeue (hapus) dari Q dan Q tetap teratur dengan mekanisme circular buffer
+			Q mungkin menjadi kosong */
+	if (! IsEmpty(*Q))
+	{
+		MAKANAN temp;
+		int idx;
+		int tail;
+		int i = Head(*Q);
+		while (Elmt(*Q, i).id != m.id)
+		{
+			i++;
+			if (i == Q->MaxEl)
+			{
+				i = 0;
+			}
+		}
+		// i = index dengan Elmt(*Q, i).id == m.id 
+		if (i==Head(*Q)){
+			Dequeue(Q, &temp);
+		}
+		else if (i != Tail(*Q)){
+			tail = Tail(*Q);
+			// Tail(*Q) = (Tail(*Q)-1) % Q->MaxEl;
+			Tail(*Q) = (Tail(*Q)-1);
+			if (Tail(*Q)==-1){
+				Tail(*Q) = Q->MaxEl-1; 
+			} 
+			while (i != tail)
+			{
+				idx  = (i+1) % Q->MaxEl;
+				Elmt(*Q, i) = Elmt(*Q, idx);
+				i=idx;
+			}
+		}
+		else {
+			// Tail
+			Tail(*Q) = (Tail(*Q) - 1);
+			if (Tail(*Q)==-1){
+				Tail(*Q) = Q->MaxEl-1; 
+			} 
+		}
+	}
+}
+
 /* Operasi Tambahan */
 void PrintPrioQueue(PrioQueue Q)
 {

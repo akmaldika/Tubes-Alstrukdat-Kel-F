@@ -102,6 +102,14 @@ void DequeueExp(PrioQueue *Q, MAKANAN *X);
 /* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer;
         Q mungkin kosong */
 
+void removeFromInventory(PrioQueue *Q, MAKANAN m);
+/* Proses: Menghapus m pada Q dengan aturan yang paling mendekati expired dimulai dari head 
+hingga menemukan m lalu dihapus */
+/* I.S. Q tidak mungkin kosong */
+/* F.S. m ter-dequeue (hapus) dari Q dan Q tetap teratur dengan mekanisme circular buffer
+        Q mungkin menjadi kosong */
+
+
 /* Operasi Tambahan */
 void PrintPrioQueue(PrioQueue Q);
 /* Mencetak isi queue Q ke layar */

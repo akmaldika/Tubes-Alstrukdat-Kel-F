@@ -2,20 +2,6 @@
 #include "PrioQueue.h"
 // #include "../ADT_ListStatik/ListMakanan.h"
 
-// typedef char str[100];
-
-// typedef struct line
-// {
-//     str Tabword;
-//     int Length;
-// } Line;
-
-// typedef struct word
-// {
-//     str String;
-//     int Length;
-// } Word;
-
 void assignWord(Word *w, char str[])
 {
     int i = 0;
@@ -78,14 +64,14 @@ int main()
     // CreateMakanan(&m4, 15, "nasi goreng", t4, t4, 4);
     // Makanan(a) = m1;
     PrioQueue q;
-    MakeEmpty(&q, 6);  // 4 dan 5 
+    MakeEmpty(&q, 4);  // 4 dan 5 
+    printf("max : %d \n", MaxEl(q));
     Enqueue(&q, m1);
     Enqueue(&q, m2);
     Enqueue(&q, m3);
     Enqueue(&q, m4);
-    Enqueue(&q, m5);
-    Enqueue(&q, m7);
-    printf("max : %d \n", MaxEl(q));
+    // Enqueue(&q, m5);
+    // Enqueue(&q, m7);
     PrintPrioQueue(q);
     // printf("h t%d %d\n", Head(q), Tail(q));
     // printf("is full %d \n",IsFull(q) );
@@ -182,12 +168,23 @@ int main()
         printf("\nFlag false, belum ada yg expired \n\n");
     }
     printf("list makanan basi : \n");
+
     i=0;
     while (i < ListMakananExp.NElmt)
     {
         printf("   %d. %s\n", i + 1, ListMakananExp.Lmakanan[i].Nama);
         i++;
     }
+
+    Enqueue(&q, m2);
+    Enqueue(&q, m3);
+    printf("\n");
+    PrintPrioQueue(q);
+    printf("h t%d %d\n", Head(q), Tail(q));
+    printf("\nremove ikan asin \n");
+    removeFromInventory(&q, m6);
+    // printf("h t%d %d\n", Head(q), Tail(q));
+    PrintPrioQueue(q);
 
     return 0;
 }
