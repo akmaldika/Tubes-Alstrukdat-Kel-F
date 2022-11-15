@@ -15,14 +15,35 @@
 #ifndef _LIBRARY_h_
 #define _LIBRARY_h_
 
-#define START "START"
-#define EXIT "EXIT"
+// char* equal to Word
+
+/* AKMAL */
+#define START "START" 
+#define EXIT "EXIT" 
 #define BUY "BUY"
-#define FRY "FRY"
+
+// nigel 
+#define WAIT "WAIT"
 #define DELIVERY "DELIVERY"
+/* Falhri*/
 #define MIX "MIX"
 #define CHOP "CHOP"
 #define FRY "FRY"
 #define BOIL "BOIL"
+#define REKOMENDASI "RECOMMENDATION"
+#define UNDO "UNDO"
+#define REDO "REDO"
+
+
+#define CATALOG "CATALOG"
+#define COOKBOOK "COOKBOOK"
+
+
+// char* equal to Line
+/* J*/
+#define MOVEN "MOVE NORTH"
+#define MOVEE "MOVE EAST"
+#define MOVEW "MOVE WEST"
+#define MOVES "MOVE SOUTH"
 
 #endif
