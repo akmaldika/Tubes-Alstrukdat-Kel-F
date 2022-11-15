@@ -17,7 +17,7 @@ void CreateEmpty(Stack *S)
 {
     /* I.S. sembarang; */
     /* F.S. Sebuah stack S kosong terbentuk dengan kapasitas initial initCap*/
-    LStack(*S) = (MAKANAN *) malloc(initCap * sizeof(MAKANAN));
+    LStack(*S) = (_SIMULATOR_ *) malloc(initCap * sizeof(_SIMULATOR_));
     Top(*S) = Nil;
     CapStack(*S) = initCap;
 }
@@ -72,7 +72,7 @@ void IncreaseSize(Stack *S)
     /* I.S. Stack terdefinisi, Stack penuh */
     /* F.S. Capacity stack bertambah sebanyak addCap */
     /* Mengalokasikan memori tambahan untuk stack sebanyak addCap dengan realloc*/
-    LStack(*S) = (MAKANAN *) realloc(LStack(*S), (CapStack(*S) + addCap) * sizeof(MAKANAN));
+    LStack(*S) = (_SIMULATOR_ *) realloc(LStack(*S), (CapStack(*S) + addCap) * sizeof(_SIMULATOR_));
     CapStack(*S) += addCap;
 }
 
@@ -81,7 +81,7 @@ void DecreaseSize(Stack *S)
     /* I.S. Stack terdefinisi, Stack sepi */
     /* F.S. Capacity stack berkurang sebanyak minCap*/
     /* Men-dealokasi memori berbelih stack sebanyak minCap dengan realloc */
-    LStack(*S) = (MAKANAN *) realloc(LStack(*S), (CapStack(*S) - minCap) * sizeof(MAKANAN));
+    LStack(*S) = (_SIMULATOR_ *) realloc(LStack(*S), (CapStack(*S) - minCap) * sizeof(_SIMULATOR_));
     CapStack(*S) -= minCap;
 }
 
@@ -89,7 +89,7 @@ void resetStack(Stack *S)
 {
     /* I.S. Stack  terdefinisi, sembarang */
     /* F.S. Capacity Stack dikembalikan initCap; Top Stack = Nil; Container menampung initCap memori */
-    LStack(*S) = (MAKANAN *) realloc(LStack(*S), (initCap) * sizeof(MAKANAN));
+    LStack(*S) = (_SIMULATOR_ *) realloc(LStack(*S), (initCap) * sizeof(_SIMULATOR_));
     Top(*S) = Nil;
     CapStack(*S) = initCap;
 }

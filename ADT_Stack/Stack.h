@@ -20,7 +20,7 @@
 
 
 typedef int address;   /* indeks tabel */
-typedef MAKANAN ElStackURType; /* Type List Makanan */
+typedef _SIMULATOR_ ElStackURType; /* Type List Makanan */
 
 typedef struct { 
   ElStackURType *Container; /* tabel penyimpan elemen */

@@ -29,9 +29,10 @@ typedef struct
    List kosong NElmt = 0 
    Pattern function/procedure agar tidak konflik :
    ..LM / LMkn
-   ..Mkn*/
+   ..Mkn
+*/
  
-
+extern ListMakanan ListMkn;
 
 
 /* ********** KONSTRUKTOR ********** */
@@ -114,7 +115,7 @@ void DisplayBuyAbleLM(ListMakanan l);
   3. Ayam Mentah (5 jam) 
  */
 
-void DisplayActionAbleLM(ListMakanan l, char* str);
+void DisplayActionAbleLM(ListMakanan l, char *Lchar);
 /* I.S. l tidak kosong str valid yaitu command / simuulator terdapat pada FRY, CHOP, BOIL, MIX */
 /* F.S menampilkan bahan makanan yang memiliki String _LOKASI_AKSI_MAKANAN_ str */
 /* contoh tampilan : 

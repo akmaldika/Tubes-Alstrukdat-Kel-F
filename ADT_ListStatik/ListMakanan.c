@@ -3,7 +3,7 @@
 
 #include "ListMakanan.h"
 
-static ListMakanan ListMkn;
+ListMakanan ListMkn;
 
 /* ********** KONSTRUKTOR ********** */
 void CreateListMakanan(ListMakanan *l)
@@ -211,26 +211,29 @@ void DisplayBuyAbleLM(ListMakanan l)
         3. Ayam Mentah (5 jam)
     */
     /* KAMUS LOKAL */
-    int i;
+    int i, n;
 
     /* ALGORITMA */
-    printf("=========================\n");
-    printf("=          BUY          =\n");
-    printf("=========================\n");
-    printf("List Bahan Makanan");
-    i = 0;
+    printf("=========================================\n");
+    printf("=                   BUY                 =\n");
+    printf("=========================================\n");
+    printf("List Bahan Makanan\n");
+    
+    i = 0; n = 0;
     while (i < LengthLM(l))
     {
-        if (GetActionLocMkn(l, i).String == "BUY")
+        if (isWordSame(GetActionLocMkn(l, i), "Buy"))
         {
-            printf("%d. %s\t()", i, GetNamaMkn(l, i).Tabword); //*************************************************************************************
+            printf("%d. %s     \t(", i, GetNamaMkn(l, i).Tabword);
+            DisplayTIMEk(GetDeliverTimeMkn(l, i));
+            printf(")");
             printf("\n");
         }
         i++;
     }
 }
 
-void DisplayActionAbleLM(ListMakanan l, char *str)
+void DisplayActionAbleLM(ListMakanan l, char *Lchar)
 {
     /* I.S. l tidak kosong str valid yaitu command / simuulator terdapat pada FRY, CHOP, BOIL, MIX */
     /* F.S menampilkan bahan makanan yang memiliki String _LOKASI_AKSI_MAKANAN_ str */
@@ -243,37 +246,38 @@ void DisplayActionAbleLM(ListMakanan l, char *str)
     2. Sambal Goreng
     */
     /* KAMUS LOKAL */
-    int i;
+    int i, n;
 
     /* ALGORITMA */
     i = 0;
     printf("===========");
-    while (str[i] != '\0')
+    while (Lchar[i] != '\0')
     {
         printf("=");
         i++;
     }
     printf("===========\n");
     printf("=          ");
-    printf("%s", str);
+    printf("%s", Lchar);
     printf("          =\n");
     i = 0;
     printf("===========");
-    while (str[i] != '\0')
+    while (Lchar[i] != '\0')
     {
         printf("=");
         i++;
     }
     printf("===========\n");
 
-    i = 0;
+    i = 0; n = 1;
     printf("List Bahan Makanan yang Bisa Dibuat:\n");
     while (i < LengthLM(l))
     {
-        if (GetActionLocMkn(l, i).String == str)
+        if (isWordSame(GetActionLocMkn(l, i), Lchar))
         {
-            printf("%d. %s", i, GetNamaMkn(l, i).Tabword);
+            printf("%d. %s", n, GetNamaMkn(l, i).Tabword);
             printf("\n");
+            n++;
         }
         i++;
     }
@@ -288,13 +292,10 @@ void DisplayCatalog(ListMakanan l)
     List Makanan
     |- Nama -|- Durasi Kedaluwarsa -|- Aksi yang  -|- Delivery Time -|
     |        |                      |- Diperlukan -|                 |
-    Cabai - 3 jam - BUY - 2 jam
-    Ayam Mentah - 5 menit - BUY - 4 jam
-    Ayam Potong - 5 menit - CHOP - 0
-    Ayam Goreng - 8 jam - FRY - 0
     */
     /* KAMUS LOKAL */
-    int i, cntStr;
+    int i, cntStr, tempInt;
+    TIME tempTime;
 
     printf("\xc9");
     for (i = 1; i <= 45; i++)
@@ -315,6 +316,7 @@ void DisplayCatalog(ListMakanan l)
     for (i = 0; i < LengthLM(l); i++)
     {   
         printf(" | ");
+
         cntStr = 0; // Nama Makanan
         while(GetNamaMkn(l, i).Tabword[cntStr] != '\0')
         {
@@ -327,51 +329,119 @@ void DisplayCatalog(ListMakanan l)
             cntStr++;
         }
         printf(" | ");
+
         cntStr = 0; // Kedaluarsa Time
-        while(GetActionLocMkn(l, i).String[cntStr] != '\0')
+        DisplayTIMEk(GetKadaluarsaMkn(l,i));
+        tempTime = GetKadaluarsaMkn(l,i);
+        tempInt = TIMEToMin(GetKadaluarsaMkn(l,i));
+
+        if (tempTime.M < 10)
         {
-            printf("%c", GetActionLocMkn(l, i).String[cntStr]);
-            cntStr++;
+            cntStr += 7;
         }
+        else
+        {
+            cntStr += 8;
+        }
+
+        if (tempInt >= 60)
+        {
+            cntStr += 6;
+
+            if (tempTime.H >= 10)
+            {
+                cntStr++;
+            }
+        }
+        
+        if (tempInt >= 1440)
+        {
+            cntStr += 7;
+            if (tempTime.D >= 10)
+            {
+                cntStr++;
+            }
+            
+            if (tempTime.D >= 100)
+            {
+                cntStr++;
+            }
+        }
+
         while(cntStr < 24)
         {
             printf(" ");
             cntStr++;
         }
         printf(" | ");
+
         cntStr = 0; // Action Loc
         while(GetActionLocMkn(l, i).String[cntStr] != '\0')
         {
             printf("%c", GetActionLocMkn(l, i).String[cntStr]);
             cntStr++;
         }
-        while(cntStr < 24)
+        while(cntStr < 10)
         {
             printf(" ");
             cntStr++;
         }
         printf(" | ");
-        cntStr = 0; // Delivery Time - minta request @NerbFox
-        // while(GetDeliverTimeMkn(l, i).String[cntStr] != '\0')
-        // {
-        //     printf("%c", GetDeliverTimeMkn(l, i).String[cntStr]);
-        //     cntStr++;
-        // }
-        // while(cntStr < 24)
-        // {
-        //     printf(" ");
-        //     cntStr++;
-        // }
-        printf(" | ");
+
+        cntStr = 0; // Deliver Time
+        DisplayTIMEk(GetDeliverTimeMkn(l,i));
+        tempTime = GetDeliverTimeMkn(l,i);
+        tempInt = TIMEToMin(GetDeliverTimeMkn(l,i));
+
+        if (tempTime.M < 10)
+        {
+            cntStr += 7;
+        }
+        else
+        {
+            cntStr += 8;
+        }
+
+        if (tempInt >= 60)
+        {
+            cntStr += 6;
+
+            if (tempTime.H >= 10)
+            {
+                cntStr++;
+            }
+        }
+        
+        if (tempInt >= 1440)
+        {
+            cntStr += 7;
+            if (tempTime.D >= 10)
+            {
+                cntStr++;
+            }
+            
+            if (tempTime.D >= 100)
+            {
+                cntStr++;
+            }
+        }
+
+        while(cntStr < 24)
+        {
+            printf(" ");
+            cntStr++;
+        }
+
+        printf(" | \n");
     }
 
     printf("\xc8");
-    for (i = 1; i <= 45; i++)
+    for (i = 1; i <= 41; i++)
     {
         printf("\xcd"); // ░
     }
-    printf(" PROGRAM BNMO ");
-    for (i = 1; i <= 46; i++)
+    printf(" OVERCOOKING SIMULATOR ");
+    for (i = 1; i <= 41; i++)
     {
         printf("\xcd"); // ░
     }

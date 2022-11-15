@@ -1,1 +1,0 @@
-urrentLength < currentLine.Length

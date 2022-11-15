@@ -1,8 +1,8 @@
 #include "string.h"
 
-boolean isWordSame (Word str1, str str2) {
+boolean isWordSame (Word str1, char str2[]) {
     int i = 0;
-    boolean same = true;
+    boolean same = (str1.Length != 0);
 
     while (i < str1.Length && same) {
         if (str1.String[i] != str2[i]) {
@@ -15,9 +15,9 @@ boolean isWordSame (Word str1, str str2) {
     return same;
 }
 
-boolean isLineSame (Line l, str str2) {
+boolean isLineSame (Line l, char str2[]) {
     int i = 0;
-    boolean same = true;
+    boolean same = (l.Length != 0);
 
     while (i < l.Length && same) {
         if (l.Tabword[i] != str2[i]) {
@@ -39,6 +39,5 @@ int wordToInt (Word cc) {
 		num += ((int) cc.String[i] - 48) * pow(10, power);
 		power--;
 	}
-
 	return num;
 }

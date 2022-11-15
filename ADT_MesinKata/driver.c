@@ -8,67 +8,35 @@
 
 
 int main () {
+    printf("Masukkan Command = ");
     STARTCOMMAND();
-    while (!EOL) {
-        ADVCOMMAND();
-    }
-    CopyWord();
+    STARTWORD();
 
     if (isWordSame(currentWord,"MAKANAN")) {
         STARTLINE("ConfigMakanan.txt");
-        STARTWORD();
-        displayWord();
-        printf("\n");
+        printf("%s\n", currentLine.Tabword);
         while (!EOP) {
             ADVLINE();
-            STARTWORD();
-            displayWord();
-            printf(" ");            
-            while (!endWord) {
-                ADVWORD();
-                displayWord();
-                printf(" ");
-            }
-            printf("\n");
+            printf("%s\n", currentLine.Tabword);
         }
     }
     else if (isWordSame(currentWord,"RESEP")) {
         STARTLINE("ConfigResep.txt");
-        STARTWORD();
-        displayWord();
-        printf("\n");        
+        printf("%s\n", currentLine.Tabword);       
         while (!EOP) {
             ADVLINE();
-            STARTWORD();
-            displayWord();
-            printf(" ");
-            while (!endWord) {
-                ADVWORD();
-                displayWord();
-                printf(" ");
-            }
-            printf("\n");
+            printf("%s\n", currentLine.Tabword);
         }      
     }
     else if (isWordSame(currentWord,"PETA")) {
         STARTLINE("ConfigPeta.txt");
         STARTWORD();
-        displayWord();
-        printf(" ");
+        printf("%s ", currentWord.String);
         ADVWORD();
-        displayWord();
-        printf("\n");        
+        printf("%s\n", currentWord.String);       
         while (!EOP) {
             ADVLINE();
-            STARTWORD();
-            displayWord();
-            printf(" ");            
-            while (!endWord) {
-                ADVWORD();
-                displayWord();
-                printf(" ");
-            }
-            printf("\n");
+            printf("%s\n", currentLine.Tabword);
         }        
     }
     else {

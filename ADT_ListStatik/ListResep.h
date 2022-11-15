@@ -7,8 +7,10 @@
 #include "boolean.h"
 #include "..\ADT_Tree\NTree.h"
 #include "..\ADT_MesinKata\mesinkata.h"
-#include "..\ADT_MesinKata\string.h"
+#include "..\ADT_MesinKata\mesinkarakter.h"
 #include "..\config_main.h"
+#include "..\ADT_MesinKata\string.h"
+
 
 
 #define CAPACITY_LIST_RESEP CONFIG_SIZELR
@@ -42,7 +44,6 @@ typedef struct {
 /* F.S  l merupakan ListResep yang kosong*/
 void CreateLR(ListResep *l);
 
-/* ********** SELEKTOR (TAMBAHAN) ********** */
 /* *** Banyaknya elemen *** */
 
 /* Mengirimkan banyaknya elemen efektif List */
@@ -61,6 +62,7 @@ int getLastIdxLR(ListResep l);
 
 
 /* ********** Test Indeks yang valid ********** */
+
 /* Mengirimkan true jika i adalah indeks yang valid utk kapasitas List l */
 /* yaitu antara indeks yang terdefinisi utk container*/
 boolean isIdxValidLR(ListResep l, int i);
@@ -85,13 +87,7 @@ boolean isFullLR(ListResep l);
 
 /* I.S. l sembarang */
 /* F.S. List l terdefinisi */
-/* Proses: membaca banyaknya elemen l dan mengisi nilainya */
-/* 1. Baca banyaknya elemen diakhiri enter, misalnya n */
-/*    Pembacaan diulangi sampai didapat n yang benar yaitu 0 <= n <= CAPACITY */
-/*    Jika n tidak valid, tidak diberikan pesan kesalahan */
-/* 2. Jika 0 < n <= CAPACITY; Lakukan n kali: 
-          Baca elemen mulai dari indeks 0 satu per satu diakhiri enter */
-/*    Jika n = 0; hanya terbentuk List kosong */
+/* Proses: */
 void readListLR(ListResep *l);
 
 /* Proses : Menuliskan isi List dengan traversal, List ditulis di antara kurung 
@@ -101,11 +97,12 @@ void readListLR(ListResep *l);
 /* F.S. Jika l tidak kosong: [e1,e2,...,en] */
 /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
 /* Jika List kosong : menulis [] */
-void printListLR(ListResep l);
+void printLR(ListResep l);
 
 
 /* ********** SEARCHING ********** */
 /* ***  Perhatian : List boleh kosong!! *** */
+
 
 /* Search apakah ada elemen List l yang bernilai val */
 /* Jika ada, menghasilkan indeks i terkecil, dengan ELMT(l,i) = val */
@@ -113,6 +110,9 @@ void printListLR(ListResep l);
 /* Skema Searching yang digunakan bebas */
 int indexOfLR(ListResep l, ElListResepType val);
 
+/* Search apakah resep makanan dengan ID id sudah dicatat pada List Resep*/
+/* Jika ada, kembalikan true, sebaliknya kembalikan false*/
+boolean isContainResep(ListResep l, int id);
 /* ********** MENAMBAH ELEMEN ********** */
 /* *** Menambahkan elemen terakhir *** */
 
@@ -133,6 +133,12 @@ void insertAtLR(ListResep *l, ElListResepType val, int idx);
 /* F.S. val adalah elemen terakhir l yang baru */
 void insertLastLR(ListResep *l, ElListResepType val);
 
+/* I.S. ListResep tidak boleh kosong */
+/* F.S. Jika newResep merupakan subresep dari salah satu resep yang sudah ada */
+/*      Maka sisipkan newResep pada subresep tersebut. Jika resep lama merupakan */
+/*      sub resep dari newResep, maka gabungkan resep lama ke newResep. Jika */
+/*      tidak terjadi, maka tambahkan newResep ke ListResep seperti biasa */
+void insertLastLRKonsolidasi(ListResep *l, NTree *newResep);
 
 /* ********** MENGHAPUS ELEMEN ********** */
 /* *** Menghapus elemen pertama *** */
@@ -145,13 +151,9 @@ void insertLastLR(ListResep *l, ElListResepType val);
 /* *** Menghapus elemen pada index tertentu *** */
 void deleteFirstLR(ListResep *l, ElListResepType *val);
 
-/* Proses : Menghapus elemen pada index idx List */
-/* I.S. List tidak kosong, idx adalah index yang valid di l */
-/* F.S. val adalah nilai elemen pada index idx l sebelum penghapusan, */
-/*      Banyaknya elemen List berkurang satu */
-/*      List l mungkin menjadi kosong */
-/* *** Menghapus elemen terakhir *** */
-void deleteAtLR(ListResep *l, ElListResepType *val, int idx);
+/* I.S. l terdefinisi, tidak kosong, i merupakan index valid dari l*/
+/* F.S. Semua elemen dari l mulai dari index i tergeser ke kiri sekali */
+void deleteAtLR(ListResep *l, int i);
 
 /* Proses : Menghapus elemen terakhir List */
 /* I.S. List tidak kosong */
@@ -159,6 +161,8 @@ void deleteAtLR(ListResep *l, ElListResepType *val, int idx);
 /*      Banyaknya elemen List berkurang satu */
 /*      List l mungkin menjadi kosong */
 void deleteLastLR(ListResep *l, ElListResepType *val);
+
+
 
 
 #endif
