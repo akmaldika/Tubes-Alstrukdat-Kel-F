@@ -97,7 +97,7 @@ LokasiAksi ActionLocId(ListMakanan l, IDEM id);
 /* mengambalikan _UKURAN_MAKANAN_ berdasarkan ID */
 
 /* ********** INPUT / OUTPUT ********** */
-void SetUpListMakanan();
+void SetUpListMakanan(char *filename);
 /* I.S. Sembarang */
 /* I.F. Terbentuk list makanan berdasarkan hasil konfigurasi */
 /* NElmt list pasti sama dengan CONFIG_SIZELM */

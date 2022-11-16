@@ -10,8 +10,8 @@ void FRYFOOD(SIMULATOR *s, ListMakanan lm, ListResep lr, boolean *flag) {
 
     // ALGORITMA
 
-    if (isAdjacent(s, MAP(*s), 'f')) {
-        actionableFood = DisplayActionAbleLM(lm, 'f');
+    if (isAdjacent(s, MAP(*s), 'F')) {
+        actionableFood = DisplayActionAbleLM(lm, "Fry");
         STARTCOMMAND();
         STARTWORD();
         printf("Kirim 0 untuk exit.\n\n");
@@ -26,6 +26,7 @@ void FRYFOOD(SIMULATOR *s, ListMakanan lm, ListResep lr, boolean *flag) {
 
             // Jija n sesuai 0 <= n <= Length(actionableFood)
             } else {
+                // Inisialisasi untuk memilih
                 id = GetIdMkn(actionableFood, n-1);
                 listBahan = getListBahan(lr, id);
                 isSuccess = true;
@@ -44,6 +45,7 @@ void FRYFOOD(SIMULATOR *s, ListMakanan lm, ListResep lr, boolean *flag) {
 
                 if (isSuccess) {
                     printf("%s telah berhasil dibuat dan masuk ke dalam inventory\n\n", NamaMknId(lm, id).Tabword);
+
                     Enqueue(&tempInventory, MknId(lm, id));
                     INVENTORY(*s) = tempInventory;
                 } else {
@@ -60,3 +62,4 @@ void FRYFOOD(SIMULATOR *s, ListMakanan lm, ListResep lr, boolean *flag) {
 
         }
     }
+}

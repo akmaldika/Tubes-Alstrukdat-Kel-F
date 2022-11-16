@@ -143,7 +143,7 @@ LokasiAksi ActionLocId(ListMakanan l, IDEM id)
 
 
 /* ********** INPUT / OUTPUT ********** */
-void SetUpListMakanan()
+void SetUpListMakanan(char *filename)
 {
     /* I.S. Sembarang */
     /* I.F. Terbentuk list makanan berdasarkan hasil konfigurasi */
@@ -155,7 +155,7 @@ void SetUpListMakanan()
     int D, M, H;
 
     CreateListMakanan(&ListMkn);
-    STARTLINE("../Config/Config_Makanan.txt");
+    STARTLINE(filename);
     STARTWORD();
     LengthLM(ListMkn) = wordToInt(currentWord);
     i = 0;
