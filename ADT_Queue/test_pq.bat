@@ -1,1 +1,1 @@
-gcc driver_PrioQueue.c PrioQueue.c ../ADT_liststatik/listmakanan.c ../ADT_time/time.c ../ADT_makanan/makanan.c ../ADT_Time/boolean.h -o pqTest && .\pqTest  
+gcc driver_PrioQueue.c  PrioQueue.c ../ADT_liststatik/listmakanan.c ..\ADT_MesinKata\mesinkata.c ..\ADT_MesinKata\mesinkarakter.c ..\ADT_MesinKata\string.c  ../ADT_time/time.c ../ADT_makanan/makanan.c ../ADT_Time/boolean.h -o pqTest && .\pqTest  

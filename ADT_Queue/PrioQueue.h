@@ -45,6 +45,7 @@ typedef struct
 /* Jika e adalah MAKANAN dan Q adalah PrioQueue, maka akses elemen : */
 #define TimeFull(e) (e).exp
 #define Time(e) TIMEToMin((e).exp)
+#define TimeDeliv(e) TIMEToMin((e).deliv)
 #define Makanan(e) (e)
 #define NamaMakanan(e) (e).Nama
 #define Info(e) (e).id
@@ -63,6 +64,8 @@ boolean IsFullPQ(PrioQueue Q);
 /* yaitu mengandung elemen sebanyak MaxEl */
 boolean isThereExp(PrioQueue Q);
 /* Mengirim true jika dalam queue ada yang expired */
+boolean isDelivDone(PrioQueue Q);
+/* Mengirim true jika dalam Q ada yang sudah selesai pengirimannya */
 boolean searchMkn(PrioQueue Q, MAKANAN m);
 /* Mengirimkan true jika makanan terdapat dalam queue */
 
@@ -128,12 +131,33 @@ void PrintPrioQueue(PrioQueue Q);
 // Cabai - 3 jam
 // Bawang - 1 jam
 
-void Min1Minute(PrioQueue *Q, boolean *Flag, ListMakanan *LMakana);
+void Min1Minute(PrioQueue *Q, boolean *Flag, ListMakanan *LMakanan);
 /* I.S. q terdefinisi */
 /* F.S. Semnua elemen makanan  dalam q berkurang 1 menit dan DequeueExp  */
 
-void MinNTime(PrioQueue *Q, boolean *Flag, ListMakanan *LMakana, int h, int m);
+void MinNTime(PrioQueue *Q, boolean *Flag, ListMakanan *LMakanan, int h, int m);
 /* I.S. q terdefinisi */
 /* F.S. Semnua elemen makanan  dalam q berkurang h jam dan m menit dan DequeueExp  */
+
+void Min1MinuteDeliv(PrioQueue *Qdeliv, PrioQueue *Q, boolean *FlagExp, boolean *FlagDeliv, ListMakanan *LMakanan, ListMakanan *LdelivDone);  
+/* I.S. Qdeliv terdefinisi */
+/* F.S. Semnua elemen makanan  dalam Qdeliv berkurang 1 menit dan DequeueExp  */
+
+void MinNTimeDeliv(PrioQueue *Qdeliv, PrioQueue *Q, boolean *Flag, boolean *FlagDeliv, ListMakanan *LMakanan, ListMakanan *LdelivDone, int h, int m);
+/* I.S. Qdeliv terdefinisi */
+/* F.S. Semnua elemen makanan  dalam Qdeliv berkurang h jam dan m menit dan DequeueExp  */
+
+void DelivMakanan(PrioQueue *Qdeliv, MAKANAN m);  // perlu flag gak ?
+/* I.S. Qdeliv terdefinisi */
+/* F.S. memasukan makanan m ke dalam Qdeliv */
+
+void waitCommand(PrioQueue *Qdeliv, PrioQueue *Q, boolean *FlagDeliv, boolean *FlagExp, ListMakanan *LMakanan, ListMakanan *LdelivDone,  int h, int m);  
+/* I.S. Qdeliv terdefinisi */
+/* F.S. memasukan makanan m ke dalam Qdeliv */
+
+void min1menitAll(PrioQueue *Qdeliv, PrioQueue *Q, boolean *FlagDeliv, boolean *FlagExp, ListMakanan *LMakanan, ListMakanan *LdelivDone);   
+/* I.S. Qdeliv dan Q (untuk inventory) terdefinisi */
+/* F.S. mengurangi 1 menit untuk semua makanan dalam inventory dan Qdeliv. Apabila sudah ada yang  selesai di deliv akan masuk ke dalam 
+inventory */
 
 #endif

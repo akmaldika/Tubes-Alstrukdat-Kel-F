@@ -24,6 +24,10 @@ boolean isThereExp(PrioQueue Q)
 	/* Mengirim true jika dalam queue ada yang expired */
 	return Time(Elmt(Q, Head(Q))) < 1;
 }
+boolean isDelivDone(PrioQueue Q){
+	/* Mengirim true jika dalam Q ada yang sudah selesai pengirimannya */
+	return TimeDeliv(Elmt(Q, Head(Q))) < 1;
+}
 boolean searchMkn(PrioQueue Q, MAKANAN m)
 {
 	/* Mengirimkan true jika makanan terdapat dalam queue */
@@ -314,7 +318,7 @@ void Min1Minute(PrioQueue *Q, boolean *Flag, ListMakanan *LMakanan)
 		}
 		if (LMakanan->NElmt == nBefore)
 		{
-			Flag = false;
+			*Flag = false;
 		}
 	}
 }
@@ -365,7 +369,204 @@ void MinNTime(PrioQueue *Q, boolean *Flag, ListMakanan *LMakanan, int h, int m){
 		}
 		if (LMakanan->NElmt == nBefore)
 		{
-			Flag = false;
+			*Flag = false;
 		}
+	}
+}
+
+void Min1MinuteDeliv(PrioQueue *Qdeliv, PrioQueue *Q, boolean *FlagExp, boolean *FlagDeliv, ListMakanan *LMakanan, ListMakanan *LdelivDone){  
+	/* I.S. Qdeliv terdefinisi */
+	/* F.S. Semnua elemen makanan  dalam Qdeliv berkurang 1 menit dan DequeueExp  */
+	int i, nBefore;
+	int nMknExp = 0;
+	nBefore = LMakanan->NElmt;
+	boolean exp = false, delivDone = false;
+	MAKANAN m;
+	if (!IsEmptyPQ(*Qdeliv))
+	{
+		i = Head(*Qdeliv);
+		while (i != Tail(*Qdeliv))
+		{
+			if (i == MaxEl(*Qdeliv))
+			{
+				i = 0;
+			}
+			if (i != Tail(*Qdeliv))
+			{
+				PrevMin(&Deliv(Elmt(*Qdeliv, i)));
+				PrevMin(&Exp(Elmt(*Qdeliv, i)));
+				// if(isThereExp(*Q)){
+				// 	DequeueExp(Q, &m);
+				// 	LMakanan->Lmakanan[LMakanan->NElmt] = m;
+				// 	LMakanan->NElmt++;
+				// 	*FlagExp = true;
+				// 	exp = true;
+				// }
+				if (isThereExp(*Qdeliv))
+				{
+					DequeueExp(Qdeliv, &m);
+					LMakanan->Lmakanan[LMakanan->NElmt] = m;
+					LMakanan->NElmt++;
+					*FlagExp = true;
+					exp = true;
+				}
+				else if (isDelivDone(*Qdeliv)){
+					// LdelivDone
+					Dequeue(Qdeliv, &m);
+					Enqueue(Q, m);
+					LdelivDone->Lmakanan[LdelivDone->NElmt] = m;
+					LdelivDone->NElmt++;
+					*FlagDeliv=true;
+					delivDone = true;
+				}
+				i++;
+			}
+		}
+		// Tail nya
+		PrevMin(&Deliv(Elmt(*Qdeliv, i)));
+		PrevMin(&Exp(Elmt(*Qdeliv, i)));
+		// if(isThereExp(*Q)){
+		// 	DequeueExp(Q, &m);
+		// 	LMakanan->Lmakanan[LMakanan->NElmt] = m;
+		// 	LMakanan->NElmt++;
+		// 	*FlagExp = true;
+		// 	exp = true;
+		// }
+		if (isThereExp(*Qdeliv))
+		{
+			DequeueExp(Qdeliv, &m);
+			LMakanan->Lmakanan[LMakanan->NElmt] = m;
+			LMakanan->NElmt++;
+			*FlagExp = true;
+			exp = true;
+		}
+		else if (isDelivDone(*Qdeliv)){
+			// LdelivDone
+			Dequeue(Qdeliv, &m);
+			Enqueue(Q, m);
+			LdelivDone->Lmakanan[LdelivDone->NElmt] = m;
+			LdelivDone->NElmt++;
+			*FlagDeliv=true;
+			delivDone = true;
+		}
+		if (exp)
+		{
+			*FlagExp = false;
+		}
+		if(delivDone){
+			*FlagDeliv = false;
+		}
+	}
+}
+
+void MinNTimeDeliv(PrioQueue *Qdeliv, PrioQueue *Q, boolean *Flag, boolean *FlagDeliv, ListMakanan *LMakanan, ListMakanan *LdelivDone, int h, int m){
+	/* I.S. Qdeliv terdefinisi */
+	/* F.S. Semnua elemen makanan  dalam Qdeliv berkurang h jam dan m menit dan DequeueExp  */
+	int i, nBefore;
+	int nMknExp = 0;
+	nBefore = LMakanan->NElmt;
+	boolean exp = false, delivDone = false;
+	MAKANAN mkn;
+	int min = h*60 + m; 
+	if (!IsEmptyPQ(*Qdeliv))
+	{
+		i = Head(*Qdeliv);
+		while (i != Tail(*Qdeliv))
+		{
+			if (i == MaxEl(*Qdeliv))
+			{
+				i = 0;
+			}
+			if (i != Tail(*Qdeliv))
+			{
+				PrevNMin(&Deliv(Elmt(*Qdeliv, i)), min);
+				PrevNMin(&Exp(Elmt(*Qdeliv, i)), min);
+				if (isThereExp(*Qdeliv))
+				{
+					DequeueExp(Qdeliv, &mkn);
+					LMakanan->Lmakanan[LMakanan->NElmt] = mkn;
+					LMakanan->NElmt++;
+					*Flag = true;
+					exp = true;
+				}
+				else if (isDelivDone(*Qdeliv)){
+					// LdelivDone
+					Dequeue(Qdeliv, &mkn);
+					Enqueue(Q, mkn);
+					LdelivDone->Lmakanan[LdelivDone->NElmt] = mkn;
+					LdelivDone->NElmt++;
+					*FlagDeliv=true;
+					delivDone = true;
+				}
+				i++;
+			}
+		}
+		// Tail nya
+		PrevNMin(&Deliv(Elmt(*Qdeliv, i)), min);
+		PrevNMin(&Exp(Elmt(*Qdeliv, i)), min);
+		if (isThereExp(*Qdeliv))
+		{
+			DequeueExp(Qdeliv, &mkn);
+			LMakanan->Lmakanan[LMakanan->NElmt] = mkn;
+			LMakanan->NElmt++;
+			*Flag = true;
+			exp = true;
+		}
+		else if (isDelivDone(*Qdeliv)){
+			// LdelivDone
+			Dequeue(Qdeliv, &mkn);
+			Enqueue(Q, mkn);
+			LdelivDone->Lmakanan[LdelivDone->NElmt] = mkn;
+			LdelivDone->NElmt++;
+			*FlagDeliv=true;
+			delivDone = true;
+		}
+		if (exp)
+		{
+			*Flag = false;
+		}
+		if(delivDone){
+			*FlagDeliv = false;
+		}
+	}
+
+}
+
+void DelivMakanan(PrioQueue *Qdeliv, MAKANAN m){
+	/* I.S. Qdeliv terdefinisi */
+	/* F.S. memasukan makanan m ke dalam Qdeliv */
+	Enqueue(Qdeliv, m);
+}
+
+void waitCommand(PrioQueue *Qdeliv, PrioQueue *Q, boolean *FlagDeliv, boolean *FlagExp, ListMakanan *LMakanan, ListMakanan *LdelivDone,  int h, int m){
+	/* I.S. Qdeliv terdefinisi */
+	/* F.S. memasukan makanan m ke dalam Qdeliv */
+	boolean cek = false;
+	MinNTime(Q, FlagExp, LMakanan, h, m);
+	if (FlagExp){
+		cek = true;
+	}
+	if(! IsEmptyPQ(*Qdeliv)){
+		MinNTimeDeliv(Qdeliv, Q, FlagExp, FlagDeliv, LMakanan, LdelivDone, h, m);
+	}
+	if (cek){
+		*FlagExp = true;
+	}
+}
+
+void min1menitAll(PrioQueue *Qdeliv, PrioQueue *Q, boolean *FlagDeliv, boolean *FlagExp, ListMakanan *LMakanan, ListMakanan *LdelivDone){
+	/* I.S. Qdeliv dan Q (untuk inventory) terdefinisi */
+	/* F.S. mengurangi 1 menit untuk semua makanan dalam inventory dan Qdeliv. Apabila sudah ada yang  selesai di deliv akan masuk ke dalam 
+	inventory */
+	boolean cek = false;
+	Min1Minute(Q, FlagExp, LMakanan);
+	if (FlagExp){
+		cek = true;
+	}
+	if(! IsEmptyPQ(*Qdeliv)){
+		Min1MinuteDeliv(Qdeliv, Q, FlagExp, FlagDeliv, LMakanan, LdelivDone);
+	}
+	if (cek){
+		*FlagExp = true;
 	}
 }

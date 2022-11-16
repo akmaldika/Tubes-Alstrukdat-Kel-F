@@ -29,8 +29,11 @@ int main()
     Line w1, w2, w3, w4, w5, w6, w7;
     Word wd;
     ListMakanan ListMakananExp;
+    ListMakanan ListDelivDone;
     CreateListMakanan(&ListMakananExp);
+    CreateListMakanan(&ListDelivDone);
     boolean Flag = false;
+    boolean FlagDeliv = false;
     assignWord(&wd, "Dapur");
     assignLine(&w1, "Ayam goreng");
     assignLine(&w2, "Kangkung");
@@ -51,13 +54,13 @@ int main()
     CreateTime(&t5, 0, 0, 2);
     CreateTime(&t6, 0, 0, 8);
     CreateTime(&t7, 0, 0, 3);
-    CreateMakanan(&m1, 12, w1, t1, t1, wd);
-    CreateMakanan(&m2, 13, w2, t2, t2, wd);
-    CreateMakanan(&m3, 14, w3, t3, t3, wd);
-    CreateMakanan(&m4, 15, w4, t4, t4, wd);
-    CreateMakanan(&m5, 16, w5, t5, t5, wd);
-    CreateMakanan(&m6, 18, w6, t6, t6, wd);
-    CreateMakanan(&m7, 19, w7, t7, t7, wd);
+    CreateMakanan(&m1, 12, w1, t1, t7, wd);
+    CreateMakanan(&m2, 13, w2, t2, t7, wd);
+    CreateMakanan(&m3, 14, w3, t3, t4, wd);
+    CreateMakanan(&m4, 15, w4, t4, t2, wd);
+    CreateMakanan(&m5, 16, w5, t5, t1, wd);
+    CreateMakanan(&m6, 18, w6, t6, t4, wd);
+    CreateMakanan(&m7, 19, w7, t7, t2, wd);
     // CreateMakanan(&m1, 12, "ayam goreng", t1, t1, 1);
     // CreateMakanan(&m2, 13, "manisan", t2, t2, 2);
     // CreateMakanan(&m3, 14, "kangkung", t3, t3, 3);
@@ -185,6 +188,18 @@ int main()
     removeFromInventory(&q, 18);
     // printf("h t%d %d\n", Head(q), Tail(q));
     PrintPrioQueue(q);
+
+    // Delivery m5  m4
+    PrioQueue Qdeliv;
+    MakeEmpty(&Qdeliv, 3);
+    DelivMakanan(&Qdeliv, m4);
+    PrintPrioQueue(Qdeliv);
+    waitCommand(&Qdeliv, &q, &FlagDeliv, &Flag, &ListMakananExp, &ListDelivDone, 0, 2);
+    // min1menitAll(&Qdeliv, &q, &FlagDeliv, &Flag, &ListMakananExp, &ListDelivDone);
+    // min1menitAll(&Qdeliv, &q, &FlagDeliv, &Flag, &ListMakananExp, &ListDelivDone);
+    // min1menitAll(&Qdeliv, &q, &FlagDeliv, &Flag, &ListMakananExp, &ListDelivDone);
+    PrintPrioQueue(q);
+    PrintPrioQueue(Qdeliv);
 
     return 0;
 }
