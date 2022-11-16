@@ -233,7 +233,7 @@ void DisplayBuyAbleLM(ListMakanan l)
     }
 }
 
-void DisplayActionAbleLM(ListMakanan l, char *Lchar)
+ListMakanan DisplayActionAbleLM(ListMakanan l, char *Lchar)
 {
     /* I.S. l tidak kosong str valid yaitu command / simuulator terdapat pada FRY, CHOP, BOIL, MIX */
     /* F.S menampilkan bahan makanan yang memiliki String _LOKASI_AKSI_MAKANAN_ str */
@@ -247,8 +247,10 @@ void DisplayActionAbleLM(ListMakanan l, char *Lchar)
     */
     /* KAMUS LOKAL */
     int i, n;
+    ListMakanan listActionable;
 
     /* ALGORITMA */
+    CreateListMakanan(&listActionable);
     i = 0;
     printf("===========");
     while (Lchar[i] != '\0')
@@ -275,12 +277,14 @@ void DisplayActionAbleLM(ListMakanan l, char *Lchar)
     {
         if (isWordSame(GetActionLocMkn(l, i), Lchar))
         {
+            ElmtLM(listActionable, LengthLM(listActionable)) = ElmtLM(l, i);
+            LengthLM(listActionable)++;
             printf("%d. %s", n, GetNamaMkn(l, i).Tabword);
             printf("\n");
             n++;
         }
         i++;
-    }
+    } return listActionable;
 }
 
 void DisplayCatalog(ListMakanan l)

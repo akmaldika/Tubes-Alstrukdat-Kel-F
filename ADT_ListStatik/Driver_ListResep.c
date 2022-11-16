@@ -73,7 +73,7 @@ int main() {
     // CreateMS(&m);
 
     printf("List bahan dan jumlah yang diperlukan untuk membuat resep dengan id 37\n");
-    m = listBahan(l, 37);
+    m = getListBahan(l, 37);
 
     printMS(m);
 

@@ -136,7 +136,7 @@ void deleteLastLR(ListResep *l, ElListResepType *val);
 
 /* Mengambalikan multiset daftar bahan-bahan makanan yang diperlukan untuk */
 /* 'Langsung' membuat makanan dengan id x dalam satu kali aksi */
-MultiSet listBahan(ListResep l, int x);
+MultiSet getListBahan(ListResep l, int x);
 
 /* Bonus 3*/
 /* Recomendation */

@@ -263,7 +263,7 @@ void compressLR(ListResep *l) {
 /* Prekondisi: x merupakan makanan yang dibuat dari bahan lain (mempunyai resep) */
 /* Mengambalikan multiset daftar bahan-bahan makanan yang diperlukan untuk */
 /* 'Langsung' membuat makanan dengan id x dalam satu kali aksi */
-MultiSet listBahan(ListResep l, int x) {
+MultiSet getListBahan(ListResep l, int x) {
     // KAMUS
     NTree bahan;
     MultiSet m;
