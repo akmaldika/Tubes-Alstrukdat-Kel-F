@@ -217,45 +217,5 @@ void deleteAtMS(MultiSet *m, int i) {
     NEFFMS(*m) = NEFFMS(*m) - 1;
 }
 
-/* Bonus 3*/
-/* Recomendation */
 
-/* Mengembalikan true jika resep bisa dibuat dengan inventory m*/
-boolean isResepMakeable(MultiSet *m, NTree resep) {
-    // KAMUS
-    NTree resepBahan;
-    boolean isMakeable;
-    int i;
-    // ALGORITMA
-    if (isInMS(*m, INFONTREE(resep), 1)) {
-        removeMS(m, INFONTREE(resep), 1);
-        return true;
-    } else if (isHaveChild(resep)) {
-        isMakeable = true;
-        resepBahan = CHILD(resep);
-        while ((resepBahan != NULL) && (isMakeable)) {
-            isMakeable = isResepMakeable(m, resepBahan);
-            resepBahan = SIBLING(resepBahan);
-        }
-        return isMakeable;
-    } else {
-        return false;
-    }
-}
-
-/* Mengembalikan id dari resep yang bisa dibuat dari inventory m */
-MultiSet getMakableResep(MultiSet m, ListResep l) {
-    // KAMUS
-    MultiSet listMakable, tempInventory;
-    int i;
-    // ALGORITMA
-    CreateMS(&listMakable);
-    for (i = 0; isIdxEffLR(l, i); i++) {
-        tempInventory = m;
-        if (isResepMakeable(&tempInventory, ELMTLR(l, i))) {
-            addMS(&listMakable, INFONTREE(ELMTLR(l, i)), 1);
-        }
-    }
-    return listMakable;
-}
 

@@ -10,9 +10,10 @@
 #include "..\ADT_MesinKata\mesinkarakter.h"
 #include "..\config_main.h"
 #include "..\ADT_MesinKata\string.h"
+#include "..\ADT_MultiSet\MultiSet.h"
 
 
-
+#define IDX_UNDEF_LR -1
 #define CAPACITY_LIST_RESEP CONFIG_SIZELR
 
 typedef NTree ElListResepType;
@@ -88,45 +89,25 @@ boolean isFullLR(ListResep l);
 /* I.S. l sembarang */
 /* F.S. List l terdefinisi */
 /* Proses: */
-void readListLR(ListResep *l);
+void readListLR(ListResep *l, char *filename);
 
-/* Proses : Menuliskan isi List dengan traversal, List ditulis di antara kurung 
-   siku; antara dua elemen dipisahkan dengan separator "koma", tanpa tambahan 
-   karakter di depan, di tengah, atau di belakang, termasuk spasi dan enter */
-/* I.S. l boleh kosong */
-/* F.S. Jika l tidak kosong: [e1,e2,...,en] */
-/* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
-/* Jika List kosong : menulis [] */
+
 void printLR(ListResep l);
 
 
 /* ********** SEARCHING ********** */
 /* ***  Perhatian : List boleh kosong!! *** */
 
-
-/* Search apakah ada elemen List l yang bernilai val */
-/* Jika ada, menghasilkan indeks i terkecil, dengan ELMT(l,i) = val */
-/* Jika tidak ada atau jika l kosong, mengirimkan IDX_UNDEF */
-/* Skema Searching yang digunakan bebas */
-int indexOfLR(ListResep l, ElListResepType val);
+/* Search apakah di ListResep l ada t sehingga */
+/* INFONTREE(t) = id. jika iya kembalikan index kemunculan */
+/* pertama dari t di l. Jika tidak kembalikan IDX_UNDEF_LR */
+int getIdxOfLR(ListResep l, int id);
 
 /* Search apakah resep makanan dengan ID id sudah dicatat pada List Resep*/
 /* Jika ada, kembalikan true, sebaliknya kembalikan false*/
 boolean isContainResep(ListResep l, int id);
 /* ********** MENAMBAH ELEMEN ********** */
 /* *** Menambahkan elemen terakhir *** */
-
-/* Proses: Menambahkan val sebagai elemen pertama List */
-/* I.S. List l boleh kosong, tetapi tidak penuh */
-/* F.S. val adalah elemen pertama l yang baru */
-/* *** Menambahkan elemen pada index tertentu *** */
-void insertFirstLR(ListResep *l, ElListResepType val);
-
-/* Proses: Menambahkan val sebagai elemen pada index idx List */
-/* I.S. List l tidak kosong dan tidak penuh, idx merupakan index yang valid di l */
-/* F.S. val adalah elemen yang disisipkan pada index idx l */
-/* *** Menambahkan elemen terakhir *** */
-void insertAtLR(ListResep *l, ElListResepType val, int idx);
 
 /* Proses: Menambahkan val sebagai elemen terakhir List */
 /* I.S. List l boleh kosong, tetapi tidak penuh */
@@ -141,15 +122,6 @@ void insertLastLR(ListResep *l, ElListResepType val);
 void insertLastLRKonsolidasi(ListResep *l, NTree *newResep);
 
 /* ********** MENGHAPUS ELEMEN ********** */
-/* *** Menghapus elemen pertama *** */
-
-/* Proses : Menghapus elemen pertama List */
-/* I.S. List tidak kosong */
-/* F.S. val adalah nilai elemen pertama l sebelum penghapusan, */
-/*      Banyaknya elemen List berkurang satu */
-/*      List l mungkin menjadi kosong */
-/* *** Menghapus elemen pada index tertentu *** */
-void deleteFirstLR(ListResep *l, ElListResepType *val);
 
 /* I.S. l terdefinisi, tidak kosong, i merupakan index valid dari l*/
 /* F.S. Semua elemen dari l mulai dari index i tergeser ke kiri sekali */
@@ -161,6 +133,19 @@ void deleteAtLR(ListResep *l, int i);
 /*      Banyaknya elemen List berkurang satu */
 /*      List l mungkin menjadi kosong */
 void deleteLastLR(ListResep *l, ElListResepType *val);
+
+/* Mengambalikan multiset daftar bahan-bahan makanan yang diperlukan untuk */
+/* 'Langsung' membuat makanan dengan id x dalam satu kali aksi */
+MultiSet listBahan(ListResep l, int x);
+
+/* Bonus 3*/
+/* Recomendation */
+
+/* Mengembalikan true jika resep bisa dibuat dengan inventory m*/
+boolean isResepMakeable(MultiSet *m, NTree resep);
+
+/* Mengembalikan id dari resep yang bisa dibuat dari inventory m */
+MultiSet getMakableResep(MultiSet m, ListResep l);
 
 
 

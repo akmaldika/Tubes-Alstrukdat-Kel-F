@@ -5,8 +5,6 @@
 
 #include "boolean.h"
 #include "..\config_main.h"
-#include "..\ADT_Tree\NTree.h"
-#include "..\ADT_ListStatik\ListResep.h"
 #include "..\ADT_MesinKata\mesinkata.h"
 #include "..\ADT_MesinKata\mesinkarakter.h"
 #include "..\ADT_MesinKata\string.h"
@@ -102,12 +100,4 @@ void removeMS(MultiSet *m, int x, int k);
 /* F.S. Semua elemen dari m mulai dari index i tergeser ke kiri sekali */
 void deleteAtMS(MultiSet *m, int i);
 
-/* Bonus 3*/
-/* Recomendation */
-
-/* Mengembalikan true jika resep bisa dibuat dengan inventory m*/
-boolean isResepMakeable(MultiSet *m, NTree resep);
-
-/* Mengembalikan id dari resep yang bisa dibuat dari inventory m */
-MultiSet getMakableResep(MultiSet m, ListResep l);
 #endif

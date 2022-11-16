@@ -94,13 +94,13 @@ boolean isFullLR(ListResep l) {
 
 /* I.S. l sembarang */
 /* F.S. List l terdefinisi */
-void readListLR(ListResep *l) {
+void readListLR(ListResep *l, char *filename) {
     // KAMUS
     NTree newResep;
     Address newSubresep;
     int n, baris, i, k, id;
     // ALGORITMA
-    STARTLINE("../Config/Config_Resep.txt");
+    STARTLINE(filename);
     STARTWORD();
     n = wordToInt(currentWord);
     printf("%d\n", n);
@@ -143,13 +143,31 @@ void printLR(ListResep l) {
 
 
 
-/* Search apakah ada elemen List l yang bernilai val */
-/* Jika ada, menghasilkan indeks i terkecil, dengan ELMT(l,i) = val */
-/* Jika tidak ada atau jika l kosong, mengirimkan IDX_UNDEF = -1 */
-/* Skema Searching yang digunakan bebas */
-int indexOfLR(ListResep l, ElListResepType val) {
+/* Search apakah di ListResep l ada t sehingga */
+/* INFONTREE(t) = id. jika iya kembalikan index kemunculan */
+/* pertama dari t di l. Jika tidak kembalikan IDX_UNDEF_LR */
+int getIdxOfLR(ListResep l, int id) {
     // KAMUS
+    NTree currResep;
+    int i, currID;
+    boolean isFound;
     // ALGORITMA
+    // Inisialisasi
+    i = 0;
+    isFound = false;
+    while (isIdxEffLR(l, i) && !isFound) {
+        currResep = ELMTLR(l, i);
+        currID = INFONTREE(currResep);
+        if (currID == id) {
+            isFound = true;
+        } else {
+            i++;
+        };
+    } if (isFound) {
+        return i;
+    } else {
+        return IDX_UNDEF_LR;
+    }
 
 }
 /* Search apakah resep makanan dengan ID id sudah dicatat pada List Resep*/
@@ -174,18 +192,6 @@ boolean isContainResep(ListResep l, int id) {
 
 /* ********** MENAMBAH ELEMEN ********** */
 /* *** Menambahkan elemen terakhir *** */
-
-/* Proses: Menambahkan val sebagai elemen pertama List */
-/* I.S. List l boleh kosong, tetapi tidak penuh */
-/* F.S. val adalah elemen pertama l yang baru */
-/* *** Menambahkan elemen pada index tertentu *** */
-void insertFirstLR(ListResep *l, ElListResepType val);
-
-/* Proses: Menambahkan val sebagai elemen pada index idx List */
-/* I.S. List l tidak kosong dan tidak penuh, idx merupakan index yang valid di l */
-/* F.S. val adalah elemen yang disisipkan pada index idx l */
-/* *** Menambahkan elemen terakhir *** */
-void insertAtLR(ListResep *l, ElListResepType val, int idx);
 
 /* Proses: Menambahkan val sebagai elemen terakhir List */
 /* I.S. List lR boleh kosong, tetapi tidak penuh */
@@ -227,15 +233,6 @@ void insertLastLRKonsolidasi(ListResep *l, NTree *newResep) {
 }
 
 /* ********** MENGHAPUS ELEMEN ********** */
-/* *** Menghapus elemen pertama *** */
-
-/* Proses : Menghapus elemen pertama List */
-/* I.S. List tidak kosong */
-/* F.S. val adalah nilai elemen pertama l sebelum penghapusan, */
-/*      Banyaknya elemen List berkurang satu */
-/*      List l mungkin menjadi kosong */
-/* *** Menghapus elemen pada index tertentu *** */
-void deleteFirstLR(ListResep *l, ElListResepType *val);
 
 /* I.S. l terdefinisi, l tidak kosong, i merupakan index valid dari l*/
 /* F.S. Semua elemen dari l mulai dari index i tergeser ke kiri sekali */
@@ -262,4 +259,64 @@ void deleteLastLR(ListResep *l, ElListResepType *val);
 
 void compressLR(ListResep *l) {
 
+}
+/* Prekondisi: x merupakan makanan yang dibuat dari bahan lain (mempunyai resep) */
+/* Mengambalikan multiset daftar bahan-bahan makanan yang diperlukan untuk */
+/* 'Langsung' membuat makanan dengan id x dalam satu kali aksi */
+MultiSet listBahan(ListResep l, int x) {
+    // KAMUS
+    NTree bahan;
+    MultiSet m;
+    int i;
+    // ALGORITMA
+    CreateMS(&m);
+    i = getIdxOfLR(l, x);
+    bahan = CHILD(ELMTLR(l, i));
+    while (bahan != NULL) {
+        addMS(&m, INFONTREE(bahan), 1);
+        bahan = SIBLING(bahan);
+    }
+    return m;
+}
+
+/* Bonus 3*/
+/* Recomendation */
+
+/* Mengembalikan true jika resep bisa dibuat dengan inventory m*/
+boolean isResepMakeable(MultiSet *m, NTree resep) {
+    // KAMUS
+    NTree resepBahan;
+    boolean isMakeable;
+    int i;
+    // ALGORITMA
+    if (isInMS(*m, INFONTREE(resep), 1)) {
+        removeMS(m, INFONTREE(resep), 1);
+        return true;
+    } else if (isHaveChild(resep)) {
+        isMakeable = true;
+        resepBahan = CHILD(resep);
+        while ((resepBahan != NULL) && (isMakeable)) {
+            isMakeable = isResepMakeable(m, resepBahan);
+            resepBahan = SIBLING(resepBahan);
+        }
+        return isMakeable;
+    } else {
+        return false;
+    }
+}
+
+/* Mengembalikan id dari resep yang bisa dibuat dari inventory m */
+MultiSet getMakableResep(MultiSet m, ListResep l) {
+    // KAMUS
+    MultiSet listMakable, tempInventory;
+    int i;
+    // ALGORITMA
+    CreateMS(&listMakable);
+    for (i = 0; isIdxEffLR(l, i); i++) {
+        tempInventory = m;
+        if (isResepMakeable(&tempInventory, ELMTLR(l, i))) {
+            addMS(&listMakable, INFONTREE(ELMTLR(l, i)), 1);
+        }
+    }
+    return listMakable;
 }

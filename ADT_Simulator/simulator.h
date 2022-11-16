@@ -1,17 +1,16 @@
 #ifndef SIMULATOR_H
 #define SIMULATOR_H
 
-#include "boolean.h"
-#include "point.h"
-#include "matrix.h"
-#include "PrioQueue.h"
+
+#include "library.h"
+
 typedef struct { 
-    char nama;
+    Word nama;
     POINT locs;
     PrioQueue inventory;
     PrioQueue delivery;
-    char notifikasi;
     Matrix m;
+    TIME waktu
 
 }SIMULATOR;
 
@@ -22,9 +21,29 @@ typedef struct {
 #define DELIVERY(s) (s).delivery
 #define NOTIFIKASI(s) (s).notifikasi
 #define MAP(s) (s).m
+#define TIME(s) (s).waktu
 
-boolean isAdjacent(SIMULATOR *S, Matrix m);
+// #define INFONAMA(p) (p)->nama
+// #define INFOLOCS(p) (p)->locs
+// #define INFOINVENTORY(p) (p)->inventory
+// #define INFODELIVERY(p) (p)->delivery
+// #define INFONOTIFIKASI(p) (p)->notifikasi
+// #define INFOMAP(p) (p)->m
+// #define INFOTIME(p) (p)->waktu
 
+void SetSimulator(SIMULATOR *S, POINT locs,Matrix m);
 
+boolean isAdjacent(SIMULATOR *S, Matrix m,char val);
 
+void setLokasi(SIMULATOR *S,POINT p);
+
+void setTIme(SIMULATOR *S, TIME waktu);
+
+void setDelivery(SIMULATOR *S, PrioQueue delivery);
+
+void setInventory(SIMULATOR *S, PrioQueue inventory);
+
+void setNama(SIMULATOR *S, Word Nama);
+
+void setMap(SIMULATOR *S, Matrix Map);
 #endif
