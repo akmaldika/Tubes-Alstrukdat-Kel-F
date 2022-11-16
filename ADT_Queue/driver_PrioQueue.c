@@ -180,9 +180,9 @@ int main()
     Enqueue(&q, m3);
     printf("\n");
     PrintPrioQueue(q);
-    printf("h t%d %d\n", Head(q), Tail(q));
+    // printf("h t%d %d\n", Head(q), Tail(q));
     printf("\nremove ikan asin \n");
-    removeFromInventory(&q, m6);
+    removeFromInventory(&q, 18);
     // printf("h t%d %d\n", Head(q), Tail(q));
     PrintPrioQueue(q);
 

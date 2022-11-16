@@ -8,12 +8,12 @@
 #include <stdlib.h>
 
 /* ********* Prototype ********* */
-boolean IsEmpty(PrioQueue Q)
+boolean IsEmptyPQ(PrioQueue Q)
 {
 	/* Mengirim true jika Q kosong: lihat definisi di atas */
 	return Head(Q) == Nil && Tail(Q) == Nil;
 }
-boolean IsFull(PrioQueue Q)
+boolean IsFullPQ(PrioQueue Q)
 {
 	/* Mengirim true jika tabel penampung elemen Q sudah penuh */
 	/* yaitu mengandung elemen sebanyak MaxEl */
@@ -27,7 +27,7 @@ boolean isThereExp(PrioQueue Q)
 boolean searchMkn(PrioQueue Q, MAKANAN m)
 {
 	/* Mengirimkan true jika makanan terdapat dalam queue */
-	if (IsEmpty(Q))
+	if (IsEmptyPQ(Q))
 	{
 		return false;
 	}
@@ -52,7 +52,7 @@ int NBElmt(PrioQueue Q)
 
 	int lin = (Tail(Q) - Head(Q)) + 1;
 	int lantarab;
-	if (IsEmpty(Q)) //
+	if (IsEmptyPQ(Q)) //
 		return 0;
 	else if (Head(Q) == Tail(Q))
 	{
@@ -112,12 +112,12 @@ void Enqueue(PrioQueue *Q, MAKANAN X)
 	/* F.S. X disisipkan pada posisi yang tepat sesuai dengan prioritas,
 			TAIL "maju" dengan mekanisme circular buffer; */
 	int i, h;
-	if (Time(X) != 0 && ! IsFull(*Q))
+	if (Time(X) != 0 && ! IsFullPQ(*Q))
 	{
-		// if (IsFull(*Q))
+		// if (IsFullPQ(*Q))
 		// {
 		// }
-		if (IsEmpty(*Q))
+		if (IsEmptyPQ(*Q))
 		{
 			Head(*Q) = 0;
 			Tail(*Q) = 0;
@@ -152,7 +152,7 @@ void Dequeue(PrioQueue *Q, MAKANAN *X)
 	/* I.S. Q tidak mungkin kosong */
 	/* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer;
 			Q mungkin kosong */
-	if (!IsEmpty(*Q))
+	if (!IsEmptyPQ(*Q))
 	{
 		*X = InfoHead(*Q);
 		if (NBElmt(*Q) == 1)
@@ -181,19 +181,19 @@ void DequeueExp(PrioQueue *Q, MAKANAN *X)
 	}
 }
 
-void removeFromInventory(PrioQueue *Q, MAKANAN m){
-	/* Proses: Menghapus m pada Q dengan aturan yang paling mendekati expired dimulai dari head 
+void removeFromInventory(PrioQueue *Q, int ID){
+	/* Proses: Menghapus makanan dengan id ID pada Q dengan aturan yang paling mendekati expired dimulai dari head 
 	hingga menemukan m lalu dihapus */
 	/* I.S. Q tidak mungkin kosong */
-	/* F.S. m ter-dequeue (hapus) dari Q dan Q tetap teratur dengan mekanisme circular buffer
+	/* F.S. makanan dengan id ID ter-dequeue (hapus) dari Q dan Q tetap teratur dengan mekanisme circular buffer
 			Q mungkin menjadi kosong */
-	if (! IsEmpty(*Q))
+	if (! IsEmptyPQ(*Q))
 	{
 		MAKANAN temp;
 		int idx;
 		int tail;
 		int i = Head(*Q);
-		while (Elmt(*Q, i).id != m.id)
+		while (Elmt(*Q, i).id != ID)
 		{
 			i++;
 			if (i == Q->MaxEl)
@@ -247,7 +247,7 @@ void PrintPrioQueue(PrioQueue Q)
 	no = 1;
 	printf("List Makanan di Inventory\n");
 	printf("(nama - waktu sisa kedaluwarsa)\n");
-	if (!IsEmpty(Q))
+	if (!IsEmptyPQ(Q))
 	{
 		i = Head(Q);
 		while (i != Tail(Q))
@@ -281,7 +281,7 @@ void Min1Minute(PrioQueue *Q, boolean *Flag, ListMakanan *LMakanan)
 	int nMknExp = 0;
 	nBefore = LMakanan->NElmt;
 	MAKANAN m;
-	if (!IsEmpty(*Q))
+	if (!IsEmptyPQ(*Q))
 	{
 		i = Head(*Q);
 		while (i != Tail(*Q))
@@ -330,7 +330,7 @@ void MinNTime(PrioQueue *Q, boolean *Flag, ListMakanan *LMakanan, int h, int m){
 	Nmin = TIMEToMin(tim);
 	nBefore = LMakanan->NElmt;
 	MAKANAN mkn;
-	if (!IsEmpty(*Q))
+	if (!IsEmptyPQ(*Q))
 	{
 		i = Head(*Q);
 		while (i != Tail(*Q))
