@@ -9,9 +9,9 @@
 #include "boolean.h"
 #include "..\ADT_Makanan\makanan.h"
 #include "..\ADT_Time\time.h"
-// #include "..\ADT_Simulator\"
+#include "..\ADT_Simulator\simulator.h"
 // #include "..\ADT_Point\"
-// #include "..\ADT_Matriks\"
+#include "..\ADT_Matriks\matrix.h"
 
 #define Nil -1
 #define initCap 20
@@ -20,7 +20,7 @@
 
 
 typedef int address;   /* indeks tabel */
-typedef _SIMULATOR_ ElStackURType; /* Type List Makanan */
+typedef SIMULATOR ElStackURType; /* Type List Makanan */
 
 typedef struct { 
   ElStackURType *Container; /* tabel penyimpan elemen */

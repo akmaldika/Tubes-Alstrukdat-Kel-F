@@ -4,14 +4,18 @@
 
 int main()
 {
-    SetUpListMakanan();
+    ListMakanan TEMP;
 
-    DisplayCatalog(ListMkn);
-    printf("Banyak Makanan = %d (Gak masuk display)\n", LengthLM(ListMkn));
+    CreateListMakanan(&TEMP);
+
+    SetUpListMakanan(&TEMP, "../Config/Config_Makanan.txt");
+
+    DisplayCatalog(TEMP);
+    printf("Banyak Makanan = %d (Gak masuk display)\n", LengthLM(TEMP));
     printf("\n");
     printf("\nMisal User : BUY saat adjecent\n");
-    DisplayBuyAbleLM(ListMkn);
+    DisplayBuyAbleLM(TEMP);
     printf("\nMisal diketikan command FRY saat adjecent\n");
-    DisplayActionAbleLM(ListMkn, "Fry");
+    DisplayActionAbleLM(TEMP, "Fry");
 
 }

@@ -13,10 +13,11 @@
 #include "..\ADT_Makanan\makanan.h"
 #include "..\ADT_Time\time.h"
 
+#define IDX_UNDEF_LM -1
 
 /* CONFIG_SIZELM adalah SetUp Ukuran Makanan sesuai konfigurasi pada file config_main.h */
 
-typedef int IdxType; /* Type index */
+typedef int IdxTypeLM; /* Type index */
 typedef MAKANAN ElListMakananType;
 
 typedef struct
@@ -31,8 +32,6 @@ typedef struct
    ..LM / LMkn
    ..Mkn
 */
- 
-extern ListMakanan ListMkn;
 
 
 /* ********** KONSTRUKTOR ********** */
@@ -74,9 +73,10 @@ Word GetActionLocMkn(ListMakanan l, int i);
 boolean isIdValid(ListMakanan l, IDEM id);
 /* Mengembalikan true jika id ada di dalam list */
 
-/* Precond : untuk setiap parameter Id adalah valid dan pasti ada dalam list makanan */
-IdxType SearchIndexId(ListMakanan l, IDEM id);
+IdxTypeLM SearchIndexbyId(ListMakanan l, IDEM id);
 /* mengembalikan index jika menemukan Id pada list */
+/* mengembalikan IDX_UNDEF_LM jika ID tidak ada */
+/* Precond : untuk setiap parameter Id adalah valid dan pasti ada dalam list makanan */
 
 ElListMakananType MknId(ListMakanan l, IDEM id);
 /* mengambalikan tipe Makanan berdasarkan ID makanan */
@@ -97,12 +97,12 @@ LokasiAksi ActionLocId(ListMakanan l, IDEM id);
 /* mengambalikan _UKURAN_MAKANAN_ berdasarkan ID */
 
 /* ********** INPUT / OUTPUT ********** */
-void SetUpListMakanan(char *filename);
+void SetUpListMakanan(ListMakanan *l, char *filename);
 /* I.S. Sembarang */
 /* I.F. Terbentuk list makanan berdasarkan hasil konfigurasi */
 /* NElmt list pasti sama dengan CONFIG_SIZELM */
 
-void DisplayBuyAbleLM(ListMakanan l);
+ListMakanan DisplayBuyAbleLM(ListMakanan l);
 /* I.S. l tidak kosong, terdapat command BUY dan Simulator adjecent dengan B */
 /* F.S. menampilkan bahan makanan yang memiliki String _LOKASI_AKSI_MAKANAN_ "BUY" */
 /* contoh tampilan : 
