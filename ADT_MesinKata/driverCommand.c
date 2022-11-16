@@ -13,6 +13,10 @@ int main () {
     printf("Command = %s\n", currentWord.String);
     if (isWordSame(currentWord, "WAIT")) {
         printf("benul\n");
+        ADVWORD();
+        if (isWordInt(currentWord)) {
+            printf("%s\n", currentWord.String);
+        }
     }
     else {
         printf("salah\n");

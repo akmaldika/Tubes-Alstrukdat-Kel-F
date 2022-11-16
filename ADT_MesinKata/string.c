@@ -41,3 +41,7 @@ int wordToInt (Word cc) {
 	}
 	return num;
 }
+
+boolean isWordInt (Word cc) {
+    return (48 <= cc.String[0] && cc.String[0] <= 57);
+}

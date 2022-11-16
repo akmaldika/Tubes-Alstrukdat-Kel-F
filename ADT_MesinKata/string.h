@@ -16,4 +16,7 @@ boolean isLineSame (Line l, char str2[]);
 int wordToInt (Word cc);
 /* Mengembalikan integer dari suatu word */
 
+boolean isWordInt (Word cc);
+/* Mengembalikan true jika word merupakan integer dan false jika tidak */
+
 #endif
