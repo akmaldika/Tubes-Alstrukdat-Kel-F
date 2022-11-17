@@ -1,17 +1,7 @@
-#include "boolean.h"
-#include <stdio.h>
-#include "matrix.h"
-#include <math.h>
-#include "mesinkata.h"
-#include "string.h"
-#include "mesinkata.c"
-#include "mesinkarakter.c"
-#include "mesinkarakter.h"
-#include "string.c"
-
+ 
 //Muhammad Zaydan A
 //13521104
-
+#include"matrix.h"
 
 /* ********** DEFINISI PROTOTIPE PRIMITIF ********** */
 /* *** Konstruktor membentuk Matrix *** */
@@ -25,7 +15,7 @@ void createMatrix(int nRows, int nCols, Matrix *m){
    COL_EFF(*m) = nCols;
 }
 
-Matrix MapMatrix(){
+Matrix MapMatrix(char* filename){
     /* Membuat MATRIKS Map berukuran N x M dengan */
     /* sisi terluarnya adalah # yaitu pagar, sisi dalamnya adalah . yaitu lahan */
     Matrix Map;
@@ -36,35 +26,34 @@ Matrix MapMatrix(){
     int i;
     int j = 0;
     int cnt = 0;
-    scanf("%s", &f);
         
         
-        STARTLINE(f);
-        STARTWORD();
-        row = wordToInt(currentWord);
-        printf(" ");
-        ADVWORD();
-        col = wordToInt(currentWord);
-        printf("\n"); 
-        createMatrix(row,col,&Map);
-        i=0;
-        j=0;       
-        while (!EOP) {
-          ADVLINE();
-          for (j=0;j<col;j++){
-            ELMT(Map,i,j)=currentLine.Tabword[j];
-          }
-            i++;
-            printf("\n");
+    STARTLINE(filename);
+    STARTWORD();
+    row = wordToInt(currentWord);
+    printf(" ");
+    ADVWORD();
+    col = wordToInt(currentWord);
+    printf("\n"); 
+    createMatrix(row,col,&Map);
+    i=0;
+    j=0;       
+    while (!EOP) {
+        ADVLINE();
+        for (j=0;j<col;j++){
+        ELMT(Map,i,j)=currentLine.Tabword[j];
         }
-      createMatrix(row+2,col+2,&RetMap);
-      for (int i = brsmin; i <= getLastIdxRow(RetMap); i++){
-         for (int j = kolmin; j <= getLastIdxCol(RetMap); j++){
-            ELMT(RetMap, i, j) = (i == brsmin || i == getLastIdxRow(RetMap) || j == kolmin || j == getLastIdxCol(RetMap) ) 
-                ? '*'
-                : ELMT(Map,i-1,j-1);
+        i++;
+        printf("\n");
+    }
+    createMatrix(row+2,col+2,&RetMap);
+    for (int i = brsmin; i <= getLastIdxRow(RetMap); i++){
+        for (int j = kolmin; j <= getLastIdxCol(RetMap); j++){
+        ELMT(RetMap, i, j) = (i == brsmin || i == getLastIdxRow(RetMap) || j == kolmin || j == getLastIdxCol(RetMap) ) 
+            ? '*'
+            : ELMT(Map,i-1,j-1);
         }
-      }
+    }
 
 
       return RetMap;

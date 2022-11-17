@@ -12,7 +12,6 @@
 #include "ADT_Point/point.h"
 #include "ADT_Queue/PrioQueue.h"
 #include "ADT_Simulator/simulator.h"
-#include "ADT_Stack/Stack.h"
 #include "ADT_Time/time.h"
 #include "ADT_Tree/NTree.h"
 

@@ -10,7 +10,7 @@ void CreateSim(SIMULATOR *S) {
     NAMA(*S) = nama;
     
     POINT newPoint;
-    CreatePoint(&newPoint, 0, 0);
+    SetPoint(&newPoint, 0, 0);
     TITIK(*S) = newPoint;
 
     PrioQueue newInventory;

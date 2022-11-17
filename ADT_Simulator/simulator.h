@@ -3,13 +3,13 @@
 
 #include "../library.h"
 
-typedef struct Simulator{ 
+typedef struct { 
     Word nama;
     POINT titik;
     PrioQueue inventory;
     PrioQueue delivery;
     Matrix map;
-    TIME waktu
+    TIME waktu;
 } SIMULATOR;
 
 #define NAMA(s) (s).nama

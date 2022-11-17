@@ -4,6 +4,9 @@
 #define MATRIX_H
 
 #include "boolean.h"
+#include "../ADT_MesinKata/mesinkarakter.h"
+#include "../ADT_MesinKata/mesinkata.h"
+#include "../ADT_MesinKata/string.h"
 
 /* Ukuran maksimum baris dan kolom */
 #define ROW_CAP 100
@@ -36,7 +39,7 @@ void createMatrix(int nRows, int nCols, Matrix *m);
 #define ELMT(M, i, j) (M).mem[(i)][(j)]
 
 
-Matrix MapMatrix();
+Matrix MapMatrix(char *filename);
 
 void displayMap(Matrix m);
 /* Merubah '#' dalam matrix menjadi ' ' kemudian menampilkan matrix */
