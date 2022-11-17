@@ -85,7 +85,7 @@ IdxTypeLM SearchIndexbyId(ListMakanan l, IDEM id)
     /* ALGORITMA */
     i = 0;
     found = false;
-    while (!found && i <= LengthLM(l))
+    while (!found && i < LengthLM(l))
     {
         if (ID(ElmtLM(l, i)) == id)
         {
@@ -153,21 +153,19 @@ void SetUpListMakanan(ListMakanan *l, char *filename)
     /* I.F. Terbentuk list makanan berdasarkan hasil konfigurasi */
     /* NElmt list pasti sama dengan CONFIG_SIZELM */
     /* KMAMUS LOKAL */
-    int BanyakMakanan;
     IdxTypeLM i;
     TIME tempT;
     MAKANAN tempM;
     int D, M, H;
-    int idxIn;
 
     CreateListMakanan(l);
     STARTLINE(filename);
     STARTWORD();
     LengthLM(*l) = wordToInt(currentWord);
+    printf("ini %d\n\n", LengthLM(*l));
     i = 0;
-    idxIn = 0;
 
-    while (!EOP)
+    while (i < LengthLM(*l))
     {
         // ID
         ADVLINE();
@@ -201,15 +199,8 @@ void SetUpListMakanan(ListMakanan *l, char *filename)
         STARTWORD();
         Locate(tempM) = currentWord;
 
-        idxIn = SearchIndexbyId(*l, ID(tempM)) != IDX_UNDEF_LM;
-        if (!idxIn)
-        {
-            ElmtLM(*l, i) = tempM;
-        }
-        else
-        {
-            ElmtLM(*l, idxIn) = tempM;
-        }
+        ElmtLM(*l, i) = tempM;
+        printf("PANJANGGGG %d\n", i);
         i++;
     }
 }
