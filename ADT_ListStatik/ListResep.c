@@ -103,7 +103,7 @@ void readListLR(ListResep *l, char *filename) {
     STARTLINE(filename);
     STARTWORD();
     n = wordToInt(currentWord);
-    while (!EOP) {
+    for (i = 0; i < n; i++) {
         // Akuisi integer pertama sebagai resep utama
         ADVLINE();
         STARTWORD();
