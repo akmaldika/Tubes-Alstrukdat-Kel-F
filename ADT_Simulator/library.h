@@ -1,3 +1,6 @@
+#ifndef _LIBRARY_h_
+#define _LIBRARY_h_
+
 #include "ADT_ListStatik/ListMakanan.h"
 #include "ADT_ListStatik/ListResep.h"
 #include "ADT_Makanan/makanan.h"
@@ -12,38 +15,36 @@
 #include "ADT_Time/time.h"
 #include "ADT_Tree/NTree.h"
 
-#ifndef _LIBRARY_h_
-#define _LIBRARY_h_
 
 // char* equal to Word
 
 /* AKMAL */
-#define START "START" 
-#define EXIT "EXIT" 
-#define BUY "BUY"
+// #define START "START" 
+// #define EXIT "EXIT" 
+// #define BUY "BUY"
 
-// nigel 
-#define WAIT "WAIT"
-#define DELIVERY "DELIVERY"
-/* Falhri*/
-#define MIX "MIX"
-#define CHOP "CHOP"
-#define FRY "FRY"
-#define BOIL "BOIL"
-#define REKOMENDASI "RECOMMENDATION"
-#define UNDO "UNDO"
-#define REDO "REDO"
-
-
-#define CATALOG "CATALOG"
-#define COOKBOOK "COOKBOOK"
+// // nigel 
+// #define WAIT "WAIT"
+// #define DELIVERY "DELIVERY"
+// /* Falhri*/
+// #define MIX "MIX"
+// #define CHOP "CHOP"
+// #define FRY "FRY"
+// #define BOIL "BOIL"
+// #define REKOMENDASI "RECOMMENDATION"
+// #define UNDO "UNDO"
+// #define REDO "REDO"
 
 
-// char* equal to Line
-/* J*/
-#define MOVEN "MOVE NORTH"
-#define MOVEE "MOVE EAST"
-#define MOVEW "MOVE WEST"
-#define MOVES "MOVE SOUTH"
+// #define CATALOG "CATALOG"
+// #define COOKBOOK "COOKBOOK"
+
+
+// // char* equal to Line
+// /* J*/
+// #define MOVEN "MOVE NORTH"
+// #define MOVEE "MOVE EAST"
+// #define MOVEW "MOVE WEST"
+// #define MOVES "MOVE SOUTH"
 
 #endif
