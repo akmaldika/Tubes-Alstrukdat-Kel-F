@@ -43,7 +43,7 @@ void setInventory(SIMULATOR *S, PrioQueue inventory){
     INVENTORY(*S) = inventory;
 }
 
-void setDelivery(SIMULATOR *S, PrioQueue delivery){
+void setDeliverySim(SIMULATOR *S, PrioQueue delivery){
     DELIV(*S) = delivery;
 }
 

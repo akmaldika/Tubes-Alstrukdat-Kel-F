@@ -27,7 +27,7 @@ void setTitikSim(SIMULATOR *S, POINT point);
 
 void setInventory(SIMULATOR *S, PrioQueue inventory);
 
-void setDelivery(SIMULATOR *S, PrioQueue delivery);
+void setDeliverySim(SIMULATOR *S, PrioQueue delivery);
 
 void setMapSim(SIMULATOR *S, Matrix map);
 
