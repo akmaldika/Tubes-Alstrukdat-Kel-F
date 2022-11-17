@@ -116,11 +116,12 @@ void Enqueue(PrioQueue *Q, MAKANAN X)
 	/* F.S. X disisipkan pada posisi yang tepat sesuai dengan prioritas,
 			TAIL "maju" dengan mekanisme circular buffer; */
 	int i, h;
-	if (Time(X) != 0 && ! IsFullPQ(*Q))
+	if (Time(X) != 0)
 	{
-		// if (IsFullPQ(*Q))
-		// {
-		// }
+		if (IsFullPQ(*Q))
+		{
+			expandPQ(Q, MaxElPQ);
+		}
 		if (IsEmptyPQ(*Q))
 		{
 			Head(*Q) = 0;
@@ -158,6 +159,11 @@ void Dequeue(PrioQueue *Q, MAKANAN *X)
 			Q mungkin kosong */
 	if (!IsEmptyPQ(*Q))
 	{
+		if(MaxEl(*Q) > MaxElPQ){
+			if ((MaxEl(*Q) - NBElmt(*Q)) > MaxElPQ){
+				shrinkPQ(Q, MaxElPQ/2);
+			}
+		}
 		*X = InfoHead(*Q);
 		if (NBElmt(*Q) == 1)
 		{
@@ -234,6 +240,81 @@ void removeFromInventory(PrioQueue *Q, int ID){
 }
 
 /* Operasi Tambahan */
+
+void copyPQ(PrioQueue Qin, PrioQueue *Qout){
+	/* Mengisi semua elemen Qout dengan elemen-elemen pada Qin */
+	/* I.S. Qin terdefinisi dan Qout siap diisikan Qin */
+	/* F.S. semua elemen Qin dicopy ke dalam Qout */
+	int n = MaxEl(Qin);
+	MakeEmpty(Qout, n);
+	int i = Head(Qin);
+	while (i != Tail(Qin) )
+	{
+		Enqueue(Qout, Elmt(Qin, i));
+		i++;
+		if(i == n){
+			i=0;
+		}
+	}
+	// Tail nya
+	Enqueue(Qout, Elmt(Qin, i));
+}
+
+void expandPQ(PrioQueue *Q, int num){
+	/* Memperbesar ukuran Q sebesar num */
+	/* I.S. Q terdefinisi */
+	/* F.S. Ukuran Q menjadi ukuran Q sebelumnya + num */
+	PrioQueue temp;
+	int c;
+	int i;
+	c = MaxEl(*Q);
+	MakeEmpty(&temp, c);
+	copyPQ(*Q, &temp);
+	DeAlokasi(Q);
+
+	// PQ yang baru
+	MakeEmpty(Q, c + num);
+	i = Head(temp);   
+	while (i != Tail(temp))
+	{
+		/* code */
+		Enqueue(Q, Elmt(temp, i));
+		i++;
+		if(i == c){
+			i=0;
+		}
+	}
+	Enqueue(Q, Elmt(temp, i));
+}
+
+void shrinkPQ(PrioQueue *Q, int num){
+	/* Memperkecil ukuran Q sebesar num */
+	/* I.S. Q terdefinisi */
+	/* F.S. Ukuran Q menjadi ukuran Q sebelumnya - num */
+	PrioQueue temp;
+	int c;
+	int i;
+	c = MaxEl(*Q);
+	MakeEmpty(&temp, c);
+	copyPQ(*Q, &temp);
+	DeAlokasi(Q);
+
+	// PQ yang baru
+	MakeEmpty(Q, c - num);
+	i = Head(temp);   
+	while (i != Tail(temp))
+	{
+		/* code */
+		Enqueue(Q, Elmt(temp, i));
+		i++;
+		if(i == c){
+			i=0;
+		}
+	}
+	Enqueue(Q, Elmt(temp, i));
+
+}
+
 void PrintPrioQueue(PrioQueue Q)
 {
 	/* Mencetak isi queue Q ke layar */
@@ -251,6 +332,49 @@ void PrintPrioQueue(PrioQueue Q)
 	no = 1;
 	printf("List Makanan di Inventory\n");
 	printf("(nama - waktu sisa kedaluwarsa)\n");
+	if (!IsEmptyPQ(Q))
+	{
+		i = Head(Q);
+		while (i != Tail(Q))
+		{
+			if (i == MaxEl(Q))
+			{
+				i = 0;
+			}
+			if (i != Tail(Q))
+			{
+				printf("   %d. %s - ", no, NamaMakanan(Elmt(Q,i)));
+				// printf("   %d. %s - %d ", no, NamaMakanan(Elmt(Q, i)), Elmt(Q, i).id); // buat method display 4 jam , 3 jam 10 menit, print sama getvar nya
+				DisplayTIMEk(TimeFull((Q).T[i]));
+				printf("\n");
+				i++;
+				no++;
+			}
+		}
+		// printf("   %d. %s - %d ", no, NamaMakanan(Elmt(Q, i)), Elmt(Q, i).id); // buat method display 4 jam , 3 jam 10 menit, print sama getvar nya
+		printf("   %d. %s - ", no, NamaMakanan(Elmt(Q,i)));
+		DisplayTIMEk(TimeFull((Q).T[i]));
+		printf("\n");
+	}
+}
+
+void PrintDelivery(PrioQueue Q)
+{
+	/* Mencetak isi queue Q ke layar */
+	/* I.S. Q terdefinisi, mungkin kosong */
+	/* F.S. Q tercetak ke layar dengan format: */
+
+	// 	List Makanan di Perjalanan
+	// (nama - waktu sisa delivery)
+	// <Nama Makanan 1> - <Waktu Makanan 1>
+	// <Nama Makanan 2> - <Waktu Makanan 2>
+	// <Nama Makanan 3> - <Waktu Makanan 3>
+	// ...
+
+	int i, no;
+	no = 1;
+	printf("List Makanan di Perjalanan\n");
+	printf("(nama - waktu sisa delivery)\n");
 	if (!IsEmptyPQ(Q))
 	{
 		i = Head(Q);

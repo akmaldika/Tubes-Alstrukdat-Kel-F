@@ -42,11 +42,11 @@ int main()
     assignLine(&w5, "Kentang");
     assignLine(&w6, "Ikan asin");
     assignLine(&w7, "Ubi");
-    printf("\nkata word: %s, n : %d\n", w1.Tabword, w1.Length);
-    printf("kata line: %s, n : %d\n\n", wd.String, wd.Length);
+    // printf("\nkata word: %s, n : %d\n", w1.Tabword, w1.Length);
+    // printf("kata line: %s, n : %d\n\n", wd.String, wd.Length);
 
     TIME t1, t2, t3, t4, t5, t6, t7;
-    printf("\nTest PrioQueue \n\n");
+    printf("Test PrioQueue \n\n");
     CreateTime(&t1, 0, 0, 7);
     CreateTime(&t2, 0, 0, 2);
     CreateTime(&t3, 0, 0, 6);
@@ -67,7 +67,7 @@ int main()
     // CreateMakanan(&m4, 15, "nasi goreng", t4, t4, 4);
     // Makanan(a) = m1;
     PrioQueue q;
-    MakeEmpty(&q, 4);  // 4 dan 5 
+    MakeEmpty(&q, 4); // 4 dan 5 // MaxEl
     printf("max : %d \n", MaxEl(q));
     Enqueue(&q, m1);
     Enqueue(&q, m2);
@@ -151,11 +151,9 @@ int main()
         i++;
     }
     PrintPrioQueue(q);
-    printf("m3 id : %d\n",m1.id);
-    printf("ada ayam goreng : %d", searchMkn(q, m1) );
+    printf("m3 id : %d\n", m1.id);
+    printf("ada ayam goreng : %d", searchMkn(q, m1));
     boolean flag = 0;
-
-
 
     printf("\n\n4. Pengurangan 3 menit dalam PrioQueue \n");
     PrintPrioQueue(q);
@@ -172,7 +170,7 @@ int main()
     }
     printf("list makanan basi : \n");
 
-    i=0;
+    i = 0;
     while (i < ListMakananExp.NElmt)
     {
         printf("   %d. %s\n", i + 1, ListMakananExp.Lmakanan[i].Nama);
@@ -190,16 +188,45 @@ int main()
     PrintPrioQueue(q);
 
     // Delivery m5  m4
-    PrioQueue Qdeliv;
+    PrioQueue Qdeliv, Qcopy;
     MakeEmpty(&Qdeliv, 3);
     DelivMakanan(&Qdeliv, m4);
-    PrintPrioQueue(Qdeliv);
+    PrintDelivery(Qdeliv); // delivv
     waitCommand(&Qdeliv, &q, &FlagDeliv, &Flag, &ListMakananExp, &ListDelivDone, 0, 2);
     // min1menitAll(&Qdeliv, &q, &FlagDeliv, &Flag, &ListMakananExp, &ListDelivDone);
     // min1menitAll(&Qdeliv, &q, &FlagDeliv, &Flag, &ListMakananExp, &ListDelivDone);
     // min1menitAll(&Qdeliv, &q, &FlagDeliv, &Flag, &ListMakananExp, &ListDelivDone);
+
     PrintPrioQueue(q);
-    PrintPrioQueue(Qdeliv);
+    printf("\n");
+    copyPQ(q, &Qcopy);
+    PrintPrioQueue(Qcopy);
+    printf("\n");
+    PrintDelivery(Qdeliv); // delivv
+    printf("\n");
+    PrintPrioQueue(Qcopy);
+    printf("maxBefore %d\n", MaxEl(Qcopy));
+    // expandPQ(&Qcopy, 10);
+    shrinkPQ(&Qcopy, 2);
+    printf("maxAfter shrink  %d\n", MaxEl(Qcopy));
+
+    printf("\nUntuk mencoba shrink/expand (ketika enqueue atau dequeue) harus di set MaxElPQ di PrioQueue.h menjadi 2\n\n");
+    if (MaxElPQ == 2)
+    {
+        Enqueue(&Qcopy, m7);
+        Enqueue(&Qcopy, m1);
+        Enqueue(&Qcopy, m2);
+        PrintPrioQueue(Qcopy);
+        printf("maxAfter enqueue -> expand  %d\n", MaxEl(Qcopy));
+
+        Dequeue(&Qcopy, &temp);
+        Dequeue(&Qcopy, &temp);
+        Dequeue(&Qcopy, &temp);
+        Dequeue(&Qcopy, &temp);
+        printf("maxAfter dequeue -> shrink  %d\n", MaxEl(Qcopy));
+        PrintPrioQueue(Qcopy);
+        printf("\n");
+    }
 
     return 0;
 }

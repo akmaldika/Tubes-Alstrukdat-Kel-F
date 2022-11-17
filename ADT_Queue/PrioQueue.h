@@ -1,5 +1,5 @@
 /* File : prioqueue.h */
-/* Definisi ADT Priority Queue Char dengan representasi array secara eksplisit dan alokasi dinamik */
+/* Definisi ADT Priority Queue dengan representasi array secara eksplisit dan alokasi dinamik */
 /* Model Implementasi Versi III dengan circular buffer */
 /* Elemen queue terurut membesar berdasarkan elemen time */
 
@@ -13,8 +13,9 @@
 #include "../ADT_Time/time.h"
 #include "../ADT_Time/boolean.h"
 #include "../ADT_Makanan/makanan.h"
-#include "../ADT_ListStatik/ListMakanan.h" 
+#include "../ADT_ListStatik/ListMakanan.h"
 
+#define MaxElPQ 20
 #define Nil -1
 /* Konstanta untuk mendefinisikan address tak terdefinisi */
 
@@ -32,14 +33,12 @@ typedef int address; /* indeks tabel */
 /* Versi I : tabel dinamik, Head dan Tail eksplisit, ukuran disimpan */
 typedef struct
 {
-    MAKANAN *T;   /* tabel penyimpan elemen */
-    address HEAD; /* alamat penghapusan */
-    address TAIL; /* alamat penambahan */
-    int MaxEl;    /* Max elemen queue */
+        MAKANAN *T;   /* tabel penyimpan elemen */
+        address HEAD; /* alamat penghapusan */
+        address TAIL; /* alamat penambahan */
+        int MaxEl;    /* Max elemen queue atau kapasitas dari queue */
 } PrioQueue;
 /* Definisi PrioQueue kosong: HEAD=Nil; TAIL=Nil. */
-
-/* Catatan implementasi: T[0] tidak pernah dipakai */
 
 /* ********* AKSES (Selektor) ********* */
 /* Jika e adalah MAKANAN dan Q adalah PrioQueue, maka akses elemen : */
@@ -106,14 +105,29 @@ void DequeueExp(PrioQueue *Q, MAKANAN *X);
         Q mungkin kosong */
 
 void removeFromInventory(PrioQueue *Q, int ID);
-/* Proses: Menghapus makanan dengan id ID pada Q dengan aturan yang paling mendekati expired dimulai dari head 
+/* Proses: Menghapus makanan dengan id ID pada Q dengan aturan yang paling mendekati expired dimulai dari head
 hingga menemukan m lalu dihapus */
 /* I.S. Q tidak mungkin kosong */
 /* F.S. makanan dengan id ID ter-dequeue (hapus) dari Q dan Q tetap teratur dengan mekanisme circular buffer
         Q mungkin menjadi kosong */
 
-
 /* Operasi Tambahan */
+
+void copyPQ(PrioQueue Qin, PrioQueue *Qout);
+/* Mengisi semua elemen Qout dengan elemen-elemen pada Qin */
+/* I.S. Qin terdefinisi dan Qout siap diisikan Qin */
+/* F.S. semua elemen Qin dicopy ke dalam Qout */
+
+void expandPQ(PrioQueue *Q, int num);
+/* Memperbesar ukuran Q sebesar num */
+/* I.S. Q terdefinisi */
+/* F.S. Ukuran Q menjadi ukuran Q sebelumnya + num */
+
+void shrinkPQ(PrioQueue *Q, int num);
+/* Memperkecil ukuran Q sebesar num */
+/* I.S. Q terdefinisi */
+/* F.S. Ukuran Q menjadi ukuran Q sebelumnya - num */
+
 void PrintPrioQueue(PrioQueue Q);
 /* Mencetak isi queue Q ke layar */
 /* I.S. Q terdefinisi, mungkin kosong */
@@ -131,6 +145,18 @@ void PrintPrioQueue(PrioQueue Q);
 // Cabai - 3 jam
 // Bawang - 1 jam
 
+void PrintDelivery(PrioQueue Q);
+/* Mencetak isi queue Q ke layar */
+/* I.S. Q terdefinisi, mungkin kosong */
+/* F.S. Q tercetak ke layar dengan format: */
+
+// 	List Makanan di Perjalanan
+// (nama - waktu sisa delivery)
+// <Nama Makanan 1> - <Waktu Makanan 1>
+// <Nama Makanan 2> - <Waktu Makanan 2>
+// <Nama Makanan 3> - <Waktu Makanan 3>
+// ...
+
 void Min1Minute(PrioQueue *Q, boolean *Flag, ListMakanan *LMakanan);
 /* I.S. q terdefinisi */
 /* F.S. Semnua elemen makanan  dalam q berkurang 1 menit dan DequeueExp  */
@@ -139,7 +165,7 @@ void MinNTime(PrioQueue *Q, boolean *Flag, ListMakanan *LMakanan, int h, int m);
 /* I.S. q terdefinisi */
 /* F.S. Semnua elemen makanan  dalam q berkurang h jam dan m menit dan DequeueExp  */
 
-void Min1MinuteDeliv(PrioQueue *Qdeliv, PrioQueue *Q, boolean *FlagExp, boolean *FlagDeliv, ListMakanan *LMakanan, ListMakanan *LdelivDone);  
+void Min1MinuteDeliv(PrioQueue *Qdeliv, PrioQueue *Q, boolean *FlagExp, boolean *FlagDeliv, ListMakanan *LMakanan, ListMakanan *LdelivDone);
 /* I.S. Qdeliv terdefinisi */
 /* F.S. Semnua elemen makanan  dalam Qdeliv berkurang 1 menit dan DequeueExp  */
 
@@ -147,17 +173,17 @@ void MinNTimeDeliv(PrioQueue *Qdeliv, PrioQueue *Q, boolean *Flag, boolean *Flag
 /* I.S. Qdeliv terdefinisi */
 /* F.S. Semnua elemen makanan  dalam Qdeliv berkurang h jam dan m menit dan DequeueExp  */
 
-void DelivMakanan(PrioQueue *Qdeliv, MAKANAN m);  // perlu flag gak ?
+void DelivMakanan(PrioQueue *Qdeliv, MAKANAN m); // perlu flag gak ?
 /* I.S. Qdeliv terdefinisi */
 /* F.S. memasukan makanan m ke dalam Qdeliv */
 
-void waitCommand(PrioQueue *Qdeliv, PrioQueue *Q, boolean *FlagDeliv, boolean *FlagExp, ListMakanan *LMakanan, ListMakanan *LdelivDone,  int h, int m);  
+void waitCommand(PrioQueue *Qdeliv, PrioQueue *Q, boolean *FlagDeliv, boolean *FlagExp, ListMakanan *LMakanan, ListMakanan *LdelivDone, int h, int m);
 /* I.S. Qdeliv terdefinisi */
 /* F.S. memasukan makanan m ke dalam Qdeliv */
 
-void min1menitAll(PrioQueue *Qdeliv, PrioQueue *Q, boolean *FlagDeliv, boolean *FlagExp, ListMakanan *LMakanan, ListMakanan *LdelivDone);   
+void min1menitAll(PrioQueue *Qdeliv, PrioQueue *Q, boolean *FlagDeliv, boolean *FlagExp, ListMakanan *LMakanan, ListMakanan *LdelivDone);
 /* I.S. Qdeliv dan Q (untuk inventory) terdefinisi */
-/* F.S. mengurangi 1 menit untuk semua makanan dalam inventory dan Qdeliv. Apabila sudah ada yang  selesai di deliv akan masuk ke dalam 
+/* F.S. mengurangi 1 menit untuk semua makanan dalam inventory dan Qdeliv. Apabila sudah ada yang  selesai di deliv akan masuk ke dalam
 inventory */
 
 #endif
