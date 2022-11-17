@@ -9,7 +9,7 @@ void FRYFOOD(SIMULATOR *s, ListMakanan lm, ListResep lr, boolean *flag) {
     int n, id, currIdBahan, failureId;
 
     // ALGORITMA
-
+    *flag = false;
     if (isAdjacent(s, MAP(*s), 'F')) {
         actionableFood = DisplayActionAbleLM(lm, "Fry");
         STARTCOMMAND();
@@ -35,7 +35,7 @@ void FRYFOOD(SIMULATOR *s, ListMakanan lm, ListResep lr, boolean *flag) {
                 while ((!isEmptyMS(listBahan)) && (isSuccess)) {
                     currIdBahan = ELMTMS(listBahan, 0);
                     if (searchMkn(tempInventory, MknId(lm, currIdBahan))) {
-                        removeFromInventory(&tempInventory, MknId(lm, currIdBahan));
+                        removeFromInventory(&tempInventory, currIdBahan);
                         removeMS(&listBahan, currIdBahan, 1);
                     } else {
                         isSuccess = false;
@@ -44,6 +44,7 @@ void FRYFOOD(SIMULATOR *s, ListMakanan lm, ListResep lr, boolean *flag) {
                 }
 
                 if (isSuccess) {
+                    *flag = true;
                     printf("%s telah berhasil dibuat dan masuk ke dalam inventory\n\n", NamaMknId(lm, id).Tabword);
 
                     Enqueue(&tempInventory, MknId(lm, id));

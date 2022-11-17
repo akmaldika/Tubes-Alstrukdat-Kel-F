@@ -1,5 +1,6 @@
 #ifndef _LIBRARY_h_
 #define _LIBRARY_h_
+
 #include "ADT_ListStatik/ListMakanan.h"
 #include "ADT_ListStatik/ListResep.h"
 #include "ADT_Makanan/makanan.h"
@@ -8,6 +9,7 @@
 #include "ADT_MesinKata/mesinkata.h"
 #include "ADT_MesinKata/string.h"
 #include "ADT_MultiSet/MultiSet.h"
+#include "ADT_Point/point.h"
 #include "ADT_Queue/PrioQueue.h"
 #include "ADT_Simulator/simulator.h"
 #include "ADT_Stack/Stack.h"

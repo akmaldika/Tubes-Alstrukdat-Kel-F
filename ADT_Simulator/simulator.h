@@ -1,49 +1,36 @@
 #ifndef SIMULATOR_H
 #define SIMULATOR_H
 
+#include "../library.h"
 
-#include "library.h"
-
-typedef struct { 
+typedef struct Simulator{ 
     Word nama;
-    POINT locs;
+    POINT titik;
     PrioQueue inventory;
     PrioQueue delivery;
-    Matrix m;
+    Matrix map;
     TIME waktu
-
-}SIMULATOR;
-
+} SIMULATOR;
 
 #define NAMA(s) (s).nama
-#define LOCS(s) (s).locs
+#define TITIK(s) (s).titik
 #define INVENTORY(s) (s).inventory
-#define DELIVERY(s) (s).delivery
-#define NOTIFIKASI(s) (s).notifikasi
-#define MAP(s) (s).m
-#define TIME(s) (s).waktu
+#define DELIV(s) (s).delivery
+#define MAP(s) (s).map
+#define WAKTU(s) (s).waktu
 
-// #define INFONAMA(p) (p)->nama
-// #define INFOLOCS(p) (p)->locs
-// #define INFOINVENTORY(p) (p)->inventory
-// #define INFODELIVERY(p) (p)->delivery
-// #define INFONOTIFIKASI(p) (p)->notifikasi
-// #define INFOMAP(p) (p)->m
-// #define INFOTIME(p) (p)->waktu
+void CreateSim(SIMULATOR *S);
 
-void SetSimulator(SIMULATOR *S, POINT locs,Matrix m);
+void setNamaSim(SIMULATOR *S, Word nama);
 
-boolean isAdjacent(SIMULATOR *S, Matrix m,char val);
-
-void setLokasi(SIMULATOR *S,POINT p);
-
-void setTIme(SIMULATOR *S, TIME waktu);
-
-void setDelivery(SIMULATOR *S, PrioQueue delivery);
+void setTitikSim(SIMULATOR *S, POINT point);
 
 void setInventory(SIMULATOR *S, PrioQueue inventory);
 
-void setNama(SIMULATOR *S, Word Nama);
+void setDelivery(SIMULATOR *S, PrioQueue delivery);
 
-void setMap(SIMULATOR *S, Matrix Map);
+void setMapSim(SIMULATOR *S, Matrix map);
+
+void setTimeSim(SIMULATOR *S, TIME waktu);
+
 #endif

@@ -11,7 +11,7 @@ int main() {
     readListLR(&lr, "Driver_Config/Resep.txt");
     // printf("Banyak barang di ListMakanan%d", LengthLM(lm));
     // printLR(lr);
-    // DisplayCatalog(lm);
+    DisplayCatalog(lm);
 
     // COOKBOOKFOOD(lr, lm);    
     // lb = DisplayActionAbleLM(lm, "Fry");
