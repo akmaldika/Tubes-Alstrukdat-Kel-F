@@ -162,7 +162,6 @@ void SetUpListMakanan(ListMakanan *l, char *filename)
     STARTLINE(filename);
     STARTWORD();
     LengthLM(*l) = wordToInt(currentWord);
-    printf("ini %d\n\n", LengthLM(*l));
     i = 0;
 
     while (i < LengthLM(*l))
@@ -200,7 +199,6 @@ void SetUpListMakanan(ListMakanan *l, char *filename)
         Locate(tempM) = currentWord;
 
         ElmtLM(*l, i) = tempM;
-        printf("PANJANGGGG %d\n", i);
         i++;
     }
 }
