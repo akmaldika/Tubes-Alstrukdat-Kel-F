@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "Stack.h"
+#include "../ADT_Simulator/simulator.h"
 
 
 /* ********** SELEKTOR ********** */
@@ -17,7 +18,7 @@ void CreateEmpty(Stack *S)
 {
     /* I.S. sembarang; */
     /* F.S. Sebuah stack S kosong terbentuk dengan kapasitas initial initCap*/
-    LStack(*S) = (_SIMULATOR_ *) malloc(initCap * sizeof(_SIMULATOR_));
+    LStack(*S) = (SIMULATOR *) malloc(initCap * sizeof(SIMULATOR));
     Top(*S) = Nil;
     CapStack(*S) = initCap;
 }
@@ -61,7 +62,7 @@ void Pop(Stack *S, ElStackURType *X)
     InfoTop(*S) = *X;
     Top(*S)--;
 
-    if(Capstack(*S) >= 40 && Top(*S) < CapStack(*S) + 20)
+    if(CapStack(*S) >= 40 && Top(*S) < CapStack(*S) + 20)
     {
         DecreaseSize(S);
     }
@@ -72,7 +73,7 @@ void IncreaseSize(Stack *S)
     /* I.S. Stack terdefinisi, Stack penuh */
     /* F.S. Capacity stack bertambah sebanyak addCap */
     /* Mengalokasikan memori tambahan untuk stack sebanyak addCap dengan realloc*/
-    LStack(*S) = (_SIMULATOR_ *) realloc(LStack(*S), (CapStack(*S) + addCap) * sizeof(_SIMULATOR_));
+    LStack(*S) = (SIMULATOR *) realloc(LStack(*S), (CapStack(*S) + addCap) * sizeof(SIMULATOR));
     CapStack(*S) += addCap;
 }
 
@@ -81,7 +82,7 @@ void DecreaseSize(Stack *S)
     /* I.S. Stack terdefinisi, Stack sepi */
     /* F.S. Capacity stack berkurang sebanyak minCap*/
     /* Men-dealokasi memori berbelih stack sebanyak minCap dengan realloc */
-    LStack(*S) = (_SIMULATOR_ *) realloc(LStack(*S), (CapStack(*S) - minCap) * sizeof(_SIMULATOR_));
+    LStack(*S) = (SIMULATOR *) realloc(LStack(*S), (CapStack(*S) - minCap) * sizeof(SIMULATOR));
     CapStack(*S) -= minCap;
 }
 
@@ -89,7 +90,16 @@ void resetStack(Stack *S)
 {
     /* I.S. Stack  terdefinisi, sembarang */
     /* F.S. Capacity Stack dikembalikan initCap; Top Stack = Nil; Container menampung initCap memori */
-    LStack(*S) = (_SIMULATOR_ *) realloc(LStack(*S), (initCap) * sizeof(_SIMULATOR_));
+    LStack(*S) = (SIMULATOR *) realloc(LStack(*S), (initCap) * sizeof(SIMULATOR));
+    Top(*S) = Nil;
+    CapStack(*S) = initCap;
+}
+
+void delAllStack(Stack *S)
+{
+    /* I.S. Stack  terdefinisi, sembarang */
+    /* F.S. Stack dikembalikan ke sistem seluruhnya */
+    free(LStack(*S));
     Top(*S) = Nil;
     CapStack(*S) = initCap;
 }

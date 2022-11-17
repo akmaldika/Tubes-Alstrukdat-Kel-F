@@ -80,4 +80,8 @@ void resetStack(Stack *S);
 /* F.S. Capacity Stack dikembalikan initCap; Top Stack = Nil; Container menampung initCap memori */
 /* menggunakan fungsi realloc untuk container */
 
+void delAllStack(Stack *S);
+/* I.S. Stack terdefinisi, sembarang */
+/* F.S. Stack dikembalikan ke sistem seluruhnya */
+
 #endif
