@@ -44,7 +44,14 @@ Matrix MapMatrix(char *filename);
 void displayMap(Matrix m);
 /* Merubah '#' dalam matrix menjadi ' ' kemudian menampilkan matrix */
 
-
+void MoveNorth(Matrix *m,boolean *sukses);
+/*Memindahkan 'S' sesuai arah fungsi sebanyak 1 index */
+void MoveSouth(Matrix *m,boolean *sukses);
+/*Memindahkan 'S' sesuai arah fungsi sebanyak 1 index */
+void MoveWest(Matrix *m,boolean *sukses);
+/*Memindahkan 'S' sesuai arah fungsi sebanyak 1 index */
+void MoveEast(Matrix *m,boolean *sukses);
+/*Memindahkan 'S' sesuai arah fungsi sebanyak 1 index */
 
 /* *** Selektor "Dunia Matrix" *** */
 boolean isMatrixIdxValid(int i, int j);
@@ -55,10 +62,7 @@ IdxType getLastIdxRow(Matrix m);
 /* Mengirimkan Index baris terbesar m */
 IdxType getLastIdxCol(Matrix m);
 /* Mengirimkan Index kolom terbesar m */
-boolean isIdxEff(Matrix m, IdxType i, IdxType j);
-/* Mengirimkan true jika i, j adalah Index efektif bagi m */
-ElType getElmtDiagonal(Matrix m, IdxType i);
-/* Mengirimkan elemen m(i,i) */
+
 IdxType GetFirstIdxBrs (Matrix M);
     /* Mengirimkan indeks baris terkecil M */
 
@@ -69,17 +73,7 @@ IdxType GetFirstIdxKol (Matrix M);
 void copyMatrix(Matrix mIn, Matrix *mOut);
 /* Melakukan assignment mOut <- mIn */
 
-/* ********** KELOMPOK BACA/TULIS ********** */
-void readMatrix(Matrix *m, int nRow, int nCol);
-/* I.S. isIdxValid(nRow,nCol) */
-/* F.S. m terdefinisi nilai elemen efektifnya, berukuran nRow x nCol */
-/* Proses: Melakukan CreateMatrix(m,nRow,nCol) dan mengisi nilai efektifnya */
-/* Selanjutnya membaca nilai elemen per baris dan kolom */
-/* Contoh: Jika nRow = 3 dan nCol = 3, maka contoh cara membaca isi matriks :
-1 2 3
-4 5 6
-8 9 10 
-*/
+
 void displayMatrix(Matrix m);
 /* I.S. m terdefinisi */
 /* F.S. Nilai m(i,j) ditulis ke layar per baris per kolom, masing-masing elemen per baris 
@@ -91,29 +85,4 @@ void displayMatrix(Matrix m);
 8 9 10
 */
 
-
-
-/* ********** KELOMPOK OPERASI RELASIONAL TERHADAP Matrix ********** */
-boolean isMatrixEqual(Matrix m1, Matrix m2);
-/* Mengirimkan true jika m1 = m2, yaitu count(m1) = count(m2) dan */
-/* untuk setiap i,j yang merupakan Index baris dan kolom m1(i,j) = m2(i,j) */
-/* Juga merupakan strong eq karena getLastIdxCol(m1) = getLastIdxCol(m2) */
-boolean isMatrixNotEqual(Matrix m1, Matrix m2);
-/* Mengirimkan true jika m1 tidak sama dengan m2 */
-boolean isMatrixSizeEqual(Matrix m1, Matrix m2);
-/* Mengirimkan true jika ukuran efektif matriks m1 sama dengan ukuran efektif m2 */
-/* yaitu RowEff(m1) = RowEff (m2) dan ColEff (m1) = ColEff (m2) */
-
-/* ********** Operasi lain ********** */
-int countElmt(Matrix m);
-/* Mengirimkan banyaknya elemen m */
-
-/* ********** KELOMPOK TEST TERHADAP Matrix ********** */
-boolean isSquare(Matrix m);
-/* Mengirimkan true jika m adalah matriks dg ukuran baris dan kolom sama */
-
-int CountNumCol(Matrix m, IdxType j, ElType val);
-/*Menghitung Indeks Kolom*/
-int CountNumRow(Matrix m, IdxType i, ElType val);
-/*Menghitung Indeks Baris*/
 #endif

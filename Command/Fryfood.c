@@ -10,7 +10,7 @@ void FRYFOOD(SIMULATOR *s, ListMakanan lm, ListResep lr, boolean *flag) {
 
     // ALGORITMA
     *flag = false;
-    if (isAdjacent(s, MAP(*s), 'F')) {
+    if (isAdjacent(*s,'F')) {
         actionableFood = DisplayActionAbleLM(lm, "Fry");
         STARTCOMMAND();
         STARTWORD();

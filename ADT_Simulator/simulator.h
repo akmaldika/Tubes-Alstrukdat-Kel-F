@@ -33,4 +33,6 @@ void setMapSim(SIMULATOR *S, Matrix map);
 
 void setTimeSim(SIMULATOR *S, TIME waktu);
 
+boolean isAdjacent(SIMULATOR S, char val);
+
 #endif
