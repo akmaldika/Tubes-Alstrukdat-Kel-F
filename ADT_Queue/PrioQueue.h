@@ -186,4 +186,8 @@ void min1menitAll(PrioQueue *Qdeliv, PrioQueue *Q, boolean *FlagDeliv, boolean *
 /* F.S. mengurangi 1 menit untuk semua makanan dalam inventory dan Qdeliv. Apabila sudah ada yang  selesai di deliv akan masuk ke dalam
 inventory */
 
+void delAllPriqueue(PrioQueue *Q);
+/* I.S. Qdeliv dan QInven terdefinisi */
+/* F.S. menghapus semua elemen dari Qdeliv dan QInven */
+
 #endif

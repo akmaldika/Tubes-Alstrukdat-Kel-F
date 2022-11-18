@@ -15,6 +15,7 @@
 #include "ADT_Time/time.h"
 #include "ADT_Tree/NTree.h"
 
+// #include "Command/splash.c"
 
 // char* equal to Word
 
@@ -26,6 +27,7 @@
 // // nigel 
 // #define WAIT "WAIT"
 // #define DELIVERY "DELIVERY"
+// #define INV "INVENTORY"
 // /* Falhri*/
 // #define MIX "MIX"
 // #define CHOP "CHOP"
