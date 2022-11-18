@@ -7,11 +7,7 @@
 #define StackUndoRedo_h
 
 #include "boolean.h"
-#include "..\ADT_Makanan\makanan.h"
-#include "..\ADT_Time\time.h"
 #include "..\ADT_Simulator\simulator.h"
-// #include "..\ADT_Point\"
-#include "..\ADT_Matriks\matrix.h"
 
 #define Nil -1
 #define initCap 20
@@ -40,15 +36,15 @@ typedef struct {
 #define CapStack(S) (S).Capacity
 
 /* *** KONSTRUKTOR *** */
-void CreateEmpty(Stack *S);
+void CreateEmptyStack(Stack *S);
 /* I.S. sembarang; */
 /* F.S. Sebuah stack S kosong terbentuk dengan kapasitas initial initCap*/
 
 /* ************ Predikat Untuk test keadaan Stack ************ */
-boolean IsEmpty(Stack S);
+boolean IsEmptyStack(Stack S);
 /* Mengirim true jika Stack kosong */
 
-boolean IsFull(Stack S);
+boolean IsFullStack(Stack S);
 /* Mengirim true jika Stack penuh */
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */

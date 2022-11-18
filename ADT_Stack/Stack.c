@@ -14,7 +14,7 @@
 // #define CapStack(S) (S).Capacity
 
 /* *** KONSTRUKTOR *** */
-void CreateEmpty(Stack *S)
+void CreateEmptyStack(Stack *S)
 {
     /* I.S. sembarang; */
     /* F.S. Sebuah stack S kosong terbentuk dengan kapasitas initial initCap*/
@@ -24,13 +24,13 @@ void CreateEmpty(Stack *S)
 }
 
 /* ************ Predikat Untuk test keadaan Stack ************ */
-boolean IsEmpty(Stack S)
+boolean IsEmptyStack(Stack S)
 {
     /* Mengirim true jika Stack kosong */
     return (Top(S) == Nil);
 }
 
-boolean IsFull(Stack S)
+boolean IsFullStack(Stack S)
 {
     /* Mengirim true jika Stack penuh */
     return (Top(S) == CapStack(S) - 1);
@@ -43,7 +43,7 @@ void Push(Stack *S, ElStackURType X)
     /* I.S. S mungkin kosong, mungkin penuh */
     /* F.S. Jika Stack tidak penuh maka Top bertambah 1 */
     /* Jika stack penuh akan mengalokasi memori tambahan dengan fungsi IncearseSize */
-    if(IsFull(*S))
+    if(IsFullStack(*S))
     {
         IncreaseSize(S);
     }
@@ -62,9 +62,13 @@ void Pop(Stack *S, ElStackURType *X)
     InfoTop(*S) = *X;
     Top(*S)--;
 
-    if(CapStack(*S) >= 40 && Top(*S) < CapStack(*S) + 20)
+    if(CapStack(*S) >= 40 && Top(*S) < CapStack(*S) - 20)
     {
         DecreaseSize(S);
+    }
+    else if (IsEmptyStack(*S))
+    {
+        resetStack(S);
     }
 }
 
