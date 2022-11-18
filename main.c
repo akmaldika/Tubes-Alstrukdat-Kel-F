@@ -6,14 +6,15 @@ int main()
 {
     /* KAMUS */
     ListResep ListRsp;
+    ListMakanan ListMkn;
 
     /* ALGORITMA */
     /* Inisiasi program */
-    SetUpListMakanan(); // variabel ListMkn as "Global Variable"
-    readListLR(&ListRsp);
+    SetUpListMakanan(&ListMkn, "Config/Config_Makanan.txt");
+    readListLR(&ListRsp, "Confg/Config_Resep.txt");
 
-    // muncul splash
-
+    // splashInitGame();
+    
     STARTCOMMAND(); // currentWord
 
     // Cek Start command error mcna nerima START sam EXIT
