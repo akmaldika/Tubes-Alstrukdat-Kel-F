@@ -81,7 +81,7 @@ void displayMap(Matrix m){
 
 
 
-void MoveEast(Matrix *m){
+void MoveEast(Matrix *m,boolean *sukses){
    int x,y;
    Matrix idx;
    idx=getidx(*m,'S');
@@ -97,7 +97,7 @@ void MoveEast(Matrix *m){
       ELMT(*m,y,x)=temp;
 
    }else{
-      printf("gakbisa");
+      printf("Move Gagal");
    }
 
 
@@ -105,7 +105,7 @@ void MoveEast(Matrix *m){
 
 }
 
-void MoveWest(Matrix *m){
+void MoveWest(Matrix *m,boolean *sukses){
    int x,y;
    Matrix idx;
    idx=getidx(*m,'S');
@@ -121,12 +121,12 @@ void MoveWest(Matrix *m){
       ELMT(*m,y,x)=temp;
 
    }else{
-      printf("gakbisa");
+      printf("Move Gagal");
    }
 
 }
 
-void MoveNorth(Matrix *m){
+void MoveNorth(Matrix *m,boolean *sukses){
    int x,y;
    Matrix idx;
    idx=getidx(*m,'S');
@@ -143,12 +143,12 @@ void MoveNorth(Matrix *m){
 
       
    }else{
-      printf("gakbisa");
+      printf("Move Gagal");
    }
 
 }
 
-void MoveSouth(Matrix *m){
+void MoveSouth(Matrix *m,boolean *sukses){
    int x,y;
    Matrix idx;
    idx=getidx(*m,'S');
@@ -167,7 +167,7 @@ void MoveSouth(Matrix *m){
       ELMT(*m,y,x)=temp;
 
    }else{
-      printf("gakbisa");
+      printf("Move Gagal");
    }
 
 }
@@ -227,12 +227,7 @@ boolean isIdxEff(Matrix m, IdxType i, IdxType j){
    return (0 <= i && i < ROW_EFF(m)) && (0 <= j && j < COL_EFF(m));
 }
 
-ElType getElmtDiagonal(Matrix m, IdxType i){
-/* Mengirimkan elemen m(i,i) */
 
-   // AGORITMA
-   return (ELMT(m, i, i));  
-}
 
 
 void copyMatrix(Matrix mIn, Matrix *mOut){
@@ -242,29 +237,6 @@ void copyMatrix(Matrix mIn, Matrix *mOut){
    *mOut = mIn;
 }
 
-
-void readMatrix(Matrix *m, int nRow, int nCol){
-/* I.S. isIdxValid(nRow,nCol) */
-/* F.S. m terdefinisi nilai elemen efektifnya, berukuran nRow x nCol */
-/* Proses: Melakukan CreateMatrix(m,nRow,nCol) dan mengisi nilai efektifnya */
-/* Selanjutnya membaca nilai elemen per baris dan kolom */
-/* Contoh: Jika nRow = 3 dan nCol = 3, maka contoh cara membaca isi matriks :
-1 2 3
-4 5 6
-8 9 10 
-*/
-
-   // KAMUS LOKAL
-   int i, j;
-
-   // ALGORITMA
-   createMatrix(nRow, nCol, m);
-   for (i = 0; i < nRow; i ++) {
-      for (j = 0; j < nCol; j ++) {
-         scanf("%d", &ELMT(*m, i, j));
-      }
-   }
-}
 
 void displayMatrix(Matrix m){
 /* I.S. m terdefinisi */
