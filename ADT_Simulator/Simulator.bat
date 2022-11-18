@@ -1,0 +1,1 @@
+gcc driver_simulatorc -o driver_simulatorc ADT_POINT/point.c && driver_simulatorc

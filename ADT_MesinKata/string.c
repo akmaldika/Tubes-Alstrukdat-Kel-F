@@ -12,7 +12,8 @@ boolean isWordSame (Word str1, char str2[]) {
             i++;
         }
     }
-    return same;
+    return same && str2[i] == '\0';
+
 }
 
 boolean isLineSame (Line l, char str2[]) {

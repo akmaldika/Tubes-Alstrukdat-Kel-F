@@ -317,20 +317,20 @@ void DisplayCatalog(ListMakanan l)
     TIME tempTime;
 
     printf("\xc9");
-    for (i = 1; i <= 45; i++)
+    for (i = 1; i <= 50; i++)
     {
         printf("\xcd"); // ░
     }
     printf(" LIST MAKANAN ");
-    for (i = 1; i <= 46; i++)
+    for (i = 1; i <= 51; i++)
     {
         printf("\xcd"); // ░
     }
     printf("\xbb");
     printf("\n");
 
-    printf(" |-%15sNama%15s-|-%4sDurasi Kedaluarsa%3s-|-%sAksi yang %s-|-%6sDelivery Time%5s-|\n", "", "", "", "", "", "", "", "");
-    printf(" | %15s    %15s | %4s                 %3s | %sDiperlukan%s | %6s             %5s |\n", "", "", "", "", "", "", "", "");
+    printf(" |-%20sNama%20s-|-%4sDurasi Kedaluarsa%3s-|-%sAksi yang %s-|-%6sDelivery Time%5s-|\n", "", "", "", "", "", "", "", "");
+    printf(" | %20s    %20s | %4s                 %3s | %sDiperlukan%s | %6s             %5s |\n", "", "", "", "", "", "", "", "");
 
     for (i = 0; i < LengthLM(l); i++)
     {
@@ -342,7 +342,7 @@ void DisplayCatalog(ListMakanan l)
             printf("%c", GetNamaMkn(l, i).Tabword[cntStr]);
             cntStr++;
         }
-        while (cntStr < 34)
+        while (cntStr < 44)
         {
             printf(" ");
             cntStr++;
@@ -354,13 +354,10 @@ void DisplayCatalog(ListMakanan l)
         tempTime = GetKadaluarsaMkn(l, i);
         tempInt = TIMEToMin(GetKadaluarsaMkn(l, i));
 
-        if (tempTime.M < 10)
+        cntStr += 7;
+        if (tempTime.M > 9)
         {
-            cntStr += 7;
-        }
-        else
-        {
-            cntStr += 8;
+            cntStr++;
         }
 
         if (tempInt >= 60)
@@ -412,13 +409,10 @@ void DisplayCatalog(ListMakanan l)
         tempTime = GetDeliverTimeMkn(l, i);
         tempInt = TIMEToMin(GetDeliverTimeMkn(l, i));
 
-        if (tempTime.M < 10)
+        cntStr += 7;
+        if (tempTime.M > 9)
         {
-            cntStr += 7;
-        }
-        else
-        {
-            cntStr += 8;
+            cntStr++;
         }
 
         if (tempInt >= 60)
@@ -455,12 +449,12 @@ void DisplayCatalog(ListMakanan l)
     }
 
     printf("\xc8");
-    for (i = 1; i <= 41; i++)
+    for (i = 1; i <= 46; i++)
     {
         printf("\xcd"); // ░
     }
     printf(" OVERCOOKING SIMULATOR ");
-    for (i = 1; i <= 41; i++)
+    for (i = 1; i <= 46; i++)
     {
         printf("\xcd"); // ░
     }
