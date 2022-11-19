@@ -79,6 +79,7 @@ void DisplayTIME(TIME T)
     /* F.S. : Nilai T ditulis dg format D:H:M */
     /* Proses : menulis nilai setiap komponen T ke layar dalam format D.H.M
     tanpa karakter apa pun di depan atau belakangnya, termasuk spasi, enter, dll.*/
+    printf("Waktu: ");
     if (getD(T) == 0 && getH != 0)
     { // H.M
         printf("%d.%d", Hour(T), Minute(T));
@@ -91,6 +92,7 @@ void DisplayTIME(TIME T)
     { // D.H.M
         printf("%d.%d.%d", Day(T), Hour(T), Minute(T));
     }
+    printf("\n");
 }
 
 void DisplayTIMEk(TIME T)
