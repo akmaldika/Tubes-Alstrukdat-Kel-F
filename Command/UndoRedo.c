@@ -6,9 +6,9 @@
 #include "../ADT_Simulator/simulator.h"
 #include "../ADT_Stack/stack.h"
 #include "boolean.h"
-#include "../ADT_MesinKata/mesinkata.c"
-#include "../ADT_MesinKata/mesinkarakter.c"
-#include "../ADT_MesinKata/string.c"
+#include "../ADT_MesinKata/mesinkata.h"
+#include "../ADT_MesinKata/mesinkarakter.h"
+#include "../ADT_MesinKata/string.h"
 
 void undoGame(SIMULATOR *S, SIMULATOR InitSim, Notifikasi *Notif, Stack *Undo, Stack *Redo);
 /* I.S. : S, Undo, Notif, dan redo terdefinisi, InitSim adalah keadaan simulator paling awal dalam game */
@@ -111,8 +111,7 @@ void saveUndoRedoGame(SIMULATOR S, SIMULATOR InitSim, Notifikasi Notif, Stack *U
         // Handle kejadian pertama kali keadaan sim berubah
         if (IsEmptyStack(*Undo))
         {
-            Sim(valIn) = S;
-            Nof(valIn) = Notif;
+            valIn = MakeElStack(S, Notif);
             Push(Undo, valIn);
         }
         else
@@ -123,8 +122,7 @@ void saveUndoRedoGame(SIMULATOR S, SIMULATOR InitSim, Notifikasi Notif, Stack *U
             }
             else
             {
-                Sim(valIn) = S;
-                Nof(valIn) = Notif;
+                valIn = MakeElStack(S, Notif);
                 Push(Undo, valIn);
                 resetStack(Redo);
             }
