@@ -60,7 +60,7 @@ void BuyFood(SIMULATOR *s, ListMakanan lm, boolean *flag)
                 {
                     Enqueue(&DELIV(*s), ElmtLM(buyAbleFood, inputUser - 1));
                     printf("%s Berhasil dipesan! Mohon tunggu selama ", GetNamaMkn(buyAbleFood, inputUser - 1));
-                    DisplayTIMEk(GetDeliverTimeMkn(buyAbleFood, inputUser - 1));
+                    DisplayTIMEk(GetActionTimeMkn(buyAbleFood, inputUser - 1));
                     printf("\n");
 
                     ADVWORD();
@@ -87,7 +87,7 @@ void BuyFood(SIMULATOR *s, ListMakanan lm, boolean *flag)
                 {
                     Enqueue(&DELIV(*s), ElmtLM(buyAbleFood, inputUser -1));
                     printf("%s Berhasil dipesan! Mohon tunggu selama ", GetNamaMkn(buyAbleFood, inputUser - 1));
-                    DisplayTIMEk(GetDeliverTimeMkn(buyAbleFood, inputUser - 1));
+                    DisplayTIMEk(GetActionTimeMkn(buyAbleFood, inputUser - 1));
                     printf("\n");
                 }
 

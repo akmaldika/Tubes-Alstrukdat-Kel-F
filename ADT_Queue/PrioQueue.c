@@ -26,7 +26,7 @@ boolean isThereExp(PrioQueue Q)
 }
 boolean isDelivDone(PrioQueue Q){
 	/* Mengirim true jika dalam Q ada yang sudah selesai pengirimannya */
-	return TimeDeliv(Elmt(Q, Head(Q))) < 1;
+	return TimeAction(Elmt(Q, Head(Q))) < 1;
 }
 boolean searchMkn(PrioQueue Q, MAKANAN m)
 {
@@ -517,7 +517,7 @@ void Min1MinuteDeliv(PrioQueue *Qdeliv, PrioQueue *Q, boolean *FlagExp, boolean 
 			}
 			if (i != Tail(*Qdeliv))
 			{
-				PrevMin(&Deliv(Elmt(*Qdeliv, i)));
+				PrevMin(&TimeAct(Elmt(*Qdeliv, i)));
 				PrevMin(&Exp(Elmt(*Qdeliv, i)));
 				// if(isThereExp(*Q)){
 				// 	DequeueExp(Q, &m);
@@ -547,7 +547,7 @@ void Min1MinuteDeliv(PrioQueue *Qdeliv, PrioQueue *Q, boolean *FlagExp, boolean 
 			}
 		}
 		// Tail nya
-		PrevMin(&Deliv(Elmt(*Qdeliv, i)));
+		PrevMin(&TimeAct(Elmt(*Qdeliv, i)));
 		PrevMin(&Exp(Elmt(*Qdeliv, i)));
 		// if(isThereExp(*Q)){
 		// 	DequeueExp(Q, &m);
@@ -603,7 +603,7 @@ void MinNTimeDeliv(PrioQueue *Qdeliv, PrioQueue *Q, boolean *Flag, boolean *Flag
 			}
 			if (i != Tail(*Qdeliv))
 			{
-				PrevNMin(&Deliv(Elmt(*Qdeliv, i)), min);
+				PrevNMin(&TimeAct(Elmt(*Qdeliv, i)), min);
 				PrevNMin(&Exp(Elmt(*Qdeliv, i)), min);
 				if (isThereExp(*Qdeliv))
 				{
@@ -626,7 +626,7 @@ void MinNTimeDeliv(PrioQueue *Qdeliv, PrioQueue *Q, boolean *Flag, boolean *Flag
 			}
 		}
 		// Tail nya
-		PrevNMin(&Deliv(Elmt(*Qdeliv, i)), min);
+		PrevNMin(&TimeAct(Elmt(*Qdeliv, i)), min);
 		PrevNMin(&Exp(Elmt(*Qdeliv, i)), min);
 		if (isThereExp(*Qdeliv))
 		{
@@ -680,7 +680,7 @@ void waitCommand(PrioQueue *Qdeliv, PrioQueue *Q, boolean *FlagDeliv, boolean *F
 
 void min1menitAll(PrioQueue *Qdeliv, PrioQueue *Q, boolean *FlagDeliv, boolean *FlagExp, ListMakanan *LMakanan, ListMakanan *LdelivDone){
 	/* I.S. Qdeliv dan Q (untuk inventory) terdefinisi */
-	/* F.S. mengurangi 1 menit untuk semua makanan dalam inventory dan Qdeliv. Apabila sudah ada yang  selesai di deliv akan masuk ke dalam 
+	/* F.S. mengurangi 1 menit untuk semua makanan dalam inventory dan Qdeliv. Apabila sudah ada yang  selesai di delivery akan masuk ke dalam 
 	inventory */
 	boolean cek = false;
 	Min1Minute(Q, FlagExp, LMakanan);

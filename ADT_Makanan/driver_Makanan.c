@@ -5,8 +5,8 @@ int main(){
     IDEM id;
     NamaMakanan namaMakanan;
     TIME exp;
-    TIME deliv;
+    TIME TAction;
     LokasiAksi loc;
 
-    CreateMakanan(&m, id, namaMakanan, exp, deliv, loc);
+    CreateMakanan(&m, id, namaMakanan, exp, TAction, loc);
 }

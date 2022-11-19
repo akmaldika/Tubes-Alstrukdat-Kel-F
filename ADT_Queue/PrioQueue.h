@@ -44,7 +44,7 @@ typedef struct
 /* Jika e adalah MAKANAN dan Q adalah PrioQueue, maka akses elemen : */
 #define TimeFull(e) (e).exp
 #define Time(e) TIMEToMin((e).exp)
-#define TimeDeliv(e) TIMEToMin((e).deliv)
+#define TimeAction(e) TIMEToMin((e).TAction)
 #define Makanan(e) (e)
 #define NamaMakanan(e) (e).Nama
 #define Info(e) (e).id
@@ -183,7 +183,7 @@ void waitCommand(PrioQueue *Qdeliv, PrioQueue *Q, boolean *FlagDeliv, boolean *F
 
 void min1menitAll(PrioQueue *Qdeliv, PrioQueue *Q, boolean *FlagDeliv, boolean *FlagExp, ListMakanan *LMakanan, ListMakanan *LdelivDone);
 /* I.S. Qdeliv dan Q (untuk inventory) terdefinisi */
-/* F.S. mengurangi 1 menit untuk semua makanan dalam inventory dan Qdeliv. Apabila sudah ada yang  selesai di deliv akan masuk ke dalam
+/* F.S. mengurangi 1 menit untuk semua makanan dalam inventory dan Qdeliv. Apabila sudah ada yang  selesai di deliver akan masuk ke dalam
 inventory */
 
 void delAllPriqueue(PrioQueue *Q);
