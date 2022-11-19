@@ -2,12 +2,10 @@
 #include "boolean.h"
 #include "mesinkarakter.h"
 #include "mesinkata.h"
-#include "mesinkarakter.c"
-#include "mesinkata.c"
-#include "string.c"
+#include "string.h"
 
 
-int main () {
+int main() {
     printf("Masukkan Command = ");
     STARTCOMMAND();
     STARTWORD();

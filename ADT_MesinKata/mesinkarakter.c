@@ -1,5 +1,5 @@
 /* File: mesinkarakter.c */
-/* Implementasi Mesin Karakter */
+/* Implementasi ADT Mesin Karakter */
 
 #include "mesinkarakter.h"
 #include <stdio.h>
@@ -31,7 +31,7 @@ void ADV() {
 
        /* Algoritma */
        retval = fscanf(pita, "%c", &currentChar);
-       EOL = (currentChar == '\n');
+       EOL = (currentChar == NEWLINE);
        EOP = (retval != 1);
        if (EOP) {
               fclose(pita);

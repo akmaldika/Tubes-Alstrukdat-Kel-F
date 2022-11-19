@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "mesinkata.h": "c",
-        "simulator.h": "c"
+        "simulator.h": "c",
+        "mesinkarakter.h": "c"
     }
 }

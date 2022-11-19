@@ -66,44 +66,44 @@ int main()
     // CreateMakanan(&m3, 14, "kangkung", t3, t3, 3);
     // CreateMakanan(&m4, 15, "nasi goreng", t4, t4, 4);
     // Makanan(a) = m1;
-    PrioQueue q;
-    MakeEmpty(&q, 4); // 4 dan 5 // MaxEl
-    printf("max : %d \n", MaxEl(q));
-    Enqueue(&q, m1);
-    Enqueue(&q, m2);
-    Enqueue(&q, m3);
-    Enqueue(&q, m4);
-    // Enqueue(&q, m5);
-    // Enqueue(&q, m7);
-    PrintPrioQueue(q);
-    // printf("h t%d %d\n", Head(q), Tail(q));
-    // printf("is full %d \n",IsFull(q) );
+    PrioQueue InventoryPQ;
+    MakeEmpty(&InventoryPQ, 4); // 4 dan 5 // MaxEl
+    printf("max : %d \n", MaxEl(InventoryPQ));
+    Enqueue(&InventoryPQ, m1);
+    Enqueue(&InventoryPQ, m2);
+    Enqueue(&InventoryPQ, m3);
+    Enqueue(&InventoryPQ, m4);
+    // Enqueue(&InventoryPQ, m5);
+    // Enqueue(&InventoryPQ, m7);
+    PrintPrioQueue(InventoryPQ);
+    // printf("h t%d %d\n", Head(InventoryPQ), Tail(InventoryPQ));
+    // printf("is full %d \n",IsFull(InventoryPQ) );
 
-    Dequeue(&q, &temp);
-    Dequeue(&q, &temp);
-    Dequeue(&q, &temp);
+    Dequeue(&InventoryPQ, &temp);
+    Dequeue(&InventoryPQ, &temp);
+    Dequeue(&InventoryPQ, &temp);
 
-    PrintPrioQueue(q);
-    // printf("h t%d %d\n", Head(q), Tail(q));
-    Enqueue(&q, m5);
-    // PrintPrioQueue(q);
+    PrintPrioQueue(InventoryPQ);
+    // printf("h t%d %d\n", Head(InventoryPQ), Tail(InventoryPQ));
+    Enqueue(&InventoryPQ, m5);
+    // PrintPrioQueue(InventoryPQ);
 
-    // printf("h t%d %d\n", Head(q), Tail(q));
-    Enqueue(&q, m6);
-    // PrintPrioQueue(q);
+    // printf("h t%d %d\n", Head(InventoryPQ), Tail(InventoryPQ));
+    Enqueue(&InventoryPQ, m6);
+    // PrintPrioQueue(InventoryPQ);
 
-    // printf("h t%d %d\n", Head(q), Tail(q));
-    Enqueue(&q, m7);
-    // PrintPrioQueue(q);
+    // printf("h t%d %d\n", Head(InventoryPQ), Tail(InventoryPQ));
+    Enqueue(&InventoryPQ, m7);
+    // PrintPrioQueue(InventoryPQ);
 
-    DequeueExp(&q, &temp);
-    // printf("h t%d %d\n", Head(q), Tail(q));
-    // printf("id nihh %d\n", Info((q).T[Head(q)]));  enque yg dah exp
+    DequeueExp(&InventoryPQ, &temp);
+    // printf("h t%d %d\n", Head(InventoryPQ), Tail(InventoryPQ));
+    // printf("id nihh %d\n", Info((InventoryPQ).T[Head(InventoryPQ)]));  enque yg dah exp
 
     printf("\n\n1. Pengurangan 1 menit dalam PrioQueue \n");
-    PrintPrioQueue(q);
-    Min1Minute(&q, &Flag, &ListMakananExp);
-    PrintPrioQueue(q);
+    PrintPrioQueue(InventoryPQ);
+    Min1Minute(&InventoryPQ, &Flag, &ListMakananExp);
+    PrintPrioQueue(InventoryPQ);
     if (Flag)
     {
         printf("\nFlag truee \n");
@@ -115,9 +115,9 @@ int main()
     }
 
     printf("\n2. Pengurangan 1 menit dalam PrioQueue \n");
-    PrintPrioQueue(q);
-    Min1Minute(&q, &Flag, &ListMakananExp);
-    PrintPrioQueue(q);
+    PrintPrioQueue(InventoryPQ);
+    Min1Minute(&InventoryPQ, &Flag, &ListMakananExp);
+    PrintPrioQueue(InventoryPQ);
     if (Flag)
     {
         printf("\nFlag truee \n");
@@ -129,9 +129,9 @@ int main()
     }
 
     printf("\n3. Pengurangan 1 menit dalam PrioQueue \n");
-    PrintPrioQueue(q);
-    Min1Minute(&q, &Flag, &ListMakananExp);
-    PrintPrioQueue(q);
+    PrintPrioQueue(InventoryPQ);
+    Min1Minute(&InventoryPQ, &Flag, &ListMakananExp);
+    PrintPrioQueue(InventoryPQ);
     if (Flag)
     {
         printf("\nFlag truee \n");
@@ -150,15 +150,15 @@ int main()
         printf("   %d. %s\n", i + 1, ListMakananExp.Lmakanan[i].Nama);
         i++;
     }
-    PrintPrioQueue(q);
+    PrintPrioQueue(InventoryPQ);
     printf("m3 id : %d\n", m1.id);
-    printf("ada ayam goreng : %d", searchMkn(q, m1));
+    printf("ada ayam goreng : %d", searchMkn(InventoryPQ, m1));
     boolean flag = 0;
 
     printf("\n\n4. Pengurangan 3 menit dalam PrioQueue \n");
-    PrintPrioQueue(q);
-    MinNTime(&q, &flag, &ListMakananExp, 0, 3);
-    PrintPrioQueue(q);
+    PrintPrioQueue(InventoryPQ);
+    MinNTime(&InventoryPQ, &flag, &ListMakananExp, 0, 3);
+    PrintPrioQueue(InventoryPQ);
     if (Flag)
     {
         printf("\nFlag truee \n");
@@ -177,32 +177,32 @@ int main()
         i++;
     }
 
-    Enqueue(&q, m2);
-    Enqueue(&q, m3);
+    Enqueue(&InventoryPQ, m2);
+    Enqueue(&InventoryPQ, m3);
     printf("\n");
-    PrintPrioQueue(q);
-    // printf("h t%d %d\n", Head(q), Tail(q));
+    PrintPrioQueue(InventoryPQ);
+    // printf("h t%d %d\n", Head(InventoryPQ), Tail(InventoryPQ));
     printf("\nremove ikan asin \n");
-    removeFromInventory(&q, 18);
-    // printf("h t%d %d\n", Head(q), Tail(q));
-    PrintPrioQueue(q);
+    removeFromInventory(&InventoryPQ, 18);
+    // printf("h t%d %d\n", Head(InventoryPQ), Tail(InventoryPQ));
+    PrintPrioQueue(InventoryPQ);
 
     // Delivery m5  m4
-    PrioQueue Qdeliv, Qcopy;
-    MakeEmpty(&Qdeliv, 3);
-    DelivMakanan(&Qdeliv, m4);
-    PrintDelivery(Qdeliv); // delivv
-    waitCommand(&Qdeliv, &q, &FlagDeliv, &Flag, &ListMakananExp, &ListDelivDone, 0, 2);
-    // min1menitAll(&Qdeliv, &q, &FlagDeliv, &Flag, &ListMakananExp, &ListDelivDone);
-    // min1menitAll(&Qdeliv, &q, &FlagDeliv, &Flag, &ListMakananExp, &ListDelivDone);
-    // min1menitAll(&Qdeliv, &q, &FlagDeliv, &Flag, &ListMakananExp, &ListDelivDone);
+    PrioQueue DeliveryPQ, Qcopy;
+    MakeEmpty(&DeliveryPQ, 3);
+    DelivMakanan(&DeliveryPQ, m4);
+    PrintDelivery(DeliveryPQ); // delivv
+    waitCommand(&DeliveryPQ, &InventoryPQ, &FlagDeliv, &Flag, &ListMakananExp, &ListDelivDone, 0, 2);
+    // min1menitAll(&DeliveryPQ, &InventoryPQ, &FlagDeliv, &Flag, &ListMakananExp, &ListDelivDone);
+    // min1menitAll(&DeliveryPQ, &InventoryPQ, &FlagDeliv, &Flag, &ListMakananExp, &ListDelivDone);
+    // min1menitAll(&DeliveryPQ, &InventoryPQ, &FlagDeliv, &Flag, &ListMakananExp, &ListDelivDone);
 
-    PrintPrioQueue(q);
+    PrintPrioQueue(InventoryPQ);
     printf("\n");
-    copyPQ(q, &Qcopy);
+    copyPQ(InventoryPQ, &Qcopy);
     PrintPrioQueue(Qcopy);
     printf("\n");
-    PrintDelivery(Qdeliv); // delivv
+    PrintDelivery(DeliveryPQ); // delivv
     printf("\n");
     PrintPrioQueue(Qcopy);
     printf("maxBefore %d\n", MaxEl(Qcopy));
@@ -227,6 +227,13 @@ int main()
         PrintPrioQueue(Qcopy);
         printf("\n");
     }
+
+
+    // printf("test\n");
+    // STARTWORD();
+    // STARTCOMMAND();
+    // checkWait();
+
 
     return 0;
 }

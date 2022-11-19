@@ -1,5 +1,6 @@
 /* File: mesinkata.h */
-/* Definisi Mesin Word: Model Akuisisi Versi I */
+/* Definisi Mesin Kata */
+
 
 #ifndef __MESINKATA_H__
 #define __MESINKATA_H__
@@ -7,7 +8,6 @@
 #include "boolean.h"
 #include "mesinkarakter.h"
 
-#define BLANK ' '
 
 typedef struct line
 {
@@ -22,7 +22,6 @@ typedef struct word
 } Word;
 
 
-/* State Mesin Word */
 extern boolean endWord;
 extern Word currentWord;
 extern Line currentLine;
@@ -59,5 +58,12 @@ void STARTCOMMAND();
     /* I.S. : Sembarang
        F.S. : currentLine berisi masukan command dari user sampai sebelum new line (currentChar = '\n') */
 
+void ADVCOMMAND();
+    /* I.S. : Sembarang
+       F.S  : karakter pada input command telah dimajukan satu karakter */
+
+void CopyCommand();
+    /* I.S. : Sembarang
+       F.S. : Satu line/baris input command telah diakuisisi dan disimpan pada currentLine, currentChar == '\n' */
 
 #endif
