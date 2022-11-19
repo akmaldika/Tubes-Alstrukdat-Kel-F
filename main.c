@@ -8,13 +8,20 @@
 #include "Command/Cookbook.c"
 #include "Command/Move.c"
 #include "Command/Fryfood.c"
+#include "Command/wait.c"
 
 int main()
 {
     /* KAMUS */
     ListResep ListRsp;
     ListMakanan ListMkn;
+    ListMakanan ListMakananEXP;
+    ListMakanan ListDeliveryDone;
+    boolean FlagDelivDone;
+    boolean FlagMakananEXP;
     boolean isStartGame;
+    PrioQueue InventoryMakanan;
+    PrioQueue DeliveryMakanan;
     SIMULATOR BMO;
     Stack Undo, Redo;
 
@@ -25,7 +32,10 @@ int main()
     CreateEmptyStack(&Undo);
     CreateEmptyStack(&Redo);
     CreateSim(&BMO);
-    
+    MakeEmpty(&InventoryMakanan, MaxElPQ);
+    MakeEmpty(&DeliveryMakanan, MaxElPQ);
+    CreateListMakanan(&ListMakananEXP);
+    CreateListMakanan(&ListDeliveryDone);
 
     splashInitGame();
     STARTCOMMAND(); // currentWord
@@ -60,7 +70,7 @@ int main()
         }
         else if (isWordSame(currentWord, "FRY"))
         {
-            FRYFOOD(&BMO, ListMkn, ListRsp, ) //************* KURANG FALG
+            // FRYFOOD(&BMO, ListMkn, ListRsp, ) //************* KURANG FALG
         }
         else if (isWordSame(currentWord, "BOIL"))
         {
@@ -73,14 +83,17 @@ int main()
         else if (isWordSame(currentWord, "WAIT"))
         {
             //WAIT
+            WAIT(&DeliveryMakanan, &InventoryMakanan, &FlagDelivDone, &FlagMakananEXP, &ListMakananEXP, &ListDeliveryDone);
         }
         else if (isWordSame(currentWord, "DELIVERY"))
         {
             //DELIVERY
+            DELIVERY(DeliveryMakanan);
         }
         else if (isWordSame(currentWord, "INVENTORY"))
         {
             //INVENTORY
+            INVENTORYMakanan(InventoryMakanan);
         }
         else if (isWordSame(currentWord, "CATALOG"))
         {
