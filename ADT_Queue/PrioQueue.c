@@ -694,3 +694,13 @@ void min1menitAll(PrioQueue *Qdeliv, PrioQueue *Q, boolean *FlagDeliv, boolean *
 		*FlagExp = true;
 	}
 }
+
+void delAllPrioqueue(PrioQueue *Qdeliv)
+{
+	/* I.S. Qdeliv dan QInven terdefinisi */
+	/* F.S. menghapus semua elemen dari Qdeliv dan QInven */
+	free(Qdeliv->T);
+	Head(*Qdeliv) = Nil;
+	Tail(*Qdeliv) = Nil;
+	MaxEl(*Qdeliv) = 0;
+}

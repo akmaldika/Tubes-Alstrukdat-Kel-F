@@ -1,6 +1,8 @@
 #include "../ADT_Simulator/simulator.h"
 #include "../ADT_Matriks/matrix.h"
 #include "../ADT_Point/point.h"
+#include "../ADT_Queue/PrioQueue.h"
+
 void MoveE(SIMULATOR *S){
     Matrix m=MAP(*S);
     TIME t=WAKTU(*S);
@@ -52,6 +54,7 @@ void MoveS(SIMULATOR *S){
     Matrix m=MAP(*S);
     TIME t=WAKTU(*S);
     POINT p=TITIK(*S);
+    PrioQueue q=DELIV(*S);
     boolean sukses=false;
     MoveSouth(&m,&sukses) ;
     if (sukses){
@@ -61,5 +64,18 @@ void MoveS(SIMULATOR *S){
     setTimeSim(&S,t);
     setMap(&S,m);
     }
+}
 
+
+
+void Move(SIMULATOR *S, Word X){
+    if (isWordSame(X,'EAST')){
+        MoveE(S);
+    }else if (isWordSame(X,'WEST')){
+        MoveW(S);
+    }else if (isWordSame(X,'NORTH')){
+        MoveN(S);
+    }else if (isWordSame(X,'SOUTH')){
+        MoveS(S);
+    }
 }

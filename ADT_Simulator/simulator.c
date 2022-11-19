@@ -1,6 +1,6 @@
 #include "simulator.h"
 
-void CreateSim(SIMULATOR *S) {
+void CreateSim(SIMULATOR *S, char *filename) {
     Word nama;
     nama.Length = 4;
     nama.String[0] = 'J';
@@ -22,7 +22,7 @@ void CreateSim(SIMULATOR *S) {
     DELIV(*S) = newDelivery;
 
     Matrix newMap;
-    createMatrix(1, 1, &newMap);
+    newMap = MapMatrix(filename);
     MAP(*S) = newMap;
 
     TIME newTime;

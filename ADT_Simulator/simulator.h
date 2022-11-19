@@ -19,7 +19,7 @@ typedef struct {
 #define MAP(s) (s).map
 #define WAKTU(s) (s).waktu
 
-void CreateSim(SIMULATOR *S);
+void CreateSim(SIMULATOR *S, char *filename);
 
 void setNamaSim(SIMULATOR *S, Word nama);
 

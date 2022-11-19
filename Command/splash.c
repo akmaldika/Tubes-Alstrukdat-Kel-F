@@ -12,7 +12,7 @@ void splashInitGame()
 void splashExitGame()
 {
     printf("=== TERIMA KASIH TELAH BERMAIN OVERCOOKING SIMULATOR ===\n");
-    printf("===     create by Fakhri Akmal Nigel Libri Zaydan    ===");
+    printf("===     games by Fakhri Akmal Nigel Libri Zaydan     ===");
 }
 
 #endif
