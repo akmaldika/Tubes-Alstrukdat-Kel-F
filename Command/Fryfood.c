@@ -2,7 +2,7 @@
 #include "../ADT_Notifikasi/Notifikasi.h"
 #include "../config_main.h"
 
-void FRYFOOD(SIMULATOR *s, ListMakanan lm, ListResep lr, Notifikasi *notif) {
+void COOKFOOD(SIMULATOR *s, ListMakanan lm, ListResep lr, Notifikasi *notif, char *action) {
     // KAMUS
     MultiSet listBahan;
     PrioQueue tempInventory;
@@ -17,7 +17,7 @@ void FRYFOOD(SIMULATOR *s, ListMakanan lm, ListResep lr, Notifikasi *notif) {
     CreateListMakanan(&newFood);
     CreateListMakanan(&usedFood);
 
-    actionableFood = DisplayActionAbleLM(lm, "Fry");
+    actionableFood = DisplayActionAbleLM(lm, action);
     printf("Kirim 0 untuk exit.\n\n");
     printf("Command = ");
     STARTCOMMAND();
@@ -35,7 +35,7 @@ void FRYFOOD(SIMULATOR *s, ListMakanan lm, ListResep lr, Notifikasi *notif) {
         // Jija n sesuai 0 <= n <= Length(actionableFood)
         } else {
 
-            // Inisialisasi untuk memilih
+            // Inisialisasi 
             // Nomor id pilihan pengguna
             id = GetIdMkn(actionableFood, n-1);
             listBahan = getListBahan(lr, id);
@@ -43,7 +43,7 @@ void FRYFOOD(SIMULATOR *s, ListMakanan lm, ListResep lr, Notifikasi *notif) {
             tempInventory = INVENTORY(*s);
             CreateListMakanan(&tempUsedFood);
 
-            // 
+            // Loop untuk tes apakah terdapat bahan yang cukup dari inventory
             while ((!isEmptyMS(listBahan)) && (isSuccess)) {
                 currIdBahan = ELMTMS(listBahan, 0);
                 if (searchMkn(tempInventory, MknId(lm, currIdBahan))) {

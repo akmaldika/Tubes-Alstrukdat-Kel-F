@@ -44,8 +44,9 @@ int main() {
     Notifikasi notif;
     CreateNotifikasi(&notif);
 
-    FRYFOOD(&s, lm, lr, &notif);
+    COOKFOOD(&s, lm, lr, &notif, "Fry");
 
+    printLR(lr);
     displayNotifikasi(notif);
 
 
@@ -55,9 +56,5 @@ int main() {
     
 }
 /*
-gcc -lm  ..\ADT_Tree\NTree.c ..\ADT_MesinKata\mesinkata.c  ..\ADT_MesinKata\string.c ..\ADT_MesinKata\mesinkarakter.c ..\ADT_MultiSet\MultiSet.c ..\ADT_Makanan\makanan.c ..\ADT_ListStatik\ListMakanan.c ..\ADT_Time\time.c ..\ADT_ListStatik\ListResep.c ..\ADT_Matriks\matrix.c ..\ADT_Simulator\simulator.c ..\ADT_Queue\PrioQueue.c ..\ADT_Point\point.c Driver_Action_Command.c -o a ; ./a
-*/
-
-/*
-gcc -lm  ..\ADT_MesinKata\mesinkata.c  ..\ADT_MesinKata\string.c ..\ADT_MesinKata\mesinkarakter.c  Driver_Action_Command.c -o a ; ./a
+gcc -lm  ..\ADT_Tree\NTree.c ..\ADT_MesinKata\mesinkata.c  ..\ADT_MesinKata\string.c ..\ADT_MesinKata\mesinkarakter.c ..\ADT_MultiSet\MultiSet.c ..\ADT_Makanan\makanan.c ..\ADT_ListStatik\ListMakanan.c ..\ADT_Time\time.c ..\ADT_ListStatik\ListResep.c ..\ADT_Matriks\matrix.c ..\ADT_Simulator\simulator.c ..\ADT_Queue\PrioQueue.c ..\ADT_Point\point.c ..\ADT_Notifikasi\Notifikasi.c Driver_Action_Command.c  -o a ; ./a
 */

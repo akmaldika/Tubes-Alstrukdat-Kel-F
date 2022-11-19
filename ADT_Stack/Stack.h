@@ -8,7 +8,7 @@
 
 #include "boolean.h"
 #include "..\ADT_Simulator\simulator.h"
-#include "..\ADT_Notif\Notifikasi.h"
+#include "..\ADT_Notifikasi\Notifikasi.h"
 
 #define IDX_UNDEF_STACK -1
 #define initCap 20
