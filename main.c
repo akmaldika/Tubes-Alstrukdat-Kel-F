@@ -78,7 +78,9 @@ int main()
         }
         else if (isWordSame(currentWord, "MOVE"))
         {
-            //MOVE
+            ADVWORD();
+            Move(&BMO,currentWord);
+            min1menitAll()
         }
         else if (isWordSame(currentWord, "WAIT"))
         {

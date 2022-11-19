@@ -54,6 +54,7 @@ void MoveS(SIMULATOR *S){
     Matrix m=MAP(*S);
     TIME t=WAKTU(*S);
     POINT p=TITIK(*S);
+    PrioQueue q=DELIV(*S);
     boolean sukses=false;
     MoveSouth(&m,&sukses) ;
     if (sukses){
