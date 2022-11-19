@@ -80,7 +80,7 @@ int main()
         {
             ADVWORD();
             Move(&BMO,currentWord);
-            min1menitAll()
+            //min1menitAll() gangerti help yg ini hehehe
         }
         else if (isWordSame(currentWord, "WAIT"))
         {
