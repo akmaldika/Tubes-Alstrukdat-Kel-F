@@ -1,10 +1,5 @@
 #include <stdio.h>
-#include "../library.h"
-// #include "../ADT_MesinKata/mesinkarakter.c"
-// #include "../ADT_MesinKata/mesinkata.c"
-#include "../ADT_MesinKata/string.h"
-#include "../ADT_Notifikasi/Notifikasi.h"
-#include "Fryfood.c"
+#include "CommandGame.h"
 
 int main() {
     SIMULATOR s;
