@@ -17,3 +17,8 @@ void CreateMakanan(MAKANAN *m, IDEM id, NamaMakanan namaMakanan, TIME exp, TIME 
         Deliv(*m) = deliv;
         Locate(*m) = loc;
 }
+
+boolean isMakananSame(MAKANAN m1, MAKANAN m2)
+{
+        return ID(m1) == ID(m2);
+}
