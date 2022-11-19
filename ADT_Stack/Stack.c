@@ -19,7 +19,7 @@ void CreateEmptyStack(Stack *S)
     /* I.S. sembarang; */
     /* F.S. Sebuah stack S kosong terbentuk dengan kapasitas initial initCap*/
     LStack(*S) = (SIMULATOR *) malloc(initCap * sizeof(SIMULATOR));
-    Top(*S) = Nil;
+    Top(*S) = IDX_UNDEF_STACK;
     CapStack(*S) = initCap;
 }
 
@@ -27,7 +27,7 @@ void CreateEmptyStack(Stack *S)
 boolean IsEmptyStack(Stack S)
 {
     /* Mengirim true jika Stack kosong */
-    return (Top(S) == Nil);
+    return (Top(S) == IDX_UNDEF_STACK);
 }
 
 boolean IsFullStack(Stack S)
@@ -36,6 +36,11 @@ boolean IsFullStack(Stack S)
     return (Top(S) == CapStack(S) - 1);
 }
 
+boolean IsSparseStack(Stack S)
+{
+    /* Mengirimkan true jika S adalah matrix sepi */
+    return (CapStack(S) >= 40 && Top(S) < CapStack(S) - 20);
+}
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
 void Push(Stack *S, ElStackURType X)
 {
@@ -57,12 +62,12 @@ void Pop(Stack *S, ElStackURType *X)
 {
     /* Menghapus X dari Stack S. */
     /* I.S. S  tidak mungkin kosong, mungkin mendekati keadaan sepi */
-    /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
+    /* F.S. X adalah IDX_UNDEF_STACKai elemen TOP yang lama, TOP berkurang 1 */
     /* Jika stack sepi akan di-dealokasi dengan fungsi DecreaseSize */
     InfoTop(*S) = *X;
     Top(*S)--;
 
-    if(CapStack(*S) >= 40 && Top(*S) < CapStack(*S) - 20)
+    if(IsSparseStack(*S))
     {
         DecreaseSize(S);
     }
@@ -93,9 +98,9 @@ void DecreaseSize(Stack *S)
 void resetStack(Stack *S)
 {
     /* I.S. Stack  terdefinisi, sembarang */
-    /* F.S. Capacity Stack dikembalikan initCap; Top Stack = Nil; Container menampung initCap memori */
+    /* F.S. Capacity Stack dikembalikan initCap; Top Stack = IDX_UNDEF_STACK; Container menampung initCap memori */
     LStack(*S) = (SIMULATOR *) realloc(LStack(*S), (initCap) * sizeof(SIMULATOR));
-    Top(*S) = Nil;
+    Top(*S) = IDX_UNDEF_STACK;
     CapStack(*S) = initCap;
 }
 
@@ -104,6 +109,6 @@ void delAllStack(Stack *S)
     /* I.S. Stack  terdefinisi, sembarang */
     /* F.S. Stack dikembalikan ke sistem seluruhnya */
     free(LStack(*S));
-    Top(*S) = Nil;
+    Top(*S) = IDX_UNDEF_STACK;
     CapStack(*S) = initCap;
 }

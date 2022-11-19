@@ -129,4 +129,7 @@ long Duration(TIME TAw, TIME TAkh);
 /* Mengirim TAkh-TAw dlm Detik, dengan kalkulasi */
 /* Jika TAw > TAkh, maka TAkh adalah 1 hari setelah TAw */
 
+boolean isTimeSame(TIME T1, TIME T2);
+/* Mengirimkan true jika t1 dan t2 meemiliki waktu yang sama */
+
 #endif

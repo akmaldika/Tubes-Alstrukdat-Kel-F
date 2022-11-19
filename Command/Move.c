@@ -3,6 +3,7 @@
 #include "../ADT_Point/point.h"
 #include "../ADT_Queue/PrioQueue.h"
 
+
 void MoveE(SIMULATOR *S, boolean *MoveSuccess){
     Matrix m=MAP(*S);
     TIME t=WAKTU(*S);
@@ -65,9 +66,6 @@ void MoveS(SIMULATOR *S,boolean *MoveSuccess){
         setMapSim(S,m);
     }
 }
-
-
-
 void Move(SIMULATOR *S, Word X,boolean *MoveSuccess){
     if (isWordSame(X,'EAST')){
         MoveE(S,MoveSuccess);

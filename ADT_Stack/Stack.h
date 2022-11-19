@@ -9,7 +9,7 @@
 #include "boolean.h"
 #include "..\ADT_Simulator\simulator.h"
 
-#define Nil -1
+#define IDX_UNDEF_STACK -1
 #define initCap 20
 #define addCap 10
 #define minCap 10
@@ -24,7 +24,7 @@ typedef struct {
   int Capacity; /* kapasitas yang sedang ditampung */
 } Stack;
 /* indeks stack [0..Capacity-1] */
-/* Stack kosong adalah stack dengan Top == Nil */
+/* Stack kosong adalah stack dengan Top == IDX_UNDEF_STACK */
 /* Stack penuh adalah stack dengan Top == Capacity - 1 */
 /* Stack sepi adalah stack dengan Top < Capacity - 20 dan Capacity >= 40 */
 
@@ -47,6 +47,9 @@ boolean IsEmptyStack(Stack S);
 boolean IsFullStack(Stack S);
 /* Mengirim true jika Stack penuh */
 
+boolean IsSparseStack(Stack S);
+/* Mengirimkan true jika S adalah matrix sepi */
+
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
 void Push(Stack *S, ElStackURType X);
 /* Menambahkan X sebagai elemen Stack S. */
@@ -58,7 +61,7 @@ void Push(Stack *S, ElStackURType X);
 void Pop(Stack *S, ElStackURType *X);
 /* Menghapus X dari Stack S. */
 /* I.S. S  tidak mungkin kosong, mungkin mendekati keadaan sepi */
-/* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
+/* F.S. X adalah IDX_UNDEF_STACKai elemen TOP yang lama, TOP berkurang 1 */
 /* Jika stack sepi akan di-dealokasi dengan fungsi DecreaseSize */
 
 void IncreaseSize(Stack *S);
@@ -73,7 +76,7 @@ void DecreaseSize(Stack *S);
 
 void resetStack(Stack *S);
 /* I.S. Stack  terdefinisi, sembarang */
-/* F.S. Capacity Stack dikembalikan initCap; Top Stack = Nil; Container menampung initCap memori */
+/* F.S. Capacity Stack dikembalikan initCap; Top Stack = IDX_UNDEF_STACK; Container menampung initCap memori */
 /* menggunakan fungsi realloc untuk container */
 
 void delAllStack(Stack *S);

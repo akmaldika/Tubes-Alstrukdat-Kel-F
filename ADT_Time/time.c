@@ -237,3 +237,7 @@ long Duration(TIME TAw, TIME TAkh)
     }
     return d;
 }
+
+boolean isTimeSame(TIME T1, TIME T2){
+    return (getD(T1) == getD(T2) && getH(T1) == getH(T2) && getM(T1) == getM(T2));
+}
