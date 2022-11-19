@@ -3,7 +3,12 @@
 
 int main(){
     POINT P;
+    POINT P2;
+    SetPoint(&P2,0,0);
     SetPoint(&P,0,0);
+    if (isPointSame(P,P2)){
+        printf("true");
+    }
     printf("Posisi Saat ini : ");
     TulisPOINT(P);
     
