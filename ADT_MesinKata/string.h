@@ -1,3 +1,7 @@
+/* File: string.h */
+/* Definisi String */
+
+
 #ifndef __STRING_H_
 #define __STRING_H_
 

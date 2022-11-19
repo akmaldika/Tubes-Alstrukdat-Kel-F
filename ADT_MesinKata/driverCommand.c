@@ -2,11 +2,10 @@
 #include "boolean.h"
 #include "mesinkarakter.h"
 #include "mesinkata.h"
-#include "mesinkarakter.c"
-#include "mesinkata.c"
-#include "string.c"
+#include "string.h"
 
-int main () {
+
+int main() {
     /* Beda isWordSame buat 1 kata, sedangkan isLineSame buat 1 baris (ada spasinya) */
     STARTCOMMAND();
     STARTWORD();

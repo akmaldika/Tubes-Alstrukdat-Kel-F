@@ -6,7 +6,11 @@
 
 #include "boolean.h"
 
+#define NEWLINE '\n'
+#define BLANK ' '
+#define ENDSTRING '\0'
 #define Nmax 100
+
 typedef char str[Nmax];
 
 /* State Mesin */
