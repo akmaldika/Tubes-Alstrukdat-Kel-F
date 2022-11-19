@@ -44,7 +44,6 @@ Matrix MapMatrix(char* filename){
         ELMT(Map,i,j)=currentLine.Tabword[j];
         }
         i++;
-        printf("\n");
     }
     createMatrix(row+2,col+2,&RetMap);
     for (int i = brsmin; i <= getLastIdxRow(RetMap); i++){
