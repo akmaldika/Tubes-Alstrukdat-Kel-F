@@ -1,16 +1,5 @@
 // #include "../ADT_Simulator/simulator.h"
-#include "../ADT_ListStatik/ListMakanan.h"
-#include "../ADT_ListStatik/ListResep.h"
-#include "../ADT_Makanan/makanan.h"
-#include "../ADT_Matriks/matrix.h"
-#include "../ADT_MesinKata/mesinkarakter.h"
-#include "../ADT_MesinKata/mesinkata.h"
-#include "../ADT_MesinKata/string.h"
-#include "../ADT_MultiSet/MultiSet.h"
-// #include "../ADT_Point/point.h"
-#include "../ADT_Queue/PrioQueue.h"
-#include "../ADT_Time/time.h"
-#include "../ADT_Tree/NTree.h"
+#include "../library.h"
 
 void COOKBOOKFOOD(ListResep lr, ListMakanan lm) {
     // KAMUS
@@ -34,4 +23,28 @@ void COOKBOOKFOOD(ListResep lr, ListMakanan lm) {
         printf("\n");
     } 
 
+}
+
+void RECOMMENDATION(SIMULATOR s, ListResep lr, ListMakanan lm) {
+    // KAMUS
+    MultiSet multiSetInventory, makeableFood;
+    int i, currentId;
+    // ALGORITMA
+    for (i = 0; i < NBElmt(INVENTORY(s)); i++) {
+        addMS(&multiSetInventory, Info(Elmt(INVENTORY(s), i)), 1); 
+    }
+
+    makeableFood = getMakableResep(multiSetInventory, lr);
+
+    if (!isEmptyMS(makeableFood)) {
+        printf("Tidak ada makanan yang dapat direkomendasikan\n\n");
+
+    } else {
+        printf("Berikut daftar makanan yang direkomendasikan\n");
+        while (!isEmptyMS(makeableFood)) {
+            currentId = ELMTMS(makeableFood, 0);
+            printf(" - %s\n", NamaMknId(lm, currentId).Tabword);
+            removeMS(&makeableFood, currentId, 1);
+        }
+    }
 }

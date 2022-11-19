@@ -19,6 +19,7 @@ void CreateNotifikasi(Notifikasi *n) {
     CreateListMakanan(&DELIVEREDFOOD(*n));
     CreateListMakanan(&USEDFOOD(*n));
     CreateListMakanan(&NEWFOOD(*n));
+    ISUNDO(*n) = false;
 }
 
 /* Selektor */
@@ -67,15 +68,18 @@ void displayExpFood(Notifikasi n) {
     // KAMUS
     int i;
     // ALGOTIMA
-    if (ISUNDO(n)) {
-        printf("Makanan berikut sudah expired dan dibuang dari inventory\n");
-        for (i = 0; i < LengthLM(EXPIREDFOOD(n)); i++); {
-            printf("- %s\n", GetNamaMkn(EXPIREDFOOD(n), i).Tabword);
-        }
-    } else {
-        printf("Makanan berikut yang tadinya expired sudah kembali ke inventory\n");
-        for (i = 0; i < LengthLM(EXPIREDFOOD(n)); i++); {
-            printf("- %s\n", GetNamaMkn(EXPIREDFOOD(n), i).Tabword);
+
+    if (LengthLM(EXPIREDFOOD(n)) != 0) {
+        if (!ISUNDO(n)) {
+            printf("Makanan berikut sudah expired dan dibuang dari inventory\n");
+            for (i = 0; i < LengthLM(EXPIREDFOOD(n)); i++) {
+                printf("- %s\n", GetNamaMkn(EXPIREDFOOD(n), i).Tabword);
+            }
+        } else {
+            printf("Makanan berikut yang tadinya expired sudah kembali ke inventory\n");
+            for (i = 0; i < LengthLM(EXPIREDFOOD(n)); i++) {
+                printf("- %s\n", GetNamaMkn(EXPIREDFOOD(n), i).Tabword);
+            }
         }
     }
 }
@@ -87,15 +91,17 @@ void displayDelivFood(Notifikasi n) {
     // KAMUS
     int i;
     // ALGOTIMA
-    if (ISUNDO(n)) {
-        printf("Makanan berikut sudah expired dan dibuang dari inventory\n");
-        for (i = 0; i < LengthLM(DELIVEREDFOOD(n)); i++); {
-            printf("- %s\n", GetNamaMkn(DELIVEREDFOOD(n), i).Tabword);
-        }
-    } else {
-        printf("Makanan berikut yang tadinya expired sudah kembali ke inventory\n");
-        for (i = 0; i < LengthLM(DELIVEREDFOOD(n)); i++); {
-            printf("- %s\n", GetNamaMkn(DELIVEREDFOOD(n), i).Tabword);
+    if (LengthLM(DELIVEREDFOOD(n)) != 0) {
+        if (!ISUNDO(n)) {
+            printf("Makanan berikut sudah sampai dan akan dimasukan ke inventory\n");
+            for (i = 0; i < LengthLM(DELIVEREDFOOD(n)); i++) {
+                printf("- %s\n", GetNamaMkn(DELIVEREDFOOD(n), i).Tabword);
+            }
+        } else {
+            printf("Makanan berikut yang tadinya sudah sampai dan masuk ke inventory, akan keluar kembali\n");
+            for (i = 0; i < LengthLM(DELIVEREDFOOD(n)); i++) {
+                printf("- %s\n", GetNamaMkn(DELIVEREDFOOD(n), i).Tabword);
+            }
         }
     }
 }
@@ -107,15 +113,17 @@ void displayUsedFood(Notifikasi n) {
     // KAMUS
     int i;
     // ALGOTIMA
-    if (ISUNDO(n)) {
-        printf("Makanan berikut sudah expired dan dibuang dari inventory\n");
-        for (i = 0; i < LengthLM(USEDFOOD(n)); i++); {
-            printf("- %s\n", GetNamaMkn(USEDFOOD(n), i).Tabword);
-        }
-    } else {
-        printf("Makanan berikut yang tadinya expired sudah kembali ke inventory\n");
-        for (i = 0; i < LengthLM(USEDFOOD(n)); i++); {
-            printf("- %s\n", GetNamaMkn(USEDFOOD(n), i).Tabword);
+    if (LengthLM(USEDFOOD(n)) != 0) {
+        if (!ISUNDO(n)) {
+            printf("Makanan berikut sudah dipakai sebagai bahan makanan\n");
+            for (i = 0; i < LengthLM(USEDFOOD(n)); i++) {
+                printf("- %s\n", GetNamaMkn(USEDFOOD(n), i).Tabword);
+            }
+        } else {
+            printf("Makanan berikut yang tadinya dipakai sebagai bahan makanan sudah kembali ke inventory\n");
+            for (i = 0; i < LengthLM(USEDFOOD(n)); i++) {
+                printf("- %s\n", GetNamaMkn(USEDFOOD(n), i).Tabword);
+            }
         }
     }
 }
@@ -127,22 +135,30 @@ void displayNewFood(Notifikasi n) {
     // KAMUS
     int i;
     // ALGOTIMA
-    if (ISUNDO(n)) {
-        printf("Makanan berikut sudah expired dan dibuang dari inventory\n");
-        for (i = 0; i < LengthLM(NEWFOOD(n)); i++); {
-            printf("- %s\n", GetNamaMkn(NEWFOOD(n), i).Tabword);
-        }
-    } else {
-        printf("Makanan berikut yang tadinya expired sudah kembali ke inventory\n");
-        for (i = 0; i < LengthLM(NEWFOOD(n)); i++); {
-            printf("- %s\n", GetNamaMkn(NEWFOOD(n), i).Tabword);
+    if (LengthLM(NEWFOOD(n)) != 0) {
+        if (!ISUNDO(n)) {
+            printf("Makanan berikut baru dibuat dan masuk ke inventory\n");
+            for (i = 0; i < LengthLM(NEWFOOD(n)); i++) {
+                printf("- %s\n", GetNamaMkn(NEWFOOD(n), i).Tabword);
+            }
+        } else {
+            printf("Makanan berikut yang baru dibuat akan dikeluarkan lagi dari inventory\n");
+            for (i = 0; i < LengthLM(NEWFOOD(n)); i++) {
+                printf("- %s\n", GetNamaMkn(NEWFOOD(n), i).Tabword);
+            }
         }
     }
 }
 
 /* I.S. Notifikasi n terdefinisi */
 /* F.S. Tampilkan notifikasi secara keseluruhan */
-void displayNotifikasi(Notifikasi n);
+void displayNotifikasi(Notifikasi n) {
+    displayExpFood(n);
+    displayDelivFood(n);
+    displayUsedFood(n);
+    displayNewFood(n);
+    
+}
 
 /* I.S. Notifikasi n terdefinisi */
 /* F.S. Isi n berubah di bagian notifikasi makanan delivery dan expired sesuai input*/
@@ -153,9 +169,9 @@ void setExpDelivNotif(Notifikasi *n, ListMakanan expFood, ListMakanan delivFood)
 
 /* I.S. Notifikasi n terdefinisi */
 /* F.S. Isi n berubah di semua bagian sesuai input*/
-void setAllNotif(Notifikasi *n, ListMakanan expFood, ListMakanan delivFood, ListMakanan newFood, ListMakanan usedFood) {
+void setAllNotif(Notifikasi *n, ListMakanan expFood, ListMakanan delivFood,  ListMakanan usedFood, ListMakanan newFood) {
     EXPIREDFOOD(*n) = expFood;
     DELIVEREDFOOD(*n) = delivFood;
-    NEWFOOD(*n) = newFood;
     USEDFOOD(*n) = usedFood;
+    NEWFOOD(*n) = newFood;
 }

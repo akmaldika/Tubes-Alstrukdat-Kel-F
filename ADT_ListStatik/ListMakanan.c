@@ -143,6 +143,14 @@ LokasiAksi ActionLocId(ListMakanan l, IDEM id)
     return Locate(MknId(l, id));
 }
 
+void insertLM(ListMakanan *l, MAKANAN m)
+/* I.S. l tidak penuh, l dan m terdefinisi */
+/* F.S. elemen m ditambahkan ke akhir list l */
+{
+    ElmtLM(*l, LengthLM(*l)) = m;
+    LengthLM(*l) = LengthLM(*l) + 1;
+}
+
 // POINT UkuranMknId(ListMakanan l, IDEM);
 /* mengambalikan _UKURAN_MAKANAN_ berdasarkan ID */
 
