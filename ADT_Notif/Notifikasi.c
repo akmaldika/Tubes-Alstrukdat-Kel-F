@@ -1,5 +1,3 @@
-#include "../ADT_Notifikasi/Notifikasi.h"
-
 #include <stdio.h>
 #include "boolean.h"
 #include "../library.h"
