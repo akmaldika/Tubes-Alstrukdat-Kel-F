@@ -93,8 +93,8 @@ int main()
         else if (isWordSame(currentWord, "MOVE"))
         {
             ADVWORD();
-            Move(&BMO,currentWord,&MoveSucces);
-            if (MoveSucces){
+            Move(&BMO,currentWord,&isActionSucces);
+            if (isActionSucces){
                 min1menitAll(&DELIV(BMO),&INVENTORY(BMO),&FlagDelivDone,&FlagMakananEXP,&ListMkn,&ListDeliveryDone);
                 NextMin(&WAKTU(BMO));
             }
