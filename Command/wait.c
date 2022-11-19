@@ -3,24 +3,24 @@
 
 int hour, minute;
 
-void WAIT(PrioQueue *Qdeliv, PrioQueue *Q, boolean *FlagDeliv, boolean *FlagExp, ListMakanan *LMakananEXP, ListMakanan *ListDelivDone)
+void WAIT(SIMULATOR *S, boolean *FlagDeliv, boolean *FlagExp, ListMakanan *LMakananEXP, ListMakanan *ListDelivDone)
 {
     ADVWORD();
     hour = isWordInt(currentWord);
     ADVWORD();
     minute = isWordInt(currentWord);
-    waitCommand(Qdeliv, Q, FlagDeliv, FlagExp, LMakananEXP, ListDelivDone, hour, minute);
+    waitCommand(&DELIV(*S), &INVENTORY(*S), FlagDeliv, FlagExp, LMakananEXP, ListDelivDone, hour, minute);
     printf("menunggu %d  %d\n", hour, minute);
     ADVLINE();
 }
 
-void DELIVERY(PrioQueue Q)
+void DELIVERY(SIMULATOR S)
 {
-    PrintDelivery(Q);
+    PrintDelivery(DELIV(S));
     ADVLINE();
 }
 
-void INVENTORYMakanan(PrioQueue Q){
-    PrintPrioQueue(Q);
+void INVENTORYMakanan(SIMULATOR S){
+    PrintPrioQueue(INVENTORY(S));
     ADVLINE();
 }

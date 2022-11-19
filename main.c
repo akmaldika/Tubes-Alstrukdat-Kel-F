@@ -22,8 +22,6 @@ int main()
     boolean FlagMakananEXP;
     boolean isStartGame;
     boolean MoveSucces;
-    PrioQueue InventoryMakanan;
-    PrioQueue DeliveryMakanan;
     SIMULATOR BMO, InitSim;
     Stack Undo, Redo;
     boolean isBuydone;
@@ -34,10 +32,9 @@ int main()
     readListLR(&ListRsp, "Confg/Config_Resep.txt");
     CreateEmptyStack(&Undo);
     CreateEmptyStack(&Redo);
-    CreateSim(&BMO, "Config/Config_Map.txt");
+
+    CreateSim(&BMO, "Config/Config_Peta.txt");
     InitSim = BMO;
-    MakeEmpty(&InventoryMakanan, MaxElPQ);
-    MakeEmpty(&DeliveryMakanan, MaxElPQ);
     CreateListMakanan(&ListMakananEXP);
     CreateListMakanan(&ListDeliveryDone);
 
@@ -51,11 +48,13 @@ int main()
 
     // while loop
     while (isStartGame)
-    {
+    {   
+        displayMap(MAP(BMO));
         // STARTCOMMAND semua yang diterima kecuali START
         printf("\nMasukkan command: ");
         STARTCOMMAND();
         STARTWORD();
+
         // cek benar salah, loop sampai benar
         commandInGameError();
 
@@ -88,23 +87,25 @@ int main()
             ADVWORD();
             Move(&BMO,currentWord,&MoveSucces);
             if (MoveSucces){
-                min1menitAll(&DeliveryMakanan,&InventoryMakanan,&FlagDelivDone,&FlagMakananEXP,&ListMkn,&ListDeliveryDone);
+                min1menitAll(&DELIV(BMO),&INVENTORY(BMO),&FlagDelivDone,&FlagMakananEXP,&ListMkn,&ListDeliveryDone);
             }
         }
         else if (isWordSame(currentWord, "WAIT"))
         {
             //WAIT
-            WAIT(&DeliveryMakanan, &InventoryMakanan, &FlagDelivDone, &FlagMakananEXP, &ListMakananEXP, &ListDeliveryDone);
+            WAIT(&BMO, &FlagDelivDone, &FlagMakananEXP, &ListMakananEXP, &ListDeliveryDone);
         }
         else if (isWordSame(currentWord, "DELIVERY"))
         {
             //DELIVERY
-            DELIVERY(DeliveryMakanan);
+            DELIVERY(BMO);
+            min1menitAll(&DELIV(BMO),&INVENTORY(BMO),&FlagDelivDone,&FlagMakananEXP,&ListMkn,&ListDeliveryDone);
         }
         else if (isWordSame(currentWord, "INVENTORY"))
         {
             //INVENTORY
-            INVENTORYMakanan(InventoryMakanan);
+            INVENTORYMakanan(BMO);
+            min1menitAll(&DELIV(BMO),&INVENTORY(BMO),&FlagDelivDone,&FlagMakananEXP,&ListMkn,&ListDeliveryDone);
         }
         else if (isWordSame(currentWord, "CATALOG"))
         {
