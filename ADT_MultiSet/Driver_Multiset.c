@@ -9,8 +9,6 @@ int main() {
     // KAMUS
     MultiSet m, m1, m2, m3;
     int i, j, k, n1, n2, n3, n4, n5;
-    NTree t, t1, t2, t3;
-    ListResep l, l1, l2, l3;
 
     // ALGOTITMA
     printf("Buat MultiSet baru l\n");
@@ -31,23 +29,12 @@ int main() {
 
     printMS(m);
 
-    printf("Baca resep dari config\n");
-    CreateLR(&l);
-    readListLR(&l);
-    printf("Print l:\n");
-    printLR(l);
-
     CreateMS(&m);
     addMS(&m, 2, 2);
     addMS(&m, 21, 1);
     addMS(&m, 10, 1);
     addMS(&m, 15, 1);
     // addMS(&m, 123, 1);
-
-
-    printMS(m);
-
-    m = getMakableResep(m, l);
 
     printMS(m);
     
