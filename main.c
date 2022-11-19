@@ -32,7 +32,7 @@ int main()
     readListLR(&ListRsp, "Confg/Config_Resep.txt");
     CreateEmptyStack(&Undo);
     CreateEmptyStack(&Redo);
-    CreateSim(&BMO);
+    CreateSim(&BMO, "Config/Config_Peta.txt");
     MakeEmpty(&InventoryMakanan, MaxElPQ);
     MakeEmpty(&DeliveryMakanan, MaxElPQ);
     CreateListMakanan(&ListMakananEXP);
