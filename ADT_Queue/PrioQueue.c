@@ -695,7 +695,7 @@ void min1menitAll(PrioQueue *Qdeliv, PrioQueue *Q, boolean *FlagDeliv, boolean *
 	}
 }
 
-void delAllPrioqueue(PrioQueue *Qdeliv)
+void delAllPriqueue(PrioQueue *Qdeliv)
 {
 	/* I.S. Qdeliv dan QInven terdefinisi */
 	/* F.S. menghapus semua elemen dari Qdeliv dan QInven */
