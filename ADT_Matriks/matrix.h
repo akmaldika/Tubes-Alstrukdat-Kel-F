@@ -54,8 +54,7 @@ void MoveEast(Matrix *m,boolean *sukses);
 /*Memindahkan 'S' sesuai arah fungsi sebanyak 1 index */
 
 /* *** Selektor "Dunia Matrix" *** */
-boolean isMatrixIdxValid(int i, int j);
-/* Mengirimkan true jika i, j adalah index yang valid untuk matriks apa pun */
+
 Matrix getidx(Matrix m, ElType val);
 /* *** Selektor: Untuk sebuah matriks m yang terdefinisi: *** */
 IdxType getLastIdxRow(Matrix m);
@@ -63,15 +62,8 @@ IdxType getLastIdxRow(Matrix m);
 IdxType getLastIdxCol(Matrix m);
 /* Mengirimkan Index kolom terbesar m */
 
-IdxType GetFirstIdxBrs (Matrix M);
-    /* Mengirimkan indeks baris terkecil M */
 
-IdxType GetFirstIdxKol (Matrix M);
-    /* Mengirimkan indeks kolom terkecil M */
 
-/* ********** Assignment  Matrix ********** */
-void copyMatrix(Matrix mIn, Matrix *mOut);
-/* Melakukan assignment mOut <- mIn */
 
 
 void displayMatrix(Matrix m);

@@ -197,12 +197,7 @@ Matrix getidx(Matrix m, ElType val){
 
 
 /* *** Selektor "Dunia Matrix" *** */
-boolean isMatrixIdxValid(int i, int j){
-/* Mengirimkan true jika i, j adalah index yang valid untuk matriks apa pun */
 
-   // ALGORITMA
-   return (0 <= i && i < ROW_CAP) && (0 <= j && j < COL_CAP);
-}
 
 /* *** Selektor: Untuk sebuah matriks m yang terdefinisi: *** */
 IdxType getLastIdxRow(Matrix m){
@@ -219,22 +214,11 @@ IdxType getLastIdxCol(Matrix m){
    return (COL_EFF(m) - 1);
 }
 
-boolean isIdxEff(Matrix m, IdxType i, IdxType j){
-/* Mengirimkan true jika i, j adalah Index efektif bagi m */
-
-   // ALGORITMA
-   return (0 <= i && i < ROW_EFF(m)) && (0 <= j && j < COL_EFF(m));
-}
 
 
 
 
-void copyMatrix(Matrix mIn, Matrix *mOut){
-/* Melakukan assignment mOut <- mIn */
 
-   // ALGORITMA
-   *mOut = mIn;
-}
 
 
 void displayMatrix(Matrix m){
@@ -265,15 +249,5 @@ void displayMatrix(Matrix m){
 }
 
 
-
-
-
-
-int countElmt(Matrix m){
-/* Mengirimkan banyaknya elemen m */
-
-   // ALGORITMA
-   return (ROW_EFF(m) * COL_EFF(m));
-}
 
 
