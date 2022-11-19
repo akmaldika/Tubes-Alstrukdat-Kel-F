@@ -33,7 +33,7 @@ int main()
     CreateEmptyStack(&Undo);
     CreateEmptyStack(&Redo);
 
-    CreateSim(&BMO, "Config/Config_Map.txt");
+    CreateSim(&BMO, "Config/Config_Peta.txt");
     InitSim = BMO;
     CreateListMakanan(&ListMakananEXP);
     CreateListMakanan(&ListDeliveryDone);
@@ -48,11 +48,13 @@ int main()
 
     // while loop
     while (isStartGame)
-    {
+    {   
+        displayMap(MAP(BMO));
         // STARTCOMMAND semua yang diterima kecuali START
         printf("Masukkan command: ");
         STARTCOMMAND();
         STARTWORD();
+
         // cek benar salah, loop sampai benar
         commandInGameError();
 
@@ -82,7 +84,7 @@ int main()
         }
         else if (isWordSame(currentWord, "MOVE"))
         {
-            
+            ADVWORD();
             Move(&BMO,currentWord,&MoveSucces);
             if (MoveSucces){
                 min1menitAll(&DELIV(BMO),&INVENTORY(BMO),&FlagDelivDone,&FlagMakananEXP,&ListMkn,&ListDeliveryDone);
