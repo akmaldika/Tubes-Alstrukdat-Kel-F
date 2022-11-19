@@ -11,22 +11,22 @@ int main() {
     STARTWORD();
     printf("Command = %s\n", currentWord.String);
     if (isWordSame(currentWord, "WAIT")) {
-        printf("benul\n");
+        printf("Benul\n");
         ADVWORD();
         if (isWordInt(currentWord)) {
-            printf("%s\n", currentWord.String);
+            printf("Selama = %d menit\n", wordToInt(currentWord));
         }
     }
     else {
-        printf("salah\n");
+        printf("Salah\n");
     }
 
     STARTCOMMAND();
     printf("Command = %s\n", currentLine.Tabword);
     if (isLineSame(currentLine,"MOVE NORTH")) {
-        printf("Mendaki guuunung, melewati sungai.\n");
+        printf("Mendaki guuunung, melewati sungai\n");
     }
     else {
-        printf("meng-turu\n");
+        printf("Meng-turu\n");
     }
 }
