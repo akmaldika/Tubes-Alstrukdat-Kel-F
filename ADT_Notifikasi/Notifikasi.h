@@ -71,7 +71,7 @@ void setExpDelivNotif(Notifikasi *n, ListMakanan expFood, ListMakanan delivFood)
 
 /* I.S. Notifikasi n terdefinisi */
 /* F.S. Isi n berubah di semua bagian sesuai input*/
-void setAllNotif(Notifikasi *n, ListMakanan expFood, ListMakanan delivFood, ListMakanan newFood, ListMakanan usedFood);
+void setAllNotif(Notifikasi *n, ListMakanan expFood, ListMakanan delivFood, ListMakanan usedFood, ListMakanan newFood);
 
 
 #endif

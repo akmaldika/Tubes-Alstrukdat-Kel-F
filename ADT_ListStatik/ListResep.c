@@ -287,6 +287,7 @@ boolean isResepMakeable(MultiSet *m, NTree resep) {
     NTree resepBahan;
     boolean isMakeable;
     int i;
+    
     // ALGORITMA
     if (isInMS(*m, INFONTREE(resep), 1)) {
         removeMS(m, INFONTREE(resep), 1);

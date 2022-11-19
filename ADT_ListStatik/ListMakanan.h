@@ -96,6 +96,10 @@ LokasiAksi ActionLocId(ListMakanan l, IDEM id);
 // POINT UkuranMknId(ListMakanan l, IDEM);
 /* mengambalikan _UKURAN_MAKANAN_ berdasarkan ID */
 
+void insertLM(ListMakanan *l, MAKANAN m);
+/* I.S. l tidak penuh, l dan m terdefinisi */
+/* F.S. elemen m ditambahkan ke akhir list l */
+
 void accumLM(ListMakanan *l1, ListMakanan l2);
 /* I.S. l1 dan l2 terdefinisi, jumlah dari panjang l1 dan l2 tidak melebih CONFIG_SIZELM */
 /* F.S. isi dari l2 tersalin dan ditambahkan ke l1*/
