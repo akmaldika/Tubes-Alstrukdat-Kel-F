@@ -1,10 +1,10 @@
 #include "../ADT_Queue/PrioQueue.h"
 #include <stdio.h>
 
-int hour, minute;
 
 void WAIT(SIMULATOR *S, boolean *FlagDeliv, boolean *FlagExp, ListMakanan *LMakananEXP, ListMakanan *ListDelivDone)
 {
+    int hour, minute;
     ADVWORD();
     hour = isWordInt(currentWord);
     ADVWORD();

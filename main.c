@@ -1,16 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "library.h"
-#include "Command/splash.c"
-#include "Command/help.c"
-#include "Command/Exit.c"
-#include "Command/commandError.c"
-#include "Command/Cookbook.c"
-#include "Command/Move.c"
-#include "Command/Fryfood.c"
-#include "Command/wait.c"
-#include "Command/buy.c"
-#include "Command/UndoRedo.c"
+#include "Command/CommandGame.h"
 
 int main()
 {
@@ -115,7 +106,7 @@ int main()
         }
         else if (isWordSame(currentWord, "CATALOG"))
         {
-            DisplayCatalog(ListMkn);
+            Catalogue(ListMkn);
         }
         else if (isWordSame(currentWord, "COOKBOOK"))
         {

@@ -20,20 +20,12 @@ void commandStartError();
 /* ketika currentLine/currentWord tidak dikenali untuk start game */
 /* memunculkan pesna error dan meminta input kembali sesuai kondisi */
 
-boolean isDigit(char *str);
-/* precond : str terdefinisi */
-/* mengecek apakah string yang dimasukkan merupakan digit */
-
 void commandInGameError();
 /* I.S. : currrentLine dan currentWord sudah didapatkan */
 /* F.S. : currentWord / currentLine untuk command yang benar didapatkan*/
 /* currentWord adalah kata pertama dari currentLine */
 /* currentLine/currentWord tidak dikenali untuk start game*/
 /* memunculkan pesna error dan meminta input kembali sesuai kondisi */
-
-// void IgnoreBlankcurLine();
-/* I.S. sembarang untuk suatu kata/kalimat dalam currentLine dan currentLine terdefinisi */
-/* F.S. currentLine.Tabword[currentLength] != BLANK atau endWord*/
 
 #endif
 
