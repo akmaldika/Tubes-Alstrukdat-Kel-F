@@ -8,7 +8,7 @@
 
 #include "boolean.h"
 #include "..\ADT_Simulator\simulator.h"
-#include "..\ADT_Notif\Notifikasi.h"
+#include "..\ADT_Notifikasi\Notifikasi.h"
 
 #define IDX_UNDEF_STACK -1
 #define initCap 20
@@ -44,6 +44,10 @@ typedef struct {
 #define CapStack(S) (S).Capacity
 
 /* *** KONSTRUKTOR *** */
+ElStackURType MakeElStack(SIMULATOR S, Notifikasi N);
+/* Mengirimkan tipe element stack daari S dan N */
+/* precond : S dan N terdefinisi dan valid */
+
 void CreateEmptyStack(Stack *S);
 /* I.S. sembarang; */
 /* F.S. Sebuah stack S kosong terbentuk dengan kapasitas initial initCap*/

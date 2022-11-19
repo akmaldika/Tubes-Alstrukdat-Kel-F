@@ -16,6 +16,16 @@
 // #define CapStack(S) (S).Capacity
 
 /* *** KONSTRUKTOR *** */
+ElStackURType MakeElStack(SIMULATOR S, Notifikasi N)
+{
+    /* Mengirimkan tipe element stack daari S dan N */
+    /* precond : S dan N terdefinisi dan valid */
+    ElStackURType e;
+    Sim(e) = S;
+    Nof(e) = N;
+    return e;
+}
+
 void CreateEmptyStack(Stack *S)
 {
     /* I.S. sembarang; */
