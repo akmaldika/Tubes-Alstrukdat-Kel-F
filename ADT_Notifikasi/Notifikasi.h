@@ -65,5 +65,13 @@ void displayNewFood(Notifikasi n);
 /* F.S. Tampilkan notifikasi secara keseluruhan */
 void displayNotifikasi(Notifikasi n);
 
+/* I.S. Notifikasi n terdefinisi */
+/* F.S. Isi n berubah di bagian notifikasi makanan delivery dan expired sesuai input*/
+void setExpDelivNotif(Notifikasi *n, ListMakanan expFood, ListMakanan delivFood);
+
+/* I.S. Notifikasi n terdefinisi */
+/* F.S. Isi n berubah di semua bagian sesuai input*/
+void setAllNotif(Notifikasi *n, ListMakanan expFood, ListMakanan delivFood, ListMakanan newFood, ListMakanan usedFood);
+
 
 #endif

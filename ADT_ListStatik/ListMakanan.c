@@ -146,6 +146,21 @@ LokasiAksi ActionLocId(ListMakanan l, IDEM id)
 // POINT UkuranMknId(ListMakanan l, IDEM);
 /* mengambalikan _UKURAN_MAKANAN_ berdasarkan ID */
 
+void accumLM(ListMakanan *l1, ListMakanan l2) 
+/* I.S. l1 dan l2 terdefinisi, jumlah dari panjang l1 dan l2 tidak melebih CONFIG_SIZELM */
+/* F.S. isi dari l2 tersalin dan ditambahkan ke l1*/
+{
+    // KAMUS LOKAL
+    int i;
+    // ALGORITMA
+    if (LengthLM(l2) > 0) {
+        for (i = 0; i < LengthLM(l2); i++) {
+            ElmtLM(*l1, LengthLM(*l1)) = ElmtLM(l2, i);
+            LengthLM(*l1) = LengthLM(*l1) + 1;
+        }
+    }
+}
+
 /* ********** INPUT / OUTPUT ********** */
 void SetUpListMakanan(ListMakanan *l, char *filename)
 {

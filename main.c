@@ -51,7 +51,8 @@ int main()
 
     // while loop
     while (isStartGame)
-    {
+    {   
+        DisplayTIME(WAKTU(BMO));
         displayMap(MAP(BMO));
         // STARTCOMMAND semua yang diterima kecuali START
         printf("\nMasukkan command: ");
@@ -92,10 +93,10 @@ int main()
         else if (isWordSame(currentWord, "MOVE"))
         {
             ADVWORD();
-            Move(&BMO, currentWord, &isActionSucces);
-            if (isActionSucces)
-            {
-                min1menitAll(&DELIV(BMO), &INVENTORY(BMO), &FlagDelivDone, &FlagMakananEXP, &LM, &ListDeliveryDone);
+            Move(&BMO,currentWord,&MoveSucces);
+            if (MoveSucces){
+                min1menitAll(&DELIV(BMO),&INVENTORY(BMO),&FlagDelivDone,&FlagMakananEXP,&ListMkn,&ListDeliveryDone);
+                NextMin(&WAKTU(BMO));
             }
         }
         else if (isWordSame(currentWord, "WAIT"))

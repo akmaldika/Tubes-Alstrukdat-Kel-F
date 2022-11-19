@@ -10,7 +10,8 @@ void WAIT(SIMULATOR *S, boolean *FlagDeliv, boolean *FlagExp, ListMakanan *LMaka
     ADVWORD();
     minute = isWordInt(currentWord);
     waitCommand(&DELIV(*S), &INVENTORY(*S), FlagDeliv, FlagExp, LMakananEXP, ListDelivDone, hour, minute);
-    printf("menunggu %d  %d\n", hour, minute);
+    // printf("menunggu %d  %d\n", hour, minute);
+    NextNMin(&WAKTU(*S), (60*hour)+minute);
 }
 
 void DELIVERY(SIMULATOR S)

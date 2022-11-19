@@ -9,7 +9,7 @@
 int main(){
     Matrix p;
     Matrix idx;
-    char *filename='Peta.txt';
+    char *filename='../Confifg/Config_Peta.txt';
     p=MapMatrix(filename); //Membaca Konfigurasi
     char input;
     boolean sukses; //Kondisi Berhasil Move
@@ -29,8 +29,8 @@ int main(){
     }
 
     idx = getidx(p,'S'); //mengambil index S
-    printf("(%d,%d)",ELMT(idx,0,1),ELMT(idx,0,0));
+    printf("(%d,%d)\n",ELMT(idx,0,1),ELMT(idx,0,0));
 
-    printf("Last Idx Row: %d",getLastIdxRow(p));
-    printf("Last Idx Col: %d",getLastIdxCol(p));
+    printf("Last Idx Row: %d\n",getLastIdxRow(p));
+    printf("Last Idx Col: %d\n",getLastIdxCol(p));
 }
