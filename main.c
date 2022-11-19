@@ -20,6 +20,7 @@ int main()
     boolean FlagDelivDone;
     boolean FlagMakananEXP;
     boolean isStartGame;
+    boolean MoveSucces;
     PrioQueue InventoryMakanan;
     PrioQueue DeliveryMakanan;
     SIMULATOR BMO;
@@ -78,9 +79,12 @@ int main()
         }
         else if (isWordSame(currentWord, "MOVE"))
         {
+            
             ADVWORD();
-            Move(&BMO,currentWord);
-            //min1menitAll() gangerti help yg ini hehehe
+            Move(&BMO,currentWord,&MoveSucces);
+            if (MoveSucces){
+                min1menitAll(&DeliveryMakanan,&InventoryMakanan,&FlagDelivDone,&FlagMakananEXP,&ListMkn,&ListDeliveryDone);
+            }
         }
         else if (isWordSame(currentWord, "WAIT"))
         {
