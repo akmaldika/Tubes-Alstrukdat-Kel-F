@@ -71,12 +71,12 @@ Sambal Goreng
 Fry
 44
 Ayam Goreng
-0 30 0
+0 5 0
 0 0 0
 Fry
 45
 Udang Goreng
-0 30 0
+0 5 0
 0 0 0
 Fry
 46
