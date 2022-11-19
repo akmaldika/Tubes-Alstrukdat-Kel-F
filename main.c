@@ -42,7 +42,7 @@ int main()
     CreateListMakanan(&ListDeliveryDone);
 
     splashInitGame();
-    printf("Masukkan command: ");
+    printf("\nMasukkan command: ");
     STARTCOMMAND();
     STARTWORD();
     // Cek Start command error mcna nerima START sam EXIT, loop sampai benar
@@ -53,7 +53,7 @@ int main()
     while (isStartGame)
     {
         // STARTCOMMAND semua yang diterima kecuali START
-        printf("Masukkan command: ");
+        printf("\nMasukkan command: ");
         STARTCOMMAND();
         STARTWORD();
         // cek benar salah, loop sampai benar
@@ -85,7 +85,6 @@ int main()
         }
         else if (isWordSame(currentWord, "MOVE"))
         {
-            
             ADVWORD();
             Move(&BMO,currentWord,&MoveSucces);
             if (MoveSucces){
