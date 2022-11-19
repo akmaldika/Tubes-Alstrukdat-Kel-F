@@ -91,6 +91,8 @@ void BuyFood(SIMULATOR *s, ListMakanan lm, boolean *flag)
                     printf("\n");
                 }
 
+                NextMin(&WAKTU(*s));
+
                 printf("Ingin memesan lagi?\n");
                 printf("Masukkan command = ");
                 STARTCOMMAND();

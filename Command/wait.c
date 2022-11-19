@@ -11,16 +11,13 @@ void WAIT(SIMULATOR *S, boolean *FlagDeliv, boolean *FlagExp, ListMakanan *LMaka
     minute = isWordInt(currentWord);
     waitCommand(&DELIV(*S), &INVENTORY(*S), FlagDeliv, FlagExp, LMakananEXP, ListDelivDone, hour, minute);
     printf("menunggu %d  %d\n", hour, minute);
-    ADVLINE();
 }
 
 void DELIVERY(SIMULATOR S)
 {
     PrintDelivery(DELIV(S));
-    ADVLINE();
 }
 
 void INVENTORYMakanan(SIMULATOR S){
     PrintPrioQueue(INVENTORY(S));
-    ADVLINE();
 }

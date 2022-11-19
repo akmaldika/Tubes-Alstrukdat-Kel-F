@@ -14,6 +14,7 @@
 #include "ADT_Simulator/simulator.h"
 #include "ADT_Time/time.h"
 #include "ADT_Tree/NTree.h"
+#include "ADT_Notif/Notifikasi.h"
 
 // #include "Command/splash.c"
 
