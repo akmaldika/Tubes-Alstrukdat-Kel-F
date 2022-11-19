@@ -49,14 +49,14 @@ void commandStartError()
         }
         printf("Command tidak dikenali. Silahkan masukkan command yang benar\n");
         printf("Ketik 'HELP' untuk melihat daftar command yang tersedia\n");
-        printf("Masukkan command: ");
+        printf("\nMasukkan command: ");
         STARTCOMMAND();
         STARTWORD();
     
         while (isWordSame(currentWord, "HELP"))
         {    
             helpStartGame();
-            printf("Masukkan command: ");
+            printf("\nMasukkan command: ");
             STARTCOMMAND();
             STARTWORD();
         }   
@@ -74,7 +74,7 @@ void commandInGameError()
         {
             printf("Anda tidak memasukkan parameter X jam Y menit dengan benar!\n");
             printf("WAIT X Y\n");
-            printf("Masukkan command: ");
+            printf("\nMasukkan command: ");
             STARTCOMMAND();
             STARTWORD();
             commandInGameError();
@@ -97,7 +97,7 @@ void commandInGameError()
                         {
                             printf("Jangan tambahkan karakter lain!\n");
                             printf("Gunakan Format: WAIT X Y\nX untuk jam dan Y untuk menit\n");
-                            printf("Masukkan command: ");
+                            printf("\nMasukkan command: ");
                             STARTCOMMAND();
                             STARTWORD();
                             commandInGameError(); 
@@ -107,7 +107,7 @@ void commandInGameError()
                     {
                         printf("Y harus berupa angka!\n");
                         printf("Gunakan Format: WAIT X Y\nX untuk jam dan Y untuk menit\n");
-                        printf("Masukkan command: ");
+                        printf("\nMasukkan command: ");
                         STARTCOMMAND();
                         STARTWORD();
                         commandInGameError(); 
@@ -117,7 +117,7 @@ void commandInGameError()
                 {
                     printf("Masukkan parameter Y dengan benar!\n");
                     printf("Gunakan Format: WAIT X Y\nX untuk jam dan Y untuk menit\n");
-                    printf("Masukkan command: ");
+                    printf("\nMasukkan command: ");
                     STARTCOMMAND();
                     STARTWORD();
                     commandInGameError();
@@ -127,7 +127,7 @@ void commandInGameError()
             {
                 printf("X harus berupa angka!\n");
                 printf("Gunakan Format: WAIT X Y\nX untuk jam dan Y untuk menit\n");
-                printf("Masukkan command: ");
+                printf("\nMasukkan command: ");
                 STARTCOMMAND();
                 STARTWORD();
                 commandInGameError();
@@ -142,7 +142,7 @@ void commandInGameError()
             printf("Anda tidak memasukkan X dengan benar!\n");
             printf("Gunakan Format: MOVE X\n");
             printf("X = {NORTH, SOUTH, EAST, WEST}\n");
-            printf("Masukkan command: ");
+            printf("\nMasukkan command: ");
             STARTCOMMAND();
             STARTWORD();
 
@@ -162,7 +162,7 @@ void commandInGameError()
                     printf("Jangan tambahkan karakter lain!\n");
                     printf("Gunakan Format: MOVE X\n");
                     printf("X = {NORTH, SOUTH, EAST, WEST}\n");
-                    printf("Masukkan command: ");
+                    printf("\nMasukkan command: ");
                     STARTCOMMAND();
                     STARTWORD();
                     commandInGameError();
@@ -173,7 +173,7 @@ void commandInGameError()
                 printf("X harus berupa NORTH, SOUTH, EAST, atau WEST!\n");
                 printf("Gunakan Format: MOVE X\n");
                 printf("X = {NORTH, SOUTH, EAST, WEST}\n");
-                printf("Masukkan command: ");
+                printf("\nMasukkan command: ");
                 STARTCOMMAND();
                 STARTWORD();
 
@@ -188,7 +188,7 @@ void commandInGameError()
             printf("Game sudah dimulai!\n");
             printf("Silakan masukkan commmand 'EXIT' untuk keluar game dan memulai ulang game\n");
             printf("Ketik 'HELP' untuk melihat daftar command yang tersedia\n");
-            printf("Masukkan command: ");
+            printf("\nMasukkan command: ");
             STARTCOMMAND();
             STARTWORD();
         }
@@ -200,7 +200,7 @@ void commandInGameError()
             }
             printf("Command tidak dikenali. Silahkan masukkan command yang benar\n");
             printf("Ketik 'HELP' untuk melihat daftar command yang tersedia\n");
-            printf("Masukkan command: ");
+            printf("\nMasukkan command: ");
             STARTCOMMAND();
             STARTWORD();
         }

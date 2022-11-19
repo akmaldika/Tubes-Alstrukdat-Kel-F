@@ -10,45 +10,49 @@
 #include "../ADT_MesinKata/mesinkarakter.c"
 #include "../ADT_MesinKata/string.c"
 
-void undoGame(SIMULATOR *S, SIMULATOR InitSim, Stack *Undo, Stack *Redo);
-/* I.S. : S, Undo, dan redo terdefinisi, InitSim adalah keadaan simulator paling awal dalam game */
+void undoGame(SIMULATOR *S, SIMULATOR InitSim, Notifikasi *Notif, Stack *Undo, Stack *Redo);
+/* I.S. : S, Undo, Notif, dan redo terdefinisi, InitSim adalah keadaan simulator paling awal dalam game */
+/* Notif datang ke Undo dalam keadaan kosong */
 /* F.S. : jika stack Undo kosong, tampilkan pesan */
-/* Stack undo menjadi kosong artinya S = InitSim  */
-/* Jika tidak, Stack Undo akan dipop dan dimasukkan ke dalam Stack Redo */
-/* Top(Undo) yang baru akan menjadi S, visualnya */
-/* misal A, B, C adalah type SIMULATOR dan S adalah kondisi S
-    C     S=C                               S=B
-    B                   -undoGame->     B
+/* Stack undo menjadi kosong artinya S = InitSim  dan Notif kosong */
+/* Jika tidak, Notifikasi pada InfoTopN(Undo) akan dikirimkan ke Notif */
+/* Stack Undo akan dipop dan dimasukkan ke dalam Stack Redo */
+/* InfoTopSim(Undo) yang baru akan menjadi S, dan visualnya */
+/* misal A, B, C adalah keadaan untuk SIMULATOR S dan Notifikasi N 
+    C     SD=C                               SD=B
+    B                   -undoGame->     B               -> Notif = InfoTopN(Undo) di C
     A                                   A           C
     Undo        Redo                    Undo        Redo
-    -------Jika Stack menjadi kosong
-          S=A                               S=InitSim
-                        -undoGame->     
-    A                                               A
+    -------Jika Stack Undo menjadi kosong
+          SN=A                             SN=InitSim A
+                B       -undoGame->                   B -> Notif = InfoTopN(Undo) di A
+    A           C                                     C
     Undo        Redo                    Undo        Redo
  */
 
-void redoGame(SIMULATOR *S, Stack *Undo, Stack *Redo);
+void redoGame(SIMULATOR *S, Notifikasi *Notif, Stack *Undo, Stack *Redo);
 /* I.S. : S, Undo, dan Redo terdefinisi */
+/* Notif datang ke redoGame dalam keadaan kosong */
 /* F.S. : Jika Stack Redo kosong, tampilkan pesan */
-/* Stack redo kosong artinya S sedang pada keadaan paling baru*/
+/* Stack redo kosong artinya S dan Notif sedang pada keadaan paling baru*/
 /* Jika tidak kosong Stack Redo akan dipop dan di masukkan ke dalam Stack Redo*/
-/* Top(Undo) yang baru akan menjadi S, visualnya: */
+/* InfoTopSim(Undo) yang baru akan menjadi S, visualnya: */
 /* misal A, B, C adalah type SIMULATOR dan S adalah kondisi S
-          S=B                           C    S=C
-    B                   -redoGame->     B
+          SN=B                          C    SN=C
+    B                   -redoGame->     B               -> Notif = InfoTopN(Undo) di C 
     A           C                       A           
     Undo        Redo                    Undo        Redo
     -------Jika Stack kosong
-          S=A                               S=A 
-                        -redoGame->     
+    C      SN=C                         C      SN=C 
+    B                    -redoGame->    B               -> Notif = kosong
     A                    {pesan}        A           
     Undo        Redo                    Undo        Redo
  */
 
-void saveUndoRedoGame(SIMULATOR S, SIMULATOR InitSim, Stack *Undo, Stack *Redo);
+void saveUndoRedoGame(SIMULATOR S, SIMULATOR InitSim, Notifikasi Notif, Stack *Undo, Stack *Redo);
 /* I.S. : S, Undo, dan Redo terdefinisi, InitSim adalah keadaan simulator paling awal, 
     currentWord terdefinisi dan valid sebagai command */
+/* Notif terdefinisi baik kosong mapun berisi */
 /* F.S. : jika keadaan S berubah, S dimasukkan ke dalam Stack Undo */
 /* S disamakan dengan Top(Undo) -> F.S. */
 /* Stack Redo akan kosong menyesuaikan kondisi logic undo-redo, 
@@ -56,7 +60,7 @@ void saveUndoRedoGame(SIMULATOR S, SIMULATOR InitSim, Stack *Undo, Stack *Redo);
 
 #endif
 
-void undoGame(SIMULATOR *S, SIMULATOR InitSim, Stack *Undo, Stack *Redo)
+void undoGame(SIMULATOR *S, SIMULATOR InitSim, Notifikasi *Notif, Stack *Undo, Stack *Redo)
 {
     if (IsEmptyStack(*Undo))
     {
@@ -69,18 +73,20 @@ void undoGame(SIMULATOR *S, SIMULATOR InitSim, Stack *Undo, Stack *Redo)
         Pop(Undo, &valOut);
         Push(Redo, valOut);
 
+        *Notif = Nof(valOut);
+
         if (IsEmptyStack(*Undo))
         {
             *S = InitSim;
         }
         else
         {
-            *S = InfoTop(*Undo);
+            *S = InfoTopSim(*Undo);
         }
     }
 }
 
-void redoGame(SIMULATOR *S, Stack *Undo, Stack *Redo)
+void redoGame(SIMULATOR *S, Notifikasi *Notif, Stack *Undo, Stack *Redo)
 {
     if (IsEmptyStack(*Redo))
     {
@@ -92,28 +98,34 @@ void redoGame(SIMULATOR *S, Stack *Undo, Stack *Redo)
         ElStackURType valOut;
         Pop(Redo, &valOut);
         Push(Undo, valOut);
-        *S = valOut;
+        *S = Sim(valOut);
+        *Notif = Nof(valOut);
     }
 }
 
-void saveUndoRedoGame(SIMULATOR S, SIMULATOR InitSim, Stack *Undo, Stack *Redo)
+void saveUndoRedoGame(SIMULATOR S, SIMULATOR InitSim, Notifikasi Notif, Stack *Undo, Stack *Redo)
 {
-    // Handle kejadian pertama kali keadaan sim berubah
+    ElStackURType valIn;
     if (!(isTimeSame(WAKTU(S), WAKTU(InitSim))))
     {
+        // Handle kejadian pertama kali keadaan sim berubah
         if (IsEmptyStack(*Undo))
         {
-            Push(Undo, S);
+            Sim(valIn) = S;
+            Nof(valIn) = Notif;
+            Push(Undo, valIn);
         }
         else
         {
-            if (isTimeSame(WAKTU(S), WAKTU(InfoTop(*Undo))))
+            if (isTimeSame(WAKTU(S), WAKTU(InfoTopSim(*Undo))))
             {
                 // Do Nothing 
             }
             else
             {
-                Push(Undo, S);
+                Sim(valIn) = S;
+                Nof(valIn) = Notif;
+                Push(Undo, valIn);
                 resetStack(Redo);
             }
         }

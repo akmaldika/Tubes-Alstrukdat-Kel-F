@@ -11,6 +11,8 @@
 // #define Top(S) (S).TOP
 // #define LStack(S) (S).Container
 // #define InfoTop(S) (S).Container[(S).TOP]
+// #define InfoTopSim(S) (S).Container[(S).TOP].Sim
+// #define InfoTopN(S) (S).Container[(S).TOP].N
 // #define CapStack(S) (S).Capacity
 
 /* *** KONSTRUKTOR *** */
@@ -18,7 +20,7 @@ void CreateEmptyStack(Stack *S)
 {
     /* I.S. sembarang; */
     /* F.S. Sebuah stack S kosong terbentuk dengan kapasitas initial initCap*/
-    LStack(*S) = (SIMULATOR *) malloc(initCap * sizeof(SIMULATOR));
+    LStack(*S) = (ElStackURType *) malloc(initCap * sizeof(ElStackURType));
     Top(*S) = IDX_UNDEF_STACK;
     CapStack(*S) = initCap;
 }
@@ -82,7 +84,7 @@ void IncreaseSize(Stack *S)
     /* I.S. Stack terdefinisi, Stack penuh */
     /* F.S. Capacity stack bertambah sebanyak addCap */
     /* Mengalokasikan memori tambahan untuk stack sebanyak addCap dengan realloc*/
-    LStack(*S) = (SIMULATOR *) realloc(LStack(*S), (CapStack(*S) + addCap) * sizeof(SIMULATOR));
+    LStack(*S) = (ElStackURType *) realloc(LStack(*S), (CapStack(*S) + addCap) * sizeof(ElStackURType));
     CapStack(*S) += addCap;
 }
 
@@ -91,7 +93,7 @@ void DecreaseSize(Stack *S)
     /* I.S. Stack terdefinisi, Stack sepi */
     /* F.S. Capacity stack berkurang sebanyak minCap*/
     /* Men-dealokasi memori berbelih stack sebanyak minCap dengan realloc */
-    LStack(*S) = (SIMULATOR *) realloc(LStack(*S), (CapStack(*S) - minCap) * sizeof(SIMULATOR));
+    LStack(*S) = (ElStackURType *) realloc(LStack(*S), (CapStack(*S) - minCap) * sizeof(ElStackURType));
     CapStack(*S) -= minCap;
 }
 
@@ -99,7 +101,7 @@ void resetStack(Stack *S)
 {
     /* I.S. Stack  terdefinisi, sembarang */
     /* F.S. Capacity Stack dikembalikan initCap; Top Stack = IDX_UNDEF_STACK; Container menampung initCap memori */
-    LStack(*S) = (SIMULATOR *) realloc(LStack(*S), (initCap) * sizeof(SIMULATOR));
+    LStack(*S) = (ElStackURType *) realloc(LStack(*S), (initCap) * sizeof(ElStackURType));
     Top(*S) = IDX_UNDEF_STACK;
     CapStack(*S) = initCap;
 }

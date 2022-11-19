@@ -8,6 +8,7 @@
 
 #include "boolean.h"
 #include "..\ADT_Simulator\simulator.h"
+#include "..\ADT_Notif\Notifikasi.h"
 
 #define IDX_UNDEF_STACK -1
 #define initCap 20
@@ -16,7 +17,10 @@
 
 
 typedef int address;   /* indeks tabel */
-typedef SIMULATOR ElStackURType; /* Type List Makanan */
+typedef struct {
+  SIMULATOR Sim;
+  Notifikasi N;
+} ElStackURType; /* Type List Makanan */
 
 typedef struct { 
   ElStackURType *Container; /* tabel penyimpan elemen */
@@ -30,9 +34,13 @@ typedef struct {
 
 
 /* ********** SELEKTOR ********** */
+#define Sim(e) (e).Sim
+#define Nof(e) (e).N
 #define Top(S) (S).TOP
 #define LStack(S) (S).Container
 #define InfoTop(S) (S).Container[(S).TOP]
+#define InfoTopSim(S) Sim(InfoTop(S))
+#define InfoTopN(S) Nof(InfoTop(S))
 #define CapStack(S) (S).Capacity
 
 /* *** KONSTRUKTOR *** */
