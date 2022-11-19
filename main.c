@@ -10,31 +10,34 @@
 #include "Command/Fryfood.c"
 #include "Command/wait.c"
 #include "Command/buy.c"
+#include "Command/UndoRedo.c"
 
 int main()
 {
     /* KAMUS */
     ListResep ListRsp;
-    ListMakanan ListMkn;
+    ListMakanan ListMkn, LM;
     ListMakanan ListMakananEXP;
     ListMakanan ListDeliveryDone;
+    SIMULATOR BMO;
+    Stack Undo, Redo;
+    Notifikasi Notif;
     boolean FlagDelivDone;
     boolean FlagMakananEXP;
+    boolean isActionSucces;
     boolean isStartGame;
-    boolean MoveSucces;
-    SIMULATOR BMO, InitSim;
-    Stack Undo, Redo;
-    boolean isBuydone;
 
     /* ALGORITMA */
     /* Inisiasi program */
     SetUpListMakanan(&ListMkn, "Config/Config_Makanan.txt");
     readListLR(&ListRsp, "Confg/Config_Resep.txt");
-    CreateEmptyStack(&Undo);
-    CreateEmptyStack(&Redo);
 
     CreateSim(&BMO, "Config/Config_Peta.txt");
-    InitSim = BMO;
+    const SIMULATOR InitSim = BMO;
+
+    CreateNotifikasi(&Notif);
+    CreateEmptyStack(&Undo);
+    CreateEmptyStack(&Redo);
     CreateListMakanan(&ListMakananEXP);
     CreateListMakanan(&ListDeliveryDone);
 
@@ -48,7 +51,7 @@ int main()
 
     // while loop
     while (isStartGame)
-    {   
+    {
         displayMap(MAP(BMO));
         // STARTCOMMAND semua yang diterima kecuali START
         printf("\nMasukkan command: ");
@@ -64,15 +67,19 @@ int main()
         }
         else if (isWordSame(currentWord, "BUY"))
         {
-            BuyFood(&BMO, ListMkn, &isBuydone);
+            BuyFood(&BMO, ListMkn, &isActionSucces);
+            if (isActionSucces)
+            {
+                min1menitAll(&DELIV(BMO), &INVENTORY(BMO), &FlagDelivDone, &FlagMakananEXP, &LM, &ListDeliveryDone);
+            }
         }
         else if (isWordSame(currentWord, "MIX"))
         {
-            //MIX
+            // MIX
         }
         else if (isWordSame(currentWord, "CHOP"))
         {
-            //CHOP
+            // CHOP
         }
         else if (isWordSame(currentWord, "FRY"))
         {
@@ -80,32 +87,31 @@ int main()
         }
         else if (isWordSame(currentWord, "BOIL"))
         {
-            //BOIL
+            // BOIL
         }
         else if (isWordSame(currentWord, "MOVE"))
         {
             ADVWORD();
-            Move(&BMO,currentWord,&MoveSucces);
-            if (MoveSucces){
-                min1menitAll(&DELIV(BMO),&INVENTORY(BMO),&FlagDelivDone,&FlagMakananEXP,&ListMkn,&ListDeliveryDone);
+            Move(&BMO, currentWord, &isActionSucces);
+            if (isActionSucces)
+            {
+                min1menitAll(&DELIV(BMO), &INVENTORY(BMO), &FlagDelivDone, &FlagMakananEXP, &LM, &ListDeliveryDone);
             }
         }
         else if (isWordSame(currentWord, "WAIT"))
         {
-            //WAIT
+            // WAIT
             WAIT(&BMO, &FlagDelivDone, &FlagMakananEXP, &ListMakananEXP, &ListDeliveryDone);
         }
         else if (isWordSame(currentWord, "DELIVERY"))
         {
-            //DELIVERY
+            // DELIVERY
             DELIVERY(BMO);
-            min1menitAll(&DELIV(BMO),&INVENTORY(BMO),&FlagDelivDone,&FlagMakananEXP,&ListMkn,&ListDeliveryDone);
         }
         else if (isWordSame(currentWord, "INVENTORY"))
         {
-            //INVENTORY
+            // INVENTORY
             INVENTORYMakanan(BMO);
-            min1menitAll(&DELIV(BMO),&INVENTORY(BMO),&FlagDelivDone,&FlagMakananEXP,&ListMkn,&ListDeliveryDone);
         }
         else if (isWordSame(currentWord, "CATALOG"))
         {
@@ -113,26 +119,26 @@ int main()
         }
         else if (isWordSame(currentWord, "COOKBOOK"))
         {
-            //COOKBOOK
+            // COOKBOOK
         }
         else if (isWordSame(currentWord, "RECOMMENDATION"))
         {
-            //RECOMMENDATION
+            // RECOMMENDATION
         }
         else if (isWordSame(currentWord, "UNDO"))
         {
-            //UNDO
+            undoGame(&BMO, InitSim, &Notif, &Undo, &Redo);
         }
         else if (isWordSame(currentWord, "REDO"))
         {
-            //REDO
+            redoGame(&BMO, &Notif, &Undo, &Redo);
         }
         else if (isWordSame(currentWord, "EXIT"))
         {
             isStartGame = false;
         }
 
-        // State baru masuk stak undo
+        saveUndoRedoGame(BMO, InitSim, Notif, &Undo, &Redo);
         // Atur Notif
     }
     // until command/currentLine = exit
