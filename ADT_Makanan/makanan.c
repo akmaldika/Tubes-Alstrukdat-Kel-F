@@ -5,16 +5,16 @@
 // #define IDs(m) (m).id
 // #define Judul(m) (m).JudulMakanan
 // #define Exp(m) (m).exp
-// #define Deliv(m) (m).deliv
+// #define TimeAct(m) (m).TAction
 // #define Locate(m) (m).loc
 
 /* **** KONSTRUKTOR **** */
-void CreateMakanan(MAKANAN *m, IDEM id, NamaMakanan namaMakanan, TIME exp, TIME deliv, LokasiAksi loc)
+void CreateMakanan(MAKANAN *m, IDEM id, NamaMakanan namaMakanan, TIME exp, TIME TAction, LokasiAksi loc)
 {
         ID(*m) = id;
         Judul(*m) = namaMakanan;
         Exp(*m) = exp;
-        Deliv(*m) = deliv;
+        TimeAct(*m) = TAction;
         Locate(*m) = loc;
 }
 

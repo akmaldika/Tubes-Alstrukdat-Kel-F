@@ -39,11 +39,11 @@ TIME GetKadaluarsaMkn(ListMakanan l, int i)
     return Exp(ElmtLM(l, i));
 }
 
-TIME GetDeliverTimeMkn(ListMakanan l, int i)
+TIME GetActionTimeMkn(ListMakanan l, int i)
 {
     /* l terdefinisi dan i valid untuk l, yaitu [0..NElmt-1] */
     /* Mengembalikan _TIPE_TIME_ dari Waktu pengiriman makanan index ke-i*/
-    return Deliv(ElmtLM(l, i));
+    return TimeAct(ElmtLM(l, i));
 }
 
 Word GetActionLocMkn(ListMakanan l, int i)
@@ -131,10 +131,10 @@ TIME KedaluarsaMknId(ListMakanan l, IDEM id)
     return Exp(MknId(l, id));
 }
 
-TIME DeliverTimeMknId(ListMakanan l, IDEM id)
+TIME ActionTimeMknId(ListMakanan l, IDEM id)
 {
     /* Mengembalikan waktu pengiriman makanan berdasarkan Id makanan*/
-    return Deliv(MknId(l, id));
+    return TimeAct(MknId(l, id));
 }
 
 LokasiAksi ActionLocId(ListMakanan l, IDEM id)
@@ -206,7 +206,7 @@ void SetUpListMakanan(ListMakanan *l, char *filename)
         H = wordToInt(currentWord);
         CreateTime(&tempT, D, M, H);
         Exp(tempM) = tempT;
-        // deliv Time
+        // TAction Time
         ADVLINE();
         STARTWORD();
         D = wordToInt(currentWord);
@@ -215,7 +215,7 @@ void SetUpListMakanan(ListMakanan *l, char *filename)
         ADVWORD();
         H = wordToInt(currentWord);
         CreateTime(&tempT, D, M, H);
-        Deliv(tempM) = tempT;
+        TimeAct(tempM) = tempT;
         // lokasi
         ADVLINE();
         STARTWORD();
@@ -256,7 +256,7 @@ ListMakanan DisplayBuyAbleLM(ListMakanan l)
         if (isWordSame(GetActionLocMkn(l, i), "Buy"))
         {
             printf("   %d. %s   \t(", LengthLM(listBuyable)+1, GetNamaMkn(l, i).Tabword);
-            DisplayTIMEk(GetDeliverTimeMkn(l, i));
+            DisplayTIMEk(GetActionTimeMkn(l, i));
             printf(")");
             printf("\n");
             ElmtLM(listBuyable, LengthLM(listBuyable)) = ElmtLM(l, i);
@@ -332,8 +332,8 @@ void DisplayCatalog(ListMakanan l)
     /* Katalog adalah semua makanan dan bahan yang tersedia pada program */
     /* contoh tampilan :
     List Makanan
-    |- Nama -|- Durasi Kedaluwarsa -|- Aksi yang  -|- Delivery Time -|
-    |        |                      |- Diperlukan -|                 |
+    |- Nama -|- Durasi Kedaluwarsa -|- Aksi yang  -|- Action Time -|
+    |        |                      |- Diperlukan -|               |
     */
     /* KAMUS LOKAL */
     int i, cntStr, tempInt;
@@ -352,8 +352,8 @@ void DisplayCatalog(ListMakanan l)
     printf("\xbb");
     printf("\n");
 
-    printf(" |-%20sNama%20s-|-%4sDurasi Kedaluarsa%3s-|-%sAksi yang %s-|-%6sDelivery Time%5s-|\n", "", "", "", "", "", "", "", "");
-    printf(" | %20s    %20s | %4s                 %3s | %sDiperlukan%s | %6s             %5s |\n", "", "", "", "", "", "", "", "");
+    printf(" |-%20sNama%20s-|-%4sDurasi Kedaluarsa%3s-|-%sAksi yang %s-|-%7sAction Time%6s-|\n", "", "", "", "", "", "", "", "");
+    printf(" | %20s    %20s | %4s                 %3s | %sDiperlukan%s | %7s           %6s |\n", "", "", "", "", "", "", "", "");
 
     for (i = 0; i < LengthLM(l); i++)
     {
@@ -427,10 +427,10 @@ void DisplayCatalog(ListMakanan l)
         }
         printf(" | ");
 
-        cntStr = 0; // Deliver Time
-        DisplayTIMEk(GetDeliverTimeMkn(l, i));
-        tempTime = GetDeliverTimeMkn(l, i);
-        tempInt = TIMEToMin(GetDeliverTimeMkn(l, i));
+        cntStr = 0; // Action Time
+        DisplayTIMEk(GetActionTimeMkn(l, i));
+        tempTime = GetActionTimeMkn(l, i);
+        tempInt = TIMEToMin(GetActionTimeMkn(l, i));
 
         cntStr += 7;
         if (tempTime.M > 9)

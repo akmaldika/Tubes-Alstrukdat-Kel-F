@@ -57,7 +57,7 @@ TIME GetKadaluarsaMkn(ListMakanan l, int i);
 /* l terdefinisi dan i valid untuk l, yaitu [0..NElmt-1] */
 /* Mengembalikan _TIPE_TIME_ dari kadaluarsa makanan index ke-i*/
 
-TIME GetDeliverTimeMkn(ListMakanan l, int i);
+TIME GetActionTimeMkn(ListMakanan l, int i);
 /* l terdefinisi dan i valid untuk l, yaitu [0..NElmt-1] */
 /* Mengembalikan _TIPE_TIME_ dari Waktu pengiriman makanan index ke-i*/
 
@@ -87,7 +87,7 @@ NamaMakanan NamaMknId(ListMakanan l, IDEM id);
 TIME KedaluarsaMknId(ListMakanan l, IDEM id);
 /* Mengembalikan nama makanan berdasarkan ID makanan */
 
-TIME DeliverTimeMknId(ListMakanan l, IDEM id);
+TIME ActionTimeMknId(ListMakanan l, IDEM id);
 /* Mengembalikan waktu pengiriman makanan berdasarkan Id makanan*/
 
 LokasiAksi ActionLocId(ListMakanan l, IDEM id);

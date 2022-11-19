@@ -44,6 +44,10 @@ typedef struct {
 #define CapStack(S) (S).Capacity
 
 /* *** KONSTRUKTOR *** */
+ElStackURType MakeElStack(SIMULATOR S, Notifikasi N);
+/* Mengirimkan tipe element stack daari S dan N */
+/* precond : S dan N terdefinisi dan valid */
+
 void CreateEmptyStack(Stack *S);
 /* I.S. sembarang; */
 /* F.S. Sebuah stack S kosong terbentuk dengan kapasitas initial initCap*/
