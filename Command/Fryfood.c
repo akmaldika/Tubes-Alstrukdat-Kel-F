@@ -1,16 +1,17 @@
 #include "../ADT_Simulator/simulator.h"
+#include "../ADT_Notifikasi/Notifikasi.h"
+#include "../config_main.h"
 
-void FRYFOOD(SIMULATOR *s, ListMakanan lm, ListResep lr, boolean *flag) {
+void FRYFOOD(SIMULATOR *s, ListMakanan lm, ListResep lr, Notifikasi *notif) {
     // KAMUS
-    MultiSet listBahan;
+    MultiSet listBahan, accumBahan, accumHasil;
     PrioQueue tempInventory;
-    ListMakanan actionableFood;
-    boolean isSuccess;
+    ListMakanan actionableFood, expFood, delivFood, accumNewFood, accumUsedFood;
+    boolean isSuccess, flagDeliv, flagExp;
     int n, id, currIdBahan, failureId;
 
     // ALGORITMA
     // Inisialisasi awal
-    *flag = false;
     actionableFood = DisplayActionAbleLM(lm, "Fry");
     STARTCOMMAND();
     STARTWORD();
@@ -27,7 +28,8 @@ void FRYFOOD(SIMULATOR *s, ListMakanan lm, ListResep lr, boolean *flag) {
 
         // Jija n sesuai 0 <= n <= Length(actionableFood)
         } else {
-
+            CreateMS(&accumBahan);
+            CreateMS(&accumHasil);
             // Inisialisasi untuk memilih
             id = GetIdMkn(actionableFood, n-1);
             listBahan = getListBahan(lr, id);
@@ -47,10 +49,16 @@ void FRYFOOD(SIMULATOR *s, ListMakanan lm, ListResep lr, boolean *flag) {
             }
 
             if (isSuccess) {
-                *flag = true;
+                listBahan = getListBahan(lr, id);
+                CreateListMakanan(&expFood);
+                CreateListMakanan(&delivFood);
+
                 printf("%s telah berhasil dibuat dan masuk ke dalam inventory\n\n", NamaMknId(lm, id).Tabword);
                 Enqueue(&tempInventory, MknId(lm, id));
                 INVENTORY(*s) = tempInventory;
+                waitCommand(&DELIV(*s), &INVENTORY(*s), &flagDeliv, &flagExp, &expFood, &delivFood, 0, FRY_TIME);
+                setAllNotif(notif, expFood, delivFood, newFood, usedFood);
+
 
             } else {
                 printf("Gagal membuat %s karena kamu tidak memiliki bahan berikut: \n", NamaMknId(lm, id).Tabword);
