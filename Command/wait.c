@@ -21,8 +21,6 @@ void DELIVERY(PrioQueue Q)
 }
 
 void INVENTORYMakanan(PrioQueue Q){
-    if (isWordSame(currentWord, "INVENTORY")){
-        PrintPrioQueue(Q);
-        ADVLINE();
-    }
+    PrintPrioQueue(Q);
+    ADVLINE();
 }
