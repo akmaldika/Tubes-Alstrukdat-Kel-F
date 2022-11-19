@@ -6,9 +6,9 @@
 #include "../ADT_MesinKata/mesinkata.h"
 #include "../ADT_MesinKata/mesinkarakter.h"
 #include "../ADT_MesinKata/string.h"
-#include "../ADT_MesinKata/mesinkata.c"
-#include "../ADT_MesinKata/mesinkarakter.c"
-#include "../ADT_MesinKata/string.c"
+// #include "../ADT_MesinKata/mesinkata.c"
+// #include "../ADT_MesinKata/mesinkarakter.c"
+// #include "../ADT_MesinKata/string.c"
 #include "help.c"
 #include "boolean.h"
 
@@ -36,21 +36,6 @@ void commandInGameError();
 /* F.S. currentLine.Tabword[currentLength] != BLANK atau endWord*/
 
 #endif
-
-boolean isDigit(char *str)
-{
-    int i = 0;
-    boolean isdigit = true;
-    while (str[i] != '\0')
-    {
-        if (str[i] < '0' || str[i] > '9')
-        {
-            isdigit = false;
-        }
-        i++;
-    }
-    return isdigit;
-}
 
 void commandStartError()
 {
@@ -97,12 +82,12 @@ void commandInGameError()
         else
         {
             ADVWORD();
-            if(isDigit(currentWord.String))
+            if(isWordInt(currentWord))
             {
                 if(!endWord)
                 {
                     ADVWORD();
-                    if(isDigit(currentWord.String))
+                    if(isWordInt(currentWord))
                     {
                         if(endWord)
                         {
