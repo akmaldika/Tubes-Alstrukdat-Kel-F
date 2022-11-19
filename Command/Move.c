@@ -41,7 +41,7 @@ void MoveN(SIMULATOR *S,boolean *MoveSuccess){
     TIME t=WAKTU(*S);
     POINT p=TITIK(*S);
     *MoveSuccess=false;
-    MoveNorth(&m,*MoveSuccess) ;
+    MoveNorth(&m,MoveSuccess) ;
     if (MoveSuccess){
         Geser(&p,0,-1);
         setTitikSim(S,p);
@@ -67,13 +67,13 @@ void MoveS(SIMULATOR *S,boolean *MoveSuccess){
     }
 }
 void Move(SIMULATOR *S, Word X,boolean *MoveSuccess){
-    if (isWordSame(X,'EAST')){
+    if (isWordSame(X,"EAST")){
         MoveE(S,MoveSuccess);
-    }else if (isWordSame(X,'WEST')){
+    }else if (isWordSame(X,"WEST")){
         MoveW(S,MoveSuccess);
-    }else if (isWordSame(X,'NORTH')){
+    }else if (isWordSame(X,"NORTH")){
         MoveN(S,MoveSuccess);
-    }else if (isWordSame(X,'SOUTH')){
+    }else if (isWordSame(X,"SOUTH")){
         MoveS(S,MoveSuccess);
     }
 }

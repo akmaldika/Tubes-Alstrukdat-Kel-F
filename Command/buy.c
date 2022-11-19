@@ -67,7 +67,7 @@ void BuyFood(SIMULATOR *s, ListMakanan lm, boolean *flag)
                     if (isWordInt(currentWord))
                     {
                         inputUser = wordToInt(currentWord);
-                        isSuccess = (inputUser >= 0 && inputUser <= LengthLN(buyAbleFood));
+                        isSuccess = (inputUser >= 0 && inputUser <= LengthLM(buyAbleFood));
                         
                         if (!isSuccess)
                         {
