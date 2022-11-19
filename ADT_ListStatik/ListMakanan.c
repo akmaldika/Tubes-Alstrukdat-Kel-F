@@ -232,7 +232,7 @@ ListMakanan DisplayBuyAbleLM(ListMakanan l)
     {
         if (isWordSame(GetActionLocMkn(l, i), "Buy"))
         {
-            printf("%d. %s   \t(", LengthLM(listBuyable)+1, GetNamaMkn(l, i).Tabword);
+            printf("   %d. %s   \t(", LengthLM(listBuyable)+1, GetNamaMkn(l, i).Tabword);
             DisplayTIMEk(GetDeliverTimeMkn(l, i));
             printf(")");
             printf("\n");
@@ -293,7 +293,7 @@ ListMakanan DisplayActionAbleLM(ListMakanan l, char *Lchar)
         {
             ElmtLM(listActionable, LengthLM(listActionable)) = ElmtLM(l, i);
             LengthLM(listActionable)++;
-            printf("%d. %s", n, GetNamaMkn(l, i).Tabword);
+            printf("   %d. %s", n, GetNamaMkn(l, i).Tabword);
             printf("\n");
             n++;
         }

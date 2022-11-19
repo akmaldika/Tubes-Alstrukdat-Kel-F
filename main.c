@@ -9,6 +9,7 @@
 #include "Command/Move.c"
 #include "Command/Fryfood.c"
 #include "Command/wait.c"
+#include "Command/buy.c"
 
 int main()
 {
@@ -23,8 +24,9 @@ int main()
     boolean MoveSucces;
     PrioQueue InventoryMakanan;
     PrioQueue DeliveryMakanan;
-    SIMULATOR BMO;
+    SIMULATOR BMO, InitSim;
     Stack Undo, Redo;
+    boolean isBuydone;
 
     /* ALGORITMA */
     /* Inisiasi program */
@@ -32,15 +34,19 @@ int main()
     readListLR(&ListRsp, "Confg/Config_Resep.txt");
     CreateEmptyStack(&Undo);
     CreateEmptyStack(&Redo);
-    CreateSim(&BMO, "Config/Config_Peta.txt");
+
+    CreateSim(&BMO, "Config/Config_Map.txt");
+    InitSim = BMO;
+
     MakeEmpty(&InventoryMakanan, MaxElPQ);
     MakeEmpty(&DeliveryMakanan, MaxElPQ);
     CreateListMakanan(&ListMakananEXP);
     CreateListMakanan(&ListDeliveryDone);
 
     splashInitGame();
-    STARTCOMMAND(); // currentWord
-
+    printf("Masukkan command: ");
+    STARTCOMMAND();
+    STARTWORD();
     // Cek Start command error mcna nerima START sam EXIT, loop sampai benar
     commandStartError();
     isStartGame = isLineSame(currentLine, "START");
@@ -49,7 +55,9 @@ int main()
     while (isStartGame)
     {
         // STARTCOMMAND semua yang diterima kecuali START
+        printf("Masukkan command: ");
         STARTCOMMAND();
+        STARTWORD();
         // cek benar salah, loop sampai benar
         commandInGameError();
 
@@ -59,7 +67,7 @@ int main()
         }
         else if (isWordSame(currentWord, "BUY"))
         {
-            //BUY
+            BuyFood(&BMO, ListMkn, &isBuydone);
         }
         else if (isWordSame(currentWord, "MIX"))
         {
@@ -103,7 +111,7 @@ int main()
         }
         else if (isWordSame(currentWord, "CATALOG"))
         {
-            //CATALOG
+            DisplayCatalog(ListMkn);
         }
         else if (isWordSame(currentWord, "COOKBOOK"))
         {
