@@ -695,7 +695,7 @@ void min1menitAll(PrioQueue *Qdeliv, PrioQueue *Q, boolean *FlagDeliv, boolean *
 	}
 }
 
-void delAllPrioqueue(PrioQueue *Qdeliv)
+void delAllPriqueue(PrioQueue *Qdeliv)
 {
 	/* I.S. Qdeliv dan QInven terdefinisi */
 	/* F.S. menghapus semua elemen dari Qdeliv dan QInven */
@@ -703,4 +703,59 @@ void delAllPrioqueue(PrioQueue *Qdeliv)
 	Head(*Qdeliv) = Nil;
 	Tail(*Qdeliv) = Nil;
 	MaxEl(*Qdeliv) = 0;
+}
+
+boolean isPrioqueSame(PrioQueue q1, PrioQueue q2) {
+	/* I.S. : q1 dan q2 terdefinisi */
+	/* F.S.	: mengembalikan true jika q1 = q2 baik ukuran maupun setiap elemennya */
+
+	boolean flag;
+	int i, j;
+
+	if (MaxEl(q1) != MaxEl(q2))
+	{
+		return false;
+	}
+	else
+	{
+		if (Head(q1) != Head(q2) || Tail(q1) != Tail(q2))
+		{
+			return false;
+		}
+		else
+		{
+			i = Head(q1);
+			j = Head(q2);
+			flag = true;
+			while (flag && i <= Tail(q1) && j <= Tail(q2))
+			{
+				if (isMakananSame(Elmt(q1, i), Elmt(q2, j)))
+				{
+					if (i == MaxEl(q1))
+					{
+						i = 0;
+					}
+					else
+					{
+						i++;
+					}
+
+					if (j == MaxEl(q2))
+					{
+						j = 0;
+					}
+					else
+					{
+						j++;
+					}
+				}
+				else
+				{
+					flag = false;
+				}
+			}
+
+			return flag;
+		}
+	}
 }

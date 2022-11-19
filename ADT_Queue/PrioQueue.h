@@ -190,4 +190,9 @@ void delAllPriqueue(PrioQueue *Q);
 /* I.S. Qdeliv dan QInven terdefinisi */
 /* F.S. menghapus semua elemen dari Qdeliv dan QInven */
 
+boolean isPrioqueSame(PrioQueue q1, PrioQueue q2);
+/* I.S. : q1 dan q2 terdefinisi */
+/* F.S.	: mengembalikan true jika q1 = q2 baik ukuran maupun setiap elemennya */
+
+
 #endif

@@ -8,8 +8,11 @@
 
 int main(){
     Matrix p;
-    p=MapMatrix();
+    Matrix idx;
+    char *filename='Peta.txt';
+    p=MapMatrix(filename); //Membaca Konfigurasi
     char input;
+    boolean sukses; //Kondisi Berhasil Move
     while (input != 'b'){
     
         scanf("%c",&input); //gerakan menggunakan wasd
@@ -18,13 +21,16 @@ int main(){
         system("cls");
 
         displayMap(p);
-        ((int) tolower(input) == 'a') ? MoveWest(&p) :
-        ((int) tolower(input) == 'd') ? MoveEast(&p) :
-        ((int) tolower(input) == 'w') ? MoveNorth(&p) :
-        ((int) tolower(input) == 's') ? MoveSouth(&p) : "";
+        ((int) tolower(input) == 'a') ? MoveWest(&p,&sukses) :
+        ((int) tolower(input) == 'd') ? MoveEast(&p,&sukses) :
+        ((int) tolower(input) == 'w') ? MoveNorth(&p,&sukses) :
+        ((int) tolower(input) == 's') ? MoveSouth(&p,&sukses) : "";
 
     }
 
+    idx = getidx(p,'S'); //mengambil index S
+    printf("(%d,%d)",ELMT(idx,0,1),ELMT(idx,0,0));
 
-
+    printf("Last Idx Row: %d",getLastIdxRow(p));
+    printf("Last Idx Col: %d",getLastIdxCol(p));
 }

@@ -9,6 +9,7 @@
 #include "Command/Move.c"
 #include "Command/Fryfood.c"
 #include "Command/wait.c"
+#include "Command/buy.c"
 
 int main()
 {
@@ -20,10 +21,10 @@ int main()
     boolean FlagDelivDone;
     boolean FlagMakananEXP;
     boolean isStartGame;
-    PrioQueue InventoryMakanan;
-    PrioQueue DeliveryMakanan;
-    SIMULATOR BMO;
+    boolean MoveSucces;
+    SIMULATOR BMO, InitSim;
     Stack Undo, Redo;
+    boolean isBuydone;
 
     /* ALGORITMA */
     /* Inisiasi program */
@@ -31,15 +32,16 @@ int main()
     readListLR(&ListRsp, "Confg/Config_Resep.txt");
     CreateEmptyStack(&Undo);
     CreateEmptyStack(&Redo);
-    CreateSim(&BMO);
-    MakeEmpty(&InventoryMakanan, MaxElPQ);
-    MakeEmpty(&DeliveryMakanan, MaxElPQ);
+
+    CreateSim(&BMO, "Config/Config_Map.txt");
+    InitSim = BMO;
     CreateListMakanan(&ListMakananEXP);
     CreateListMakanan(&ListDeliveryDone);
 
     splashInitGame();
-    STARTCOMMAND(); // currentWord
-
+    printf("Masukkan command: ");
+    STARTCOMMAND();
+    STARTWORD();
     // Cek Start command error mcna nerima START sam EXIT, loop sampai benar
     commandStartError();
     isStartGame = isLineSame(currentLine, "START");
@@ -48,7 +50,9 @@ int main()
     while (isStartGame)
     {
         // STARTCOMMAND semua yang diterima kecuali START
+        printf("Masukkan command: ");
         STARTCOMMAND();
+        STARTWORD();
         // cek benar salah, loop sampai benar
         commandInGameError();
 
@@ -58,7 +62,7 @@ int main()
         }
         else if (isWordSame(currentWord, "BUY"))
         {
-            //BUY
+            BuyFood(&BMO, ListMkn, &isBuydone);
         }
         else if (isWordSame(currentWord, "MIX"))
         {
@@ -78,28 +82,32 @@ int main()
         }
         else if (isWordSame(currentWord, "MOVE"))
         {
-            ADVWORD();
-            Move(&BMO,currentWord);
-            //min1menitAll() gangerti help yg ini hehehe
+            
+            Move(&BMO,currentWord,&MoveSucces);
+            if (MoveSucces){
+                min1menitAll(&DELIV(BMO),&INVENTORY(BMO),&FlagDelivDone,&FlagMakananEXP,&ListMkn,&ListDeliveryDone);
+            }
         }
         else if (isWordSame(currentWord, "WAIT"))
         {
             //WAIT
-            WAIT(&DeliveryMakanan, &InventoryMakanan, &FlagDelivDone, &FlagMakananEXP, &ListMakananEXP, &ListDeliveryDone);
+            WAIT(&BMO, &FlagDelivDone, &FlagMakananEXP, &ListMakananEXP, &ListDeliveryDone);
         }
         else if (isWordSame(currentWord, "DELIVERY"))
         {
             //DELIVERY
-            DELIVERY(DeliveryMakanan);
+            DELIVERY(BMO);
+            min1menitAll(&DELIV(BMO),&INVENTORY(BMO),&FlagDelivDone,&FlagMakananEXP,&ListMkn,&ListDeliveryDone);
         }
         else if (isWordSame(currentWord, "INVENTORY"))
         {
             //INVENTORY
-            INVENTORYMakanan(InventoryMakanan);
+            INVENTORYMakanan(BMO);
+            min1menitAll(&DELIV(BMO),&INVENTORY(BMO),&FlagDelivDone,&FlagMakananEXP,&ListMkn,&ListDeliveryDone);
         }
         else if (isWordSame(currentWord, "CATALOG"))
         {
-            //CATALOG
+            DisplayCatalog(ListMkn);
         }
         else if (isWordSame(currentWord, "COOKBOOK"))
         {

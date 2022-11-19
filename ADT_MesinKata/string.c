@@ -64,5 +64,15 @@ boolean isWordInt (Word cc) {
     /* Mengembalikan true jika word merupakan integer dan false jika tidak */
 
     /* ALGORITMA */
-    return (48 <= cc.String[0] && cc.String[0] <= 57);
+    int i = 0;
+    boolean isInt = true;
+    while (cc.String[i] != '\0')
+    {
+        if (cc.String[i] < '0' || cc.String[i] > '9')
+        {
+            isInt = false;
+        }
+        i++;
+    }
+    return isInt;
 }

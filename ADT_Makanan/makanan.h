@@ -1,4 +1,4 @@
-#include "../ADT_Time/boolean.h"
+#include "boolean.h"
 #include "../ADT_Time/time.h"
 #include "../ADT_MesinKata/mesinkata.h"
 
@@ -29,5 +29,8 @@ typedef struct
 void CreateMakanan(MAKANAN *m, IDEM id, NamaMakanan namaMakanan, TIME exp, TIME deliv, LokasiAksi loc);
 /* I.S. m sembarang */
 /* F.s. m terdefinisi dengan elemen pembentuknya sesuai masukan parameter */
+
+boolean isMakananSame(MAKANAN m1, MAKANAN m2);
+/* Mengembalikan True jika m1 dan m2 memiliki id yang sama */
 
 #endif
