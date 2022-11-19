@@ -16,7 +16,10 @@ void TulisPOINT (POINT P){
 }
 
 
-
+boolean isPointSame(POINT p1, POINT p2)
+{
+    return (Absis(p1) == Absis(p2) && Ordinat(p1) == Ordinat (p2));
+}
 
 
 

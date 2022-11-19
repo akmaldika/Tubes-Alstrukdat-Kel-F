@@ -32,7 +32,9 @@ void TulisPOINT (POINT P);
 /* F.S. P tertulis di layar dengan format "(X,Y)" */                
 
 /* *** Kelompok operasi relasional terhadap POINT *** */
-
+boolean isPointSame(POINT p1, POINT p2);
+/* I.S. : p1, p2 terdefinisi */
+/* F.S. : mengembalikan true jika setiap p1 = p2 */
 
 
 
