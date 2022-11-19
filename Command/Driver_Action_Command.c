@@ -47,7 +47,7 @@ int main() {
     COOKFOOD(&s, lm, lr, &notif, "Fry");
 
     printLR(lr);
-    displayNotifikasi(notif);
+    displayNotifikasi(&notif);
 
 
     return 0;

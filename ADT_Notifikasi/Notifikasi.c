@@ -152,11 +152,12 @@ void displayNewFood(Notifikasi n) {
 
 /* I.S. Notifikasi n terdefinisi */
 /* F.S. Tampilkan notifikasi secara keseluruhan */
-void displayNotifikasi(Notifikasi n) {
-    displayExpFood(n);
-    displayDelivFood(n);
-    displayUsedFood(n);
-    displayNewFood(n);
+void displayNotifikasi(Notifikasi *n) {
+    displayExpFood(*n);
+    displayDelivFood(*n);
+    displayUsedFood(*n);
+    displayNewFood(*n);
+    CreateNotifikasi(n);
     
 }
 

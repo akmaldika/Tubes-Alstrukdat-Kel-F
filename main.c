@@ -52,6 +52,7 @@ int main()
     // while loop
     while (isStartGame)
     {   
+        displayNotifikasi(&Notif);
         DisplayTIME(WAKTU(BMO));
         displayMap(MAP(BMO));
         // STARTCOMMAND semua yang diterima kecuali START
@@ -76,19 +77,19 @@ int main()
         }
         else if (isWordSame(currentWord, "MIX"))
         {
-            // MIX
+            COOKFOOD(&BMO, ListMkn, ListRsp, &Notif, "Mix");
         }
         else if (isWordSame(currentWord, "CHOP"))
         {
-            // CHOP
+            COOKFOOD(&BMO, ListMkn, ListRsp, &Notif, "Chop");
         }
         else if (isWordSame(currentWord, "FRY"))
         {
-            // FRYFOOD(&BMO, ListMkn, ListRsp, ) //************* KURANG FALG
+            COOKFOOD(&BMO, ListMkn, ListRsp, &Notif, "Fry");
         }
         else if (isWordSame(currentWord, "BOIL"))
         {
-            // BOIL
+            COOKFOOD(&BMO, ListMkn, ListRsp, &Notif, "Boil");
         }
         else if (isWordSame(currentWord, "MOVE"))
         {
@@ -106,12 +107,10 @@ int main()
         }
         else if (isWordSame(currentWord, "DELIVERY"))
         {
-            // DELIVERY
             DELIVERY(BMO);
         }
         else if (isWordSame(currentWord, "INVENTORY"))
         {
-            // INVENTORY
             INVENTORYMakanan(BMO);
         }
         else if (isWordSame(currentWord, "CATALOG"))
@@ -120,11 +119,11 @@ int main()
         }
         else if (isWordSame(currentWord, "COOKBOOK"))
         {
-            // COOKBOOK
+            COOKBOOKFOOD(ListRsp, ListMkn);
         }
         else if (isWordSame(currentWord, "RECOMMENDATION"))
         {
-            // RECOMMENDATION
+            RECOMMENDATION(BMO, ListRsp, ListMkn);
         }
         else if (isWordSame(currentWord, "UNDO"))
         {
