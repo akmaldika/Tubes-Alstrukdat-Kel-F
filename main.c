@@ -32,6 +32,7 @@ int main()
     readListLR(&ListRsp, "Confg/Config_Resep.txt");
     CreateEmptyStack(&Undo);
     CreateEmptyStack(&Redo);
+
     CreateSim(&BMO, "Config/Config_Map.txt");
     InitSim = BMO;
     CreateListMakanan(&ListMakananEXP);
