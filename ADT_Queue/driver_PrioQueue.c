@@ -189,11 +189,17 @@ int main()
 
     // Delivery m5  m4
     PrioQueue DeliveryPQ, Qcopy;
-    MakeEmpty(&DeliveryPQ, 3);
+    MakeEmpty(&DeliveryPQ, 20);
+    DelivMakanan(&DeliveryPQ, m4);
+    DelivMakanan(&DeliveryPQ, m4);
+    DelivMakanan(&DeliveryPQ, m4);
+    DelivMakanan(&DeliveryPQ, m4);
+    DelivMakanan(&DeliveryPQ, m4);
     DelivMakanan(&DeliveryPQ, m4);
     PrintDelivery(DeliveryPQ); // delivv
     waitCommand(&DeliveryPQ, &InventoryPQ, &FlagDeliv, &Flag, &ListMakananExp, &ListDelivDone, 0, 2);
-    // min1menitAll(&DeliveryPQ, &InventoryPQ, &FlagDeliv, &Flag, &ListMakananExp, &ListDelivDone);
+    PrintDelivery(DeliveryPQ); // delivv
+    min1menitAll(&DeliveryPQ, &InventoryPQ, &FlagDeliv, &Flag, &ListMakananExp, &ListDelivDone);
     // min1menitAll(&DeliveryPQ, &InventoryPQ, &FlagDeliv, &Flag, &ListMakananExp, &ListDelivDone);
     // min1menitAll(&DeliveryPQ, &InventoryPQ, &FlagDeliv, &Flag, &ListMakananExp, &ListDelivDone);
 

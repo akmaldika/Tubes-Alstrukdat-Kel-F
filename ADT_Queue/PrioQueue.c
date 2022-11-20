@@ -1,4 +1,4 @@
-/* File : prioqueue.h */
+/* File : prioqueue.c */
 /* Definisi ADT Priority Queue Char dengan representasi array secara eksplisit dan alokasi dinamik */
 /* Model Implementasi Versi III dengan circular buffer */
 /* Elemen queue terurut membesar berdasarkan elemen time */
@@ -388,7 +388,7 @@ void PrintDelivery(PrioQueue Q)
 			{
 				printf("   %d. %s - ", no, NamaMakanan(Elmt(Q,i)));
 				// printf("   %d. %s - %d ", no, NamaMakanan(Elmt(Q, i)), Elmt(Q, i).id); // buat method display 4 jam , 3 jam 10 menit, print sama getvar nya
-				DisplayTIMEk((Q).T[i].timeAction);
+				DisplayTIMEk(((Q).T[i]).timeAction);
 				printf("\n");
 				i++;
 				no++;
@@ -396,7 +396,7 @@ void PrintDelivery(PrioQueue Q)
 		}
 		// printf("   %d. %s - %d ", no, NamaMakanan(Elmt(Q, i)), Elmt(Q, i).id); // buat method display 4 jam , 3 jam 10 menit, print sama getvar nya
 		printf("   %d. %s - ", no, NamaMakanan(Elmt(Q,i)));
-		DisplayTIMEk((Q).T[i].timeAction);
+		DisplayTIMEk(((Q).T[i]).timeAction);
 		printf("\n");
 	}
 }
@@ -605,9 +605,10 @@ void MinNTimeDeliv(PrioQueue *Qdeliv, PrioQueue *Q, boolean *Flag, boolean *Flag
 			{
 				PrevNMin(&TimeAct(Elmt(*Qdeliv, i)), min);
 				PrevNMin(&Exp(Elmt(*Qdeliv, i)), min);
-				if (isThereExp(*Qdeliv))
+						// printf("m %d\n", TIMEToMin(Elmt(*Qdeliv, Head(*Qdeliv)).timeAction));
+				if (TIMEToMin(Elmt(*Qdeliv, Head(*Qdeliv)).timeAction) < 1)
 				{
-					DequeueExp(Qdeliv, &mkn);
+					Dequeue(Qdeliv, &mkn);
 					LMakanan->Lmakanan[LMakanan->NElmt] = mkn;
 					LMakanan->NElmt++;
 					*Flag = true;
@@ -628,9 +629,9 @@ void MinNTimeDeliv(PrioQueue *Qdeliv, PrioQueue *Q, boolean *Flag, boolean *Flag
 		// Tail nya
 		PrevNMin(&TimeAct(Elmt(*Qdeliv, i)), min);
 		PrevNMin(&Exp(Elmt(*Qdeliv, i)), min);
-		if (isThereExp(*Qdeliv))
+		if (TIMEToMin(Elmt(*Qdeliv, Head(*Qdeliv)).timeAction) <1)
 		{
-			DequeueExp(Qdeliv, &mkn);
+			Dequeue(Qdeliv, &mkn);
 			LMakanan->Lmakanan[LMakanan->NElmt] = mkn;
 			LMakanan->NElmt++;
 			*Flag = true;
