@@ -606,7 +606,7 @@ void MinNTimeDeliv(PrioQueue *Qdeliv, PrioQueue *Q, boolean *Flag, boolean *Flag
 				PrevNMin(&TimeAct(Elmt(*Qdeliv, i)), min);
 				PrevNMin(&Exp(Elmt(*Qdeliv, i)), min);
 						// printf("m %d\n", TIMEToMin(Elmt(*Qdeliv, Head(*Qdeliv)).timeAction));
-				if (TIMEToMin(Elmt(*Qdeliv, Head(*Qdeliv)).timeAction) < 1)
+				if (TIMEToMin(Elmt(*Qdeliv, Head(*Qdeliv)).exp) < 1)
 				{
 					Dequeue(Qdeliv, &mkn);
 					LMakanan->Lmakanan[LMakanan->NElmt] = mkn;
@@ -629,7 +629,7 @@ void MinNTimeDeliv(PrioQueue *Qdeliv, PrioQueue *Q, boolean *Flag, boolean *Flag
 		// Tail nya
 		PrevNMin(&TimeAct(Elmt(*Qdeliv, i)), min);
 		PrevNMin(&Exp(Elmt(*Qdeliv, i)), min);
-		if (TIMEToMin(Elmt(*Qdeliv, Head(*Qdeliv)).timeAction) <1)
+		if (TIMEToMin(Elmt(*Qdeliv, Head(*Qdeliv)).exp) <1)
 		{
 			Dequeue(Qdeliv, &mkn);
 			LMakanan->Lmakanan[LMakanan->NElmt] = mkn;
