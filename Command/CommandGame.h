@@ -2,6 +2,7 @@
 #define CommandGame_h
 
 #include "../library.h"
+#include "../ADT_Stack/stack.h"
 
 void splashInitGame();
 /* I.S. Sembarang */
