@@ -58,21 +58,19 @@ void commandStartError()
     if (isLineSame(currentLine, "START") || isLineSame(currentLine, "EXIT"))
     { /* Do Nothing */
     }
+    else if (isLineSame(currentLine, "HELP"))
+    {
+        helpStartGame();
+        printf("\nMasukkan command: ");
+        STARTCOMMAND();
+        STARTWORD();
+        commandStartError();
+    }
     else
     {
         if (!endWord)
         {
             printf("Jangan gunakan spasi di awal atau diakhir command!\n");
-        }
-        while (isWordSame(currentWord, "HELP"))
-        {
-            helpStartGame();
-            printf("\nMasukkan command: ");
-            STARTCOMMAND();
-            STARTWORD();
-        }
-        if (isLineSame(currentLine, "START") || isLineSame(currentLine, "EXIT"))
-        {
         }
         else
         {
