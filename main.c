@@ -21,7 +21,8 @@ int main()
     /* ALGORITMA */
     /* Inisiasi program */
     SetUpListMakanan(&ListMkn, "Config/Config_Makanan.txt");
-    readListLR(&ListRsp, "Confg/Config_Resep.txt");
+    CreateLR(&ListRsp);
+    readListLR(&ListRsp, "Config/Config_Resep.txt");
 
     CreateSim(&BMO, "Config/Config_Peta.txt");
     const SIMULATOR InitSim = BMO;
