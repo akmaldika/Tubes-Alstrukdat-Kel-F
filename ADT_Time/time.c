@@ -70,7 +70,7 @@ void DisplayTIMEFull(TIME T)
     tanpa karakter apa pun di depan atau belakangnya, termasuk spasi, enter, dll.*/
     // KAMUS LOKAL
     // ALGORITMA
-    printf("%d:%d:%d", Day(T), Hour(T), Minute(T));
+    printf("Waktu: %d:%d:%d\n", Day(T), Hour(T), Minute(T));
 }
 
 void DisplayTIME(TIME T)

@@ -94,9 +94,11 @@ void MoveEast(Matrix *m,boolean *sukses){
       
       ELMT(*m,y,x+1)=ELMT(*m,y,x);
       ELMT(*m,y,x)=temp;
+      *sukses = true;
 
    }else{
       printf("Move Gagal\n");
+      *sukses = false;
    }
 
 
@@ -118,9 +120,11 @@ void MoveWest(Matrix *m,boolean *sukses){
       
       ELMT(*m,y,x-1)=ELMT(*m,y,x);
       ELMT(*m,y,x)=temp;
+      *sukses = true;
 
    }else{
       printf("Move Gagal\n");
+      *sukses = false;
    }
 
 }
@@ -139,10 +143,12 @@ void MoveNorth(Matrix *m,boolean *sukses){
       
       ELMT(*m,y-1,x)=ELMT(*m,y,x);
       ELMT(*m,y,x)=temp;
+      *sukses = true;
 
       
    }else{
       printf("Move Gagal\n");
+      *sukses = false;
    }
 
 }
@@ -161,12 +167,13 @@ void MoveSouth(Matrix *m,boolean *sukses){
    // }
    if (ELMT(*m,y+1,x)=='#'){
       ElType temp=ELMT(*m,y+1,x);
-      
       ELMT(*m,y+1,x)=ELMT(*m,y,x);
       ELMT(*m,y,x)=temp;
+      *sukses = true;
 
    }else{
       printf("Move Gagal\n");
+      *sukses = false;
    }
 
 }

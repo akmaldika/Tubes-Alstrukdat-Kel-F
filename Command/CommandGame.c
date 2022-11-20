@@ -256,12 +256,10 @@ void MoveS(SIMULATOR *S, boolean *MoveSuccess)
     PrioQueue q = DELIV(*S);
     *MoveSuccess = false;
     MoveSouth(&m, MoveSuccess);
-    if (MoveSuccess)
+    if (*MoveSuccess)
     {
         Geser(&p, 0, 1);
         setTitikSim(S, p);
-        t = TPrevMin(t);
-        setTimeSim(S, t);
         setMapSim(S, m);
     }
 }
@@ -277,8 +275,6 @@ void MoveN(SIMULATOR *S, boolean *MoveSuccess)
     {
         Geser(&p, 0, -1);
         setTitikSim(S, p);
-        t = TPrevMin(t);
-        setTimeSim(S, t);
         setMapSim(S, m);
     }
 }
@@ -294,8 +290,6 @@ void MoveW(SIMULATOR *S, boolean *MoveSuccess)
     {
         Geser(&p, -1, 0);
         setTitikSim(S, p);
-        t = TPrevMin(t);
-        setTimeSim(S, t);
         setMapSim(S, m);
     }
 }
@@ -311,8 +305,6 @@ void MoveE(SIMULATOR *S, boolean *MoveSuccess)
     {
         Geser(&p, 1, 0);
         setTitikSim(S, p);
-        t = TPrevMin(t);
-        setTimeSim(S, t);
         setMapSim(S, m);
     }
 }
@@ -338,7 +330,6 @@ void COOKBOOKFOOD(ListResep lr, ListMakanan lm) {
         
         printf("\n");
     } 
-
 }
 
 
@@ -355,7 +346,7 @@ void RECOMMENDATION(SIMULATOR s, ListResep lr, ListMakanan lm)
 
     makeableFood = getMakableResep(multiSetInventory, lr);
 
-    if (!isEmptyMS(makeableFood))
+    if (isEmptyMS(makeableFood))
     {
         printf("Tidak ada makanan yang dapat direkomendasikan\n\n");
     }
