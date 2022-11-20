@@ -63,7 +63,7 @@ void displayNewFood(Notifikasi n);
 
 /* I.S. Notifikasi n terdefinisi */
 /* F.S. Tampilkan notifikasi secara keseluruhan, setelah display reset isi notifikasi */
-void displayNotifikasi(Notifikasi *n);
+void displayNotifikasi(Notifikasi n);
 
 /* I.S. Notifikasi n terdefinisi */
 /* F.S. Isi n berubah di bagian notifikasi makanan delivery dan expired sesuai input*/

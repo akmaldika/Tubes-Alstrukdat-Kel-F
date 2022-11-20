@@ -41,9 +41,6 @@ int main()
     commandStartError();
     isStartGame = isLineSame(currentLine, "START");
 
-    Enqueue(&INVENTORY(BMO), MknId(ListMkn, 2));
-    Enqueue(&INVENTORY(BMO), MknId(ListMkn, 24));
-
     // while loop
     while (isStartGame)
     {   
@@ -51,7 +48,8 @@ int main()
         STARTCOMMAND();
         STARTWORD();
         printf("Notifikasi: \n");
-        displayNotifikasi(&Notif);
+        displayNotifikasi(Notif);
+        CreateNotifikasi(&Notif);
         DisplayTIMEFull(WAKTU(BMO));
         displayMap(MAP(BMO));
         // STARTCOMMAND semua yang diterima kecuali START
@@ -71,8 +69,7 @@ int main()
             BuyFood(&BMO, ListMkn, &isActionSucces);
             if (isActionSucces)
             {
-                min1menitAll(&DELIV(BMO), &INVENTORY(BMO), &FlagDelivDone, &FlagMakananEXP, &ListMakananEXP, &ListDeliveryDone);
-                setExpDelivNotif(&Notif, ListMakananEXP, ListDeliveryDone);
+                min1menitAll(&DELIV(BMO), &INVENTORY(BMO), &FlagDelivDone, &FlagMakananEXP, &EXPIREDFOOD(Notif), &DELIVEREDFOOD(Notif));
                 NextMin(&WAKTU(BMO));
             }
         }
@@ -113,15 +110,14 @@ int main()
             ADVWORD();
             Move(&BMO, currentWord, &isActionSucces);
             if (isActionSucces){
-                min1menitAll(&DELIV(BMO),&INVENTORY(BMO),&FlagDelivDone,&FlagMakananEXP,&ListMakananEXP,&ListDeliveryDone);
-                setExpDelivNotif(&Notif, ListMakananEXP, ListDeliveryDone);
+                
+                min1menitAll(&DELIV(BMO), &INVENTORY(BMO), &FlagDelivDone, &FlagMakananEXP, &EXPIREDFOOD(Notif), &DELIVEREDFOOD(Notif));
                 NextMin(&WAKTU(BMO));
             }
         }
         else if (isWordSame(currentWord, "WAIT"))
         {
-            WAIT(&BMO, &FlagDelivDone, &FlagMakananEXP, &ListMakananEXP, &ListDeliveryDone);
-            setExpDelivNotif(&Notif, ListMakananEXP, ListDeliveryDone);
+            WAIT(&BMO, &FlagDelivDone, &FlagMakananEXP, &EXPIREDFOOD(Notif), &DELIVEREDFOOD(Notif));
         }
         else if (isWordSame(currentWord, "DELIVERY"))
         {
@@ -155,7 +151,7 @@ int main()
         {
             isStartGame = false;
         }
-
+        
         saveUndoRedoGame(BMO, InitSim, Notif, &Undo, &Redo);
         // Atur Notif
     }

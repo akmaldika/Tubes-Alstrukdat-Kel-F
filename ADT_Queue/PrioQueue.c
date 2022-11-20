@@ -388,7 +388,7 @@ void PrintDelivery(PrioQueue Q)
 			{
 				printf("   %d. %s - ", no, NamaMakanan(Elmt(Q,i)));
 				// printf("   %d. %s - %d ", no, NamaMakanan(Elmt(Q, i)), Elmt(Q, i).id); // buat method display 4 jam , 3 jam 10 menit, print sama getvar nya
-				DisplayTIMEk(TimeFull((Q).T[i]));
+				DisplayTIMEk((Q).T[i].timeAction);
 				printf("\n");
 				i++;
 				no++;
@@ -396,7 +396,7 @@ void PrintDelivery(PrioQueue Q)
 		}
 		// printf("   %d. %s - %d ", no, NamaMakanan(Elmt(Q, i)), Elmt(Q, i).id); // buat method display 4 jam , 3 jam 10 menit, print sama getvar nya
 		printf("   %d. %s - ", no, NamaMakanan(Elmt(Q,i)));
-		DisplayTIMEk(TimeFull((Q).T[i]));
+		DisplayTIMEk((Q).T[i].timeAction);
 		printf("\n");
 	}
 }

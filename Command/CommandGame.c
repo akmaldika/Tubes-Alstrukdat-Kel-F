@@ -506,8 +506,9 @@ void COOKFOOD(SIMULATOR *s, ListMakanan lm, ListResep lr, Notifikasi *notif, cha
                 actionTime = ActionTimeMknId(lm, id);
                 actionMinute = TIMEToMin(actionTime);
                 NextNMin(&WAKTU(*s), actionMinute);
-                waitCommand(&DELIV(*s), &INVENTORY(*s), &flagDeliv, &flagExp, &expFood, &delivFood, Hour(actionTime), Minute(actionTime));
-                setAllNotif(notif, expFood, delivFood, usedFood, newFood);
+                waitCommand(&DELIV(*s), &INVENTORY(*s), &flagDeliv, &flagExp, &EXPIREDFOOD(*notif), &DELIVEREDFOOD(*notif), Hour(actionTime), Minute(actionTime));
+                USEDFOOD(*notif) = usedFood;
+                NEWFOOD(*notif) = newFood;
             }
             else
             {
@@ -537,6 +538,7 @@ void undoGame(SIMULATOR *S, SIMULATOR InitSim, Notifikasi *Notif, Stack *Undo, S
         Push(Redo, valOut);
 
         *Notif = Nof(valOut);
+        ISUNDO(*Notif) = true;
 
         if (IsEmptyStack(*Undo))
         {
