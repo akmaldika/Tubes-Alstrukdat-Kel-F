@@ -70,24 +70,40 @@ int main()
         }
         else if (isWordSame(currentWord, "MIX"))
         {
-            COOKFOOD(&BMO, ListMkn, ListRsp, &Notif, "Mix");
+            if (isAdjacent(BMO, 'M')) {
+                COOKFOOD(&BMO, ListMkn, ListRsp, &Notif, "Mix");
+            } else {
+                printf("BNMO tidak berada di area Mix!!\n ");
+            }
         }
         else if (isWordSame(currentWord, "CHOP"))
         {
-            COOKFOOD(&BMO, ListMkn, ListRsp, &Notif, "Chop");
+            if (isAdjacent(BMO, 'C')) {
+                COOKFOOD(&BMO, ListMkn, ListRsp, &Notif, "Chop");
+            } else {
+                printf("BNMO tidak berada di area Chop!!\n ");
+            }
         }
         else if (isWordSame(currentWord, "FRY"))
         {
-            COOKFOOD(&BMO, ListMkn, ListRsp, &Notif, "Fry");
+            if (isAdjacent(BMO, 'F')) {
+                COOKFOOD(&BMO, ListMkn, ListRsp, &Notif, "Fry");
+            } else {
+                printf("BNMO tidak berada di area Fry!!\n ");
+            }
         }
         else if (isWordSame(currentWord, "BOIL"))
         {
-            COOKFOOD(&BMO, ListMkn, ListRsp, &Notif, "Boil");
+            if (isAdjacent(BMO, 'B')) {
+                COOKFOOD(&BMO, ListMkn, ListRsp, &Notif, "Boil");
+            } else {
+                printf("BNMO tidak berada di area Boil!!\n ");
+            }
         }
         else if (isWordSame(currentWord, "MOVE"))
         {
             ADVWORD();
-            Move(&BMO,currentWord,&isActionSucces);
+            Move(&BMO,currentWord, &isActionSucces);
             if (isActionSucces){
                 min1menitAll(&DELIV(BMO),&INVENTORY(BMO),&FlagDelivDone,&FlagMakananEXP,&ListMakananEXP,&ListDeliveryDone);
                 setExpDelivNotif(&Notif, ListMakananEXP, ListDeliveryDone);
