@@ -339,6 +339,7 @@ void RECOMMENDATION(SIMULATOR s, ListResep lr, ListMakanan lm)
     MultiSet multiSetInventory, makeableFood;
     int i, currentId;
     // ALGORITMA
+    CreateMS(&multiSetInventory);
     for (i = 0; i < NBElmt(INVENTORY(s)); i++)
     {
         addMS(&multiSetInventory, Info(Elmt(INVENTORY(s), i)), 1);

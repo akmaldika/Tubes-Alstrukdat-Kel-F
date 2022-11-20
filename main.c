@@ -44,7 +44,7 @@ int main()
     // while loop
     while (isStartGame)
     {   
-        printf("- Ketik apapun untuk berlanjut -");
+        printf("-- Ketik apapun untuk berlanjut --");
         STARTCOMMAND();
         STARTWORD();
         printf("Notifikasi: \n");
