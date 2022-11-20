@@ -289,20 +289,24 @@ boolean isResepMakeable(MultiSet *m, NTree resep) {
     int i;
     
     // ALGORITMA
-    if (isInMS(*m, INFONTREE(resep), 1)) {
-        removeMS(m, INFONTREE(resep), 1);
-        return true;
-    } else if (isHaveChild(resep)) {
-        isMakeable = true;
-        resepBahan = CHILD(resep);
-        while ((resepBahan != NULL) && (isMakeable)) {
-            isMakeable = isResepMakeable(m, resepBahan);
-            resepBahan = SIBLING(resepBahan);
+    if (!isEmptyMS(*m)) {
+        if (isInMS(*m, INFONTREE(resep), 1)) {
+            removeMS(m, INFONTREE(resep), 1);
+            return true;
+        } else if (isHaveChild(resep)) {
+            isMakeable = true;
+            resepBahan = CHILD(resep);
+            while ((resepBahan != NULL) && (isMakeable)) {
+                isMakeable = isResepMakeable(m, resepBahan);
+                resepBahan = SIBLING(resepBahan);
+            }
+            return isMakeable;
+        } else {
+            return false;
         }
-        return isMakeable;
     } else {
         return false;
-    }
+    } 
 }
 
 /* Mengembalikan id dari resep yang bisa dibuat dari inventory m */
