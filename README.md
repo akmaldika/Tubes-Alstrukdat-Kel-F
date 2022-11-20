@@ -41,19 +41,20 @@ $ gcc Program.c -o Program HeaderImplement1.c ... && Program
 
 Pembagian Tugas dan Statusnya
 
-Fitur Utama                                     Sub-Fitur                        Nama                                   NIM             Status Pengerjaan
-ADT Sederhana                                   ADT Point               Muhammad Zaydan Athallah                        13521104                Selesai
-                                                ADT Makanan             Muhammad Zaydan Athallah                        13521104                Selesai
-                                                ADT Simulator           Muhammad Zaydan Athallah                        13521104                Selesai
-                                                ADT Waktu/Time          Nigel Sahl                                      13521043                Selesai
-ADT List Statik                                 ADT List Makanan        Akmal Mahardika Nurwahyu P                      13521070                Selesai
-                                                ADT List Resep          Fakhri Muhammad Mahendra                        13521045                Selesai
-ADT Matriks                                     ADT Map                 Muhammad Zaydan Athallah                        13521104                Selesai
-ADT Mesin Karakter dan Mesin Kata               ADT Mesin Karakter      Muhammad Equilibrie Fajria                      13521047                Selesai
-                                                ADT Mesin Kata          Muhammad Equilibrie Fajria                      13521047                Selesai
-                                                ADT String              Muhammad Equilibrie Fajria                      13521047                Selesai
-ADT Queue                                       ADT PrioQueue           Nigel Sahl                                      13521043                Selesai
-ADT Stack                                       ADT Stack Undo Redo     Akmal Mahardika Nurwahyu P                      13521070                Selesai
-ADT Tree                                        ADT Resep               Fakhri Muhammad Mahendra                        13521045                Selesai
-Waktu Pengolahan Makanan                                                Nigel Sahl & Fakhri Muhammad Mahendra           13521043 & 13521045     Selesai
-Rekomendasi Makanan                                                     Fakhri Muhammad Mahendra                        13521045                Selesai
+|Fitur Utama|                                     |Sub-Fitur|                        |Nama|                                   |NIM|            |Status Pengerjaan|
+| --- |                                          | --- |                   | --- |                                           | --- |                   | --- | 
+|ADT Sederhana|                                  |ADT Point|               |Muhammad Zaydan Athallah|                        |13521104|                |Selesai|
+||                                               |ADT Makanan|             |Muhammad Zaydan Athallah|                        |13521104|                |Selesai|
+||                                               |ADT Simulator|           |Muhammad Zaydan Athallah|                        |13521104|                |Selesai|
+||                                               |ADT Waktu/Time|          |Nigel Sahl|                                      |13521043|                |Selesai|
+|ADT List Statik|                                |ADT List Makanan|        |Akmal Mahardika Nurwahyu P|                      |13521070|                |Selesai|
+||                                               |ADT List Resep|          |Fakhri Muhammad Mahendra|                        |13521045|                |Selesai|
+|ADT Matriks|                                    |ADT Map|                 |Muhammad Zaydan Athallah|                        |13521104|                |Selesai|
+|ADT Mesin Karakter dan Mesin Kata|              |ADT Mesin Karakter|      |Muhammad Equilibrie Fajria|                      |13521047|                |Selesai|
+||                                               |ADT Mesin Kata|          |Muhammad Equilibrie Fajria|                      |13521047|                |Selesai|
+||                                               |ADT String|              |Muhammad Equilibrie Fajria|                      |13521047|                |Selesai|
+|ADT Queue|                                      |ADT PrioQueue|           |Nigel Sahl|                                      |13521043|                |Selesai|
+|ADT Stack|                                      |ADT Stack Undo Redo|     |Akmal Mahardika Nurwahyu P|                      |13521070|                |Selesai|
+|ADT Tree|                                       |ADT Resep|               |Fakhri Muhammad Mahendra|                        |13521045|                |Selesai|
+|Waktu Pengolahan Makanan|                       |         |               |Nigel Sahl & Fakhri Muhammad Mahendra|           |13521043 & 13521045|     |Selesai|
+|Rekomendasi Makanan|                            |         |               |Fakhri Muhammad Mahendra|                        |13521045|                |Selesai|
