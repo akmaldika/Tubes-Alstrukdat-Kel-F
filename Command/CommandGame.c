@@ -451,11 +451,12 @@ void BuyFood(SIMULATOR *s, ListMakanan lm, boolean *flag)
 void COOKFOOD(SIMULATOR *s, ListMakanan lm, ListResep lr, Notifikasi *notif, char *action)
 {
     // KAMUS
+    TIME actionTime;
     MultiSet listBahan;
     PrioQueue tempInventory;
     ListMakanan actionableFood, expFood, delivFood, newFood, tempUsedFood, usedFood;
     boolean isSuccess, flagDeliv, flagExp;
-    int n, id, currIdBahan, failureId;
+    int n, id, currIdBahan, failureId, actionMinute;
 
     // ALGORITMA
     // Inisialisasi awal
@@ -520,7 +521,10 @@ void COOKFOOD(SIMULATOR *s, ListMakanan lm, ListResep lr, Notifikasi *notif, cha
                 insertLM(&newFood, MknId(lm, id));
                 accumLM(&usedFood, tempUsedFood);
 
-                waitCommand(&DELIV(*s), &INVENTORY(*s), &flagDeliv, &flagExp, &expFood, &delivFood, 0, FRY_TIME);
+                actionTime = ActionTimeMknId(lm, id);
+                actionMinute = TIMEToMin(actionTime);
+                NextNMin(&WAKTU(*s), actionMinute);
+                waitCommand(&DELIV(*s), &INVENTORY(*s), &flagDeliv, &flagExp, &expFood, &delivFood, Hour(actionTime), Minute(actionTime));
                 setAllNotif(notif, expFood, delivFood, usedFood, newFood);
             }
             else
@@ -611,9 +615,9 @@ void WAIT(SIMULATOR *S, boolean *FlagDeliv, boolean *FlagExp, ListMakanan *LMaka
 {
     int hour, minute;
     ADVWORD();
-    hour = isWordInt(currentWord);
+    hour = wordToInt(currentWord);
     ADVWORD();
-    minute = isWordInt(currentWord);
+    minute = wordToInt(currentWord);
     waitCommand(&DELIV(*S), &INVENTORY(*S), FlagDeliv, FlagExp, LMakananEXP, ListDelivDone, hour, minute);
     // printf("menunggu %d  %d\n", hour, minute);
     NextNMin(&WAKTU(*S), (60 * hour) + minute);
