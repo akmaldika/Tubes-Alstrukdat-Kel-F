@@ -314,6 +314,31 @@ void MoveE(SIMULATOR *S, boolean *MoveSuccess)
     }
 }
 
+void COOKBOOKFOOD(ListResep lr, ListMakanan lm) {
+    // KAMUS
+    MultiSet ListBahan;
+    int currentId, i, currBahanId;
+    // ALGORITMA
+    printf("List Resep\n");
+    for (i = 0; isIdxEffLR(lr, i); i++) {
+        printf("%d. ", i+1);
+        currentId = INFONTREE(ELMTLR(lr, i));
+        printf("%s\n", NamaMknId(lm, currentId).Tabword);
+        printf("%s", ActionLocId(lm, currentId).String);
+        ListBahan = getListBahan(lr, currentId);
+
+        while (!isEmptyMS(ListBahan)) {
+            currBahanId = ELMTMS(ListBahan, 0);
+            printf(" - %s", NamaMknId(lm, currBahanId).Tabword);
+            removeMS(&ListBahan, currBahanId, 1);
+        }
+        
+        printf("\n");
+    } 
+
+}
+
+
 void RECOMMENDATION(SIMULATOR s, ListResep lr, ListMakanan lm)
 {
     // KAMUS
