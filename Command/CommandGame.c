@@ -42,7 +42,7 @@ void helpInGame()
     printf("RECOMMENDATION - Menampilkan resep yang dapat dibuat\n");
     printf("UNDO\t- Kembali ke kondisi sebelumnya\n");
     printf("REDO\t- Kembali ke kondisi setelah UNDO\n");
-    printf("EXIT\t- Keluar dari game\n");        
+    printf("EXIT\t- Keluar dari game\n");
 }
 
 void exitGame(PrioQueue *inventory, PrioQueue *delivery, Stack *undo, Stack *redo)
@@ -56,10 +56,11 @@ void exitGame(PrioQueue *inventory, PrioQueue *delivery, Stack *undo, Stack *red
 void commandStartError()
 {
     if (isLineSame(currentLine, "START") || isLineSame(currentLine, "EXIT"))
-    {/* Do Nothing */}
+    { /* Do Nothing */
+    }
     else
     {
-        if(!endWord)
+        if (!endWord)
         {
             printf("Jangan gunakan spasi di awal atau diakhir command!\n");
         }
@@ -68,25 +69,26 @@ void commandStartError()
         printf("\nMasukkan command: ");
         STARTCOMMAND();
         STARTWORD();
-    
+
         while (isWordSame(currentWord, "HELP"))
-        {    
+        {
             helpStartGame();
             printf("\nMasukkan command: ");
             STARTCOMMAND();
             STARTWORD();
-        }   
+        }
         commandStartError();
     }
 }
 
 void commandInGameError()
 {
-    if(isLineSame(currentLine, "HELP") || isLineSame(currentLine, "BUY") || isLineSame(currentLine, "MIX") || isLineSame(currentLine, "CHOP") || isLineSame(currentLine, "FRY") || isLineSame(currentLine, "BOIL") || isLineSame(currentLine, "DELIVERY") || isLineSame(currentLine, "INVENTORY") || isLineSame(currentLine, "CATALOG") || isLineSame(currentLine, "COOKBOOK") || isLineSame(currentLine, "RECOMMENDATION") || isLineSame(currentLine, "UNDO") || isLineSame(currentLine, "REDO") || isLineSame(currentLine, "EXIT"))
-    {/* Do Nothing */}
+    if (isLineSame(currentLine, "HELP") || isLineSame(currentLine, "BUY") || isLineSame(currentLine, "MIX") || isLineSame(currentLine, "CHOP") || isLineSame(currentLine, "FRY") || isLineSame(currentLine, "BOIL") || isLineSame(currentLine, "DELIVERY") || isLineSame(currentLine, "INVENTORY") || isLineSame(currentLine, "CATALOG") || isLineSame(currentLine, "COOKBOOK") || isLineSame(currentLine, "RECOMMENDATION") || isLineSame(currentLine, "UNDO") || isLineSame(currentLine, "REDO") || isLineSame(currentLine, "EXIT"))
+    { /* Do Nothing */
+    }
     else if (isWordSame(currentWord, "WAIT"))
     {
-        if(endWord)
+        if (endWord)
         {
             printf("Anda tidak memasukkan parameter X jam Y menit dengan benar!\n");
             printf("WAIT X Y\n");
@@ -98,14 +100,14 @@ void commandInGameError()
         else
         {
             ADVWORD();
-            if(isWordInt(currentWord))
+            if (isWordInt(currentWord))
             {
-                if(!endWord)
+                if (!endWord)
                 {
                     ADVWORD();
-                    if(isWordInt(currentWord))
+                    if (isWordInt(currentWord))
                     {
-                        if(endWord)
+                        if (endWord)
                         {
                             STARTWORD();
                         }
@@ -116,7 +118,7 @@ void commandInGameError()
                             printf("\nMasukkan command: ");
                             STARTCOMMAND();
                             STARTWORD();
-                            commandInGameError(); 
+                            commandInGameError();
                         }
                     }
                     else
@@ -126,7 +128,7 @@ void commandInGameError()
                         printf("\nMasukkan command: ");
                         STARTCOMMAND();
                         STARTWORD();
-                        commandInGameError(); 
+                        commandInGameError();
                     }
                 }
                 else
@@ -148,12 +150,11 @@ void commandInGameError()
                 STARTWORD();
                 commandInGameError();
             }
-        
         }
     }
-    else if(isWordSame(currentWord, "MOVE"))
+    else if (isWordSame(currentWord, "MOVE"))
     {
-        if(endWord)
+        if (endWord)
         {
             printf("Anda tidak memasukkan X dengan benar!\n");
             printf("Gunakan Format: MOVE X\n");
@@ -167,9 +168,9 @@ void commandInGameError()
         else
         {
             ADVWORD();
-            if(isWordSame(currentWord, "NORTH") || isWordSame(currentWord, "SOUTH") || isWordSame(currentWord, "EAST") || isWordSame(currentWord, "WEST"))
+            if (isWordSame(currentWord, "NORTH") || isWordSame(currentWord, "SOUTH") || isWordSame(currentWord, "EAST") || isWordSame(currentWord, "WEST"))
             {
-                if(endWord)
+                if (endWord)
                 {
                     STARTWORD();
                 }
@@ -210,7 +211,7 @@ void commandInGameError()
         }
         else
         {
-            if(!endWord)
+            if (!endWord)
             {
                 printf("Jangan gunakan spasi di awal atau diakhir command!\n");
             }
@@ -224,23 +225,117 @@ void commandInGameError()
     }
 }
 
-void RECOMMENDATION(SIMULATOR s, ListResep lr, ListMakanan lm) {
+void Move(SIMULATOR *S, Word X, boolean *MoveSuccess)
+{
+    if (isWordSame(X, "EAST"))
+    {
+        MoveE(S, MoveSuccess);
+    }
+    else if (isWordSame(X, "WEST"))
+    {
+        MoveW(S, MoveSuccess);
+    }
+    else if (isWordSame(X, "NORTH"))
+    {
+        MoveN(S, MoveSuccess);
+    }
+    else if (isWordSame(X, "SOUTH"))
+    {
+        MoveS(S, MoveSuccess);
+    }
+}
+
+void MoveS(SIMULATOR *S, boolean *MoveSuccess)
+{
+    Matrix m = MAP(*S);
+    TIME t = WAKTU(*S);
+    POINT p = TITIK(*S);
+    PrioQueue q = DELIV(*S);
+    *MoveSuccess = false;
+    MoveSouth(&m, MoveSuccess);
+    if (MoveSuccess)
+    {
+        Geser(&p, 0, 1);
+        setTitikSim(S, p);
+        t = TPrevMin(t);
+        setTimeSim(S, t);
+        setMapSim(S, m);
+    }
+}
+
+void MoveN(SIMULATOR *S, boolean *MoveSuccess)
+{
+    Matrix m = MAP(*S);
+    TIME t = WAKTU(*S);
+    POINT p = TITIK(*S);
+    *MoveSuccess = false;
+    MoveNorth(&m, MoveSuccess);
+    if (MoveSuccess)
+    {
+        Geser(&p, 0, -1);
+        setTitikSim(S, p);
+        t = TPrevMin(t);
+        setTimeSim(S, t);
+        setMapSim(S, m);
+    }
+}
+
+void MoveW(SIMULATOR *S, boolean *MoveSuccess)
+{
+    Matrix m = MAP(*S);
+    TIME t = WAKTU(*S);
+    POINT p = TITIK(*S);
+    *MoveSuccess = false;
+    MoveWest(&m, MoveSuccess);
+    if (MoveSuccess)
+    {
+        Geser(&p, -1, 0);
+        setTitikSim(S, p);
+        t = TPrevMin(t);
+        setTimeSim(S, t);
+        setMapSim(S, m);
+    }
+}
+
+void MoveE(SIMULATOR *S, boolean *MoveSuccess)
+{
+    Matrix m = MAP(*S);
+    TIME t = WAKTU(*S);
+    POINT p = TITIK(*S);
+    *MoveSuccess = false;
+    MoveEast(&m, MoveSuccess);
+    if (MoveSuccess)
+    {
+        Geser(&p, 1, 0);
+        setTitikSim(S, p);
+        t = TPrevMin(t);
+        setTimeSim(S, t);
+        setMapSim(S, m);
+    }
+}
+
+void RECOMMENDATION(SIMULATOR s, ListResep lr, ListMakanan lm)
+{
     // KAMUS
     MultiSet multiSetInventory, makeableFood;
     int i, currentId;
     // ALGORITMA
-    for (i = 0; i < NBElmt(INVENTORY(s)); i++) {
-        addMS(&multiSetInventory, Info(Elmt(INVENTORY(s), i)), 1); 
+    for (i = 0; i < NBElmt(INVENTORY(s)); i++)
+    {
+        addMS(&multiSetInventory, Info(Elmt(INVENTORY(s), i)), 1);
     }
 
     makeableFood = getMakableResep(multiSetInventory, lr);
 
-    if (!isEmptyMS(makeableFood)) {
+    if (!isEmptyMS(makeableFood))
+    {
         printf("Tidak ada makanan yang dapat direkomendasikan\n\n");
-
-    } else {
+    }
+    else
+    {
         printf("Berikut daftar makanan yang direkomendasikan\n");
-        while (!isEmptyMS(makeableFood)) {
+        while (!isEmptyMS(makeableFood))
+        {
             currentId = ELMTMS(makeableFood, 0);
             printf(" - %s\n", NamaMknId(lm, currentId).Tabword);
             removeMS(&makeableFood, currentId, 1);
@@ -253,7 +348,8 @@ void DELIVERY(SIMULATOR S)
     PrintDelivery(DELIV(S));
 }
 
-void INVENTORYMakanan(SIMULATOR S){
+void INVENTORYMakanan(SIMULATOR S)
+{
     PrintPrioQueue(INVENTORY(S));
 }
 
@@ -304,7 +400,7 @@ void BuyFood(SIMULATOR *s, ListMakanan lm, boolean *flag)
             {
                 isSuccess = true;
                 *flag = true;
-                while(isSuccess && !endWord)
+                while (isSuccess && !endWord)
                 {
                     Enqueue(&DELIV(*s), ElmtLM(buyAbleFood, inputUser - 1));
                     printf("%s Berhasil dipesan! Mohon tunggu selama ", GetNamaMkn(buyAbleFood, inputUser - 1));
@@ -316,7 +412,7 @@ void BuyFood(SIMULATOR *s, ListMakanan lm, boolean *flag)
                     {
                         inputUser = wordToInt(currentWord);
                         isSuccess = (inputUser >= 0 && inputUser <= LengthLM(buyAbleFood));
-                        
+
                         if (!isSuccess)
                         {
                             printf("'%d' tidak valid!\n", inputUser);
@@ -331,9 +427,9 @@ void BuyFood(SIMULATOR *s, ListMakanan lm, boolean *flag)
                 }
 
                 // last angka jika sudah endWord, tetapi masih success
-                if(isSuccess)
+                if (isSuccess)
                 {
-                    Enqueue(&DELIV(*s), ElmtLM(buyAbleFood, inputUser -1));
+                    Enqueue(&DELIV(*s), ElmtLM(buyAbleFood, inputUser - 1));
                     printf("%s Berhasil dipesan! Mohon tunggu selama ", GetNamaMkn(buyAbleFood, inputUser - 1));
                     DisplayTIMEk(GetActionTimeMkn(buyAbleFood, inputUser - 1));
                     printf("\n");
@@ -352,7 +448,8 @@ void BuyFood(SIMULATOR *s, ListMakanan lm, boolean *flag)
     }
 }
 
-void COOKFOOD(SIMULATOR *s, ListMakanan lm, ListResep lr, Notifikasi *notif, char *action) {
+void COOKFOOD(SIMULATOR *s, ListMakanan lm, ListResep lr, Notifikasi *notif, char *action)
+{
     // KAMUS
     MultiSet listBahan;
     PrioQueue tempInventory;
@@ -372,43 +469,51 @@ void COOKFOOD(SIMULATOR *s, ListMakanan lm, ListResep lr, Notifikasi *notif, cha
     printf("Command = ");
     STARTCOMMAND();
     STARTWORD();
-    
 
     // Nanti tambahin pengecekan currentWORD integer bukan
     n = wordToInt(currentWord);
-    while (n != 0) {
+    while (n != 0)
+    {
 
         // Jika n diluar opsi pilihan
-        if ((n < 0) || (n > LengthLM(actionableFood)) || (!isWordInt(currentWord))) {
+        if ((n < 0) || (n > LengthLM(actionableFood)) || (!isWordInt(currentWord)))
+        {
             printf("Masukan command yang sesuai\n\n");
 
-        // Jija n sesuai 0 <= n <= Length(actionableFood)
-        } else {
+            // Jija n sesuai 0 <= n <= Length(actionableFood)
+        }
+        else
+        {
 
-            // Inisialisasi 
+            // Inisialisasi
             // Nomor id pilihan pengguna
-            id = GetIdMkn(actionableFood, n-1);
+            id = GetIdMkn(actionableFood, n - 1);
             listBahan = getListBahan(lr, id);
             isSuccess = true;
             tempInventory = INVENTORY(*s);
             CreateListMakanan(&tempUsedFood);
 
             // Loop untuk tes apakah terdapat bahan yang cukup dari inventory
-            while ((!isEmptyMS(listBahan)) && (isSuccess)) {
+            while ((!isEmptyMS(listBahan)) && (isSuccess))
+            {
                 currIdBahan = ELMTMS(listBahan, 0);
-                if (searchMkn(tempInventory, MknId(lm, currIdBahan))) {
+                if (searchMkn(tempInventory, MknId(lm, currIdBahan)))
+                {
                     removeFromInventory(&tempInventory, currIdBahan);
                     insertLM(&tempUsedFood, MknId(lm, currIdBahan));
                     removeMS(&listBahan, currIdBahan, 1);
-                } else {
+                }
+                else
+                {
                     isSuccess = false;
                     failureId = currIdBahan;
                 }
             }
 
-            if (isSuccess) {
+            if (isSuccess)
+            {
                 printf("%s telah berhasil dibuat dan masuk ke dalam inventory\n\n", NamaMknId(lm, id).Tabword);
-                
+
                 Enqueue(&tempInventory, MknId(lm, id));
                 INVENTORY(*s) = tempInventory;
 
@@ -417,20 +522,18 @@ void COOKFOOD(SIMULATOR *s, ListMakanan lm, ListResep lr, Notifikasi *notif, cha
 
                 waitCommand(&DELIV(*s), &INVENTORY(*s), &flagDeliv, &flagExp, &expFood, &delivFood, 0, FRY_TIME);
                 setAllNotif(notif, expFood, delivFood, usedFood, newFood);
-
-
-            } else {
+            }
+            else
+            {
                 printf("Gagal membuat %s karena kamu tidak memiliki bahan berikut: \n", NamaMknId(lm, id).Tabword);
                 printf("- %s\n\n", NamaMknId(lm, failureId).Tabword);
             }
-
         }
         printf("Kirim 0 untuk exit.\n\n");
         printf("Command = ");
         STARTCOMMAND();
         STARTWORD();
         n = wordToInt(currentWord);
-
     }
 }
 
@@ -492,7 +595,7 @@ void saveUndoRedoGame(SIMULATOR S, SIMULATOR InitSim, Notifikasi Notif, Stack *U
         {
             if (isTimeSame(WAKTU(S), WAKTU(InfoTopSim(*Undo))))
             {
-                // Do Nothing 
+                // Do Nothing
             }
             else
             {
@@ -513,5 +616,5 @@ void WAIT(SIMULATOR *S, boolean *FlagDeliv, boolean *FlagExp, ListMakanan *LMaka
     minute = isWordInt(currentWord);
     waitCommand(&DELIV(*S), &INVENTORY(*S), FlagDeliv, FlagExp, LMakananEXP, ListDelivDone, hour, minute);
     // printf("menunggu %d  %d\n", hour, minute);
-    NextNMin(&WAKTU(*S), (60*hour)+minute);
+    NextNMin(&WAKTU(*S), (60 * hour) + minute);
 }
