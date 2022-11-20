@@ -151,9 +151,6 @@ void insertLM(ListMakanan *l, MAKANAN m)
     LengthLM(*l) = LengthLM(*l) + 1;
 }
 
-// POINT UkuranMknId(ListMakanan l, IDEM);
-/* mengambalikan _UKURAN_MAKANAN_ berdasarkan ID */
-
 void accumLM(ListMakanan *l1, ListMakanan l2) 
 /* I.S. l1 dan l2 terdefinisi, jumlah dari panjang l1 dan l2 tidak melebih CONFIG_SIZELM */
 /* F.S. isi dari l2 tersalin dan ditambahkan ke l1*/

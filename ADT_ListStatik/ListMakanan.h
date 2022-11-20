@@ -12,6 +12,7 @@
 #include "..\ADT_MesinKata\string.h"
 #include "..\ADT_Makanan\makanan.h"
 #include "..\ADT_Time\time.h"
+#include "..\ADT_Point\point.h"
 
 #define IDX_UNDEF_LM -1
 
@@ -93,7 +94,7 @@ TIME ActionTimeMknId(ListMakanan l, IDEM id);
 LokasiAksi ActionLocId(ListMakanan l, IDEM id);
 /* Mengembalikan lokasi aksi makanan berdasarkan Id makanan */
 
-// POINT UkuranMknId(ListMakanan l, IDEM);
+// POINT UkuranMknId(ListMakanan l, IDEM id);
 /* mengambalikan _UKURAN_MAKANAN_ berdasarkan ID */
 
 void insertLM(ListMakanan *l, MAKANAN m);
