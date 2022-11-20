@@ -5,7 +5,7 @@
 // #define IDs(m) (m).id
 // #define Judul(m) (m).JudulMakanan
 // #define Exp(m) (m).exp
-// #define TimeAct(m) (m).TAction
+// #define TimeAct(m) (m).timeAction
 // #define Locate(m) (m).loc
 
 /* **** KONSTRUKTOR **** */

@@ -76,7 +76,7 @@ void Pop(Stack *S, ElStackURType *X)
     /* I.S. S  tidak mungkin kosong, mungkin mendekati keadaan sepi */
     /* F.S. X adalah IDX_UNDEF_STACKai elemen TOP yang lama, TOP berkurang 1 */
     /* Jika stack sepi akan di-dealokasi dengan fungsi DecreaseSize */
-    InfoTop(*S) = *X;
+    *X == InfoTop(*S);
     Top(*S)--;
 
     if(IsSparseStack(*S))
