@@ -14,11 +14,11 @@ void splashExitGame();
 void helpStartGame();
 /* I.S. currentWord {command}= "HELP" dan belum memulai game {belum "START"} */
 /* F.S. Menampilkan command yang dapat dipakai sebelum Start Game */
-    
+
 void helpInGame();
 /* I.S. currentWord {command} = "HELP" dan user sudah masuk dalah game {sudah pernah START} */
 /* F.S. menampilkan command yang dapat dipakai di dalam game */
-    
+
 void exitGame(PrioQueue *inventory, PrioQueue *delivery, Stack *undo, Stack *redo);
 /* I.S. inventori, delivery, undo, dan redo terdefinisi */
 /* F.S. semua dikembalikan ke sistem */
@@ -49,6 +49,13 @@ void Catalogue(ListMakanan lm);
 /* I.S. lm terdefinisi dan merupakan hasil baca configurasi */
 /* F.S. menampilkan semua info makanan yang terdapat pada Game */
 
+void Move(SIMULATOR *S, Word X, boolean *MoveSuccess);
+
+void MoveS(SIMULATOR *S, boolean *MoveSuccess);
+void MoveN(SIMULATOR *S, boolean *MoveSuccess);
+void MoveW(SIMULATOR *S, boolean *MoveSuccess);
+void MoveE(SIMULATOR *S, boolean *MoveSuccess);
+
 void BuyFood(SIMULATOR *s, ListMakanan lm, boolean *flag);
 /* I.S. : S terdefinisi, lm berisi hasil konfigurasi program, flag sembarang */
 /* F.S. : S selesai melakukan pembelian dengan menginput 0 atau S tidak berada di dekat telepon */
@@ -68,7 +75,7 @@ void undoGame(SIMULATOR *S, SIMULATOR InitSim, Notifikasi *Notif, Stack *Undo, S
 /* Jika tidak, Notifikasi pada InfoTopN(Undo) akan dikirimkan ke Notif */
 /* Stack Undo akan dipop dan dimasukkan ke dalam Stack Redo */
 /* InfoTopSim(Undo) yang baru akan menjadi S, dan visualnya */
-/* misal A, B, C adalah keadaan untuk SIMULATOR S dan Notifikasi N 
+/* misal A, B, C adalah keadaan untuk SIMULATOR S dan Notifikasi N
     C     SD=C                               SD=B
     B                   -undoGame->     B               -> Notif = InfoTopN(Undo) di C
     A                                   A           C
@@ -89,24 +96,28 @@ void redoGame(SIMULATOR *S, Notifikasi *Notif, Stack *Undo, Stack *Redo);
 /* InfoTopSim(Undo) yang baru akan menjadi S, visualnya: */
 /* misal A, B, C adalah type SIMULATOR dan S adalah kondisi S
           SN=B                          C    SN=C
-    B                   -redoGame->     B               -> Notif = InfoTopN(Undo) di C 
-    A           C                       A           
+    B                   -redoGame->     B               -> Notif = InfoTopN(Undo) di C
+    A           C                       A
     Undo        Redo                    Undo        Redo
     -------Jika Stack kosong
-    C      SN=C                         C      SN=C 
+    C      SN=C                         C      SN=C
     B                    -redoGame->    B               -> Notif = kosong
-    A                    {pesan}        A           
+    A                    {pesan}        A
     Undo        Redo                    Undo        Redo
  */
 
 void saveUndoRedoGame(SIMULATOR S, SIMULATOR InitSim, Notifikasi Notif, Stack *Undo, Stack *Redo);
-/* I.S. : S, Undo, dan Redo terdefinisi, InitSim adalah keadaan simulator paling awal, 
+/* I.S. : S, Undo, dan Redo terdefinisi, InitSim adalah keadaan simulator paling awal,
     currentWord terdefinisi dan valid sebagai command */
 /* Notif terdefinisi baik kosong mapun berisi */
 /* F.S. : jika keadaan S berubah, S dimasukkan ke dalam Stack Undo */
 /* S disamakan dengan Top(Undo) -> F.S. */
-/* Stack Redo akan kosong menyesuaikan kondisi logic undo-redo, 
+/* Stack Redo akan kosong menyesuaikan kondisi logic undo-redo,
     yaitu ketika user menginput command baru dan S berubah setelah melakukan beberapa Undo  */
 
-
 #endif
+
+#include "../ADT_Simulator/simulator.h"
+#include "../ADT_Matriks/matrix.h"
+#include "../ADT_Point/point.h"
+#include "../ADT_Queue/PrioQueue.h"
