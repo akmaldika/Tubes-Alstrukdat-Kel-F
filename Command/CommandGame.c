@@ -386,11 +386,16 @@ void Catalogue(ListMakanan lm)
     DisplayCatalog(lm);
 }
 
+void chekErrorDeretAngka()
+{
+
+}
+
 void BuyFood(SIMULATOR *s, ListMakanan lm, boolean *flag)
 {
     /* KAMUS LOKAL */
     ListMakanan buyAbleFood;
-    boolean isSuccess;
+    boolean isSuccess, isValid;
     int inputUser;
     IDEM id;
 
@@ -405,69 +410,27 @@ void BuyFood(SIMULATOR *s, ListMakanan lm, boolean *flag)
         STARTCOMMAND();
         STARTWORD();
 
-        while (!isWordInt(currentWord))
+        inputUser =  wordToInt(currentWord);
+
+        while(inputUser != 0)
         {
-            printf("'%s' Bukan angka!\n", currentWord.String);
-            printf("Masukan command yang susuai\n");
-            printf("Masukkan command = ");
-            STARTCOMMAND();
-            STARTWORD();
-        }
-        inputUser = wordToInt(currentWord);
-        while (inputUser != 0)
-        {
-            if (inputUser < 0 || inputUser > LengthLM(buyAbleFood))
+            if (inputUser < 0 || inputUser > LengthLM(buyAbleFood) || !isWordInt(currentWord))
             {
-                printf("'%d' tidak valid!\n", inputUser);
-                printf("Pilih angka 0 - %d\n", LengthLM(buyAbleFood));
-                printf("Masukkan command = ");
-                STARTCOMMAND();
-                STARTWORD();
+                printf("'%s' Tidak sesuai command", currentWord);
             }
             else
             {
-                isSuccess = true;
+                Enqueue(&DELIV(*s), ElmtLM(buyAbleFood, inputUser - 1));
+                printf("%s Berhasil dipesan! Mohon tunggu selama ", GetNamaMkn(buyAbleFood, inputUser - 1));
+                DisplayTIMEk(GetActionTimeMkn(buyAbleFood, inputUser - 1));
+                printf("\n");
                 *flag = true;
-                while (isSuccess && !endWord)
-                {
-                    Enqueue(&DELIV(*s), ElmtLM(buyAbleFood, inputUser - 1));
-                    printf("%s Berhasil dipesan! Mohon tunggu selama ", GetNamaMkn(buyAbleFood, inputUser - 1));
-                    DisplayTIMEk(GetActionTimeMkn(buyAbleFood, inputUser - 1));
-                    printf("\n");
-
-                    ADVWORD();
-                    if (isWordInt(currentWord))
-                    {
-                        inputUser = wordToInt(currentWord);
-                        isSuccess = (inputUser >= 0 && inputUser <= LengthLM(buyAbleFood));
-
-                        if (!isSuccess)
-                        {
-                            printf("'%d' tidak valid!\n", inputUser);
-                            printf("Pilih angka 0 - %d\n", LengthLM(buyAbleFood));
-                        }
-                    }
-                    else
-                    {
-                        isSuccess = false;
-                        printf("'%s' Bukan angka!\n", currentWord.String);
-                    }
-                }
-
-                // last angka jika sudah endWord, tetapi masih success
-                if (isSuccess)
-                {
-                    Enqueue(&DELIV(*s), ElmtLM(buyAbleFood, inputUser - 1));
-                    printf("%s Berhasil dipesan! Mohon tunggu selama ", GetNamaMkn(buyAbleFood, inputUser - 1));
-                    DisplayTIMEk(GetActionTimeMkn(buyAbleFood, inputUser - 1));
-                    printf("\n");
-                }
-
-                printf("Ingin memesan lagi?\n");
-                printf("Masukkan command = ");
-                STARTCOMMAND();
-                STARTWORD();
             }
+            printf("\nKirim 0 untuk exit.\n\n");
+            printf("Masukkan command = ");
+            STARTCOMMAND();
+            STARTWORD();
+            inputUser = wordToInt(currentWord);
         }
     }
     else
