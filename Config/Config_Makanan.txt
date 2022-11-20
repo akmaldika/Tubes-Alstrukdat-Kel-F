@@ -2,42 +2,42 @@
 1
 Beras
 2 0 0
-0 0 30
+0 0 1
 Buy
 2
 Minyak Goreng
 2 0 30
-0 1 0
+0 0 1
 Buy
 3
 Ayam Mentah
 0 1 0
-0 0 15
+0 0 1
 Buy
 4
 Tepung
 3 0 0
-0 0 15
+0 0 1
 Buy
 5
 Udang Mentah
 0 0 45
-0 0 15
+0 0 1
 Buy
 6
 Cabai
 0 3 0
-0 0 15
+0 0 1
 Buy
 7
 Bawang
 0 3 0
-0 0 15
+0 0 1
 Buy
 21
 Ayam Potong
 0 2 0
-0 0 15
+0 0 10
 Chop
 22
 Udang Potong

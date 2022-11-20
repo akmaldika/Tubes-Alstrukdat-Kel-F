@@ -41,12 +41,16 @@ int main()
     commandStartError();
     isStartGame = isLineSame(currentLine, "START");
 
+    Enqueue(&INVENTORY(BMO), MknId(ListMkn, 2));
+    Enqueue(&INVENTORY(BMO), MknId(ListMkn, 24));
+
     // while loop
     while (isStartGame)
     {   
         printf("- Ketik apapun untuk berlanjut -");
         STARTCOMMAND();
         STARTWORD();
+        printf("Notifikasi: \n");
         displayNotifikasi(&Notif);
         DisplayTIMEFull(WAKTU(BMO));
         displayMap(MAP(BMO));
