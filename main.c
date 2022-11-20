@@ -7,7 +7,7 @@ int main()
 {
     /* KAMUS */
     ListResep ListRsp;
-    ListMakanan ListMkn, LM;
+    ListMakanan ListMkn;
     ListMakanan ListMakananEXP;
     ListMakanan ListDeliveryDone;
     SIMULATOR BMO;
@@ -63,7 +63,8 @@ int main()
             BuyFood(&BMO, ListMkn, &isActionSucces);
             if (isActionSucces)
             {
-                min1menitAll(&DELIV(BMO), &INVENTORY(BMO), &FlagDelivDone, &FlagMakananEXP, &LM, &ListDeliveryDone);
+                min1menitAll(&DELIV(BMO), &INVENTORY(BMO), &FlagDelivDone, &FlagMakananEXP, &ListMakananEXP, &ListDeliveryDone);
+
             }
         }
         else if (isWordSame(currentWord, "MIX"))
