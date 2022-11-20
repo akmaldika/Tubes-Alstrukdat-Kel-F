@@ -44,7 +44,7 @@ typedef struct
 /* Jika e adalah MAKANAN dan Q adalah PrioQueue, maka akses elemen : */
 #define TimeFull(e) (e).exp
 #define Time(e) TIMEToMin((e).exp)
-#define TimeAction(e) TIMEToMin((e).TAction)
+#define TimeAction(e) TIMEToMin((e).timeAction)
 #define Makanan(e) (e)
 #define NamaMakanan(e) (e).Nama
 #define Info(e) (e).id

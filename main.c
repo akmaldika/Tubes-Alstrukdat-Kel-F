@@ -64,7 +64,8 @@ int main()
             if (isActionSucces)
             {
                 min1menitAll(&DELIV(BMO), &INVENTORY(BMO), &FlagDelivDone, &FlagMakananEXP, &ListMakananEXP, &ListDeliveryDone);
-
+                setExpDelivNotif(&Notif, ListMakananEXP, ListDeliveryDone);
+                NextMin(&WAKTU(BMO));
             }
         }
         else if (isWordSame(currentWord, "MIX"))
@@ -88,14 +89,15 @@ int main()
             ADVWORD();
             Move(&BMO,currentWord,&isActionSucces);
             if (isActionSucces){
-                min1menitAll(&DELIV(BMO),&INVENTORY(BMO),&FlagDelivDone,&FlagMakananEXP,&ListMkn,&ListDeliveryDone);
+                min1menitAll(&DELIV(BMO),&INVENTORY(BMO),&FlagDelivDone,&FlagMakananEXP,&ListMakananEXP,&ListDeliveryDone);
+                setExpDelivNotif(&Notif, ListMakananEXP, ListDeliveryDone);
                 NextMin(&WAKTU(BMO));
             }
         }
         else if (isWordSame(currentWord, "WAIT"))
         {
-            // WAIT
             WAIT(&BMO, &FlagDelivDone, &FlagMakananEXP, &ListMakananEXP, &ListDeliveryDone);
+            setExpDelivNotif(&Notif, ListMakananEXP, ListDeliveryDone);
         }
         else if (isWordSame(currentWord, "DELIVERY"))
         {
