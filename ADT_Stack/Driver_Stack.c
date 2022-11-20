@@ -23,10 +23,11 @@ int main()
         
     // initial cek
     printf("Capacity = %d\n", CapStack(Undo));
+    printf("Top = %d\n", Top(Undo));
 
     // cek predikat keadaan
     printf("isEmpty(Undo) = %s\n", IsEmptyStack(Undo) ? "true" : "false");
-    printf("isFUll(Undo) = %s\n", IsFullStack(Undo) ? "true" : "false");
+    printf("isFull(Undo) = %s\n\n", IsFullStack(Undo) ? "true" : "false");
 
     // coba penuhin -> cek auto increase
     while (!IsFullStack(Undo))
@@ -35,35 +36,29 @@ int main()
         valStack = MakeElStack(BNMO, Notif);
         Push(&Undo, valStack);
     }
-    printf("Capacity Full = %d\n", CapStack(Undo));
+    printf("Capacity Full = %d idx = %d\n", CapStack(Undo), Top(Undo));
     setNamaSim(&BNMO, Nama2);
     valStack = MakeElStack(BNMO, Notif);
     Push(&Undo, valStack);
-    printf("Capacity Upgrade after add= %d\n", CapStack(Undo));
-    while (!IsFullStack(Undo))
-    {
-        setNamaSim(&BNMO, Nama1);
+    printf("Capacity Upgrade after add= %d idx = %d\n", CapStack(Undo), Top(Undo));
+        while (!IsFullStack(Undo))
+        {
+            setNamaSim(&BNMO, Nama1);
+            valStack = MakeElStack(BNMO, Notif);
+            Push(&Undo, valStack);
+        }
+        printf("Capacity Full = %d idx = %d\n", CapStack(Undo), Top(Undo));
+        setNamaSim(&BNMO, Nama2);
         valStack = MakeElStack(BNMO, Notif);
         Push(&Undo, valStack);
-    }
-    printf("Capacity Full = %d\n", CapStack(Undo));
-    setNamaSim(&BNMO, Nama2);
-    valStack = MakeElStack(BNMO, Notif);
-    Push(&Undo, valStack);
-    printf("Capacity Upgrade after add= %d\n", CapStack(Undo));
+        printf("Capacity Upgrade after add= %d idx = %d\n\n", CapStack(Undo), Top(Undo));
     
     // coba pop
-    memocap = CapStack(Undo);
     while (!IsEmptyStack(Undo))
     {
         Pop(&Undo, &valStack);
-        if(memocap != CapStack(Undo))
-        {
-            printf("Capacity shrink after pop = %d\nand idx Top is at = %d", Capstack(Undo)), Top(Undo);
-            memocap = CapStack(Undo);
-        }
     }
-    printf("Capacity reset = %d\n", CapStack(Undo));
+    printf("Capacity reset after empty= %d %d\n", CapStack(Undo), Top(Undo));
 
     return 0;
 }
