@@ -38,3 +38,24 @@ $ gcc Program.c -o Program HeaderImplement1.c ... && Program
 
 **boolean.h tidak memiliki implementasi '.c' sehingga tidak perlu ditambah pada bat*
 
+Pembagian Tugas dan Statusnya
+
+            Fitur Utama              |   Sub-Fitur
+------------------------------------ | -------------
+ADT Sederhana                        |
+                                     |
+                                     |
+                                     |
+ADT List Statik                      |
+                                     |
+ADT Matriks                          |
+ADT Mesin Karakter dan Mesin Kata    |
+                                     |
+                                     |
+ADT Queue                            |
+ADT Stack                            |
+ADT Tree                             |
+Waktu Pengolahan Makanan             |
+Rekomendasi Makanan                  |
+
+

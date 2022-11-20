@@ -2,12 +2,12 @@
 1
 Beras
 2 0 0
-0 0 1
+0 0 10
 Buy
 2
 Minyak Goreng
 2 0 30
-0 0 1
+0 0 10
 Buy
 3
 Ayam Mentah
