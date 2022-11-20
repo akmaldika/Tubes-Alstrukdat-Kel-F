@@ -64,15 +64,20 @@ void commandStartError()
         {
             printf("Jangan gunakan spasi di awal atau diakhir command!\n");
         }
-        printf("Command tidak dikenali. Silahkan masukkan command yang benar\n");
-        printf("Ketik 'HELP' untuk melihat daftar command yang tersedia\n");
-        printf("\nMasukkan command: ");
-        STARTCOMMAND();
-        STARTWORD();
-
         while (isWordSame(currentWord, "HELP"))
         {
             helpStartGame();
+            printf("\nMasukkan command: ");
+            STARTCOMMAND();
+            STARTWORD();
+        }
+        if (isLineSame(currentLine, "START") || isLineSame(currentLine, "EXIT"))
+        {
+        }
+        else
+        {
+            printf("Command tidak dikenali. Silahkan masukkan command yang benar\n");
+            printf("Ketik 'HELP' untuk melihat daftar command yang tersedia\n");
             printf("\nMasukkan command: ");
             STARTCOMMAND();
             STARTWORD();
